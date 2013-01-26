@@ -7,10 +7,7 @@
 //
 
 #import "fciosAppDelegate.h"
-
-#import "fciosFirstViewController.h"
-
-#import "fciosSecondViewController.h"
+#import "MainViewController.h"
 
 @implementation fciosAppDelegate
 
@@ -18,10 +15,17 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    UIViewController *viewController1 = [[fciosFirstViewController alloc] initWithNibName:@"fciosFirstViewController" bundle:nil];
-    UIViewController *viewController2 = [[fciosSecondViewController alloc] initWithNibName:@"fciosSecondViewController" bundle:nil];
+    
+    UINavigationController *nvc1 = [[UINavigationController alloc] init];
+    UIViewController *viewController1 = [[MainViewController alloc] init];
+    nvc1.viewControllers = @[viewController1];
+    
+//    UINavigationController *nvc2 = [[UINavigationController alloc] init];
+//    UIViewController *viewController2 = [[RootViewController alloc] init];
+
+    
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[viewController1, viewController2];
+    self.tabBarController.viewControllers = @[nvc1];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
