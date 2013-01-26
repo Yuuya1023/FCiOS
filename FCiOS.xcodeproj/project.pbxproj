@@ -1,0 +1,497 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18A2C19316B3C1B700CECE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19216B3C1B700CECE75 /* UIKit.framework */; };
+		18A2C19516B3C1B700CECE75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19416B3C1B700CECE75 /* Foundation.framework */; };
+		18A2C19716B3C1B700CECE75 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19616B3C1B700CECE75 /* CoreGraphics.framework */; };
+		18A2C19D16B3C1B700CECE75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C19B16B3C1B700CECE75 /* InfoPlist.strings */; };
+		18A2C19F16B3C1B700CECE75 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C19E16B3C1B700CECE75 /* main.m */; };
+		18A2C1A316B3C1B700CECE75 /* fciosAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C1A216B3C1B700CECE75 /* fciosAppDelegate.m */; };
+		18A2C1A516B3C1B700CECE75 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1A416B3C1B700CECE75 /* Default.png */; };
+		18A2C1A716B3C1B700CECE75 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1A616B3C1B700CECE75 /* Default@2x.png */; };
+		18A2C1A916B3C1B700CECE75 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1A816B3C1B700CECE75 /* Default-568h@2x.png */; };
+		18A2C1AC16B3C1B700CECE75 /* fciosFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C1AB16B3C1B700CECE75 /* fciosFirstViewController.m */; };
+		18A2C1AE16B3C1B700CECE75 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1AD16B3C1B700CECE75 /* first.png */; };
+		18A2C1B016B3C1B700CECE75 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1AF16B3C1B700CECE75 /* first@2x.png */; };
+		18A2C1B316B3C1B700CECE75 /* fciosSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C1B216B3C1B700CECE75 /* fciosSecondViewController.m */; };
+		18A2C1B516B3C1B700CECE75 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1B416B3C1B700CECE75 /* second.png */; };
+		18A2C1B716B3C1B700CECE75 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1B616B3C1B700CECE75 /* second@2x.png */; };
+		18A2C1BA16B3C1B700CECE75 /* fciosFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1B816B3C1B700CECE75 /* fciosFirstViewController.xib */; };
+		18A2C1BD16B3C1B700CECE75 /* fciosSecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1BB16B3C1B700CECE75 /* fciosSecondViewController.xib */; };
+		18A2C1C516B3C1B700CECE75 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C1C416B3C1B700CECE75 /* SenTestingKit.framework */; };
+		18A2C1C616B3C1B700CECE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19216B3C1B700CECE75 /* UIKit.framework */; };
+		18A2C1C716B3C1B700CECE75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19416B3C1B700CECE75 /* Foundation.framework */; };
+		18A2C1CF16B3C1B700CECE75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1CD16B3C1B700CECE75 /* InfoPlist.strings */; };
+		18A2C1D216B3C1B700CECE75 /* FCiOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C1D116B3C1B700CECE75 /* FCiOSTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		18A2C1C816B3C1B700CECE75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18A2C18516B3C1B700CECE75 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18A2C18D16B3C1B700CECE75;
+			remoteInfo = FCiOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		18A2C18E16B3C1B700CECE75 /* FCiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18A2C19216B3C1B700CECE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		18A2C19416B3C1B700CECE75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		18A2C19616B3C1B700CECE75 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		18A2C19A16B3C1B700CECE75 /* FCiOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FCiOS-Info.plist"; sourceTree = "<group>"; };
+		18A2C19C16B3C1B700CECE75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18A2C19E16B3C1B700CECE75 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		18A2C1A016B3C1B700CECE75 /* FCiOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FCiOS-Prefix.pch"; sourceTree = "<group>"; };
+		18A2C1A116B3C1B700CECE75 /* fciosAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fciosAppDelegate.h; sourceTree = "<group>"; };
+		18A2C1A216B3C1B700CECE75 /* fciosAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fciosAppDelegate.m; sourceTree = "<group>"; };
+		18A2C1A416B3C1B700CECE75 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		18A2C1A616B3C1B700CECE75 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		18A2C1A816B3C1B700CECE75 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		18A2C1AA16B3C1B700CECE75 /* fciosFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fciosFirstViewController.h; sourceTree = "<group>"; };
+		18A2C1AB16B3C1B700CECE75 /* fciosFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fciosFirstViewController.m; sourceTree = "<group>"; };
+		18A2C1AD16B3C1B700CECE75 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		18A2C1AF16B3C1B700CECE75 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		18A2C1B116B3C1B700CECE75 /* fciosSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fciosSecondViewController.h; sourceTree = "<group>"; };
+		18A2C1B216B3C1B700CECE75 /* fciosSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fciosSecondViewController.m; sourceTree = "<group>"; };
+		18A2C1B416B3C1B700CECE75 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		18A2C1B616B3C1B700CECE75 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		18A2C1B916B3C1B700CECE75 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/fciosFirstViewController.xib; sourceTree = "<group>"; };
+		18A2C1BC16B3C1B700CECE75 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/fciosSecondViewController.xib; sourceTree = "<group>"; };
+		18A2C1C316B3C1B700CECE75 /* FCiOSTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FCiOSTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18A2C1C416B3C1B700CECE75 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		18A2C1CC16B3C1B700CECE75 /* FCiOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FCiOSTests-Info.plist"; sourceTree = "<group>"; };
+		18A2C1CE16B3C1B700CECE75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18A2C1D016B3C1B700CECE75 /* FCiOSTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCiOSTests.h; sourceTree = "<group>"; };
+		18A2C1D116B3C1B700CECE75 /* FCiOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCiOSTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18A2C18B16B3C1B700CECE75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A2C19316B3C1B700CECE75 /* UIKit.framework in Frameworks */,
+				18A2C19516B3C1B700CECE75 /* Foundation.framework in Frameworks */,
+				18A2C19716B3C1B700CECE75 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18A2C1BF16B3C1B700CECE75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A2C1C516B3C1B700CECE75 /* SenTestingKit.framework in Frameworks */,
+				18A2C1C616B3C1B700CECE75 /* UIKit.framework in Frameworks */,
+				18A2C1C716B3C1B700CECE75 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18A2C18316B3C1B700CECE75 = {
+			isa = PBXGroup;
+			children = (
+				18A2C19816B3C1B700CECE75 /* FCiOS */,
+				18A2C1CA16B3C1B700CECE75 /* FCiOSTests */,
+				18A2C19116B3C1B700CECE75 /* Frameworks */,
+				18A2C18F16B3C1B700CECE75 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18A2C18F16B3C1B700CECE75 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C18E16B3C1B700CECE75 /* FCiOS.app */,
+				18A2C1C316B3C1B700CECE75 /* FCiOSTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18A2C19116B3C1B700CECE75 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C19216B3C1B700CECE75 /* UIKit.framework */,
+				18A2C19416B3C1B700CECE75 /* Foundation.framework */,
+				18A2C19616B3C1B700CECE75 /* CoreGraphics.framework */,
+				18A2C1C416B3C1B700CECE75 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18A2C19816B3C1B700CECE75 /* FCiOS */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C1A116B3C1B700CECE75 /* fciosAppDelegate.h */,
+				18A2C1A216B3C1B700CECE75 /* fciosAppDelegate.m */,
+				18A2C1AA16B3C1B700CECE75 /* fciosFirstViewController.h */,
+				18A2C1AB16B3C1B700CECE75 /* fciosFirstViewController.m */,
+				18A2C1AD16B3C1B700CECE75 /* first.png */,
+				18A2C1AF16B3C1B700CECE75 /* first@2x.png */,
+				18A2C1B116B3C1B700CECE75 /* fciosSecondViewController.h */,
+				18A2C1B216B3C1B700CECE75 /* fciosSecondViewController.m */,
+				18A2C1B416B3C1B700CECE75 /* second.png */,
+				18A2C1B616B3C1B700CECE75 /* second@2x.png */,
+				18A2C1B816B3C1B700CECE75 /* fciosFirstViewController.xib */,
+				18A2C1BB16B3C1B700CECE75 /* fciosSecondViewController.xib */,
+				18A2C19916B3C1B700CECE75 /* Supporting Files */,
+			);
+			path = FCiOS;
+			sourceTree = "<group>";
+		};
+		18A2C19916B3C1B700CECE75 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C19A16B3C1B700CECE75 /* FCiOS-Info.plist */,
+				18A2C19B16B3C1B700CECE75 /* InfoPlist.strings */,
+				18A2C19E16B3C1B700CECE75 /* main.m */,
+				18A2C1A016B3C1B700CECE75 /* FCiOS-Prefix.pch */,
+				18A2C1A416B3C1B700CECE75 /* Default.png */,
+				18A2C1A616B3C1B700CECE75 /* Default@2x.png */,
+				18A2C1A816B3C1B700CECE75 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18A2C1CA16B3C1B700CECE75 /* FCiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C1D016B3C1B700CECE75 /* FCiOSTests.h */,
+				18A2C1D116B3C1B700CECE75 /* FCiOSTests.m */,
+				18A2C1CB16B3C1B700CECE75 /* Supporting Files */,
+			);
+			path = FCiOSTests;
+			sourceTree = "<group>";
+		};
+		18A2C1CB16B3C1B700CECE75 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C1CC16B3C1B700CECE75 /* FCiOSTests-Info.plist */,
+				18A2C1CD16B3C1B700CECE75 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18A2C18D16B3C1B700CECE75 /* FCiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18A2C1D516B3C1B700CECE75 /* Build configuration list for PBXNativeTarget "FCiOS" */;
+			buildPhases = (
+				18A2C18A16B3C1B700CECE75 /* Sources */,
+				18A2C18B16B3C1B700CECE75 /* Frameworks */,
+				18A2C18C16B3C1B700CECE75 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FCiOS;
+			productName = FCiOS;
+			productReference = 18A2C18E16B3C1B700CECE75 /* FCiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		18A2C1C216B3C1B700CECE75 /* FCiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18A2C1D816B3C1B700CECE75 /* Build configuration list for PBXNativeTarget "FCiOSTests" */;
+			buildPhases = (
+				18A2C1BE16B3C1B700CECE75 /* Sources */,
+				18A2C1BF16B3C1B700CECE75 /* Frameworks */,
+				18A2C1C016B3C1B700CECE75 /* Resources */,
+				18A2C1C116B3C1B700CECE75 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18A2C1C916B3C1B700CECE75 /* PBXTargetDependency */,
+			);
+			name = FCiOSTests;
+			productName = FCiOSTests;
+			productReference = 18A2C1C316B3C1B700CECE75 /* FCiOSTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18A2C18516B3C1B700CECE75 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = fcios;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Yuya Nambu";
+			};
+			buildConfigurationList = 18A2C18816B3C1B700CECE75 /* Build configuration list for PBXProject "FCiOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 18A2C18316B3C1B700CECE75;
+			productRefGroup = 18A2C18F16B3C1B700CECE75 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18A2C18D16B3C1B700CECE75 /* FCiOS */,
+				18A2C1C216B3C1B700CECE75 /* FCiOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18A2C18C16B3C1B700CECE75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A2C19D16B3C1B700CECE75 /* InfoPlist.strings in Resources */,
+				18A2C1A516B3C1B700CECE75 /* Default.png in Resources */,
+				18A2C1A716B3C1B700CECE75 /* Default@2x.png in Resources */,
+				18A2C1A916B3C1B700CECE75 /* Default-568h@2x.png in Resources */,
+				18A2C1AE16B3C1B700CECE75 /* first.png in Resources */,
+				18A2C1B016B3C1B700CECE75 /* first@2x.png in Resources */,
+				18A2C1B516B3C1B700CECE75 /* second.png in Resources */,
+				18A2C1B716B3C1B700CECE75 /* second@2x.png in Resources */,
+				18A2C1BA16B3C1B700CECE75 /* fciosFirstViewController.xib in Resources */,
+				18A2C1BD16B3C1B700CECE75 /* fciosSecondViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18A2C1C016B3C1B700CECE75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A2C1CF16B3C1B700CECE75 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18A2C1C116B3C1B700CECE75 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18A2C18A16B3C1B700CECE75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A2C19F16B3C1B700CECE75 /* main.m in Sources */,
+				18A2C1A316B3C1B700CECE75 /* fciosAppDelegate.m in Sources */,
+				18A2C1AC16B3C1B700CECE75 /* fciosFirstViewController.m in Sources */,
+				18A2C1B316B3C1B700CECE75 /* fciosSecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18A2C1BE16B3C1B700CECE75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A2C1D216B3C1B700CECE75 /* FCiOSTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		18A2C1C916B3C1B700CECE75 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18A2C18D16B3C1B700CECE75 /* FCiOS */;
+			targetProxy = 18A2C1C816B3C1B700CECE75 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		18A2C19B16B3C1B700CECE75 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A2C19C16B3C1B700CECE75 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		18A2C1B816B3C1B700CECE75 /* fciosFirstViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A2C1B916B3C1B700CECE75 /* en */,
+			);
+			name = fciosFirstViewController.xib;
+			sourceTree = "<group>";
+		};
+		18A2C1BB16B3C1B700CECE75 /* fciosSecondViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A2C1BC16B3C1B700CECE75 /* en */,
+			);
+			name = fciosSecondViewController.xib;
+			sourceTree = "<group>";
+		};
+		18A2C1CD16B3C1B700CECE75 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A2C1CE16B3C1B700CECE75 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18A2C1D316B3C1B700CECE75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		18A2C1D416B3C1B700CECE75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18A2C1D616B3C1B700CECE75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FCiOS/FCiOS-Prefix.pch";
+				INFOPLIST_FILE = "FCiOS/FCiOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		18A2C1D716B3C1B700CECE75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FCiOS/FCiOS-Prefix.pch";
+				INFOPLIST_FILE = "FCiOS/FCiOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		18A2C1D916B3C1B700CECE75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FCiOS.app/FCiOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FCiOS/FCiOS-Prefix.pch";
+				INFOPLIST_FILE = "FCiOSTests/FCiOSTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		18A2C1DA16B3C1B700CECE75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FCiOS.app/FCiOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FCiOS/FCiOS-Prefix.pch";
+				INFOPLIST_FILE = "FCiOSTests/FCiOSTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18A2C18816B3C1B700CECE75 /* Build configuration list for PBXProject "FCiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18A2C1D316B3C1B700CECE75 /* Debug */,
+				18A2C1D416B3C1B700CECE75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18A2C1D516B3C1B700CECE75 /* Build configuration list for PBXNativeTarget "FCiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18A2C1D616B3C1B700CECE75 /* Debug */,
+				18A2C1D716B3C1B700CECE75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		18A2C1D816B3C1B700CECE75 /* Build configuration list for PBXNativeTarget "FCiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18A2C1D916B3C1B700CECE75 /* Debug */,
+				18A2C1DA16B3C1B700CECE75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18A2C18516B3C1B700CECE75 /* Project object */;
+}
