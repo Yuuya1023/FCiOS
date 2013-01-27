@@ -13,11 +13,12 @@
 @synthesize levelList = levelList_;
 @synthesize versionList = versionList_;
 
+@synthesize sortingList = sortingList_;
+
 - (id)init
 {
     self = [super init];
     if (self) {
-        NSLog(@"init");
         self.clearList = [[NSArray alloc] initWithObjects:
                           @"NO PLAY",
                           @"FAILED",
@@ -64,7 +65,11 @@
                             @"19 Lincle",
                             @"20 tricoro",
                             nil];
-        // Custom initialization
+        self.sortingList = [[NSArray alloc] initWithObjects:
+                            @"1",
+                            @"2",
+                            @"3",
+                            nil];
     }
     return self;
 }

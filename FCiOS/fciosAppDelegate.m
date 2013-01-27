@@ -8,6 +8,7 @@
 
 #import "fciosAppDelegate.h"
 #import "MainViewController.h"
+#import "SortConfigViewController.h"
 
 @implementation fciosAppDelegate
 
@@ -17,15 +18,18 @@
     // Override point for customization after application launch.
     
     UINavigationController *nvc1 = [[UINavigationController alloc] init];
+    nvc1.navigationBar.barStyle = UIBarStyleBlack;
     UIViewController *viewController1 = [[MainViewController alloc] init];
     nvc1.viewControllers = @[viewController1];
     
-//    UINavigationController *nvc2 = [[UINavigationController alloc] init];
-//    UIViewController *viewController2 = [[RootViewController alloc] init];
+    UINavigationController *nvc2 = [[UINavigationController alloc] init];
+    nvc2.navigationBar.barStyle = UIBarStyleBlack;
+    UIViewController *viewController2 = [[SortConfigViewController alloc] init];
+    nvc2.viewControllers = @[viewController2];
 
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[nvc1];
+    self.tabBarController.viewControllers = @[nvc1,nvc2];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;

@@ -38,6 +38,12 @@
 		18A2C1FB16B42ED000CECE75 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1F716B42ED000CECE75 /* MainViewController.xib */; };
 		18A2C1FE16B4353C00CECE75 /* TableSources.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C1FD16B4353C00CECE75 /* TableSources.m */; };
 		18A2C1FF16B4353C00CECE75 /* TableSources.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C1FD16B4353C00CECE75 /* TableSources.m */; };
+		18A2C21116B43D6D00CECE75 /* SortConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C20F16B43D6D00CECE75 /* SortConfigViewController.m */; };
+		18A2C21216B43D6D00CECE75 /* SortConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C20F16B43D6D00CECE75 /* SortConfigViewController.m */; };
+		18A2C21316B43D6D00CECE75 /* SortConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */; };
+		18A2C21416B43D6D00CECE75 /* SortConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */; };
+		18C3B10316B4DE330071EF1D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3B10116B4DE330071EF1D /* DetailViewController.m */; };
+		18C3B10416B4DE330071EF1D /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C3B10216B4DE330071EF1D /* DetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +85,12 @@
 		18A2C1F716B42ED000CECE75 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		18A2C1FC16B4353C00CECE75 /* TableSources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableSources.h; sourceTree = "<group>"; };
 		18A2C1FD16B4353C00CECE75 /* TableSources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableSources.m; sourceTree = "<group>"; };
+		18A2C20E16B43D6D00CECE75 /* SortConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortConfigViewController.h; sourceTree = "<group>"; };
+		18A2C20F16B43D6D00CECE75 /* SortConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortConfigViewController.m; sourceTree = "<group>"; };
+		18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortConfigViewController.xib; sourceTree = "<group>"; };
+		18C3B10016B4DE330071EF1D /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		18C3B10116B4DE330071EF1D /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		18C3B10216B4DE330071EF1D /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +156,12 @@
 				18A2C1F516B42ED000CECE75 /* MainViewController.h */,
 				18A2C1F616B42ED000CECE75 /* MainViewController.m */,
 				18A2C1F716B42ED000CECE75 /* MainViewController.xib */,
+				18A2C20E16B43D6D00CECE75 /* SortConfigViewController.h */,
+				18A2C20F16B43D6D00CECE75 /* SortConfigViewController.m */,
+				18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */,
+				18C3B10016B4DE330071EF1D /* DetailViewController.h */,
+				18C3B10116B4DE330071EF1D /* DetailViewController.m */,
+				18C3B10216B4DE330071EF1D /* DetailViewController.xib */,
 				18A2C1FC16B4353C00CECE75 /* TableSources.h */,
 				18A2C1FD16B4353C00CECE75 /* TableSources.m */,
 				18A2C19916B3C1B700CECE75 /* Supporting Files */,
@@ -276,6 +294,8 @@
 				18A2C1ED16B3C24000CECE75 /* second.png in Resources */,
 				18A2C1EF16B3C24000CECE75 /* second@2x.png in Resources */,
 				18A2C1FA16B42ED000CECE75 /* MainViewController.xib in Resources */,
+				18A2C21316B43D6D00CECE75 /* SortConfigViewController.xib in Resources */,
+				18C3B10416B4DE330071EF1D /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +312,7 @@
 				18A2C1EE16B3C24000CECE75 /* second.png in Resources */,
 				18A2C1F016B3C24000CECE75 /* second@2x.png in Resources */,
 				18A2C1FB16B42ED000CECE75 /* MainViewController.xib in Resources */,
+				18A2C21416B43D6D00CECE75 /* SortConfigViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +343,8 @@
 				18A2C1A316B3C1B700CECE75 /* fciosAppDelegate.m in Sources */,
 				18A2C1F816B42ED000CECE75 /* MainViewController.m in Sources */,
 				18A2C1FE16B4353C00CECE75 /* TableSources.m in Sources */,
+				18A2C21116B43D6D00CECE75 /* SortConfigViewController.m in Sources */,
+				18C3B10316B4DE330071EF1D /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +355,7 @@
 				18A2C1D216B3C1B700CECE75 /* FCiOSTests.m in Sources */,
 				18A2C1F916B42ED000CECE75 /* MainViewController.m in Sources */,
 				18A2C1FF16B4353C00CECE75 /* TableSources.m in Sources */,
+				18A2C21216B43D6D00CECE75 /* SortConfigViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +518,7 @@
 				18A2C1D716B3C1B700CECE75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18A2C1D816B3C1B700CECE75 /* Build configuration list for PBXNativeTarget "FCiOSTests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +527,7 @@
 				18A2C1DA16B3C1B700CECE75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -21,8 +21,7 @@
 {
     self = [super init];
     if (self) {
-        NSLog(@"init");
-        self.title = @"test";
+        self.title = @"Home";
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
         
         TableSources *tableSources = [[TableSources alloc] init];
