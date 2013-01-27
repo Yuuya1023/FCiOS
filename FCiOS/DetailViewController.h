@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 @interface DetailViewController : UITableViewController{
     int versionSortType_;
@@ -14,6 +15,8 @@
     int playStyleSortType_;
     int playRankSortType_;
     int sortingType_;
+    
+    NSMutableArray *tableData_;
 }
 
 @property (nonatomic, assign) int versionSortType;
@@ -22,4 +25,5 @@
 @property (nonatomic, assign) int playRankSortType;
 @property (nonatomic, assign) int sortingType;
 
+@property (nonatomic ,retain) NSMutableArray *tableData;
 @end
