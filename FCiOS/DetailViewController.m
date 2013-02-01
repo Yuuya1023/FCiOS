@@ -29,8 +29,6 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        self.tableData = [self dbSelector];
-
 //        NSLog(@"%@",self.tableData);
     }
     return self;
@@ -39,8 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    NSLog(@"%d %d %d %d %d",self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType);
-
+    NSLog(@"%d %d %d %d %d",self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType);
+    self.tableData = [self dbSelector];
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -80,12 +78,99 @@
         
         NSMutableArray *array = [[NSMutableArray alloc] init];
         
-        FMResultSet *rs = [db executeQuery:@"SELECT * FROM musicMaster"];
+//        self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType
+        //バージョン
+        NSString *versionSql;
+        if (self.versionSortType == 0) {
+            versionSql = @"version < 21";
+        }
+        else{
+            versionSql = [NSString stringWithFormat:@"version = %d",self.versionSortType];
+        }
+        
+        //レベル
+        NSString *levelSql;
+        if (self.levelSortType == 0) {
+           levelSql = @"< 13"; 
+        }
+        else{
+            levelSql = [NSString stringWithFormat:@" = %d",self.levelSortType];
+        }
+        NSString *playStyleSql;
+        if (self.playStyleSortType == 0) {
+            playStyleSql = [NSString stringWithFormat:@"SP_"];
+        }
+        else{
+            playStyleSql = [NSString stringWithFormat:@"DP_"];
+        }
+        
+        NSString *playRankSql;
+        switch (self.playRankSortType) {
+            case 0:
+                playRankSql = [NSString stringWithFormat:@"Normal_Level"];
+                break;
+            case 1:
+                playRankSql = [NSString stringWithFormat:@"Hyper_Level"];
+                break;
+            case 2:
+                playRankSql = [NSString stringWithFormat:@"Another_Level"];
+                break;
+            default:
+                playRankSql = @"UNION_ALL";
+                break;
+        }
+        
+        
+//        switch (self.sortingType) {
+//            case 0:
+//                
+//                break;
+//                
+//            default:
+//                break;
+//        }
+        NSString *from = [NSString stringWithFormat:@""];
+        NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT music_id,name,version,%@%@ AS level FROM musicMaster where %@ and %@%@%@",
+                                playStyleSql,
+                                playRankSql,
+                                versionSql,
+                                playStyleSql,
+                                playRankSql,
+                                levelSql];
+
+        if ([playRankSql isEqualToString:@"UNION_ALL"]) {
+            sql = [NSMutableString stringWithFormat:@"SELECT music_id,name,version,%@Another_Level AS level FROM musicMaster where %@ and  %@Another_Level%@",
+                   playStyleSql,
+                   versionSql,
+                   playStyleSql,
+                   levelSql];
+        
+            [sql appendFormat:@" UNION ALL "];
+            [sql appendFormat:@"SELECT music_id,name,version,%@Hyper_Level AS level FROM musicMaster where %@ and  %@Hyper_Level%@",
+             playStyleSql,
+             versionSql,
+             playStyleSql,
+             levelSql];
+        
+            [sql appendFormat:@" UNION ALL "];
+            [sql appendFormat:@"SELECT music_id,name,version,%@Normal_Level AS level FROM musicMaster where %@ and  %@Normal_Level%@",
+             playStyleSql,
+             versionSql,
+             playStyleSql,
+             levelSql];
+        }
+
+        //ソートタイプ
+        [sql appendFormat:@" ORDER BY name ASC"];
+        NSLog(@"%@",sql);
+        FMResultSet *rs = [db executeQuery:sql];
         while ([rs next]) {
-            NSLog(@"result %d %@",[rs intForColumn:@"music_id"],[rs stringForColumn:@"name"]);
+//            NSLog(@"result %d %@",[rs intForColumn:@"music_id"],[rs stringForColumn:@"name"]);
             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
                                  [NSString stringWithFormat:@"%d",[rs intForColumn:@"music_id"]],@"music_id",
                                  [rs stringForColumn:@"name"],@"name",
+                                 [rs stringForColumn:@"level"],@"level",
+//                                 [rs stringForColumn:@"type"],@"type",
                                  nil];
             
             [array addObject:dic];
@@ -129,12 +214,15 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
     cell.textLabel.text = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];
+    NSString *detail1 = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"level"];
+    NSString *detail2 = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"type"];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Lv %@, type%@",detail1,detail2];
     
     return cell;
 }

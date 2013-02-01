@@ -31,13 +31,13 @@
         
         self.tableList = [[NSArray alloc] init];
         TableSources *tableSources = [[TableSources alloc] init];
-        self.clearList = tableSources.clearList;
-        self.levelList = tableSources.levelList;
-        self.versionList = tableSources.versionList;
-        self.sortingList = tableSources.sortingList;
+        self.clearList = tableSources.clearSortList;
+        self.levelList = tableSources.levelSortList;
+        self.versionList = tableSources.versionSortList;
+        self.sortingList = tableSources.sortingSortList;
         
         self.playStyleList = [[NSArray alloc] initWithObjects:@"Single Play",@"Double Play", nil];
-        self.playRankList = [[NSArray alloc] initWithObjects:@"Normal",@"Hyper",@"Another", nil];
+        self.playRankList = [[NSArray alloc] initWithObjects:@"Normal",@"Hyper",@"Another",@"ALL", nil];
         
         //ソート結果表示
         UIButton *resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -53,7 +53,7 @@
         
         versionSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 30, 190, 40)];
         versionSortLabel.text = @"20 tricoro";
-        versionSortType = 19;
+        versionSortType = 20;
         versionSortLabel.textAlignment = UITextAlignmentRight;
         versionSortLabel.backgroundColor = [UIColor clearColor];
         
@@ -72,7 +72,7 @@
         
         levelSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 80, 190, 40)];
         levelSortLabel.text = @"☆12";
-        levelSortType = 11;
+        levelSortType = 12;
         levelSortLabel.textAlignment = UITextAlignmentRight;
         levelSortLabel.backgroundColor = [UIColor clearColor];
         

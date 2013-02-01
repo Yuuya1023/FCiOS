@@ -13,14 +13,22 @@
     NSArray *clearList_;
     NSArray *levelList_;
     NSArray *versionList_;
-    
     NSArray *sortingList_;
+    
+    NSArray *clearSortList_;
+    NSArray *levelSortList_;
+    NSArray *versionSortList_;
+    NSArray *sortingSortList_;
 }
 
 @property (nonatomic ,retain)NSArray *clearList;
 @property (nonatomic ,retain)NSArray *levelList;
 @property (nonatomic ,retain)NSArray *versionList;
-
 @property (nonatomic ,retain)NSArray *sortingList;
+
+@property (nonatomic ,retain)NSArray *clearSortList;
+@property (nonatomic ,retain)NSArray *levelSortList;
+@property (nonatomic ,retain)NSArray *versionSortList;
+@property (nonatomic ,retain)NSArray *sortingSortList;
 
 @end
