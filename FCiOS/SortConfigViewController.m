@@ -189,6 +189,9 @@
     detail.playRankSortType = playRankSortType;
     detail.playStyleSortType = playStyleSortType;
     detail.sortingType = sortingType;
+    
+    [detail setTableData];
+    [detail setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:detail animated:YES];
 }
 

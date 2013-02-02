@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		182E301C16B54FFD00E2B504 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 182E301B16B54FFD00E2B504 /* libsqlite3.0.dylib */; };
+		1898B37C16BD8EDF00275758 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898B37A16BD8EDF00275758 /* DetailViewController.m */; };
+		1898B37D16BD8EDF00275758 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898B37A16BD8EDF00275758 /* DetailViewController.m */; };
+		1898B37E16BD8EDF00275758 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1898B37B16BD8EDF00275758 /* DetailViewController.xib */; };
+		1898B37F16BD8EDF00275758 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1898B37B16BD8EDF00275758 /* DetailViewController.xib */; };
 		18A2C19316B3C1B700CECE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19216B3C1B700CECE75 /* UIKit.framework */; };
 		18A2C19516B3C1B700CECE75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19416B3C1B700CECE75 /* Foundation.framework */; };
 		18A2C19716B3C1B700CECE75 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19616B3C1B700CECE75 /* CoreGraphics.framework */; };
@@ -43,8 +47,6 @@
 		18A2C21216B43D6D00CECE75 /* SortConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C20F16B43D6D00CECE75 /* SortConfigViewController.m */; };
 		18A2C21316B43D6D00CECE75 /* SortConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */; };
 		18A2C21416B43D6D00CECE75 /* SortConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */; };
-		18C3B10316B4DE330071EF1D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3B10116B4DE330071EF1D /* DetailViewController.m */; };
-		18C3B10416B4DE330071EF1D /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C3B10216B4DE330071EF1D /* DetailViewController.xib */; };
 		18D06FBB16B55D6400519380 /* musicMaster.db in Resources */ = {isa = PBXBuildFile; fileRef = 18D06FBA16B55D6400519380 /* musicMaster.db */; };
 		18D06FBC16B55D6400519380 /* musicMaster.db in Resources */ = {isa = PBXBuildFile; fileRef = 18D06FBA16B55D6400519380 /* musicMaster.db */; };
 		18D06FC816B55EE200519380 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D06FBF16B55EE200519380 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -71,6 +73,9 @@
 
 /* Begin PBXFileReference section */
 		182E301B16B54FFD00E2B504 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		1898B37916BD8EDF00275758 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		1898B37A16BD8EDF00275758 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		1898B37B16BD8EDF00275758 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		18A2C18E16B3C1B700CECE75 /* FCiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A2C19216B3C1B700CECE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18A2C19416B3C1B700CECE75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -102,9 +107,6 @@
 		18A2C20E16B43D6D00CECE75 /* SortConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortConfigViewController.h; sourceTree = "<group>"; };
 		18A2C20F16B43D6D00CECE75 /* SortConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortConfigViewController.m; sourceTree = "<group>"; };
 		18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortConfigViewController.xib; sourceTree = "<group>"; };
-		18C3B10016B4DE330071EF1D /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		18C3B10116B4DE330071EF1D /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		18C3B10216B4DE330071EF1D /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		18D06FBA16B55D6400519380 /* musicMaster.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = musicMaster.db; sourceTree = "<group>"; };
 		18D06FBE16B55EE200519380 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		18D06FBF16B55EE200519380 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
@@ -195,9 +197,9 @@
 				18A2C20E16B43D6D00CECE75 /* SortConfigViewController.h */,
 				18A2C20F16B43D6D00CECE75 /* SortConfigViewController.m */,
 				18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */,
-				18C3B10016B4DE330071EF1D /* DetailViewController.h */,
-				18C3B10116B4DE330071EF1D /* DetailViewController.m */,
-				18C3B10216B4DE330071EF1D /* DetailViewController.xib */,
+				1898B37916BD8EDF00275758 /* DetailViewController.h */,
+				1898B37A16BD8EDF00275758 /* DetailViewController.m */,
+				1898B37B16BD8EDF00275758 /* DetailViewController.xib */,
 				18A2C1FC16B4353C00CECE75 /* TableSources.h */,
 				18A2C1FD16B4353C00CECE75 /* TableSources.m */,
 				18A2C19916B3C1B700CECE75 /* Supporting Files */,
@@ -349,8 +351,8 @@
 				18A2C1EF16B3C24000CECE75 /* second@2x.png in Resources */,
 				18A2C1FA16B42ED000CECE75 /* MainViewController.xib in Resources */,
 				18A2C21316B43D6D00CECE75 /* SortConfigViewController.xib in Resources */,
-				18C3B10416B4DE330071EF1D /* DetailViewController.xib in Resources */,
 				18D06FBB16B55D6400519380 /* musicMaster.db in Resources */,
+				1898B37E16BD8EDF00275758 /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +371,7 @@
 				18A2C1FB16B42ED000CECE75 /* MainViewController.xib in Resources */,
 				18A2C21416B43D6D00CECE75 /* SortConfigViewController.xib in Resources */,
 				18D06FBC16B55D6400519380 /* musicMaster.db in Resources */,
+				1898B37F16BD8EDF00275758 /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,12 +403,12 @@
 				18A2C1F816B42ED000CECE75 /* MainViewController.m in Sources */,
 				18A2C1FE16B4353C00CECE75 /* TableSources.m in Sources */,
 				18A2C21116B43D6D00CECE75 /* SortConfigViewController.m in Sources */,
-				18C3B10316B4DE330071EF1D /* DetailViewController.m in Sources */,
 				18D06FC816B55EE200519380 /* FMDatabase.m in Sources */,
 				18D06FCA16B55EE200519380 /* FMDatabaseAdditions.m in Sources */,
 				18D06FCC16B55EE200519380 /* FMDatabasePool.m in Sources */,
 				18D06FCE16B55EE200519380 /* FMDatabaseQueue.m in Sources */,
 				18D06FD016B55EE200519380 /* FMResultSet.m in Sources */,
+				1898B37C16BD8EDF00275758 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +425,7 @@
 				18D06FCD16B55EE200519380 /* FMDatabasePool.m in Sources */,
 				18D06FCF16B55EE200519380 /* FMDatabaseQueue.m in Sources */,
 				18D06FD116B55EE200519380 /* FMResultSet.m in Sources */,
+				1898B37D16BD8EDF00275758 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
