@@ -25,6 +25,7 @@
 @synthesize playRankSortType = playRankSortType_;
 @synthesize sortingType = sortingType_;
 @synthesize tableData = tableData_;
+@synthesize checkList = checkList_;
 
 - (id)init
 {
@@ -92,6 +93,8 @@
                      @"TO FAILED",
                      @"TO NOPLAY",
                      nil];
+        
+        self.checkList = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -100,6 +103,7 @@
     editing = NO;
     self.navigationItem.rightBarButtonItem = self.button;
     toolBar.items = toolbarItems;
+    [self clearCheckList];
     [self.table reloadData];
 }
 
@@ -144,7 +148,19 @@
     NSLog(@"%d %d %d %d %d",self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType);
     self.tableData = [self dbSelector];
     self.title = [NSString stringWithFormat:@"%d曲",[self.tableData count]];
+    //セルチェックリスト
+    for (int i = 0; i <= [self.tableData count]; i++){
+        [self.checkList addObject:@"0"];
+    }
+
     [self.table reloadData];
+}
+
+- (void)clearCheckList{
+    [self.checkList removeAllObjects];
+    for (int i = 0; i <= [self.tableData count]; i++){
+        [self.checkList addObject:@"0"];
+    }
 }
 
 -(id) dbConnect{
@@ -360,6 +376,12 @@
     }
     
     // Configure the cell...
+    if ([[self.checkList objectAtIndex:indexPath.row] isEqualToString:@"0"]) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    else{
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
     cell.textLabel.text = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];
     NSString *detail1 = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"level"];
@@ -414,8 +436,9 @@
     if (editing) {
         UITableViewCell* cell = nil;
         cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (cell.accessoryType == UITableViewCellAccessoryNone) {
+        if ([[self.checkList objectAtIndex:indexPath.row] isEqualToString:@"0"]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            [self.checkList replaceObjectAtIndex:indexPath.row withObject:@"1"];
         }
         else{
             cell.accessoryType = UITableViewCellAccessoryNone;

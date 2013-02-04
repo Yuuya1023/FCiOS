@@ -28,6 +28,8 @@
     NSArray *toolbarItemsInEditing;
     
     UIToolbar *toolBar;
+    
+    NSMutableArray *checkList_;
 }
 
 @property (nonatomic ,retain) UITableView *table;
@@ -40,6 +42,8 @@
 @property (nonatomic, assign) int sortingType;
 
 @property (nonatomic ,retain) NSMutableArray *tableData;
+
+@property (nonatomic ,retain) NSMutableArray *checkList;
 
 - (void)setTableData;
 
