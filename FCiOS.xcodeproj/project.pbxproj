@@ -12,6 +12,8 @@
 		1898B37D16BD8EDF00275758 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898B37A16BD8EDF00275758 /* DetailViewController.m */; };
 		1898B37E16BD8EDF00275758 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1898B37B16BD8EDF00275758 /* DetailViewController.xib */; };
 		1898B37F16BD8EDF00275758 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1898B37B16BD8EDF00275758 /* DetailViewController.xib */; };
+		1898B92816C001B000E1938B /* userData.db in Resources */ = {isa = PBXBuildFile; fileRef = 1898B92716C001B000E1938B /* userData.db */; };
+		1898B92916C001B000E1938B /* userData.db in Resources */ = {isa = PBXBuildFile; fileRef = 1898B92716C001B000E1938B /* userData.db */; };
 		18A2C19316B3C1B700CECE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19216B3C1B700CECE75 /* UIKit.framework */; };
 		18A2C19516B3C1B700CECE75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19416B3C1B700CECE75 /* Foundation.framework */; };
 		18A2C19716B3C1B700CECE75 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19616B3C1B700CECE75 /* CoreGraphics.framework */; };
@@ -76,6 +78,7 @@
 		1898B37916BD8EDF00275758 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		1898B37A16BD8EDF00275758 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		1898B37B16BD8EDF00275758 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		1898B92716C001B000E1938B /* userData.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = userData.db; sourceTree = "<group>"; };
 		18A2C18E16B3C1B700CECE75 /* FCiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A2C19216B3C1B700CECE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18A2C19416B3C1B700CECE75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -240,6 +243,7 @@
 		18A2C1DB16B3C24000CECE75 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1898B92716C001B000E1938B /* userData.db */,
 				18D06FBA16B55D6400519380 /* musicMaster.db */,
 				18A2C1DC16B3C24000CECE75 /* Default-568h@2x.png */,
 				18A2C1DD16B3C24000CECE75 /* Default.png */,
@@ -353,6 +357,7 @@
 				18A2C21316B43D6D00CECE75 /* SortConfigViewController.xib in Resources */,
 				18D06FBB16B55D6400519380 /* musicMaster.db in Resources */,
 				1898B37E16BD8EDF00275758 /* DetailViewController.xib in Resources */,
+				1898B92816C001B000E1938B /* userData.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +377,7 @@
 				18A2C21416B43D6D00CECE75 /* SortConfigViewController.xib in Resources */,
 				18D06FBC16B55D6400519380 /* musicMaster.db in Resources */,
 				1898B37F16BD8EDF00275758 /* DetailViewController.xib in Resources */,
+				1898B92916C001B000E1938B /* userData.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

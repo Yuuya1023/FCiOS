@@ -7,10 +7,7 @@
 //
 
 #import "DetailViewController.h"
-#import "FMDatabase.h"
-#import "FMDatabaseAdditions.h"
 
-#import "dbConnector.h"
 
 @interface DetailViewController ()
 
@@ -19,6 +16,8 @@
 @implementation DetailViewController
 @synthesize table = table_;
 @synthesize button = button_;
+@synthesize music_DB = music_DB_;
+@synthesize userData_DB = userData_DB_;
 @synthesize versionSortType = versionSortType_;
 @synthesize levelSortType = levelSortType_;
 @synthesize playStyleSortType = playStyleSortType_;
@@ -163,17 +162,17 @@
     }
 }
 
--(id) dbConnect{
+-(id) dbConnect:(NSString *)dbName{
     BOOL success;
     NSError *error;
     NSFileManager *fm = [NSFileManager defaultManager];
     NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"musicMaster.db"];
+    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db",dbName]];
     NSLog(@"%@",writableDBPath);
     success = [fm fileExistsAtPath:writableDBPath];
     if(!success){
-        NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"musicMaster.db"];
+        NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db",dbName]];
         success = [fm copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
         if(!success){
             NSLog(@"%@",[error localizedDescription]);
@@ -185,9 +184,10 @@
 
 
 - (NSMutableArray *)dbSelector{
-    FMDatabase* db = [self dbConnect];
-    if ([db open]) {
-        [db setShouldCacheStatements:YES];
+    self.music_DB = [self dbConnect:@"musicMaster"];
+    self.userData_DB = [self dbConnect:@"userData"];
+    if ([self.music_DB open]) {
+        [self.music_DB setShouldCacheStatements:YES];
         
         // SELECT
         NSMutableArray *array = [[NSMutableArray alloc] init];
@@ -274,9 +274,9 @@
         }
         
         //ソートタイプ
-        [sql appendFormat:@" ORDER BY name ASC"];
+        [sql appendFormat:@" ORDER BY LOWER(name) ASC"];
         NSLog(@"%@",sql);
-        FMResultSet *rs = [db executeQuery:sql];
+        FMResultSet *rs = [self.music_DB executeQuery:sql];
         while ([rs next]) {
 //            NSLog(@"result %d %@",[rs intForColumn:@"music_id"],[rs stringForColumn:@"name"]);
             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -290,7 +290,7 @@
             
         }
         [rs close];
-        [db close];
+        [self.music_DB close];
         
         return array;
         
@@ -314,36 +314,6 @@
         toolBar.items = toolbarItemsInEditing;
 
     }
-//    switch (buttonIndex) {
-//        case 0:
-//            editMode.text = @"TO FULLCOMBO";
-//            break;
-//        case 1:
-//            editMode.text = @"TO EXHARDCLEAR";
-//            break;
-//        case 2:
-//            editMode.text = @"TO HARDCLEAR";
-//            break;
-//        case 3:
-//            editMode.text = @"TO CLEAR";
-//            break;
-//        case 4:
-//            editMode.text = @"TO EASYCLEAR";
-//            break;
-//        case 5:
-//            editMode.text = @"TO ASSISTCLEAR";
-//            break;
-//        case 6:
-//            editMode.text = @"TO FAILED";
-//            break;
-//        case 7:
-//            editMode.text = @"TO NOPLAY";
-//            break;
-//            
-//        default:
-//            break;
-//    }
-
     
 }
 
@@ -442,6 +412,7 @@
         }
         else{
             cell.accessoryType = UITableViewCellAccessoryNone;
+            [self.checkList replaceObjectAtIndex:indexPath.row withObject:@"0"];
         }
     }
     

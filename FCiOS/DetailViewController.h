@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+#import "FMDatabase.h"
+#import "FMDatabaseAdditions.h"
+
+#import "dbConnector.h"
+
 @interface DetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>{
     UITableView *table_;
+    
+    FMDatabase* music_DB_;
+    FMDatabase* userData_DB_;
+    
     int versionSortType_;
     int levelSortType_;
     int playStyleSortType_;
@@ -34,6 +43,9 @@
 
 @property (nonatomic ,retain) UITableView *table;
 @property (nonatomic ,retain) UIBarButtonItem *button;
+
+@property (nonatomic ,retain) FMDatabase *music_DB;
+@property (nonatomic ,retain) FMDatabase *userData_DB;
 
 @property (nonatomic, assign) int versionSortType;
 @property (nonatomic, assign) int levelSortType;
