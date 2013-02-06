@@ -177,18 +177,23 @@
     DetailViewController *detail = [[DetailViewController alloc] init];
     switch (indexPath.section) {
         case 0:
-            return;
+            detail.clearSortType = indexPath.row + 1;
+            
+            detail.levelSortType = 0;
+            detail.versionSortType = 0;
             break;
             
         case 1:
             detail.levelSortType = indexPath.row + 1;
             
+            detail.clearSortType = 0;
             detail.versionSortType = 0;
             break;
             
         case 2:
             detail.versionSortType = indexPath.row + 1;
             
+            detail.clearSortType = 0;
             detail.levelSortType = 0;
             break;
             
@@ -196,11 +201,9 @@
             break;
     }
     
-//    detail.versionSortType = versionSortType;
-//    detail.levelSortType = levelSortType;
+    //プレイランクは選択されているもので検索
     detail.playRankSortType = playRankSortType;
     detail.playStyleSortType = playStyleSortType;
-//    detail.sortingType = sortingType;
     
     [detail setTableData];
     [detail setHidesBottomBarWhenPushed:YES];

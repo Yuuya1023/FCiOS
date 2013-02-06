@@ -19,6 +19,7 @@
     NSArray *levelSortList_;
     NSArray *versionSortList_;
     NSArray *sortingSortList_;
+
 }
 
 @property (nonatomic ,retain)NSArray *clearList;

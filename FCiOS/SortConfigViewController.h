@@ -24,18 +24,21 @@
     
     UILabel *versionSortLabel;
     UILabel *levelSortLabel;
+    UILabel *clearSortLabel;
     UILabel *playStyleSortLabel;
     UILabel *playRankSortLabel;
     UILabel *sortingSortLabel;
     
     UIButton *versionSelect;
     UIButton *levelSelect;
+    UIButton *clearSelect;
     UIButton *playStyleSelect;
     UIButton *playRankSelect;
     UIButton *sortingSelect;
     
     int versionSortType;
     int levelSortType;
+    int clearSortType;
     int playStyleSortType;
     int playRankSortType;
     int sortingType;

@@ -39,19 +39,19 @@
         self.playStyleList = [[NSArray alloc] initWithObjects:@"Single Play",@"Double Play", nil];
         self.playRankList = [[NSArray alloc] initWithObjects:@"Normal",@"Hyper",@"Another",@"ALL", nil];
         
-        //ソート結果表示
+        //ソート結果表示ボタン
         UIButton *resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        resultButton.frame = CGRectMake(105, 300, 120, 40);
+        resultButton.frame = CGRectMake(105, 320, 120, 40);
         [resultButton setTitle:@"リザルト" forState:UIControlStateNormal];
         [resultButton addTarget:self action:NSSelectorFromString(@"showResult:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:resultButton];
         
         //バージョン
-        UILabel *version = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 100, 20)];
+        UILabel *version = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 20)];
         version.text = @"Version";
         version.backgroundColor = [UIColor clearColor];
         
-        versionSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 30, 190, 40)];
+        versionSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 20, 190, 40)];
         versionSortLabel.text = @"20 tricoro";
         versionSortType = 20;
         versionSortLabel.textAlignment = UITextAlignmentRight;
@@ -59,18 +59,18 @@
         
         versionSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         versionSelect.tag = 0;
-        versionSelect.frame = CGRectMake(130, 30, 190, 40);
+        versionSelect.frame = CGRectMake(130, 20, 190, 40);
         [versionSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:versionSelect];
         [self.view addSubview:versionSortLabel];
         [self.view addSubview:version];
         
         //難易度
-        UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(20, 70, 100, 20)];
+        UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 100, 20)];
         level.text = @"Difficulity";
         level.backgroundColor = [UIColor clearColor];
         
-        levelSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 80, 190, 40)];
+        levelSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 70, 190, 40)];
         levelSortLabel.text = @"☆12";
         levelSortType = 12;
         levelSortLabel.textAlignment = UITextAlignmentRight;
@@ -78,59 +78,79 @@
         
         levelSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         levelSelect.tag = 1;
-        levelSelect.frame = CGRectMake(130, 80, 190, 40);
+        levelSelect.frame = CGRectMake(130, 70, 190, 40);
         [levelSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:levelSelect];
         [self.view addSubview:levelSortLabel];
         [self.view addSubview:level];
         
+        //クリアランプ
+        UILabel *clear = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 100, 20)];
+        clear.text = @"Clear Lamp";
+        clear.backgroundColor = [UIColor clearColor];
+        
+        clearSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 120, 190, 40)];
+        clearSortLabel.text = @"ALL";
+        clearSortType = 0;
+        clearSortLabel.textAlignment = UITextAlignmentRight;
+        clearSortLabel.backgroundColor = [UIColor clearColor];
+        
+        clearSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        clearSelect.tag = 2;
+        clearSelect.frame = CGRectMake(130, 120, 190, 40);
+        [clearSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:clearSelect];
+        [self.view addSubview:clearSortLabel];
+        [self.view addSubview:clear];
+
+        
         //プレイスタイル
-        UILabel *playStyle = [[UILabel alloc] initWithFrame:CGRectMake(20, 120, 100, 20)];
+        UILabel *playStyle = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 100, 20)];
         playStyle.text = @"PlayStyle";
         
-        playStyleSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 130, 190, 40)];
+        playStyleSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 170, 190, 40)];
         playStyleSortLabel.text = @"Single Play";
         playStyleSortLabel.textAlignment = UITextAlignmentRight;
         playStyleSortLabel.backgroundColor = [UIColor clearColor];
         
         playStyleSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        playStyleSelect.tag = 2;
-        playStyleSelect.frame = CGRectMake(130, 130, 190, 40);
+        playStyleSelect.tag = 3;
+        playStyleSelect.frame = CGRectMake(130, 170, 190, 40);
         [playStyleSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:playStyleSelect];
         [self.view addSubview:playStyleSortLabel];
         [self.view addSubview:playStyle];
         
         //プレイランク
-        UILabel *playRank = [[UILabel alloc] initWithFrame:CGRectMake(20, 170, 100, 20)];
+        UILabel *playRank = [[UILabel alloc] initWithFrame:CGRectMake(20, 210, 100, 20)];
         playRank.text = @"N/H/A";
         
-        playRankSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 180, 190, 40)];
+        playRankSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 220, 190, 40)];
         playRankSortLabel.text = @"Another";
         playRankSortType = 2;
         playRankSortLabel.textAlignment = UITextAlignmentRight;
         playRankSortLabel.backgroundColor = [UIColor clearColor];
         
         playRankSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        playRankSelect.tag = 3;
-        playRankSelect.frame = CGRectMake(130, 180, 190, 40);
+        playRankSelect.tag = 4;
+        playRankSelect.frame = CGRectMake(130, 220, 190, 40);
         [playRankSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:playRankSelect];
         [self.view addSubview:playRankSortLabel];
         [self.view addSubview:playRank];
         
         //ソーティング
-        UILabel *sorting = [[UILabel alloc] initWithFrame:CGRectMake(20, 220, 100, 20)];
+        UILabel *sorting = [[UILabel alloc] initWithFrame:CGRectMake(20, 260, 100, 20)];
         sorting.text = @"Sorting";
         
-        sortingSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 230, 190, 40)];
+        sortingSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 270, 190, 40)];
         sortingSortLabel.text = @"sort";
         sortingSortLabel.textAlignment = UITextAlignmentRight;
         sortingSortLabel.backgroundColor = [UIColor clearColor];
         
         sortingSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        sortingSelect.tag = 4;
-        sortingSelect.frame = CGRectMake(130, 230, 190, 40);
+        sortingSelect.tag = 5;
+        sortingSelect.frame = CGRectMake(130, 270, 190, 40);
         [sortingSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:sortingSelect];
         [self.view addSubview:sortingSortLabel];
@@ -164,12 +184,15 @@
             self.tableList = self.levelList;
             break;
         case 2:
-            self.tableList = self.playStyleList;
+            self.tableList = self.clearList;
             break;
         case 3:
-            self.tableList = self.playRankList;
+            self.tableList = self.playStyleList;
             break;
         case 4:
+            self.tableList = self.playRankList;
+            break;
+        case 5:
             self.tableList = self.sortingList;
             break;
         default:
@@ -186,6 +209,7 @@
     DetailViewController *detail = [[DetailViewController alloc] init];
     detail.versionSortType = versionSortType;
     detail.levelSortType = levelSortType;
+    detail.clearSortType = clearSortType;
     detail.playRankSortType = playRankSortType;
     detail.playStyleSortType = playStyleSortType;
     detail.sortingType = sortingType;
@@ -216,7 +240,7 @@
     
     // Configure the cell...
     cell.textLabel.text = [self.tableList objectAtIndex:indexPath.row];
-    
+    cell.textLabel.adjustsFontSizeToFitWidth = YES;
     
     return cell;
 }
@@ -236,14 +260,18 @@
                 levelSortType = indexPath.row;
                 break;
             case 2:
+                clearSortLabel.text = [self.clearList objectAtIndex:indexPath.row];
+                clearSortType = indexPath.row;
+                break;
+            case 3:
                 playStyleSortLabel.text = [self.playStyleList objectAtIndex:indexPath.row];
                 playStyleSortType = indexPath.row;
                 break;
-            case 3:
+            case 4:
                 playRankSortLabel.text = [self.playRankList objectAtIndex:indexPath.row];
                 playRankSortType = indexPath.row;
                 break;
-            case 4:
+            case 5:
                 sortingSortLabel.text = [self.sortingList objectAtIndex:indexPath.row];
                 sortingType = indexPath.row;
                 break;
@@ -252,9 +280,10 @@
         }
     }];
     
-    NSLog(@"\n %@ \n %@ \n %@ \n %@ \n %@",
+    NSLog(@"\n %@ \n %@ \n %@ \n %@ \n %@ \n %@",
           [self.versionList objectAtIndex:versionSortType],
           [self.levelList objectAtIndex:levelSortType],
+          [self.clearList objectAtIndex:clearSortType],
           [self.playStyleList objectAtIndex:playStyleSortType],
           [self.playRankList objectAtIndex:playRankSortType],
           [self.sortingList objectAtIndex:sortingType]);

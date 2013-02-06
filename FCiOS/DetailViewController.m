@@ -18,11 +18,14 @@
 @synthesize button = button_;
 @synthesize music_DB = music_DB_;
 @synthesize userData_DB = userData_DB_;
+
 @synthesize versionSortType = versionSortType_;
 @synthesize levelSortType = levelSortType_;
+@synthesize clearSortType = clearSortType_;
 @synthesize playStyleSortType = playStyleSortType_;
 @synthesize playRankSortType = playRankSortType_;
 @synthesize sortingType = sortingType_;
+
 @synthesize tableData = tableData_;
 @synthesize checkList = checkList_;
 
@@ -220,61 +223,114 @@
         NSString *playRankSql;
         switch (self.playRankSortType) {
             case 0:
-                playRankSql = [NSString stringWithFormat:@"Normal_Level"];
+                playRankSql = [NSString stringWithFormat:@"Normal_"];
                 break;
             case 1:
-                playRankSql = [NSString stringWithFormat:@"Hyper_Level"];
+                playRankSql = [NSString stringWithFormat:@"Hyper_"];
                 break;
             case 2:
-                playRankSql = [NSString stringWithFormat:@"Another_Level"];
+                playRankSql = [NSString stringWithFormat:@"Another_"];
                 break;
             default:
                 playRankSql = @"UNION_ALL";
                 break;
         }
         
-        
-        //        switch (self.sortingType) {
-        //            case 0:
-        //
-        //                break;
-        //
-        //            default:
-        //                break;
-        //        }
-        NSString *from = [NSString stringWithFormat:@""];
-        NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT music_id,name,version,%@%@ AS level FROM musicMaster where %@ and %@%@%@",
-                                playStyleSql,
-                                playRankSql,
-                                versionSql,
-                                playStyleSql,
-                                playRankSql,
-                                levelSql];
-        
-        if ([playRankSql isEqualToString:@"UNION_ALL"]) {
-            sql = [NSMutableString stringWithFormat:@"SELECT music_id,name,version,%@Another_Level AS level FROM musicMaster where %@ and  %@Another_Level%@",
-                   playStyleSql,
-                   versionSql,
-                   playStyleSql,
-                   levelSql];
-            
-            [sql appendFormat:@" UNION ALL "];
-            [sql appendFormat:@"SELECT music_id,name,version,%@Hyper_Level AS level FROM musicMaster where %@ and  %@Hyper_Level%@",
-             playStyleSql,
-             versionSql,
-             playStyleSql,
-             levelSql];
-            
-            [sql appendFormat:@" UNION ALL "];
-            [sql appendFormat:@"SELECT music_id,name,version,%@Normal_Level AS level FROM musicMaster where %@ and  %@Normal_Level%@",
-             playStyleSql,
-             versionSql,
-             playStyleSql,
-             levelSql];
+        //クリアランプそーと
+        NSString *statusSort = @"";
+        switch (self.clearSortType) {
+            case 1:
+                statusSort = @"AND status = 7";
+                break;
+            case 2:
+                statusSort = @"AND status = 6";
+                break;
+            case 3:
+                statusSort = @"AND status = 5";
+                break;
+            case 4:
+                statusSort = @"AND status = 4";
+                break;
+            case 5:
+                statusSort = @"AND status = 3";
+                break;
+            case 6:
+                statusSort = @"AND status = 2";
+                break;
+            case 7:
+                statusSort = @"AND status = 1";
+                break;
+            case 8:
+                statusSort = @"AND status = 0";
+                break;
+            case 9:
+                statusSort = @"AND status < 7";
+                break;
+            case 10:
+                statusSort = @"AND status < 6";
+                break;
+            case 11:
+                statusSort = @"AND status < 5";
+                break;
+            case 12:
+                statusSort = @"AND status < 4";
+                break;
+            case 13:
+                statusSort = @"AND status < 3";
+                break;
+            default:
+                break;
         }
         
-        //ソートタイプ
-        [sql appendFormat:@" ORDER BY LOWER(name) ASC"];
+
+        NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT tblResults.* FROM("];
+        
+        //N/H/Aすべての結果を表示
+        if ([playRankSql isEqualToString:@"UNION_ALL"]) {
+            [sql appendFormat:@"SELECT music_id,name,version,%@Normal_Level AS level,%@Normal_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Normal_Level%@ %@ AND deleteFlg = 0",
+             playStyleSql,
+             playStyleSql,
+             versionSql,
+             playStyleSql,
+             levelSql,
+             statusSort];
+            
+            [sql appendFormat:@" UNION ALL "];
+            [sql appendFormat:@"SELECT music_id,name,version,%@Hyper_Level AS level,%@Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Hyper_Level%@ %@ AND deleteFlg = 0",
+             playStyleSql,
+             playStyleSql,
+             versionSql,
+             playStyleSql,
+             levelSql,
+             statusSort];
+            
+            [sql appendFormat:@" UNION ALL "];
+            [sql appendFormat:@"SELECT music_id,name,version,%@Another_Level AS level ,%@Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND  %@Another_Level%@ %@ AND deleteFlg = 0",
+             playStyleSql,
+             playStyleSql,
+             versionSql,
+             playStyleSql,
+             levelSql,
+             statusSort];
+            
+        }
+        else{
+            //プレイランクを指定したとき
+            [sql appendFormat:@"SELECT music_id,name,version,%@%@Level AS level,%@%@Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@%@Level%@ %@ AND deleteFlg = 0",
+             playStyleSql,
+             playRankSql,
+             playStyleSql,
+             playRankSql,
+             versionSql,
+             playStyleSql,
+             playRankSql,
+             levelSql,
+             statusSort];
+        }
+        
+        //名前順並び替え
+        [sql appendFormat:@") AS tblResults ORDER BY LOWER(tblResults.name) ASC"];
+        
         NSLog(@"%@",sql);
         FMResultSet *rs = [self.music_DB executeQuery:sql];
         while ([rs next]) {

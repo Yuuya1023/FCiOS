@@ -22,6 +22,7 @@
     
     int versionSortType_;
     int levelSortType_;
+    int clearSortType_;
     int playStyleSortType_;
     int playRankSortType_;
     int sortingType_;
@@ -49,6 +50,7 @@
 
 @property (nonatomic, assign) int versionSortType;
 @property (nonatomic, assign) int levelSortType;
+@property (nonatomic, assign) int clearSortType;
 @property (nonatomic, assign) int playStyleSortType;
 @property (nonatomic, assign) int playRankSortType;
 @property (nonatomic, assign) int sortingType;
