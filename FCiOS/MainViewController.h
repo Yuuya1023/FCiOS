@@ -9,11 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "TableSources.h"
 
+#import "DetailViewController.h"
+
 @interface MainViewController : UITableViewController{
     
     NSArray *clearList_;
     NSArray *levelList_;
     NSArray *versionList_;
+    
+    int versionSortType;
+    int levelSortType;
+    int playStyleSortType;
+    int playRankSortType;
+    int sortingType;
 }
 
 @property (nonatomic ,retain)NSArray *clearList;

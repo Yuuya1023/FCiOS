@@ -29,6 +29,9 @@
         self.versionList = tableSources.versionList;
         self.levelList = tableSources.levelList;
         
+        //選択されているプレイスタイル&プレイランクをセット
+        playStyleSortType = 0;
+        playRankSortType = 2;
         // Custom initialization
     }
     return self;
@@ -108,6 +111,7 @@
     }
     
     // Configure the cell...
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case 0:
             cell.textLabel.text = [self.clearList objectAtIndex:indexPath.row];
@@ -170,13 +174,37 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    DetailViewController *detail = [[DetailViewController alloc] init];
+    switch (indexPath.section) {
+        case 0:
+            return;
+            break;
+            
+        case 1:
+            detail.levelSortType = indexPath.row + 1;
+            
+            detail.versionSortType = 0;
+            break;
+            
+        case 2:
+            detail.versionSortType = indexPath.row + 1;
+            
+            detail.levelSortType = 0;
+            break;
+            
+        default:
+            break;
+    }
+    
+//    detail.versionSortType = versionSortType;
+//    detail.levelSortType = levelSortType;
+    detail.playRankSortType = playRankSortType;
+    detail.playStyleSortType = playStyleSortType;
+//    detail.sortingType = sortingType;
+    
+    [detail setTableData];
+    [detail setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 @end

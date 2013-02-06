@@ -352,6 +352,7 @@
     else{
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
     cell.textLabel.text = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];
     NSString *detail1 = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"level"];
