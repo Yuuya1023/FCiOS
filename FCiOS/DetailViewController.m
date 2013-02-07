@@ -56,7 +56,7 @@
         //通常
         viewMode = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, self.view.bounds.size.width - 25, 40)];
         viewMode.adjustsFontSizeToFitWidth = YES;
-        viewMode.text = @"sssssssssssssssss";
+        viewMode.text = @"";
         viewMode.textColor = [UIColor whiteColor];
         viewMode.backgroundColor = [UIColor clearColor];
         UIBarButtonItem *labelBtn = [[UIBarButtonItem alloc] initWithCustomView:viewMode];
@@ -96,9 +96,21 @@
                      @"TO NOPLAY",
                      nil];
         
+        self.tableData = [[NSMutableArray alloc] init];
         self.checkList = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)cancel{
@@ -135,20 +147,11 @@
     }
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
 
 - (void)setTableData{
     NSLog(@"%d %d %d %d %d",self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType);
-    self.tableData = [self dbSelector];
+    [self dbSelector];
     self.title = [NSString stringWithFormat:@"%d曲",[self.tableData count]];
     //セルチェックリスト
     for (int i = 0; i <= [self.tableData count]; i++){
@@ -186,14 +189,12 @@
 }
 
 
-- (NSMutableArray *)dbSelector{
-    self.music_DB = [self dbConnect:@"musicMaster"];
-    self.userData_DB = [self dbConnect:@"userData"];
+- (void)dbSelector{
+    self.music_DB = [self dbConnect:@"musicMaster_test"];
+//    self.userData_DB = [self dbConnect:@"userData"];
     if ([self.music_DB open]) {
         [self.music_DB setShouldCacheStatements:YES];
         
-        // SELECT
-        NSMutableArray *array = [[NSMutableArray alloc] init];
         
         //バージョン
         NSString *versionSql;
@@ -328,6 +329,9 @@
              statusSort];
         }
         
+        NSString *sql_tmp = [NSString stringWithFormat:@"%@) AS tblResults",sql];
+        
+        
         //名前順並び替え
         [sql appendFormat:@") AS tblResults ORDER BY LOWER(tblResults.name) ASC"];
         
@@ -342,17 +346,51 @@
 //                                 [rs stringForColumn:@"type"],@"type",
                                  nil];
             
-            [array addObject:dic];
+            [self.tableData addObject:dic];
             
         }
         [rs close];
-        [self.music_DB close];
+
+
+        //統計データを抽出
+        NSString *sql2 = [NSString stringWithFormat:@"SELECT status,count(music_id) FROM (%@) GROUP BY status",sql_tmp];
+        NSLog(@"%@",sql2);
+        FMResultSet *rs2 = [self.music_DB executeQuery:sql2];
+        while ([rs2 next]) {
+            int status = [rs2 intForColumn:@"status"];
+            int count =  [rs2 intForColumn:@"count(music_id)"];
+            switch (status) {
+                case 7:
+                    fcCount = count;
+                    break;
+                case 6:
+                    exCount = count;
+                    break;
+                case 5:
+                    hcCount = count;
+                    break;
+                case 4:
+                    clCount = count;
+                    break;
+//                case 3:
+//                    ecCount = count;
+//                    break;
+//                case 0:
+//                    npCount = count;
+//                    break;
+                default:
+                    break;
+            }
+        }
         
-        return array;
+        //フッターの統計ラベルに表示
+        viewMode.text = [NSString stringWithFormat:@"FC:%d  EXH:%d  HARD:%d  CLEAR:%d",fcCount,exCount,hcCount,clCount];
+        
+        [rs2 close];
+        [self.music_DB close];
         
     }else{
         NSLog(@"Could not open db.");
-        return nil;
     }
     
 }

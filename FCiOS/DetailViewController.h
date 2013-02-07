@@ -27,6 +27,15 @@
     int playRankSortType_;
     int sortingType_;
     
+    int fcCount;
+    int exCount;
+    int hcCount;
+    int clCount;
+    int ecCount;
+    int acCount;
+    int faCount;
+    int npCount;
+    
     NSMutableArray *tableData_;
     BOOL editing;
     
