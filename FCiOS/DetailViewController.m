@@ -132,6 +132,7 @@
         self.navigationItem.rightBarButtonItem = nil;
         UIActionSheet *as = [[UIActionSheet alloc] init];
         as.delegate = self;
+        as.tag = -1;
         as.title = @"選択してください。";
         [as addButtonWithTitle:@"TO FULLCOMBO"];
         [as addButtonWithTitle:@"TO EXHARDCLEAR"];
@@ -151,6 +152,7 @@
 
 - (void)setTableData{
     NSLog(@"%d %d %d %d %d",self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType);
+    [self.tableData removeAllObjects];
     [self dbSelector];
     self.title = [NSString stringWithFormat:@"%d曲",[self.tableData count]];
     //セルチェックリスト
@@ -224,13 +226,13 @@
         NSString *playRankSql;
         switch (self.playRankSortType) {
             case 0:
-                playRankSql = [NSString stringWithFormat:@"Normal_"];
+                playRankSql = [NSString stringWithFormat:@"Normal"];
                 break;
             case 1:
-                playRankSql = [NSString stringWithFormat:@"Hyper_"];
+                playRankSql = [NSString stringWithFormat:@"Hyper"];
                 break;
             case 2:
-                playRankSql = [NSString stringWithFormat:@"Another_"];
+                playRankSql = [NSString stringWithFormat:@"Another"];
                 break;
             default:
                 playRankSql = @"UNION_ALL";
@@ -288,7 +290,7 @@
         
         //N/H/Aすべての結果を表示
         if ([playRankSql isEqualToString:@"UNION_ALL"]) {
-            [sql appendFormat:@"SELECT music_id,name,version,%@Normal_Level AS level,%@Normal_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Normal_Level%@ %@ AND deleteFlg = 0",
+            [sql appendFormat:@"SELECT music_id,name,version,%@Normal_Level AS level,%@Normal_Status AS status,selectType_Normal AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Normal_Level%@ %@ AND deleteFlg = 0 AND level != 0",
              playStyleSql,
              playStyleSql,
              versionSql,
@@ -297,7 +299,7 @@
              statusSort];
             
             [sql appendFormat:@" UNION ALL "];
-            [sql appendFormat:@"SELECT music_id,name,version,%@Hyper_Level AS level,%@Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Hyper_Level%@ %@ AND deleteFlg = 0",
+            [sql appendFormat:@"SELECT music_id,name,version,%@Hyper_Level AS level,%@Hyper_Status AS status,selectType_Hyper AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Hyper_Level%@ %@ AND deleteFlg = 0 AND level != 0",
              playStyleSql,
              playStyleSql,
              versionSql,
@@ -306,7 +308,7 @@
              statusSort];
             
             [sql appendFormat:@" UNION ALL "];
-            [sql appendFormat:@"SELECT music_id,name,version,%@Another_Level AS level ,%@Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND  %@Another_Level%@ %@ AND deleteFlg = 0",
+            [sql appendFormat:@"SELECT music_id,name,version,%@Another_Level AS level ,%@Another_Status AS status,selectType_Another AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND  %@Another_Level%@ %@ AND deleteFlg = 0 AND level != 0",
              playStyleSql,
              playStyleSql,
              versionSql,
@@ -317,10 +319,11 @@
         }
         else{
             //プレイランクを指定したとき
-            [sql appendFormat:@"SELECT music_id,name,version,%@%@Level AS level,%@%@Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@%@Level%@ %@ AND deleteFlg = 0",
+            [sql appendFormat:@"SELECT music_id,name,version,%@%@_Level AS level,%@%@_Status AS status,selectType_%@ AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@%@_Level%@ %@ AND deleteFlg = 0 AND level != 0",
              playStyleSql,
              playRankSql,
              playStyleSql,
+             playRankSql,
              playRankSql,
              versionSql,
              playStyleSql,
@@ -343,7 +346,7 @@
                                  [NSString stringWithFormat:@"%d",[rs intForColumn:@"music_id"]],@"music_id",
                                  [rs stringForColumn:@"name"],@"name",
                                  [rs stringForColumn:@"level"],@"level",
-//                                 [rs stringForColumn:@"type"],@"type",
+                                 [NSString stringWithFormat:@"%d",[rs intForColumn:@"type"]],@"type",
                                  nil];
             
             [self.tableData addObject:dic];
@@ -395,6 +398,62 @@
     
 }
 
+- (void)dbUpdate:(int)music_id changeToStatus:(int)status playRank:(int)playRank style:(int)style{
+    
+    self.music_DB = [self dbConnect:@"musicMaster_test"];
+    
+    if ([self.music_DB open]) {
+        [self.music_DB setShouldCacheStatements:YES];
+        [self.music_DB beginTransaction];
+        
+        NSString *playStyleSql;
+        if (style == 0) {
+            playStyleSql = [NSString stringWithFormat:@"SP_"];
+        }
+        else{
+            playStyleSql = [NSString stringWithFormat:@"DP_"];
+        }
+        
+        NSString *playRankSql;
+        switch (playRank) {
+            case 0:
+                playRankSql = [NSString stringWithFormat:@"Normal"];
+                break;
+            case 1:
+                playRankSql = [NSString stringWithFormat:@"Hyper"];
+                break;
+            case 2:
+                playRankSql = [NSString stringWithFormat:@"Another"];
+                break;
+            default:
+                playRankSql = @"UNION_ALL";
+                break;
+        }
+        
+        NSString *sql = [NSString stringWithFormat:@"UPDATE userData SET %@%@_Status = %d WHERE music_id = %d",
+                         playStyleSql,
+                         playRankSql,
+                         status,
+                         music_id];
+        NSLog(@"\n update sql \n %@",sql);
+        [self.music_DB executeUpdate:sql];
+        
+        //エラー処理
+        if ([self.music_DB hadError]) {
+            NSLog(@"update error %d: %@",[self.music_DB lastErrorCode],[self.music_DB lastErrorMessage]);
+            [self.music_DB rollback];
+        }
+        else{
+            [self.music_DB commit];
+        }
+        
+        [self.music_DB close];
+    }
+    else{
+        NSLog(@"Could not open db.");
+    }
+}
+
 #pragma mark - UIActionSheet Delegate
 
 -(void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -403,10 +462,25 @@
         [self cancel];
     }
     else{
-        editing = YES;
-        editMode.text = [editTypes objectAtIndex:buttonIndex];
-        toolBar.items = toolbarItemsInEditing;
+        //一括編集から出した場合
+        if (actionSheet.tag == -1) {
+            editing = YES;
+            editMode.text = [editTypes objectAtIndex:buttonIndex];
+            toolBar.items = toolbarItemsInEditing;
+        }
+        //セルをタップした際
+        else {
+            NSLog(@"tag = %d",actionSheet.tag);
+            int tag = actionSheet.tag;
+            //update
+            int music_id = [[[self.tableData objectAtIndex:tag] objectForKey:@"music_id"] intValue];
+            int status = 7 - buttonIndex;
+            int playRank = [[[self.tableData objectAtIndex:tag] objectForKey:@"type"] intValue];
+            int style = self.playStyleSortType;
 
+            [self dbUpdate:music_id changeToStatus:status playRank:playRank style:style];
+            [self setTableData];
+        }
     }
     
 }
@@ -448,10 +522,12 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
+//    cell.textLabel.textAlignment = NSTextAlignmentRight;
     cell.textLabel.text = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];
+    NSString *detail  = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"music_id"];
     NSString *detail1 = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"level"];
     NSString *detail2 = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"type"];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Lv %@, type%@",detail1,detail2];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ Lv %@, type%@",detail,detail1,detail2];
     return cell;
 }
 
@@ -510,7 +586,27 @@
             [self.checkList replaceObjectAtIndex:indexPath.row withObject:@"0"];
         }
     }
-    
+    else{
+        NSString *name = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];
+        NSString *type = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"type"];
+        NSLog(@"cell name %@, type = %@",name,type);
+        
+        UIActionSheet *as = [[UIActionSheet alloc] init];
+        as.delegate = self;
+        as.tag = indexPath.row;
+        as.title = @"選択してください。";
+        [as addButtonWithTitle:@"TO FULLCOMBO"];
+        [as addButtonWithTitle:@"TO EXHARDCLEAR"];
+        [as addButtonWithTitle:@"TO HARDCLEAR"];
+        [as addButtonWithTitle:@"TO CLEAR"];
+        [as addButtonWithTitle:@"TO EASYCLEAR"];
+        [as addButtonWithTitle:@"TO ASSISTCLEAR"];
+        [as addButtonWithTitle:@"TO FAILED"];
+        [as addButtonWithTitle:@"TO NOPLAY"];
+        [as addButtonWithTitle:@"キャンセル"];
+        as.cancelButtonIndex = 8;
+        [as showFromTabBar:self.tabBarController.tabBar];
+    }
 	
     
     // Navigation logic may go here. Create and push another view controller.
