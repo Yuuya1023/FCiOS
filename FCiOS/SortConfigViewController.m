@@ -54,7 +54,7 @@
         versionSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 20, 190, 40)];
         versionSortLabel.text = @"20 tricoro";
         versionSortType = 20;
-        versionSortLabel.textAlignment = UITextAlignmentRight;
+        versionSortLabel.textAlignment = NSTextAlignmentRight;
         versionSortLabel.backgroundColor = [UIColor clearColor];
         
         versionSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -71,9 +71,9 @@
         level.backgroundColor = [UIColor clearColor];
         
         levelSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 70, 190, 40)];
-        levelSortLabel.text = @"☆12";
-        levelSortType = 12;
-        levelSortLabel.textAlignment = UITextAlignmentRight;
+        levelSortLabel.text = @"ALL";
+        levelSortType = 0;
+        levelSortLabel.textAlignment = NSTextAlignmentRight;
         levelSortLabel.backgroundColor = [UIColor clearColor];
         
         levelSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -92,7 +92,7 @@
         clearSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 120, 190, 40)];
         clearSortLabel.text = @"ALL";
         clearSortType = 0;
-        clearSortLabel.textAlignment = UITextAlignmentRight;
+        clearSortLabel.textAlignment = NSTextAlignmentRight;
         clearSortLabel.backgroundColor = [UIColor clearColor];
         
         clearSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -110,7 +110,7 @@
         
         playStyleSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 170, 190, 40)];
         playStyleSortLabel.text = @"Single Play";
-        playStyleSortLabel.textAlignment = UITextAlignmentRight;
+        playStyleSortLabel.textAlignment = NSTextAlignmentRight;
         playStyleSortLabel.backgroundColor = [UIColor clearColor];
         
         playStyleSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -128,7 +128,7 @@
         playRankSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 220, 190, 40)];
         playRankSortLabel.text = @"Another";
         playRankSortType = 2;
-        playRankSortLabel.textAlignment = UITextAlignmentRight;
+        playRankSortLabel.textAlignment = NSTextAlignmentRight;
         playRankSortLabel.backgroundColor = [UIColor clearColor];
         
         playRankSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -144,8 +144,8 @@
         sorting.text = @"Sorting";
         
         sortingSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 270, 190, 40)];
-        sortingSortLabel.text = @"sort";
-        sortingSortLabel.textAlignment = UITextAlignmentRight;
+        sortingSortLabel.text = @"NONE";
+        sortingSortLabel.textAlignment = NSTextAlignmentRight;
         sortingSortLabel.backgroundColor = [UIColor clearColor];
         
         sortingSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];

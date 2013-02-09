@@ -335,8 +335,27 @@
         NSString *sql_tmp = [NSString stringWithFormat:@"%@) AS tblResults",sql];
         
         
-        //名前順並び替え
-        [sql appendFormat:@") AS tblResults ORDER BY LOWER(tblResults.name) ASC"];
+        //ソート順
+        switch (self.sortingType) {
+                case 0:
+                [sql appendFormat:@") AS tblResults ORDER BY LOWER(tblResults.name) ASC"];
+                break;
+            case 1:
+                [sql appendFormat:@") AS tblResults ORDER BY tblResults.status ASC,LOWER(tblResults.name) ASC"];
+                break;
+            case 2:
+                [sql appendFormat:@") AS tblResults ORDER BY tblResults.status DESC,LOWER(tblResults.name) ASC"];
+                break;
+            case 3:
+                [sql appendFormat:@") AS tblResults ORDER BY tblResults.level ASC,LOWER(tblResults.name) ASC"];
+                break;
+            case 4:
+                [sql appendFormat:@") AS tblResults ORDER BY tblResults.level DESC,LOWER(tblResults.name) ASC"];
+                break;
+                
+            default:
+                break;
+        }
         
         NSLog(@"%@",sql);
         FMResultSet *rs = [self.music_DB executeQuery:sql];
