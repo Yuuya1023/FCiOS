@@ -189,7 +189,6 @@
 
 
 - (void)dbSelector{
-//    self.userData_DB = [self dbConnect:@"userData"];
     DatabaseManager *dbManager = [DatabaseManager sharedInstance];
     FMDatabase *database = dbManager.music_DB;
     if ([database open]) {
