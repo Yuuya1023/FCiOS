@@ -37,6 +37,8 @@
         self.table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 108) style:UITableViewStylePlain];
         self.table.delegate = self;
         self.table.dataSource = self;
+        self.table.rowHeight = 40;
+//        self.table.separatorColor = [UIColor lightGrayColor];
         [self.view addSubview:self.table];
         
         self.button = [[UIBarButtonItem alloc] initWithTitle:@"一括編集"
@@ -357,7 +359,7 @@
                 break;
         }
         
-        NSLog(@"%@",sql);
+        NSLog(@"\n%@",sql);
         FMResultSet *rs = [self.music_DB executeQuery:sql];
         while ([rs next]) {
 //            NSLog(@"result %d %@",[rs intForColumn:@"music_id"],[rs stringForColumn:@"name"]);
@@ -366,6 +368,7 @@
                                  [rs stringForColumn:@"name"],@"name",
                                  [rs stringForColumn:@"level"],@"level",
                                  [NSString stringWithFormat:@"%d",[rs intForColumn:@"type"]],@"type",
+                                 [NSString stringWithFormat:@"%d",[rs intForColumn:@"status"]],@"status",
                                  nil];
             
             [self.tableData addObject:dic];
@@ -376,7 +379,7 @@
 
         //統計データを抽出
         NSString *sql2 = [NSString stringWithFormat:@"SELECT status,count(music_id) FROM (%@) GROUP BY status",sql_tmp];
-        NSLog(@"%@",sql2);
+        NSLog(@"\n%@",sql2);
         FMResultSet *rs2 = [self.music_DB executeQuery:sql2];
         while ([rs2 next]) {
             int status = [rs2 intForColumn:@"status"];
@@ -526,10 +529,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"MusicDetailCell";
+    MusicDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[MusicDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -540,54 +544,30 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    cell.textLabel.adjustsFontSizeToFitWidth = YES;
-//    cell.textLabel.textAlignment = NSTextAlignmentRight;
-    cell.textLabel.text = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];
-    NSString *detail  = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"music_id"];
-    NSString *detail1 = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"level"];
-    NSString *detail2 = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"type"];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ Lv %@, type%@",detail,detail1,detail2];
+
+    NSString *status = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"status"];
+    cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_%@",status]];
+    int type = [[[self.tableData objectAtIndex:indexPath.row] objectForKey:@"type"] intValue];
+    switch (type) {
+        case 0:
+            cell.difficulityLabel.textColor = [UIColor blueColor];
+            break;
+        case 1:
+            cell.difficulityLabel.textColor = [UIColor yellowColor];
+            break;
+        case 2:
+            cell.difficulityLabel.textColor = [UIColor redColor];
+            break;
+            
+        default:
+            break;
+    }
+    cell.difficulityLabel.text = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"level"];
+    cell.nameLabel.text = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];
+    
     return cell;
 }
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 #pragma mark - Table view delegate
 
@@ -626,15 +606,7 @@
         as.cancelButtonIndex = 8;
         [as showFromTabBar:self.tabBarController.tabBar];
     }
-	
-    
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+
 }
 
 @end

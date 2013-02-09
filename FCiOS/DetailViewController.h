@@ -13,6 +13,7 @@
 #import "FMDatabaseAdditions.h"
 
 #import "dbConnector.h"
+#import "MusicDetailCell.h"
 
 @interface DetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>{
     UITableView *table_;
