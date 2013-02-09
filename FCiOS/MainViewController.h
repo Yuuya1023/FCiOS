@@ -10,8 +10,12 @@
 #import "TableSources.h"
 
 #import "DetailViewController.h"
+#import "HomeDetailCell.h"
 
-@interface MainViewController : UITableViewController{
+@interface MainViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>{
+    
+    UITableView *tableView_;
+    UIBarButtonItem *button_;
     
     NSArray *clearList_;
     NSArray *levelList_;
@@ -23,6 +27,9 @@
     int playRankSortType;
     int sortingType;
 }
+
+@property (nonatomic, retain)UITableView *tablelView;
+@property (nonatomic ,retain) UIBarButtonItem *button;
 
 @property (nonatomic ,retain)NSArray *clearList;
 @property (nonatomic ,retain)NSArray *levelList;

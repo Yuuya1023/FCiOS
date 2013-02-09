@@ -125,6 +125,21 @@
 
 - (void)commitUpdate{
     NSLog(@"update");
+    for (int i = 0; i < [self.checkList count]; i++) {
+        if ([[self.checkList objectAtIndex:i] isEqualToString:@"1"]) {
+            //update
+            int music_id = [[[self.tableData objectAtIndex:i] objectForKey:@"music_id"] intValue];
+            int status = someEditType;
+            int playRank = [[[self.tableData objectAtIndex:i] objectForKey:@"type"] intValue];
+            int style = self.playStyleSortType;
+            
+            [self dbUpdate:music_id changeToStatus:status playRank:playRank style:style];
+            [self setTableData];
+        }
+        else{
+            
+        }
+    }
     
     [self cancel];
 }
@@ -487,6 +502,7 @@
         //一括編集から出した場合
         if (actionSheet.tag == -1) {
             editing = YES;
+            someEditType = 7 - buttonIndex;
             editMode.text = [editTypes objectAtIndex:buttonIndex];
             toolBar.items = toolbarItemsInEditing;
         }

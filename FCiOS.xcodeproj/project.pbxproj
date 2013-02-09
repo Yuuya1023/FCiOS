@@ -34,6 +34,8 @@
 		189EB6B816C6A7A20005CA3D /* clearLampImage_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6A916C6A7A20005CA3D /* clearLampImage_6.png */; };
 		189EB6B916C6A7A20005CA3D /* clearLampImage_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6AA16C6A7A20005CA3D /* clearLampImage_7.png */; };
 		189EB6BA16C6A7A20005CA3D /* clearLampImage_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6AA16C6A7A20005CA3D /* clearLampImage_7.png */; };
+		189EB6BD16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */; };
+		189EB6BE16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */; };
 		18A2C19316B3C1B700CECE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19216B3C1B700CECE75 /* UIKit.framework */; };
 		18A2C19516B3C1B700CECE75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19416B3C1B700CECE75 /* Foundation.framework */; };
 		18A2C19716B3C1B700CECE75 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19616B3C1B700CECE75 /* CoreGraphics.framework */; };
@@ -110,6 +112,8 @@
 		189EB6A816C6A7A20005CA3D /* clearLampImage_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearLampImage_5.png; sourceTree = "<group>"; };
 		189EB6A916C6A7A20005CA3D /* clearLampImage_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearLampImage_6.png; sourceTree = "<group>"; };
 		189EB6AA16C6A7A20005CA3D /* clearLampImage_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearLampImage_7.png; sourceTree = "<group>"; };
+		189EB6BB16C6B8CF0005CA3D /* HomeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeDetailCell.h; sourceTree = "<group>"; };
+		189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeDetailCell.m; sourceTree = "<group>"; };
 		18A2C18E16B3C1B700CECE75 /* FCiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A2C19216B3C1B700CECE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18A2C19416B3C1B700CECE75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -255,6 +259,8 @@
 				1898B37A16BD8EDF00275758 /* DetailViewController.m */,
 				189EB69B16C68DB40005CA3D /* MusicDetailCell.h */,
 				189EB69C16C68DB40005CA3D /* MusicDetailCell.m */,
+				189EB6BB16C6B8CF0005CA3D /* HomeDetailCell.h */,
+				189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */,
 				18A2C1FC16B4353C00CECE75 /* TableSources.h */,
 				18A2C1FD16B4353C00CECE75 /* TableSources.m */,
 				18A2C1F716B42ED000CECE75 /* MainViewController.xib */,
@@ -492,6 +498,7 @@
 				18D06FD016B55EE200519380 /* FMResultSet.m in Sources */,
 				1898B37C16BD8EDF00275758 /* DetailViewController.m in Sources */,
 				189EB69D16C68DB40005CA3D /* MusicDetailCell.m in Sources */,
+				189EB6BD16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +517,7 @@
 				18D06FD116B55EE200519380 /* FMResultSet.m in Sources */,
 				1898B37D16BD8EDF00275758 /* DetailViewController.m in Sources */,
 				189EB69E16C68DB40005CA3D /* MusicDetailCell.m in Sources */,
+				189EB6BE16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

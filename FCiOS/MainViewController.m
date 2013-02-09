@@ -13,6 +13,8 @@
 @end
 
 @implementation MainViewController
+@synthesize tablelView = tableView_;
+@synthesize button = button_;
 @synthesize clearList = clearList_;
 @synthesize levelList = levelList_;
 @synthesize versionList = versionList_;
@@ -21,8 +23,21 @@
 {
     self = [super init];
     if (self) {
+        self.tablelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 108) style:UITableViewStylePlain];
+        self.tablelView.delegate = self;
+        self.tablelView.dataSource = self;
+        self.tablelView.rowHeight = 50;
+//        self.table.separatorColor = [UIColor lightGrayColor];
+        [self.view addSubview:self.tablelView];
+        
         self.title = @"Home";
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        
+        self.button = [[UIBarButtonItem alloc] initWithTitle:@"SP ANOTHER"
+                                                       style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(setSortType:)];
+        self.navigationItem.rightBarButtonItem = self.button;
         
         TableSources *tableSources = [[TableSources alloc] init];
         self.clearList = tableSources.clearList;
@@ -32,7 +47,7 @@
         //選択されているプレイスタイル&プレイランクをセット
         playStyleSortType = 0;
         playRankSortType = 2;
-        // Custom initialization
+        
     }
     return self;
 }
@@ -53,6 +68,65 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)setSortType:(UIBarButtonItem *)b{
+    UIActionSheet *as = [[UIActionSheet alloc] init];
+    as.delegate = self;
+//    as.tag = -1;
+    as.title = @"選択してください。";
+    [as addButtonWithTitle:@"SP NORMAL"];
+    [as addButtonWithTitle:@"SP HYPER"];
+    [as addButtonWithTitle:@"SP ANOTHER"];
+    [as addButtonWithTitle:@"DP NORMAL"];
+    [as addButtonWithTitle:@"DP HYPER"];
+    [as addButtonWithTitle:@"DP ANOTHER"];
+    [as addButtonWithTitle:@"キャンセル"];
+    as.cancelButtonIndex = 6;
+    [as showFromTabBar:self.tabBarController.tabBar];
+}
+
+#pragma mark - UIActionSheet Delegate
+
+-(void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    switch (buttonIndex) {
+        case 0:
+            playStyleSortType = 0;
+            playRankSortType = 0;
+            self.button.title = @"SP NORMAL";
+            break;
+        case 1:
+            playStyleSortType = 0;
+            playRankSortType = 1;
+            self.button.title = @"SP HYPER";
+            break;
+        case 2:
+            playStyleSortType = 0;
+            playRankSortType = 2;
+            self.button.title = @"SP ANOTHER";
+            break;
+        case 3:
+            playStyleSortType = 1;
+            playRankSortType = 0;
+            self.button.title = @"DP NORMAL";
+            break;
+        case 4:
+            playStyleSortType = 1;
+            playRankSortType = 1;
+            self.button.title = @"DP HYPER";
+            break;
+        case 5:
+            playStyleSortType = 1;
+            playRankSortType = 2;
+            self.button.title = @"DP ANOTHER";
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 #pragma mark - Table view data source
@@ -104,29 +178,32 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"HomeDetailCell";
+    HomeDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[HomeDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case 0:
-            cell.textLabel.text = [self.clearList objectAtIndex:indexPath.row];
+            cell.nameLabel.text = [self.clearList objectAtIndex:indexPath.row];
+            cell.folderDetailLabel.text = @"Count : 573";
             break;
         case 1:
-            cell.textLabel.text = [self.levelList objectAtIndex:indexPath.row];
+            cell.nameLabel.text = [self.levelList objectAtIndex:indexPath.row];
+            cell.folderDetailLabel.text = @"FC:100 EXH:100 H:100";
             break;
         case 2:
-            cell.textLabel.text = [self.versionList objectAtIndex:indexPath.row];
+            cell.nameLabel.text = [self.versionList objectAtIndex:indexPath.row];
+            cell.folderDetailLabel.text = @"FC:100 EXH:100 H:100";
             break;
             
         default:
             break;
     }
-    
+        
     
     return cell;
 }

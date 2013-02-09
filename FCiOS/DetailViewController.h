@@ -37,6 +37,8 @@
     int faCount;
     int npCount;
     
+    int someEditType;
+    
     NSMutableArray *tableData_;
     BOOL editing;
     
