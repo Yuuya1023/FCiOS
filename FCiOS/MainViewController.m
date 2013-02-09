@@ -127,7 +127,11 @@
             break;
     }
     
+    //セルの曲数を取得
+    
 }
+
+
 
 #pragma mark - Table view data source
 

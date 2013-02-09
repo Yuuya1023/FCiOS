@@ -36,6 +36,8 @@
 		189EB6BA16C6A7A20005CA3D /* clearLampImage_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6AA16C6A7A20005CA3D /* clearLampImage_7.png */; };
 		189EB6BD16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */; };
 		189EB6BE16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */; };
+		189EB6C116C6C3020005CA3D /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6C016C6C3020005CA3D /* DatabaseManager.m */; };
+		189EB6C216C6C3020005CA3D /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6C016C6C3020005CA3D /* DatabaseManager.m */; };
 		18A2C19316B3C1B700CECE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19216B3C1B700CECE75 /* UIKit.framework */; };
 		18A2C19516B3C1B700CECE75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19416B3C1B700CECE75 /* Foundation.framework */; };
 		18A2C19716B3C1B700CECE75 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19616B3C1B700CECE75 /* CoreGraphics.framework */; };
@@ -114,6 +116,8 @@
 		189EB6AA16C6A7A20005CA3D /* clearLampImage_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearLampImage_7.png; sourceTree = "<group>"; };
 		189EB6BB16C6B8CF0005CA3D /* HomeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeDetailCell.h; sourceTree = "<group>"; };
 		189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeDetailCell.m; sourceTree = "<group>"; };
+		189EB6BF16C6C3020005CA3D /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
+		189EB6C016C6C3020005CA3D /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		18A2C18E16B3C1B700CECE75 /* FCiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A2C19216B3C1B700CECE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18A2C19416B3C1B700CECE75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -263,6 +267,8 @@
 				189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */,
 				18A2C1FC16B4353C00CECE75 /* TableSources.h */,
 				18A2C1FD16B4353C00CECE75 /* TableSources.m */,
+				189EB6BF16C6C3020005CA3D /* DatabaseManager.h */,
+				189EB6C016C6C3020005CA3D /* DatabaseManager.m */,
 				18A2C1F716B42ED000CECE75 /* MainViewController.xib */,
 				18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */,
 				1898B37B16BD8EDF00275758 /* DetailViewController.xib */,
@@ -499,6 +505,7 @@
 				1898B37C16BD8EDF00275758 /* DetailViewController.m in Sources */,
 				189EB69D16C68DB40005CA3D /* MusicDetailCell.m in Sources */,
 				189EB6BD16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */,
+				189EB6C116C6C3020005CA3D /* DatabaseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +525,7 @@
 				1898B37D16BD8EDF00275758 /* DetailViewController.m in Sources */,
 				189EB69E16C68DB40005CA3D /* MusicDetailCell.m in Sources */,
 				189EB6BE16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */,
+				189EB6C216C6C3020005CA3D /* DatabaseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

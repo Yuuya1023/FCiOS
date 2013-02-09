@@ -16,8 +16,6 @@
 @implementation DetailViewController
 @synthesize table = table_;
 @synthesize button = button_;
-@synthesize music_DB = music_DB_;
-@synthesize userData_DB = userData_DB_;
 
 @synthesize versionSortType = versionSortType_;
 @synthesize levelSortType = levelSortType_;
@@ -187,32 +185,15 @@
     }
 }
 
--(id) dbConnect:(NSString *)dbName{
-    BOOL success;
-    NSError *error;
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db",dbName]];
-    NSLog(@"%@",writableDBPath);
-    success = [fm fileExistsAtPath:writableDBPath];
-    if(!success){
-        NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db",dbName]];
-        success = [fm copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
-        if(!success){
-            NSLog(@"%@",[error localizedDescription]);
-        }
-    }
-    FMDatabase* db = [FMDatabase databaseWithPath:writableDBPath];
-    return db;
-}
+
 
 
 - (void)dbSelector{
-    self.music_DB = [self dbConnect:@"musicMaster_test"];
 //    self.userData_DB = [self dbConnect:@"userData"];
-    if ([self.music_DB open]) {
-        [self.music_DB setShouldCacheStatements:YES];
+    DatabaseManager *dbManager = [DatabaseManager sharedInstance];
+    FMDatabase *database = dbManager.music_DB;
+    if ([database open]) {
+        [database setShouldCacheStatements:YES];
         
         
         //バージョン
@@ -375,7 +356,7 @@
         }
         
         NSLog(@"\n%@",sql);
-        FMResultSet *rs = [self.music_DB executeQuery:sql];
+        FMResultSet *rs = [database executeQuery:sql];
         while ([rs next]) {
 //            NSLog(@"result %d %@",[rs intForColumn:@"music_id"],[rs stringForColumn:@"name"]);
             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -395,7 +376,7 @@
         //統計データを抽出
         NSString *sql2 = [NSString stringWithFormat:@"SELECT status,count(music_id) FROM (%@) GROUP BY status",sql_tmp];
         NSLog(@"\n%@",sql2);
-        FMResultSet *rs2 = [self.music_DB executeQuery:sql2];
+        FMResultSet *rs2 = [database executeQuery:sql2];
         while ([rs2 next]) {
             int status = [rs2 intForColumn:@"status"];
             int count =  [rs2 intForColumn:@"count(music_id)"];
@@ -427,7 +408,7 @@
         viewMode.text = [NSString stringWithFormat:@"FC:%d  EXH:%d  HARD:%d  CLEAR:%d",fcCount,exCount,hcCount,clCount];
         
         [rs2 close];
-        [self.music_DB close];
+        [database close];
         
     }else{
         NSLog(@"Could not open db.");
@@ -437,11 +418,12 @@
 
 - (void)dbUpdate:(int)music_id changeToStatus:(int)status playRank:(int)playRank style:(int)style{
     
-    self.music_DB = [self dbConnect:@"musicMaster_test"];
+    DatabaseManager *dbManager = [DatabaseManager sharedInstance];
+    FMDatabase *database = dbManager.music_DB;
     
-    if ([self.music_DB open]) {
-        [self.music_DB setShouldCacheStatements:YES];
-        [self.music_DB beginTransaction];
+    if ([database open]) {
+        [database setShouldCacheStatements:YES];
+        [database beginTransaction];
         
         NSString *playStyleSql;
         if (style == 0) {
@@ -473,18 +455,18 @@
                          status,
                          music_id];
         NSLog(@"\n update sql \n %@",sql);
-        [self.music_DB executeUpdate:sql];
+        [database executeUpdate:sql];
         
         //エラー処理
-        if ([self.music_DB hadError]) {
-            NSLog(@"update error %d: %@",[self.music_DB lastErrorCode],[self.music_DB lastErrorMessage]);
-            [self.music_DB rollback];
+        if ([database hadError]) {
+            NSLog(@"update error %d: %@",[database lastErrorCode],[database lastErrorMessage]);
+            [database rollback];
         }
         else{
-            [self.music_DB commit];
+            [database commit];
         }
         
-        [self.music_DB close];
+        [database close];
     }
     else{
         NSLog(@"Could not open db.");
