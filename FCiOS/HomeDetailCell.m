@@ -23,7 +23,7 @@
         //名前
 //        NSLog(@"init cell");
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, -5, [UIScreen mainScreen].bounds.size.width - 60,40)];
-        self.nameLabel.font =  [UIFont fontWithName:@"GillSans" size:18];
+        self.nameLabel.font =  DEFAULT_FONT;
         self.nameLabel.backgroundColor = [UIColor clearColor];
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
         self.nameLabel.adjustsFontSizeToFitWidth = YES;
@@ -31,7 +31,7 @@
         
         //フォルダデータ
         self.folderDetailLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, [UIScreen mainScreen].bounds.size.width - 60,15)];
-        self.folderDetailLabel.font = [UIFont fontWithName:@"GillSans" size:18];
+        self.folderDetailLabel.font = DEFAULT_FONT;
         self.folderDetailLabel.backgroundColor = [UIColor clearColor];
         self.folderDetailLabel.textColor = [UIColor grayColor];
         self.folderDetailLabel.textAlignment = NSTextAlignmentLeft;
@@ -39,7 +39,7 @@
         [self addSubview:self.folderDetailLabel];
         
         //クリアランプ
-        self.clearLamp = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 40)];
+        self.clearLamp = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 50)];
         [self addSubview:self.clearLamp];
         
     }

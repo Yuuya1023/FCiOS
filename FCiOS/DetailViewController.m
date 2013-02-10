@@ -57,7 +57,7 @@
         viewMode = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, self.view.bounds.size.width - 25, 40)];
         viewMode.adjustsFontSizeToFitWidth = YES;
         viewMode.text = @"";
-        viewMode.font = [UIFont fontWithName:@"GillSans" size:18];
+        viewMode.font = DEFAULT_FONT;
         viewMode.textColor = [UIColor whiteColor];
         viewMode.backgroundColor = [UIColor clearColor];
         UIBarButtonItem *labelBtn = [[UIBarButtonItem alloc] initWithCustomView:viewMode];

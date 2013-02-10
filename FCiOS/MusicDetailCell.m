@@ -22,14 +22,14 @@
         // Initialization code
         //名前
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, [UIScreen mainScreen].bounds.size.width - 80,40)];
-        self.nameLabel.font =  [UIFont fontWithName:@"GillSans" size:18];
+        self.nameLabel.font =  DEFAULT_FONT;
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
         self.nameLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:self.nameLabel];
         
         //難易度
         self.difficulityLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 20, 40)];
-        self.difficulityLabel.font = [UIFont fontWithName:@"GillSans" size:18];
+        self.difficulityLabel.font = DEFAULT_FONT;
         self.difficulityLabel.textAlignment = NSTextAlignmentCenter;
 //        switch (self.difficulityType) {
 //            case 0:

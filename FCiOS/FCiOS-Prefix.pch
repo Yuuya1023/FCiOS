@@ -12,3 +12,5 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#define DEFAULT_FONT [UIFont fontWithName:@"GillSans" size:18]

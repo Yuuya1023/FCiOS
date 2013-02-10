@@ -146,8 +146,11 @@
 
         
         //難易度検索
+        
         for (int i = 1; i <= 12; i++) {
             int resultSum = 0;
+            int min = 0;
+            
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             [dic setObject:@"0" forKey:@"C"];
             [dic setObject:@"0" forKey:@"H"];
@@ -155,20 +158,24 @@
             [dic setObject:@"0" forKey:@"FC"];
             [dic setObject:@"0" forKey:@"sum"];
             
-            NSString *sql_level = [NSString stringWithFormat:@"SELECT status,count(music_id) FROM ( SELECT tblResults.* FROM(SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d) AS tblResults) GROUP BY status",
+            NSString *sql_level = [NSString stringWithFormat:@"SELECT status,count(status) AS min,count(music_id) FROM ( SELECT tblResults.* FROM(SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d) AS tblResults) GROUP BY status",
                                    playStyleSql,
                                    playRankSql,
                                    playStyleSql,
                                    playRankSql,
                                    i];
         
-            NSLog(@"\n%@",sql_level);
+            NSLog(@"sql_level \n%@",sql_level);
             FMResultSet *rs_level = [database executeQuery:sql_level];
             while ([rs_level next]) {
                 int status = [rs_level intForColumn:@"status"];
                 int count =  [rs_level intForColumn:@"count(music_id)"];
                 resultSum += count;
                 NSLog(@"result_level_%d %d, %d",i,status,count);
+                
+                if (min == 0 && count > 0) {
+                    min = status;
+                }
                 
                 switch (status) {
                     case 4:
@@ -188,6 +195,7 @@
                 }                
             }
             [dic setObject:[NSString stringWithFormat:@"%d",resultSum] forKey:@"sum"];
+            [dic setObject:[NSString stringWithFormat:@"%d",min] forKey:@"min"];
             [self.levelDetailArray insertObject:dic atIndex:i - 1];
             [rs_level close];
         }
@@ -199,6 +207,7 @@
         //バージョン検索
         for (int i = 1; i <= 20; i++) {
             int resultSum = 0;
+            int min = 0;
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             [dic setObject:@"0" forKey:@"C"];
             [dic setObject:@"0" forKey:@"H"];
@@ -213,13 +222,17 @@
                                    playRankSql,
                                    i];
             
-            NSLog(@"\n%@",sql_version);
+            NSLog(@"sql_version \n%@",sql_version);
             FMResultSet *rs_version = [database executeQuery:sql_version];
             while ([rs_version next]) {
                 int status = [rs_version intForColumn:@"status"];
                 int count =  [rs_version intForColumn:@"count(music_id)"];
                 resultSum += count;
                 NSLog(@"result_version_%d %d, %d",i,status,count);
+                
+                if (min == 0 && count > 0) {
+                    min = status;
+                }
                 
                 switch (status) {
                     case 4:
@@ -239,6 +252,7 @@
                 }
             }
             [dic setObject:[NSString stringWithFormat:@"%d",resultSum] forKey:@"sum"];
+            [dic setObject:[NSString stringWithFormat:@"%d",min] forKey:@"min"];
             [self.versionDetailArray insertObject:dic atIndex:i - 1];
             [rs_version close];
         }
@@ -376,6 +390,7 @@
         case 0:
             cell.nameLabel.text = [self.clearList objectAtIndex:indexPath.row];
             cell.folderDetailLabel.text = [NSString stringWithFormat:@"Count : %@",[self.clearDetailArray objectAtIndex:7 - indexPath.row]];
+            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_%d",7 - indexPath.row]];
             break;
         case 1:
             cell.nameLabel.text = [self.levelList objectAtIndex:indexPath.row];
@@ -385,6 +400,7 @@
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"H"],
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"C"],
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"sum"]];
+            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_%@",[[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"min"]]];
             break;
         case 2:
             cell.nameLabel.text = [self.versionList objectAtIndex:indexPath.row];
@@ -394,6 +410,7 @@
                                            [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"H"],
                                            [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"C"],
                                            [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"sum"]];
+            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_%@",[[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"min"]]];
             break;
             
         default:

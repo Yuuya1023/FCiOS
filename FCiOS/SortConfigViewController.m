@@ -49,10 +49,12 @@
         //バージョン
         UILabel *version = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 20)];
         version.text = @"Version";
+        version.font = DEFAULT_FONT;
         version.backgroundColor = [UIColor clearColor];
         
         versionSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 20, 190, 40)];
         versionSortLabel.text = @"20 tricoro";
+        versionSortLabel.font = DEFAULT_FONT;
         versionSortType = 20;
         versionSortLabel.textAlignment = NSTextAlignmentRight;
         versionSortLabel.backgroundColor = [UIColor clearColor];
@@ -68,10 +70,12 @@
         //難易度
         UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 100, 20)];
         level.text = @"Difficulity";
+        level.font = DEFAULT_FONT;
         level.backgroundColor = [UIColor clearColor];
         
         levelSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 70, 190, 40)];
         levelSortLabel.text = @"ALL";
+        levelSortLabel.font = DEFAULT_FONT;
         levelSortType = 0;
         levelSortLabel.textAlignment = NSTextAlignmentRight;
         levelSortLabel.backgroundColor = [UIColor clearColor];
@@ -87,10 +91,12 @@
         //クリアランプ
         UILabel *clear = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 100, 20)];
         clear.text = @"Clear Lamp";
+        clear.font = DEFAULT_FONT;
         clear.backgroundColor = [UIColor clearColor];
         
         clearSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 120, 190, 40)];
         clearSortLabel.text = @"ALL";
+        clearSortLabel.font = DEFAULT_FONT;
         clearSortType = 0;
         clearSortLabel.textAlignment = NSTextAlignmentRight;
         clearSortLabel.backgroundColor = [UIColor clearColor];
@@ -107,9 +113,11 @@
         //プレイスタイル
         UILabel *playStyle = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 100, 20)];
         playStyle.text = @"PlayStyle";
+        playStyle.font = DEFAULT_FONT;
         
         playStyleSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 170, 190, 40)];
         playStyleSortLabel.text = @"Single Play";
+        playStyleSortLabel.font = DEFAULT_FONT;
         playStyleSortLabel.textAlignment = NSTextAlignmentRight;
         playStyleSortLabel.backgroundColor = [UIColor clearColor];
         
@@ -124,9 +132,11 @@
         //プレイランク
         UILabel *playRank = [[UILabel alloc] initWithFrame:CGRectMake(20, 210, 100, 20)];
         playRank.text = @"N/H/A";
+        playRank.font = DEFAULT_FONT;
         
         playRankSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 220, 190, 40)];
         playRankSortLabel.text = @"Another";
+        playRankSortLabel.font = DEFAULT_FONT;
         playRankSortType = 2;
         playRankSortLabel.textAlignment = NSTextAlignmentRight;
         playRankSortLabel.backgroundColor = [UIColor clearColor];
@@ -142,9 +152,11 @@
         //ソーティング
         UILabel *sorting = [[UILabel alloc] initWithFrame:CGRectMake(20, 260, 100, 20)];
         sorting.text = @"Sorting";
+        sorting.font = DEFAULT_FONT;
         
         sortingSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 270, 190, 40)];
         sortingSortLabel.text = @"NONE";
+        sortingSortLabel.font = DEFAULT_FONT;
         sortingSortLabel.textAlignment = NSTextAlignmentRight;
         sortingSortLabel.backgroundColor = [UIColor clearColor];
         
@@ -239,6 +251,7 @@
     }
     
     // Configure the cell...
+    cell.textLabel.font = DEFAULT_FONT;
     cell.textLabel.text = [self.tableList objectAtIndex:indexPath.row];
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
     
