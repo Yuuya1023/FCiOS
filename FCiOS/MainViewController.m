@@ -52,13 +52,11 @@
         self.levelDetailArray = [[NSMutableArray alloc] init];
         self.versionDetailArray = [[NSMutableArray alloc] init];
         
-        [self initializeArray];
-        
         //選択されているプレイスタイル&プレイランクをセット
         playStyleSortType = 0;
         playRankSortType = 2;
-        [self dbSelector];
         
+        [self reloadTable];
     }
     return self;
 }
@@ -73,6 +71,12 @@
     [self.versionDetailArray removeAllObjects];
 }
 
+
+- (void)reloadTable{
+    [self initializeArray];
+    [self dbSelector];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -82,6 +86,11 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+    [self reloadTable];
 }
 
 - (void)didReceiveMemoryWarning
@@ -146,10 +155,9 @@
 
         
         //難易度検索
-        
         for (int i = 1; i <= 12; i++) {
             int resultSum = 0;
-            int min = 0;
+            int min = -1;
             
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             [dic setObject:@"0" forKey:@"C"];
@@ -173,7 +181,7 @@
                 resultSum += count;
                 NSLog(@"result_level_%d %d, %d",i,status,count);
                 
-                if (min == 0 && count > 0) {
+                if (min == -1 && count > 0) {
                     min = status;
                 }
                 
@@ -195,19 +203,19 @@
                 }                
             }
             [dic setObject:[NSString stringWithFormat:@"%d",resultSum] forKey:@"sum"];
+            if (min == -1) {
+                min = 0;
+            }
             [dic setObject:[NSString stringWithFormat:@"%d",min] forKey:@"min"];
             [self.levelDetailArray insertObject:dic atIndex:i - 1];
             [rs_level close];
         }
         
-//        NSLog(@"levelDetailArray \n%@",self.levelDetailArray);
-        
-        
         
         //バージョン検索
         for (int i = 1; i <= 20; i++) {
             int resultSum = 0;
-            int min = 0;
+            int min = -1;
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             [dic setObject:@"0" forKey:@"C"];
             [dic setObject:@"0" forKey:@"H"];
@@ -230,7 +238,7 @@
                 resultSum += count;
                 NSLog(@"result_version_%d %d, %d",i,status,count);
                 
-                if (min == 0 && count > 0) {
+                if (min == -1 && count > 0) {
                     min = status;
                 }
                 
@@ -251,7 +259,11 @@
                         break;
                 }
             }
+
             [dic setObject:[NSString stringWithFormat:@"%d",resultSum] forKey:@"sum"];
+            if (min == -1) {
+                min = 0;
+            }
             [dic setObject:[NSString stringWithFormat:@"%d",min] forKey:@"min"];
             [self.versionDetailArray insertObject:dic atIndex:i - 1];
             [rs_version close];
@@ -323,8 +335,7 @@
     }
     
     //セルの曲数を取得
-    [self initializeArray];
-    [self dbSelector];
+    [self reloadTable];
 }
 
 

@@ -35,18 +35,18 @@
                           @"NO PLAY",
                           nil];
         self.levelList = [[NSArray alloc] initWithObjects:
-                          @"☆1",
-                          @"☆2",
-                          @"☆3",
-                          @"☆4",
-                          @"☆5",
-                          @"☆6",
-                          @"☆7",
-                          @"☆8",
-                          @"☆9",
-                          @"☆10",
-                          @"☆11",
-                          @"☆12",
+                          @"LEVEL  1",
+                          @"LEVEL  2",
+                          @"LEVEL  3",
+                          @"LEVEL  4",
+                          @"LEVEL  5",
+                          @"LEVEL  6",
+                          @"LEVEL  7",
+                          @"LEVEL  8",
+                          @"LEVEL  9",
+                          @"LEVEL 10",
+                          @"LEVEL 11",
+                          @"LEVEL 12",
                           nil];
         self.versionList = [[NSArray alloc] initWithObjects:
                             @"1st & substream",
@@ -70,11 +70,11 @@
                             @"19 Lincle",
                             @"20 tricoro",
                             nil];
-        self.sortingList = [[NSArray alloc] initWithObjects:
-                            @"1",
-                            @"2",
-                            @"3",
-                            nil];
+//        self.sortingList = [[NSArray alloc] initWithObjects:
+//                            @"1",
+//                            @"2",
+//                            @"3",
+//                            nil];
         
         //ソート用
         self.clearSortList = [[NSArray alloc] initWithObjects:
@@ -95,18 +95,18 @@
                               nil];
         self.levelSortList = [[NSArray alloc] initWithObjects:
                               @"ALL",
-                              @"☆1",
-                              @"☆2",
-                              @"☆3",
-                              @"☆4",
-                              @"☆5",
-                              @"☆6",
-                              @"☆7",
-                              @"☆8",
-                              @"☆9",
-                              @"☆10",
-                              @"☆11",
-                              @"☆12",
+                              @"LEVEL  1",
+                              @"LEVEL  2",
+                              @"LEVEL  3",
+                              @"LEVEL  4",
+                              @"LEVEL  5",
+                              @"LEVEL  6",
+                              @"LEVEL  7",
+                              @"LEVEL  8",
+                              @"LEVEL  9",
+                              @"LEVEL 10",
+                              @"LEVEL 11",
+                              @"LEVEL 12",
                               nil];
         self.versionSortList = [[NSArray alloc] initWithObjects:
                                 @"ALL",

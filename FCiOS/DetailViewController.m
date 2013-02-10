@@ -393,19 +393,25 @@
                 case 4:
                     clCount = count;
                     break;
-//                case 3:
-//                    ecCount = count;
-//                    break;
-//                case 0:
-//                    npCount = count;
-//                    break;
+                case 3:
+                    ecCount = count;
+                    break;
+                case 2:
+                    acCount = count;
+                    break;
+                case 1:
+                    faCount = count;
+                    break;
+                case 0:
+                    npCount = count;
+                    break;
                 default:
                     break;
             }
         }
         
         //フッターの統計ラベルに表示
-        viewMode.text = [NSString stringWithFormat:@"FC:%d  EXH:%d  HARD:%d  CLEAR:%d",fcCount,exCount,hcCount,clCount];
+        viewMode.text = [NSString stringWithFormat:@"FC:%d  EXH:%d  H:%d  C:%d EC:%d AC:%d F:%d NO:%d",fcCount,exCount,hcCount,clCount,ecCount,acCount,faCount,npCount];
         
         [rs2 close];
         [database close];

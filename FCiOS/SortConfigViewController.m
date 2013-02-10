@@ -36,8 +36,8 @@
         self.versionList = tableSources.versionSortList;
         self.sortingList = tableSources.sortingSortList;
         
-        self.playStyleList = [[NSArray alloc] initWithObjects:@"Single Play",@"Double Play", nil];
-        self.playRankList = [[NSArray alloc] initWithObjects:@"Normal",@"Hyper",@"Another",@"ALL", nil];
+        self.playStyleList = [[NSArray alloc] initWithObjects:@"SINGLE PLAY",@"DOUBLE PLAY", nil];
+        self.playRankList = [[NSArray alloc] initWithObjects:@"NORMAL",@"HYPER",@"ANOTHER",@"ALL", nil];
         
         //ソート結果表示ボタン
         UIButton *resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -116,7 +116,7 @@
         playStyle.font = DEFAULT_FONT;
         
         playStyleSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 170, 190, 40)];
-        playStyleSortLabel.text = @"Single Play";
+        playStyleSortLabel.text = @"SINGLE PLAY";
         playStyleSortLabel.font = DEFAULT_FONT;
         playStyleSortLabel.textAlignment = NSTextAlignmentRight;
         playStyleSortLabel.backgroundColor = [UIColor clearColor];
@@ -135,7 +135,7 @@
         playRank.font = DEFAULT_FONT;
         
         playRankSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 220, 190, 40)];
-        playRankSortLabel.text = @"Another";
+        playRankSortLabel.text = @"ANOTHER";
         playRankSortLabel.font = DEFAULT_FONT;
         playRankSortType = 2;
         playRankSortLabel.textAlignment = NSTextAlignmentRight;
