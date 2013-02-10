@@ -29,12 +29,18 @@
     UILabel *playRankSortLabel;
     UILabel *sortingSortLabel;
     
+    UILabel *buttonLabel;
+    UILabel *cancelLabel;
+    
     UIButton *versionSelect;
     UIButton *levelSelect;
     UIButton *clearSelect;
     UIButton *playStyleSelect;
     UIButton *playRankSelect;
     UIButton *sortingSelect;
+    
+    UIButton *resultButton;
+    UIButton *cancelButton;
     
     int versionSortType;
     int levelSortType;

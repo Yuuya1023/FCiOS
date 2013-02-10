@@ -39,12 +39,41 @@
         self.playStyleList = [[NSArray alloc] initWithObjects:@"SINGLE PLAY",@"DOUBLE PLAY", nil];
         self.playRankList = [[NSArray alloc] initWithObjects:@"NORMAL",@"HYPER",@"ANOTHER",@"ALL", nil];
         
+        //キャンセルボタン
+        cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        cancelButton.frame = CGRectMake(20, 320, 100, 40);
+        cancelButton.alpha = 0.0;
+        
+        cancelLabel = [[UILabel alloc] init];
+        cancelLabel.frame = cancelButton.frame;
+        cancelLabel.center = cancelButton.center;
+        cancelLabel.textAlignment = NSTextAlignmentCenter;
+        cancelLabel.adjustsFontSizeToFitWidth = YES;
+        cancelLabel.text = @"CANCEL";
+        cancelLabel.font = DEFAULT_FONT;
+        cancelLabel.alpha = 0.0;
+        cancelLabel.backgroundColor = [UIColor clearColor];
+        
+        [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:cancelButton];
+        [self.view addSubview:cancelLabel];
+        
         //ソート結果表示ボタン
-        UIButton *resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         resultButton.frame = CGRectMake(105, 320, 120, 40);
-        [resultButton setTitle:@"リザルト" forState:UIControlStateNormal];
+
+        buttonLabel = [[UILabel alloc] init];
+        buttonLabel.frame = resultButton.frame;
+        buttonLabel.center = resultButton.center;
+        buttonLabel.textAlignment = NSTextAlignmentCenter;
+        buttonLabel.adjustsFontSizeToFitWidth = YES;
+        buttonLabel.text = @"RESULT";
+        buttonLabel.font = DEFAULT_FONT;
+        buttonLabel.backgroundColor = [UIColor clearColor];
+        
         [resultButton addTarget:self action:NSSelectorFromString(@"showResult:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:resultButton];
+        [self.view addSubview:buttonLabel];
         
         //バージョン
         UILabel *version = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 20)];
@@ -214,6 +243,10 @@
     [UIView animateWithDuration:0.5f animations:^(void) {
         self.tablelVIew.frame = CGRectMake((self.view.bounds.size.width / 2) -30, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height);
         self.tablelVIew.alpha = 1.0;
+        resultButton.alpha = 0.0;
+        buttonLabel.alpha = 0.0;
+        cancelButton.alpha = 1.0;
+        cancelLabel.alpha = 1.0;
     }];
 }
 
@@ -229,6 +262,17 @@
     [detail setTableData];
     [detail setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:detail animated:YES];
+}
+
+- (void)cancel:(UIButton *)b{
+    [UIView animateWithDuration:0.5f animations:^(void) {
+        self.tablelVIew.frame = CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height);
+        self.tablelVIew.alpha = 0.0;
+        resultButton.alpha = 1.0;
+        buttonLabel.alpha = 1.0;
+        cancelButton.alpha = 0.0;
+        cancelLabel.alpha = 0.0;
+    }];
 }
 
 
@@ -263,6 +307,10 @@
     [UIView animateWithDuration:0.5f animations:^(void) {
         self.tablelVIew.frame = CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height);
         self.tablelVIew.alpha = 0.0;
+        resultButton.alpha = 1.0;
+        buttonLabel.alpha = 1.0;
+        cancelButton.alpha = 0.0;
+        cancelLabel.alpha = 0.0;
         switch (selectedType) {
             case 0:
                 versionSortLabel.text = [self.versionList objectAtIndex:indexPath.row];
