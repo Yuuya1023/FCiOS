@@ -26,7 +26,7 @@
 {
     self = [super init];
     if (self) {
-        self.tablelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 108) style:UITableViewStylePlain];
+        self.tablelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 113) style:UITableViewStylePlain];
         self.tablelView.delegate = self;
         self.tablelView.dataSource = self;
         self.tablelView.rowHeight = 50;
