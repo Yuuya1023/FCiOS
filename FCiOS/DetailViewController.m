@@ -36,6 +36,7 @@
         self.table.delegate = self;
         self.table.dataSource = self;
         self.table.rowHeight = 40;
+//        self.table.backgroundColor = [UIColor blackColor];
 //        self.table.separatorColor = [UIColor lightGrayColor];
         [self.view addSubview:self.table];
         

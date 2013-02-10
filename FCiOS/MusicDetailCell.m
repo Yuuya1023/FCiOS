@@ -25,6 +25,8 @@
         self.nameLabel.font =  DEFAULT_FONT;
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
         self.nameLabel.adjustsFontSizeToFitWidth = YES;
+//        self.nameLabel.textColor = [UIColor whiteColor];
+//        self.nameLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:self.nameLabel];
         
         //難易度

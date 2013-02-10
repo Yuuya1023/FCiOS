@@ -29,6 +29,13 @@
     UILabel *playRankSortLabel;
     UILabel *sortingSortLabel;
     
+    UILabel *version;
+    UILabel *level;
+    UILabel *clear;
+    UILabel *playStyle;
+    UILabel *playRank;
+    UILabel *sorting;
+    
     UILabel *buttonLabel;
     UILabel *cancelLabel;
     

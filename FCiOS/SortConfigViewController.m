@@ -41,7 +41,7 @@
         
         //キャンセルボタン
         cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        cancelButton.frame = CGRectMake(20, 320, 100, 40);
+        cancelButton.frame = CGRectMake(20, 300, 100, 40);
         cancelButton.alpha = 0.0;
         
         cancelLabel = [[UILabel alloc] init];
@@ -76,7 +76,7 @@
         [self.view addSubview:buttonLabel];
         
         //バージョン
-        UILabel *version = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 20)];
+        version = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 20)];
         version.text = @"Version";
         version.font = DEFAULT_FONT;
         version.backgroundColor = [UIColor clearColor];
@@ -97,7 +97,7 @@
         [self.view addSubview:version];
         
         //難易度
-        UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 100, 20)];
+        level = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 100, 20)];
         level.text = @"Difficulity";
         level.font = DEFAULT_FONT;
         level.backgroundColor = [UIColor clearColor];
@@ -118,7 +118,7 @@
         [self.view addSubview:level];
         
         //クリアランプ
-        UILabel *clear = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 100, 20)];
+        clear = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 100, 20)];
         clear.text = @"Clear Lamp";
         clear.font = DEFAULT_FONT;
         clear.backgroundColor = [UIColor clearColor];
@@ -140,7 +140,7 @@
 
         
         //プレイスタイル
-        UILabel *playStyle = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 100, 20)];
+        playStyle = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 100, 20)];
         playStyle.text = @"PlayStyle";
         playStyle.font = DEFAULT_FONT;
         
@@ -159,7 +159,7 @@
         [self.view addSubview:playStyle];
         
         //プレイランク
-        UILabel *playRank = [[UILabel alloc] initWithFrame:CGRectMake(20, 210, 100, 20)];
+        playRank = [[UILabel alloc] initWithFrame:CGRectMake(20, 210, 100, 20)];
         playRank.text = @"N/H/A";
         playRank.font = DEFAULT_FONT;
         
@@ -179,7 +179,7 @@
         [self.view addSubview:playRank];
         
         //ソーティング
-        UILabel *sorting = [[UILabel alloc] initWithFrame:CGRectMake(20, 260, 100, 20)];
+        sorting = [[UILabel alloc] initWithFrame:CGRectMake(20, 260, 100, 20)];
         sorting.text = @"Sorting";
         sorting.font = DEFAULT_FONT;
         
@@ -202,7 +202,7 @@
         self.tablelVIew.delegate = self;
         self.tablelVIew.dataSource = self;
         self.tablelVIew.alpha = 0.0;
-        self.tablelVIew.backgroundColor = [UIColor grayColor];
+        self.tablelVIew.backgroundColor = [UIColor blackColor];
         [self.view addSubview:self.tablelVIew];
         
         }
@@ -242,11 +242,7 @@
     [self.tablelVIew reloadData];
     [UIView animateWithDuration:0.5f animations:^(void) {
         self.tablelVIew.frame = CGRectMake((self.view.bounds.size.width / 2) -30, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height);
-        self.tablelVIew.alpha = 1.0;
-        resultButton.alpha = 0.0;
-        buttonLabel.alpha = 0.0;
-        cancelButton.alpha = 1.0;
-        cancelLabel.alpha = 1.0;
+        [self setAlpha:YES tag:b.tag];
     }];
 }
 
@@ -267,11 +263,7 @@
 - (void)cancel:(UIButton *)b{
     [UIView animateWithDuration:0.5f animations:^(void) {
         self.tablelVIew.frame = CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height);
-        self.tablelVIew.alpha = 0.0;
-        resultButton.alpha = 1.0;
-        buttonLabel.alpha = 1.0;
-        cancelButton.alpha = 0.0;
-        cancelLabel.alpha = 0.0;
+        [self setAlpha:NO tag:0];
     }];
 }
 
@@ -297,20 +289,58 @@
     // Configure the cell...
     cell.textLabel.font = DEFAULT_FONT;
     cell.textLabel.text = [self.tableList objectAtIndex:indexPath.row];
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
     
     return cell;
 }
 
-
--(void)tableView: (UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [UIView animateWithDuration:0.5f animations:^(void) {
-        self.tablelVIew.frame = CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height);
+- (void)setAlpha:(BOOL)isSelecting tag:(int)tag{
+    if (isSelecting) {
+        self.tablelVIew.alpha = 1.0;
+        resultButton.alpha = 0.0;
+        buttonLabel.alpha = 0.0;
+        cancelButton.alpha = 1.0;
+        cancelLabel.alpha = 1.0;
+        if (tag != 0) {
+            version.alpha = 0.2;
+        }
+        if (tag != 1) {
+            level.alpha = 0.2;
+        }
+        if (tag != 2) {
+            clear.alpha = 0.2;
+        }
+        if (tag != 3) {
+            playStyle.alpha = 0.2;
+        }
+        if (tag != 4) {
+            playRank.alpha = 0.2;
+        }
+        if (tag != 5) {
+            sorting.alpha = 0.2;
+        }
+    }
+    else{
         self.tablelVIew.alpha = 0.0;
         resultButton.alpha = 1.0;
         buttonLabel.alpha = 1.0;
         cancelButton.alpha = 0.0;
         cancelLabel.alpha = 0.0;
+        
+        version.alpha = 1.0;
+        level.alpha = 1.0;
+        clear.alpha = 1.0;
+        playStyle.alpha = 1.0;
+        playRank.alpha = 1.0;
+        sorting.alpha = 1.0;
+    }
+}
+
+-(void)tableView: (UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [UIView animateWithDuration:0.5f animations:^(void) {
+        self.tablelVIew.frame = CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height);
+        [self setAlpha:NO tag:0];
         switch (selectedType) {
             case 0:
                 versionSortLabel.text = [self.versionList objectAtIndex:indexPath.row];
