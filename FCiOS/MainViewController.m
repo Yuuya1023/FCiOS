@@ -18,6 +18,9 @@
 @synthesize clearList = clearList_;
 @synthesize levelList = levelList_;
 @synthesize versionList = versionList_;
+@synthesize clearDetailArray = clearDetailArray_;
+@synthesize levelDetailArray = levelDetailArray_;
+@synthesize versionDetailArray = versionDetailArray_;
 
 - (id)init
 {
@@ -46,6 +49,8 @@
         
         //配列初期化
         self.clearDetailArray = [[NSMutableArray alloc] init];
+        self.levelDetailArray = [[NSMutableArray alloc] init];
+        self.versionDetailArray = [[NSMutableArray alloc] init];
         
         [self initializeArray];
         
@@ -63,6 +68,9 @@
     for (int i = 0; i <= 7; i++){
         [self.clearDetailArray addObject:@"0"];
     }
+    
+    [self.levelDetailArray removeAllObjects];
+    [self.versionDetailArray removeAllObjects];
 }
 
 - (void)viewDidLoad
@@ -129,7 +137,7 @@
         while ([rs_lamp next]) {
             int status = [rs_lamp intForColumn:@"status"];
             int count =  [rs_lamp intForColumn:@"count(music_id)"];
-            NSLog(@"result %d, %d",status,count);
+            NSLog(@"result_lamp %d, %d",status,count);
             
             [self.clearDetailArray insertObject:[NSString stringWithFormat:@"%d",count] atIndex:status];
         }
@@ -138,181 +146,103 @@
 
         
         //難易度検索
+        for (int i = 1; i <= 12; i++) {
+            int resultSum = 0;
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setObject:@"0" forKey:@"C"];
+            [dic setObject:@"0" forKey:@"H"];
+            [dic setObject:@"0" forKey:@"EXH"];
+            [dic setObject:@"0" forKey:@"FC"];
+            [dic setObject:@"0" forKey:@"sum"];
+            
+            NSString *sql_level = [NSString stringWithFormat:@"SELECT status,count(music_id) FROM ( SELECT tblResults.* FROM(SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d) AS tblResults) GROUP BY status",
+                                   playStyleSql,
+                                   playRankSql,
+                                   playStyleSql,
+                                   playRankSql,
+                                   i];
         
+            NSLog(@"\n%@",sql_level);
+            FMResultSet *rs_level = [database executeQuery:sql_level];
+            while ([rs_level next]) {
+                int status = [rs_level intForColumn:@"status"];
+                int count =  [rs_level intForColumn:@"count(music_id)"];
+                resultSum += count;
+                NSLog(@"result_level_%d %d, %d",i,status,count);
+                
+                switch (status) {
+                    case 4:
+                        [dic setObject:[NSString stringWithFormat:@"%d",count] forKey:@"C"];
+                        break;
+                    case 5:
+                        [dic setObject:[NSString stringWithFormat:@"%d",count] forKey:@"H"];
+                        break;
+                    case 6:
+                        [dic setObject:[NSString stringWithFormat:@"%d",count] forKey:@"EXH"];
+                        break;
+                    case 7:
+                        [dic setObject:[NSString stringWithFormat:@"%d",count] forKey:@"FC"];
+                        break;
+                    default:
+                        break;
+                }                
+            }
+            [dic setObject:[NSString stringWithFormat:@"%d",resultSum] forKey:@"sum"];
+            [self.levelDetailArray insertObject:dic atIndex:i - 1];
+            [rs_level close];
+        }
         
+//        NSLog(@"levelDetailArray \n%@",self.levelDetailArray);
         
         
         
         //バージョン検索
-        
-        
-//        //バージョン
-//        NSString *versionSql;
-//        if (self.versionSortType == 0) {
-//            versionSql = @"version < 21";
-//        }
-//        else{
-//            versionSql = [NSString stringWithFormat:@"version = %d",self.versionSortType];
-//        }
-//        
-//        //レベル
-//        NSString *levelSql;
-//        if (self.levelSortType == 0) {
-//            levelSql = @"< 13";
-//        }
-//        else{
-//            levelSql = [NSString stringWithFormat:@" = %d",self.levelSortType];
-//        }
-//        NSString *playStyleSql;
-//        if (self.playStyleSortType == 0) {
-//            playStyleSql = [NSString stringWithFormat:@"SP_"];
-//        }
-//        else{
-//            playStyleSql = [NSString stringWithFormat:@"DP_"];
-//        }
-//        
-//
-//        //クリアランプそーと
-//        NSString *statusSort = @"";
-//        switch (self.clearSortType) {
-//            case 1:
-//                statusSort = @"AND status = 7";
-//                break;
-//            case 2:
-//                statusSort = @"AND status = 6";
-//                break;
-//            case 3:
-//                statusSort = @"AND status = 5";
-//                break;
-//            case 4:
-//                statusSort = @"AND status = 4";
-//                break;
-//            case 5:
-//                statusSort = @"AND status = 3";
-//                break;
-//            case 6:
-//                statusSort = @"AND status = 2";
-//                break;
-//            case 7:
-//                statusSort = @"AND status = 1";
-//                break;
-//            case 8:
-//                statusSort = @"AND status = 0";
-//                break;
-//            case 9:
-//                statusSort = @"AND status < 7";
-//                break;
-//            case 10:
-//                statusSort = @"AND status < 6";
-//                break;
-//            case 11:
-//                statusSort = @"AND status < 5";
-//                break;
-//            case 12:
-//                statusSort = @"AND status < 4";
-//                break;
-//            case 13:
-//                statusSort = @"AND status < 3";
-//                break;
-//            default:
-//                break;
-//        }
-//        
-//        
-//        NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT tblResults.* FROM("];
-//        
-//        //N/H/Aすべての結果を表示
-//        if ([playRankSql isEqualToString:@"UNION_ALL"]) {
-//            [sql appendFormat:@"SELECT music_id,name,version,%@Normal_Level AS level,%@Normal_Status AS status,selectType_Normal AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Normal_Level%@ %@ AND deleteFlg = 0 AND level != 0",
-//             playStyleSql,
-//             playStyleSql,
-//             versionSql,
-//             playStyleSql,
-//             levelSql,
-//             statusSort];
-//            
-//            [sql appendFormat:@" UNION ALL "];
-//            [sql appendFormat:@"SELECT music_id,name,version,%@Hyper_Level AS level,%@Hyper_Status AS status,selectType_Hyper AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Hyper_Level%@ %@ AND deleteFlg = 0 AND level != 0",
-//             playStyleSql,
-//             playStyleSql,
-//             versionSql,
-//             playStyleSql,
-//             levelSql,
-//             statusSort];
-//            
-//            [sql appendFormat:@" UNION ALL "];
-//            [sql appendFormat:@"SELECT music_id,name,version,%@Another_Level AS level ,%@Another_Status AS status,selectType_Another AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND  %@Another_Level%@ %@ AND deleteFlg = 0 AND level != 0",
-//             playStyleSql,
-//             playStyleSql,
-//             versionSql,
-//             playStyleSql,
-//             levelSql,
-//             statusSort];
-//            
-//        }
-//        else{
-//            //プレイランクを指定したとき
-//            [sql appendFormat:@"SELECT music_id,name,version,%@%@_Level AS level,%@%@_Status AS status,selectType_%@ AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@%@_Level%@ %@ AND deleteFlg = 0 AND level != 0",
-//             playStyleSql,
-//             playRankSql,
-//             playStyleSql,
-//             playRankSql,
-//             playRankSql,
-//             versionSql,
-//             playStyleSql,
-//             playRankSql,
-//             levelSql,
-//             statusSort];
-//        }
-//        
-//        NSString *sql_tmp = [NSString stringWithFormat:@"%@) AS tblResults",sql];
-//        
-//        
-//        //ソート順
-//        switch (self.sortingType) {
-//            case 0:
-//                [sql appendFormat:@") AS tblResults ORDER BY LOWER(tblResults.name) ASC"];
-//                break;
-//            case 1:
-//                [sql appendFormat:@") AS tblResults ORDER BY tblResults.status ASC,LOWER(tblResults.name) ASC"];
-//                break;
-//            case 2:
-//                [sql appendFormat:@") AS tblResults ORDER BY tblResults.status DESC,LOWER(tblResults.name) ASC"];
-//                break;
-//            case 3:
-//                [sql appendFormat:@") AS tblResults ORDER BY tblResults.level ASC,LOWER(tblResults.name) ASC"];
-//                break;
-//            case 4:
-//                [sql appendFormat:@") AS tblResults ORDER BY tblResults.level DESC,LOWER(tblResults.name) ASC"];
-//                break;
-//                
-//            default:
-//                break;
-//        }
-//        
-//        NSLog(@"\n%@",sql);
-//        FMResultSet *rs = [database executeQuery:sql];
-//        while ([rs next]) {
-//            //            NSLog(@"result %d %@",[rs intForColumn:@"music_id"],[rs stringForColumn:@"name"]);
-//            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                                 [NSString stringWithFormat:@"%d",[rs intForColumn:@"music_id"]],@"music_id",
-//                                 [rs stringForColumn:@"name"],@"name",
-//                                 [rs stringForColumn:@"level"],@"level",
-//                                 [NSString stringWithFormat:@"%d",[rs intForColumn:@"type"]],@"type",
-//                                 [NSString stringWithFormat:@"%d",[rs intForColumn:@"status"]],@"status",
-//                                 nil];
-//            
-//            [self.tableData addObject:dic];
-//            
-//        }
-//        [rs close];
-//        
-//        
-//
-//        //フッターの統計ラベルに表示
-//        viewMode.text = [NSString stringWithFormat:@"FC:%d  EXH:%d  HARD:%d  CLEAR:%d",fcCount,exCount,hcCount,clCount];
-        
-//        [rs2 close];
+        for (int i = 1; i <= 20; i++) {
+            int resultSum = 0;
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setObject:@"0" forKey:@"C"];
+            [dic setObject:@"0" forKey:@"H"];
+            [dic setObject:@"0" forKey:@"EXH"];
+            [dic setObject:@"0" forKey:@"FC"];
+            [dic setObject:@"0" forKey:@"sum"];
+            
+            NSString *sql_version = [NSString stringWithFormat:@"SELECT status,count(music_id) FROM ( SELECT tblResults.* FROM(SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d) AS tblResults) GROUP BY status",
+                                   playStyleSql,
+                                   playRankSql,
+                                   playStyleSql,
+                                   playRankSql,
+                                   i];
+            
+            NSLog(@"\n%@",sql_version);
+            FMResultSet *rs_version = [database executeQuery:sql_version];
+            while ([rs_version next]) {
+                int status = [rs_version intForColumn:@"status"];
+                int count =  [rs_version intForColumn:@"count(music_id)"];
+                resultSum += count;
+                NSLog(@"result_version_%d %d, %d",i,status,count);
+                
+                switch (status) {
+                    case 4:
+                        [dic setObject:[NSString stringWithFormat:@"%d",count] forKey:@"C"];
+                        break;
+                    case 5:
+                        [dic setObject:[NSString stringWithFormat:@"%d",count] forKey:@"H"];
+                        break;
+                    case 6:
+                        [dic setObject:[NSString stringWithFormat:@"%d",count] forKey:@"EXH"];
+                        break;
+                    case 7:
+                        [dic setObject:[NSString stringWithFormat:@"%d",count] forKey:@"FC"];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            [dic setObject:[NSString stringWithFormat:@"%d",resultSum] forKey:@"sum"];
+            [self.versionDetailArray insertObject:dic atIndex:i - 1];
+            [rs_version close];
+        }
+    
         [database close];
         [self.tablelView reloadData];
         
@@ -449,11 +379,21 @@
             break;
         case 1:
             cell.nameLabel.text = [self.levelList objectAtIndex:indexPath.row];
-            cell.folderDetailLabel.text = @"FC:100 EXH:100 H:100";
+            cell.folderDetailLabel.text = [NSString stringWithFormat:@"FC:%@ EXH:%@ H:%@ C:%@  /%@",
+                                           [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"FC"],
+                                           [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"EXH"],
+                                           [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"H"],
+                                           [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"C"],
+                                           [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"sum"]];
             break;
         case 2:
             cell.nameLabel.text = [self.versionList objectAtIndex:indexPath.row];
-            cell.folderDetailLabel.text = @"FC:100 EXH:100 H:100";
+            cell.folderDetailLabel.text = [NSString stringWithFormat:@"FC:%@ EXH:%@ H:%@ C:%@  /%@",
+                                           [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"FC"],
+                                           [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"EXH"],
+                                           [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"H"],
+                                           [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"C"],
+                                           [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"sum"]];
             break;
             
         default:

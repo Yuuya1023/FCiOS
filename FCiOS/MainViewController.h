@@ -21,7 +21,7 @@
     NSArray *levelList_;
     NSArray *versionList_;
     NSMutableArray *clearDetailArray_;
-    NSMutableArray *levelDetailAllay_;
+    NSMutableArray *levelDetailArray_;
     NSMutableArray *versionDetailArray_;
     
     int versionSortType;
@@ -38,7 +38,7 @@
 @property (nonatomic ,retain)NSArray *levelList;
 @property (nonatomic ,retain)NSArray *versionList;
 @property (nonatomic ,retain)NSMutableArray *clearDetailArray;
-@property (nonatomic ,retain)NSMutableArray *levelDetailAllay;
+@property (nonatomic ,retain)NSMutableArray *levelDetailArray;
 @property (nonatomic ,retain)NSMutableArray *versionDetailArray;
 
 
