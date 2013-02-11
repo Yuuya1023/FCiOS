@@ -30,7 +30,7 @@
         [self addSubview:self.nameLabel];
         
         //難易度
-        self.difficulityLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 20, 40)];
+        self.difficulityLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, 20, 40)];
         self.difficulityLabel.font = DEFAULT_FONT;
         self.difficulityLabel.textAlignment = NSTextAlignmentCenter;
 //        switch (self.difficulityType) {

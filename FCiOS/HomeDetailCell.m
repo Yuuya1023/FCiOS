@@ -22,7 +22,7 @@
         // Initialization code
         //名前
 //        NSLog(@"init cell");
-        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, -5, [UIScreen mainScreen].bounds.size.width - 60,40)];
+        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, -5, [UIScreen mainScreen].bounds.size.width - 60,40)];
         self.nameLabel.font =  DEFAULT_FONT;
         self.nameLabel.backgroundColor = [UIColor clearColor];
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
@@ -30,7 +30,7 @@
         [self addSubview:self.nameLabel];
         
         //フォルダデータ
-        self.folderDetailLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, [UIScreen mainScreen].bounds.size.width - 60,15)];
+        self.folderDetailLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 30, [UIScreen mainScreen].bounds.size.width - 60,15)];
         self.folderDetailLabel.font = DEFAULT_FONT;
         self.folderDetailLabel.backgroundColor = [UIColor clearColor];
         self.folderDetailLabel.textColor = [UIColor grayColor];

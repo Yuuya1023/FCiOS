@@ -41,7 +41,7 @@
         
         //キャンセルボタン
         cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        cancelButton.frame = CGRectMake(20, 300, 100, 40);
+        cancelButton.frame = CGRectMake(20, 320, 100, 40);
         cancelButton.alpha = 0.0;
         
         cancelLabel = [[UILabel alloc] init];
@@ -60,7 +60,7 @@
         
         //ソート結果表示ボタン
         resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        resultButton.frame = CGRectMake(105, 320, 120, 40);
+        resultButton.frame = CGRectMake(105, 318, 120, 40);
 
         buttonLabel = [[UILabel alloc] init];
         buttonLabel.frame = resultButton.frame;
@@ -76,7 +76,7 @@
         [self.view addSubview:buttonLabel];
         
         //バージョン
-        version = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 20)];
+        version = [[UILabel alloc] initWithFrame:CGRectMake(20, 28, 100, 20)];
         version.text = @"Version";
         version.font = DEFAULT_FONT;
         version.backgroundColor = [UIColor clearColor];
@@ -97,7 +97,7 @@
         [self.view addSubview:version];
         
         //難易度
-        level = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 100, 20)];
+        level = [[UILabel alloc] initWithFrame:CGRectMake(20, 78, 100, 20)];
         level.text = @"Difficulity";
         level.font = DEFAULT_FONT;
         level.backgroundColor = [UIColor clearColor];
@@ -118,7 +118,7 @@
         [self.view addSubview:level];
         
         //クリアランプ
-        clear = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 100, 20)];
+        clear = [[UILabel alloc] initWithFrame:CGRectMake(20, 128, 100, 20)];
         clear.text = @"Clear Lamp";
         clear.font = DEFAULT_FONT;
         clear.backgroundColor = [UIColor clearColor];
@@ -140,7 +140,7 @@
 
         
         //プレイスタイル
-        playStyle = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 100, 20)];
+        playStyle = [[UILabel alloc] initWithFrame:CGRectMake(20, 178, 100, 20)];
         playStyle.text = @"PlayStyle";
         playStyle.font = DEFAULT_FONT;
         
@@ -159,7 +159,7 @@
         [self.view addSubview:playStyle];
         
         //プレイランク
-        playRank = [[UILabel alloc] initWithFrame:CGRectMake(20, 210, 100, 20)];
+        playRank = [[UILabel alloc] initWithFrame:CGRectMake(20, 228, 100, 20)];
         playRank.text = @"N/H/A";
         playRank.font = DEFAULT_FONT;
         
@@ -179,7 +179,7 @@
         [self.view addSubview:playRank];
         
         //ソーティング
-        sorting = [[UILabel alloc] initWithFrame:CGRectMake(20, 260, 100, 20)];
+        sorting = [[UILabel alloc] initWithFrame:CGRectMake(20, 278, 100, 20)];
         sorting.text = @"Sorting";
         sorting.font = DEFAULT_FONT;
         
