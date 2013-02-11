@@ -36,11 +36,16 @@
         self.title = @"Home";
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
         
+        //ソートボタン
         self.button = [[UIBarButtonItem alloc] initWithTitle:@"SP ANOTHER"
                                                        style:UIBarButtonItemStylePlain
                                                       target:self
-                                                      action:@selector(setSortType:)];
-        self.navigationItem.rightBarButtonItem = self.button;
+                                                      action:NSSelectorFromString(@"setSortType:")];
+        self.navigationItem.leftBarButtonItem = self.button;
+        
+        //更新ボタン
+        UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:NSSelectorFromString(@"update:")];
+        self.navigationItem.rightBarButtonItem = updateButton;
         
         TableSources *tableSources = [[TableSources alloc] init];
         self.clearList = tableSources.clearList;
@@ -292,6 +297,29 @@
     [as addButtonWithTitle:@"キャンセル"];
     as.cancelButtonIndex = 6;
     [as showFromTabBar:self.tabBarController.tabBar];
+}
+
+- (void)update:(UIBarButtonItem *)b{
+    NSLog(@"update");
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"update" ofType:@"json"];
+    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+    
+    DatabaseManager *dbManager = [DatabaseManager sharedInstance];
+    
+//    NSLog(@"json %@",jsonObject);
+    for(NSDictionary *key in jsonObject){
+//        NSLog(@"key = %@",key);
+        
+        //現在のバージョンより上だったらアップデート
+        if ([[key objectForKey:@"version"] floatValue] >= [USER_DEFAULT floatForKey:DATABSEVERSION_KEY]) {
+            NSLog(@"version %@",[key objectForKey:@"version"]);
+            NSLog(@"description%@",[key objectForKey:@"description"]);
+            //sqlのdictionaryを渡し、アップデート
+            [dbManager updateDatabase:[key objectForKey:@"sql"]];
+        }
+    }
 }
 
 #pragma mark - UIActionSheet Delegate

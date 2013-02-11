@@ -70,4 +70,18 @@ static dispatch_queue_t serialQueue;
     return db;
 }
 
+
+- (void)updateDatabase:(NSDictionary *)dictionary{
+//    NSLog(@"dic %@",dictionary);
+    for (NSDictionary *key_sql in dictionary) {
+        NSLog(@"music ,%@",[key_sql objectForKey:@"music"]);
+        NSLog(@"user  ,%@",[key_sql objectForKey:@"user"]);
+    }
+}
+
+- (void)setDatabaseVersion:(float)version{
+    [USER_DEFAULT setFloat:version forKey:DATABSEVERSION_KEY];
+    [USER_DEFAULT synchronize];
+}
+
 @end
