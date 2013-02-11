@@ -223,7 +223,7 @@
             [dic setObject:@"0" forKey:@"FC"];
             [dic setObject:@"0" forKey:@"sum"];
             
-            NSString *sql_version = [NSString stringWithFormat:@"SELECT status,count(music_id) FROM ( SELECT tblResults.* FROM(SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d) AS tblResults) GROUP BY status",
+            NSString *sql_version = [NSString stringWithFormat:@"SELECT status,count(music_id) FROM ( SELECT tblResults.* FROM(SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d) AS tblResults WHERE level != 0) GROUP BY status",
                                    playStyleSql,
                                    playRankSql,
                                    playStyleSql,

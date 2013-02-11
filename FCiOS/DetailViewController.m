@@ -69,6 +69,7 @@
         editMode = [[UILabel alloc] initWithFrame:CGRectMake(2, 10, 145, 40)];
         editMode.adjustsFontSizeToFitWidth = YES;
         editMode.textColor = [UIColor whiteColor];
+        editMode.font = DEFAULT_FONT;
         editMode.backgroundColor = [UIColor clearColor];
         UIBarButtonItem *labelBtn2 = [[UIBarButtonItem alloc] initWithCustomView:editMode];
         
@@ -412,7 +413,7 @@
         }
         
         //フッターの統計ラベルに表示
-        viewMode.text = [NSString stringWithFormat:@"FC:%d  EXH:%d  H:%d  C:%d EC:%d AC:%d F:%d NO:%d",fcCount,exCount,hcCount,clCount,ecCount,acCount,faCount,npCount];
+        viewMode.text = [NSString stringWithFormat:@"FC:%d EXH:%d H:%d C:%d EC:%d AC:%d F:%d NO:%d",fcCount,exCount,hcCount,clCount,ecCount,acCount,faCount,npCount];
         
         [rs2 close];
         [database close];
