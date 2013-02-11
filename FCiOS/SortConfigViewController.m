@@ -27,7 +27,7 @@
     self = [super init];
     if (self) {
         self.title = @"Sort Setting";
-        self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        self.tabBarItem.image = [UIImage imageNamed:@"tab_icon02"];
         
         self.tableList = [[NSArray alloc] init];
         TableSources *tableSources = [[TableSources alloc] init];

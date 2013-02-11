@@ -34,7 +34,7 @@
         [self.view addSubview:self.tablelView];
         
         self.title = @"Home";
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.image = [UIImage imageNamed:@"tab_icon01"];
         
         //ソートボタン
         self.button = [[UIBarButtonItem alloc] initWithTitle:@"SP ANOTHER"
@@ -380,7 +380,7 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     switch (section) {
         case 0:
-            return @"CELAR";
+            return @"CLEAR";
         break;
         case 1:
             return @"LEVEL";
