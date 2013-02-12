@@ -16,3 +16,4 @@
 #define DEFAULT_FONT [UIFont fontWithName:@"GillSans" size:18]
 #define USER_DEFAULT [NSUserDefaults standardUserDefaults]
 #define DATABSEVERSION_KEY @"databaseVersion"
+#define UPDATED_USERDATA_KEY @"updatedUserData"

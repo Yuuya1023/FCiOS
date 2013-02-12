@@ -471,6 +471,8 @@
             [database rollback];
         }
         else{
+            [USER_DEFAULT setBool:YES forKey:UPDATED_USERDATA_KEY];
+            [USER_DEFAULT synchronize];
             [database commit];
         }
         

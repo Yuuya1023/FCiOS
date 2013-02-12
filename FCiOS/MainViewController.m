@@ -93,10 +93,15 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-//- (void)viewWillAppear:(BOOL)animated{
-//	[super viewWillAppear:animated];
-//    [self reloadTable];
-//}
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+    if ([USER_DEFAULT boolForKey:UPDATED_USERDATA_KEY]) {
+        [self reloadTable];
+        [USER_DEFAULT setBool:NO forKey:UPDATED_USERDATA_KEY];
+        [USER_DEFAULT synchronize];
+    }
+    
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -301,7 +306,27 @@
 
 - (void)update:(UIBarButtonItem *)b{
     NSLog(@"reload");
-    [self reloadTable];    
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"update" ofType:@"json"];
+    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+    
+    DatabaseManager *dbManager = [DatabaseManager sharedInstance];
+    
+//    NSLog(@"json %@",jsonObject);
+    for(NSDictionary *key in jsonObject){
+//        NSLog(@"key = %@",key);
+        
+        //現在のバージョンより上だったらアップデート
+        if ([[key objectForKey:@"version"] floatValue] >= [USER_DEFAULT floatForKey:DATABSEVERSION_KEY]) {
+            NSLog(@"version %@",[key objectForKey:@"version"]);
+            NSLog(@"description%@",[key objectForKey:@"description"]);
+            //sqlのdictionaryを渡し、アップデート
+            [dbManager updateDatabase:[key objectForKey:@"sql"]];
+        }
+    }
+
+    
 }
 
 #pragma mark - UIActionSheet Delegate

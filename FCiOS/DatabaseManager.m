@@ -42,7 +42,7 @@ static dispatch_queue_t serialQueue;
         obj = [super init];
         if (obj) {
             // configure instance here
-            self.music_DB = [self dbConnect:@"musicMaster_test"];
+            self.music_DB = [self dbConnect:@"musicMaster"];
         }
     });
     self = obj;
