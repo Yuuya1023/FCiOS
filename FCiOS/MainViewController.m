@@ -34,7 +34,7 @@
         [self.view addSubview:self.tablelView];
         
         self.title = @"Home";
-        self.tabBarItem.image = [UIImage imageNamed:@"tab_icon01"];
+        self.tabBarItem.image = [UIImage imageNamed:@"home"];
         
         //ソートボタン
         self.button = [[UIBarButtonItem alloc] initWithTitle:@"SP ANOTHER"
@@ -93,10 +93,10 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-	[super viewWillAppear:animated];
-    [self reloadTable];
-}
+//- (void)viewWillAppear:(BOOL)animated{
+//	[super viewWillAppear:animated];
+//    [self reloadTable];
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -300,26 +300,8 @@
 }
 
 - (void)update:(UIBarButtonItem *)b{
-    NSLog(@"update");
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"update" ofType:@"json"];
-    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
-    
-    DatabaseManager *dbManager = [DatabaseManager sharedInstance];
-    
-//    NSLog(@"json %@",jsonObject);
-    for(NSDictionary *key in jsonObject){
-//        NSLog(@"key = %@",key);
-        
-        //現在のバージョンより上だったらアップデート
-        if ([[key objectForKey:@"version"] floatValue] >= [USER_DEFAULT floatForKey:DATABSEVERSION_KEY]) {
-            NSLog(@"version %@",[key objectForKey:@"version"]);
-            NSLog(@"description%@",[key objectForKey:@"description"]);
-            //sqlのdictionaryを渡し、アップデート
-            [dbManager updateDatabase:[key objectForKey:@"sql"]];
-        }
-    }
+    NSLog(@"reload");
+    [self reloadTable];    
 }
 
 #pragma mark - UIActionSheet Delegate

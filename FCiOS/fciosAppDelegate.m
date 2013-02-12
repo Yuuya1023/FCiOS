@@ -55,6 +55,27 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"update" ofType:@"json"];
+//    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
+//    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+//    
+//    DatabaseManager *dbManager = [DatabaseManager sharedInstance];
+//    
+////    NSLog(@"json %@",jsonObject);
+//    for(NSDictionary *key in jsonObject){
+////        NSLog(@"key = %@",key);
+//        
+//        //現在のバージョンより上だったらアップデート
+//        if ([[key objectForKey:@"version"] floatValue] >= [USER_DEFAULT floatForKey:DATABSEVERSION_KEY]) {
+//            NSLog(@"version %@",[key objectForKey:@"version"]);
+//            NSLog(@"description%@",[key objectForKey:@"description"]);
+//            //sqlのdictionaryを渡し、アップデート
+//            [dbManager updateDatabase:[key objectForKey:@"sql"]];
+//        }
+//    }
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
