@@ -135,7 +135,7 @@
             int style = self.playStyleSortType;
             
             [self dbUpdate:music_id changeToStatus:status playRank:playRank style:style];
-            [self setTableData];
+//            [self setTableData];
         }
         else{
             
@@ -379,6 +379,14 @@
         NSString *sql2 = [NSString stringWithFormat:@"SELECT status,count(music_id) FROM (%@) GROUP BY status",sql_tmp];
         NSLog(@"\n%@",sql2);
         FMResultSet *rs2 = [database executeQuery:sql2];
+        fcCount = 0;
+        exCount = 0;
+        hcCount = 0;
+        clCount = 0;
+        ecCount = 0;
+        acCount = 0;
+        faCount = 0;
+        npCount = 0;
         while ([rs2 next]) {
             int status = [rs2 intForColumn:@"status"];
             int count =  [rs2 intForColumn:@"count(music_id)"];
@@ -477,6 +485,7 @@
         }
         
         [database close];
+        [self setTableData];
     }
     else{
         NSLog(@"Could not open db.");
@@ -509,7 +518,7 @@
             int style = self.playStyleSortType;
 
             [self dbUpdate:music_id changeToStatus:status playRank:playRank style:style];
-            [self setTableData];
+//            [self setTableData];
         }
     }
     

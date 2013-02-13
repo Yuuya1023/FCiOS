@@ -81,6 +81,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    DatabaseManager *dbManager = [DatabaseManager sharedInstance];
+    if ([dbManager.music_DB open]) {
+        [dbManager.music_DB executeUpdate:@"vacuum"];
+        [dbManager.music_DB close];
+    }
 }
 
 /*

@@ -4,16 +4,8 @@
   "description": "アップデート",
   "sql":[
          {
-         "music": "INSERT INTO musicMaster",
-         "user" : "INSERT INTO userData"
-         },
-         {
-         "music": "INSERT INTO musicMaster2",
-         "user" : "INSERT INTO userData2"
-         },
-         {
-         "music": "INSERT INTO musicMaster3",
-         "user" : "INSERT INTO userData3"
+         "music": "insert into musicMaster values(    21001    ,'405nm'    ,    'noname',    20,    5     ,    9     ,    11     ,    5     ,    9     ,    11     ,0,0,1,2)",
+         "user" : "INSERT INTO userData (music_id) values (21001);"
          }
          ]
   },

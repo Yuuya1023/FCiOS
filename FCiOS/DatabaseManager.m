@@ -76,6 +76,36 @@ static dispatch_queue_t serialQueue;
     for (NSDictionary *key_sql in dictionary) {
         NSLog(@"music ,%@",[key_sql objectForKey:@"music"]);
         NSLog(@"user  ,%@",[key_sql objectForKey:@"user"]);
+        
+        //更新処理
+        if ([self.music_DB open]) {
+            [self.music_DB beginTransaction];
+            [self.music_DB executeUpdate:[key_sql objectForKey:@"music"]];
+            if ([self.music_DB hadError]) {
+                [self.music_DB rollback];
+                NSLog(@"error_music");
+            }
+            else{
+                [self.music_DB commit];
+                NSLog(@"commit_music");
+            }
+            
+            [self.music_DB beginTransaction];
+            [self.music_DB executeUpdate:[key_sql objectForKey:@"user"]];
+            if ([self.music_DB hadError]) {
+                [self.music_DB rollback];
+                NSLog(@"error_userData");
+            }
+            else{
+                [self.music_DB commit];
+                NSLog(@"commit_userData");
+            }
+            
+            [self.music_DB close];
+        }
+        else{
+            NSLog(@"Could not open db.");
+        }
     }
 }
 
