@@ -126,21 +126,25 @@
 
 - (void)commitUpdate{
     NSLog(@"update");
+    
+    //アップデート対象のidとタイプを配列に入れる
+    NSMutableArray *array = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.checkList count]; i++) {
         if ([[self.checkList objectAtIndex:i] isEqualToString:@"1"]) {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
             //update
-            int music_id = [[[self.tableData objectAtIndex:i] objectForKey:@"music_id"] intValue];
-            int status = someEditType;
-            int playRank = [[[self.tableData objectAtIndex:i] objectForKey:@"type"] intValue];
-            int style = self.playStyleSortType;
+            [dic setObject:[[self.tableData objectAtIndex:i] objectForKey:@"music_id"] forKey:@"music_id"];
+            [dic setObject:[[self.tableData objectAtIndex:i] objectForKey:@"type"] forKey:@"type"];
             
-            [self dbUpdate:music_id changeToStatus:status playRank:playRank style:style];
-//            [self setTableData];
+            [array addObject:dic];
         }
         else{
-            
         }
     }
+    int status = someEditType;
+    int style = self.playStyleSortType;
+    [self dbUpdate:array changeToStatus:status style:style];
+
     
     [self cancel];
 }
@@ -432,7 +436,7 @@
     
 }
 
-- (void)dbUpdate:(int)music_id changeToStatus:(int)status playRank:(int)playRank style:(int)style{
+- (void)dbUpdate:(NSMutableArray *)list changeToStatus:(int)status style:(int)style{
     
     DatabaseManager *dbManager = [DatabaseManager sharedInstance];
     FMDatabase *database = dbManager.music_DB;
@@ -449,29 +453,32 @@
             playStyleSql = [NSString stringWithFormat:@"DP_"];
         }
         
-        NSString *playRankSql;
-        switch (playRank) {
-            case 0:
-                playRankSql = [NSString stringWithFormat:@"Normal"];
-                break;
-            case 1:
-                playRankSql = [NSString stringWithFormat:@"Hyper"];
-                break;
-            case 2:
-                playRankSql = [NSString stringWithFormat:@"Another"];
-                break;
-            default:
-                playRankSql = @"UNION_ALL";
-                break;
-        }
+        for (int i = 0; i < [list count]; i++) {
         
-        NSString *sql = [NSString stringWithFormat:@"UPDATE userData SET %@%@_Status = %d WHERE music_id = %d",
-                         playStyleSql,
-                         playRankSql,
-                         status,
-                         music_id];
-        NSLog(@"\n update sql \n %@",sql);
-        [database executeUpdate:sql];
+            NSString *playRankSql;
+            switch ([[[list objectAtIndex:i] objectForKey:@"type"] intValue]) {
+                case 0:
+                    playRankSql = [NSString stringWithFormat:@"Normal"];
+                    break;
+                case 1:
+                    playRankSql = [NSString stringWithFormat:@"Hyper"];
+                    break;
+                case 2:
+                    playRankSql = [NSString stringWithFormat:@"Another"];
+                    break;
+                default:
+                    break;
+            }
+        
+            NSString *sql = [NSString stringWithFormat:@"UPDATE userData SET %@%@_Status = %d WHERE music_id = %d",
+                             playStyleSql,
+                             playRankSql,
+                             status,
+                             [[[list objectAtIndex:i] objectForKey:@"music_id"] intValue]];
+            NSLog(@"\n update sql \n %@",sql);
+            [database executeUpdate:sql];
+        
+        }
         
         //エラー処理
         if ([database hadError]) {
@@ -512,13 +519,18 @@
             NSLog(@"tag = %d",actionSheet.tag);
             int tag = actionSheet.tag;
             //update
-            int music_id = [[[self.tableData objectAtIndex:tag] objectForKey:@"music_id"] intValue];
+            //アップデート対象のidとtypeを配列に入れる
+            NSMutableArray *array = [[NSMutableArray alloc] init];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 [[self.tableData objectAtIndex:tag] objectForKey:@"music_id"],@"music_id",
+                                 [[self.tableData objectAtIndex:tag] objectForKey:@"type"],@"type",
+                                 nil];
+            [array addObject:dic];
+            
             int status = 7 - buttonIndex;
-            int playRank = [[[self.tableData objectAtIndex:tag] objectForKey:@"type"] intValue];
             int style = self.playStyleSortType;
 
-            [self dbUpdate:music_id changeToStatus:status playRank:playRank style:style];
-//            [self setTableData];
+            [self dbUpdate:array changeToStatus:status style:style];
         }
     }
     
