@@ -582,7 +582,8 @@
             cell.difficulityLabel.textColor = [UIColor blueColor];
             break;
         case 1:
-            cell.difficulityLabel.textColor = [UIColor yellowColor];
+            //黄色
+            cell.difficulityLabel.textColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.0 alpha:1.0];
             break;
         case 2:
             cell.difficulityLabel.textColor = [UIColor redColor];
