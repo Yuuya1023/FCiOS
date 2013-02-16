@@ -40,6 +40,8 @@
     BOOL editing;
     
     UIBarButtonItem *button_;
+    UIBarButtonItem *allSelectButton_;
+    BOOL allChecking;
     NSArray *editTypes;
     UILabel *viewMode;
     UILabel *editMode;
@@ -53,6 +55,7 @@
 
 @property (nonatomic ,retain) UITableView *table;
 @property (nonatomic ,retain) UIBarButtonItem *button;
+@property (nonatomic ,retain) UIBarButtonItem * allSelectButton;
 
 @property (nonatomic, assign) int versionSortType;
 @property (nonatomic, assign) int levelSortType;

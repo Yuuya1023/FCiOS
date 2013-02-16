@@ -16,6 +16,7 @@
 @implementation DetailViewController
 @synthesize table = table_;
 @synthesize button = button_;
+@synthesize allSelectButton = allSelectButton_;
 
 @synthesize versionSortType = versionSortType_;
 @synthesize levelSortType = levelSortType_;
@@ -45,6 +46,12 @@
                                                                   target:self
                                                                   action:@selector(editData:)];
         self.navigationItem.rightBarButtonItem = self.button;
+        
+        self.allSelectButton = [[UIBarButtonItem alloc] initWithTitle:@"すべて選択"
+                                                       style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(allSelect:)];
+
         
         
         //ツールバー
@@ -84,6 +91,7 @@
                                                                    target:self
                                                                    action:@selector(commitUpdate)
                                     ];
+        okBtn.tintColor = [UIColor redColor];
         toolbarItemsInEditing = [[NSArray alloc] initWithObjects:labelBtn2,canelBtn,okBtn, nil];
 
         
@@ -151,7 +159,6 @@
 
 - (void)editData:(UIBarButtonItem *)b{
     if (!editing) {
-        self.navigationItem.rightBarButtonItem = nil;
         UIActionSheet *as = [[UIActionSheet alloc] init];
         as.delegate = self;
         as.tag = -1;
@@ -170,7 +177,20 @@
     }
 }
 
-
+- (void)allSelect:(UIBarButtonItem *)b{
+    if (!allChecking) {
+        self.allSelectButton.title = @"すべて解除";
+        self.allSelectButton.tintColor = [UIColor redColor];
+        [self allCheckList];
+    }
+    else{
+        self.allSelectButton.title = @"すべて選択";
+        self.allSelectButton.tintColor = [UIColor darkGrayColor];
+        [self clearCheckList];
+    }
+    [self.table reloadData];
+    allChecking = !allChecking;
+}
 
 - (void)setTableData{
     NSLog(@"%d %d %d %d %d",self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType);
@@ -187,13 +207,20 @@
 
 - (void)clearCheckList{
     [self.checkList removeAllObjects];
-    for (int i = 0; i <= [self.tableData count]; i++){
+//    NSLog(@"[self.tableData count] %d",[self.tableData count]);
+    for (int i = 0; i < [self.tableData count]; i++){
         [self.checkList addObject:@"0"];
     }
 }
 
 
-
+- (void)allCheckList{
+    [self.checkList removeAllObjects];
+//    NSLog(@"[self.tableData count] %d",[self.tableData count]);
+    for (int i = 0; i < [self.tableData count]; i++){
+        [self.checkList addObject:@"1"];
+    }
+}
 
 - (void)dbSelector{
     DatabaseManager *dbManager = [DatabaseManager sharedInstance];
@@ -509,6 +536,8 @@
     else{
         //一括編集から出した場合
         if (actionSheet.tag == -1) {
+            self.navigationItem.rightBarButtonItem = self.allSelectButton;
+            allChecking = NO;
             editing = YES;
             someEditType = 7 - buttonIndex;
             editMode.text = [editTypes objectAtIndex:buttonIndex];
