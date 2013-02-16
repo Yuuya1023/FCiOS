@@ -135,26 +135,49 @@
 - (void)commitUpdate{
     NSLog(@"update");
     
-    //アップデート対象のidとタイプを配列に入れる
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [self.checkList count]; i++) {
-        if ([[self.checkList objectAtIndex:i] isEqualToString:@"1"]) {
-            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-            //update
-            [dic setObject:[[self.tableData objectAtIndex:i] objectForKey:@"music_id"] forKey:@"music_id"];
-            [dic setObject:[[self.tableData objectAtIndex:i] objectForKey:@"type"] forKey:@"type"];
-            
-            [array addObject:dic];
-        }
-        else{
-        }
-    }
-    int status = someEditType;
-    int style = self.playStyleSortType;
-    [self dbUpdate:array changeToStatus:status style:style];
-
+    //ぐるぐるを出す
+    UIView *grayView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    grayView.backgroundColor = [UIColor blackColor];
+    grayView.alpha = 0.0;
     
-    [self cancel];
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    indicator.center = self.navigationController.view.center;
+    [indicator startAnimating];
+    [grayView addSubview:indicator];
+    [self.navigationController.view addSubview: grayView];
+    
+    [UIView animateWithDuration:0.3f animations:^(void) {
+        grayView.alpha = 0.6;
+        
+    }completion:^(BOOL finished){
+        
+        //アップデート対象のidとタイプを配列に入れる
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        for (int i = 0; i < [self.checkList count]; i++) {
+            if ([[self.checkList objectAtIndex:i] isEqualToString:@"1"]) {
+                NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+                //update
+                [dic setObject:[[self.tableData objectAtIndex:i] objectForKey:@"music_id"] forKey:@"music_id"];
+                [dic setObject:[[self.tableData objectAtIndex:i] objectForKey:@"type"] forKey:@"type"];
+                
+                [array addObject:dic];
+            }
+            else{
+            }
+        }
+        int status = someEditType;
+        int style = self.playStyleSortType;
+        [self dbUpdate:array changeToStatus:status style:style];
+        
+        [UIView animateWithDuration:0.3f animations:^(void) {
+            grayView.alpha = 0.0;
+            
+        }completion:^(BOOL finished){
+            [indicator removeFromSuperview];
+            [grayView removeFromSuperview];
+            [self cancel];
+        }];
+    }];
 }
 
 - (void)editData:(UIBarButtonItem *)b{
@@ -537,6 +560,8 @@
         //一括編集から出した場合
         if (actionSheet.tag == -1) {
             self.navigationItem.rightBarButtonItem = self.allSelectButton;
+            self.allSelectButton.title = @"すべて選択";
+            self.allSelectButton.tintColor = [UIColor darkGrayColor];
             allChecking = NO;
             editing = YES;
             someEditType = 7 - buttonIndex;

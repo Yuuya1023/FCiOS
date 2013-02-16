@@ -440,7 +440,7 @@
             break;
         case 1:
             cell.nameLabel.text = [self.levelList objectAtIndex:indexPath.row];
-            cell.folderDetailLabel.text = [NSString stringWithFormat:@"FC:%@ EXH:%@ H:%@ C:%@  /%@",
+            cell.folderDetailLabel.text = [NSString stringWithFormat:@"FC: %@  EXH: %@  H: %@  C: %@   /%@",
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"FC"],
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"EXH"],
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"H"],
@@ -450,7 +450,7 @@
             break;
         case 2:
             cell.nameLabel.text = [self.versionList objectAtIndex:indexPath.row];
-            cell.folderDetailLabel.text = [NSString stringWithFormat:@"FC:%@ EXH:%@ H:%@ C:%@  /%@",
+            cell.folderDetailLabel.text = [NSString stringWithFormat:@"FC: %@  EXH: %@  H: %@  C: %@   /%@",
                                            [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"FC"],
                                            [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"EXH"],
                                            [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"H"],
