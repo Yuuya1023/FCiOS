@@ -44,8 +44,8 @@
         self.navigationItem.leftBarButtonItem = self.button;
         
         //更新ボタン
-        UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:NSSelectorFromString(@"update:")];
-        self.navigationItem.rightBarButtonItem = updateButton;
+//        UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:NSSelectorFromString(@"update:")];
+//        self.navigationItem.rightBarButtonItem = updateButton;
         
         TableSources *tableSources = [[TableSources alloc] init];
         self.clearList = tableSources.clearList;

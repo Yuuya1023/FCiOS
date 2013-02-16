@@ -17,6 +17,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
+    //ユーザーデフォルトに初期値を設定
+    NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
+    [defaults setObject:@"1.0" forKey:DATABSEVERSION_KEY];
+    [USER_DEFAULT registerDefaults:defaults];
+    [USER_DEFAULT synchronize];
+//    NSLog(@"%f",[USER_DEFAULT floatForKey:DATABSEVERSION_KEY]);
+    
     UINavigationController *nvc1 = [[UINavigationController alloc] init];
     nvc1.navigationBar.barStyle = UIBarStyleBlack;
     UIViewController *viewController1 = [[MainViewController alloc] init];
