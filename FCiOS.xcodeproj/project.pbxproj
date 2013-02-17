@@ -48,6 +48,12 @@
 		189EB6BE16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */; };
 		189EB6C116C6C3020005CA3D /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6C016C6C3020005CA3D /* DatabaseManager.m */; };
 		189EB6C216C6C3020005CA3D /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6C016C6C3020005CA3D /* DatabaseManager.m */; };
+		18A0011116D0DD380075F3F8 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0011016D0DD380075F3F8 /* SettingViewController.m */; };
+		18A0011216D0DD380075F3F8 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0011016D0DD380075F3F8 /* SettingViewController.m */; };
+		18A0011616D0DE2F0075F3F8 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A0011416D0DE2F0075F3F8 /* setting.png */; };
+		18A0011716D0DE2F0075F3F8 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A0011416D0DE2F0075F3F8 /* setting.png */; };
+		18A0011816D0DE2F0075F3F8 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A0011516D0DE2F0075F3F8 /* setting@2x.png */; };
+		18A0011916D0DE2F0075F3F8 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A0011516D0DE2F0075F3F8 /* setting@2x.png */; };
 		18A2C19316B3C1B700CECE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19216B3C1B700CECE75 /* UIKit.framework */; };
 		18A2C19516B3C1B700CECE75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19416B3C1B700CECE75 /* Foundation.framework */; };
 		18A2C19716B3C1B700CECE75 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19616B3C1B700CECE75 /* CoreGraphics.framework */; };
@@ -125,6 +131,10 @@
 		189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeDetailCell.m; sourceTree = "<group>"; };
 		189EB6BF16C6C3020005CA3D /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		189EB6C016C6C3020005CA3D /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
+		18A0010F16D0DD380075F3F8 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		18A0011016D0DD380075F3F8 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		18A0011416D0DE2F0075F3F8 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		18A0011516D0DE2F0075F3F8 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		18A2C18E16B3C1B700CECE75 /* FCiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A2C19216B3C1B700CECE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18A2C19416B3C1B700CECE75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -205,6 +215,8 @@
 				1898338016CA773000CC53A2 /* folder@2x.png */,
 				1898338116CA773000CC53A2 /* home.png */,
 				1898338216CA773000CC53A2 /* home@2x.png */,
+				18A0011416D0DE2F0075F3F8 /* setting.png */,
+				18A0011516D0DE2F0075F3F8 /* setting@2x.png */,
 				1898338316CA773000CC53A2 /* sort.png */,
 				1898338416CA773000CC53A2 /* sort@2x.png */,
 			);
@@ -277,6 +289,8 @@
 				18A2C20F16B43D6D00CECE75 /* SortConfigViewController.m */,
 				1898B37916BD8EDF00275758 /* DetailViewController.h */,
 				1898B37A16BD8EDF00275758 /* DetailViewController.m */,
+				18A0010F16D0DD380075F3F8 /* SettingViewController.h */,
+				18A0011016D0DD380075F3F8 /* SettingViewController.m */,
 				189EB69B16C68DB40005CA3D /* MusicDetailCell.h */,
 				189EB69C16C68DB40005CA3D /* MusicDetailCell.m */,
 				189EB6BB16C6B8CF0005CA3D /* HomeDetailCell.h */,
@@ -450,6 +464,8 @@
 				1898338B16CA773000CC53A2 /* home@2x.png in Resources */,
 				1898338D16CA773000CC53A2 /* sort.png in Resources */,
 				1898338F16CA773000CC53A2 /* sort@2x.png in Resources */,
+				18A0011616D0DE2F0075F3F8 /* setting.png in Resources */,
+				18A0011816D0DE2F0075F3F8 /* setting@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +496,8 @@
 				1898338C16CA773000CC53A2 /* home@2x.png in Resources */,
 				1898338E16CA773000CC53A2 /* sort.png in Resources */,
 				1898339016CA773000CC53A2 /* sort@2x.png in Resources */,
+				18A0011716D0DE2F0075F3F8 /* setting.png in Resources */,
+				18A0011916D0DE2F0075F3F8 /* setting@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +538,7 @@
 				189EB69D16C68DB40005CA3D /* MusicDetailCell.m in Sources */,
 				189EB6BD16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */,
 				189EB6C116C6C3020005CA3D /* DatabaseManager.m in Sources */,
+				18A0011116D0DD380075F3F8 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +559,7 @@
 				189EB69E16C68DB40005CA3D /* MusicDetailCell.m in Sources */,
 				189EB6BE16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */,
 				189EB6C216C6C3020005CA3D /* DatabaseManager.m in Sources */,
+				18A0011216D0DD380075F3F8 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

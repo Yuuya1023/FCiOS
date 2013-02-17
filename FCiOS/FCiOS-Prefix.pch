@@ -17,3 +17,4 @@
 #define USER_DEFAULT [NSUserDefaults standardUserDefaults]
 #define DATABSEVERSION_KEY @"databaseVersion"
 #define UPDATED_USERDATA_KEY @"updatedUserData"
+#define DEFAULT_SORT_KEY @"defaultSort"

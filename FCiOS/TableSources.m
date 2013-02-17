@@ -139,6 +139,14 @@
                                 @"Difficulity (ASC)",
                                 @"Difficulity (DESC)",
                                 nil];
+        
+        self.sortSetting = [[NSArray alloc] initWithObjects:
+                            @"NAME",
+                            @"CLEAR LAMP (ASC)",
+                            @"CLEAR LAMP (DESC)",
+                            @"Difficulity (ASC)",
+                            @"Difficulity (DESC)",
+                            nil];
     }
     return self;
 }

@@ -19,6 +19,8 @@
     NSArray *levelSortList_;
     NSArray *versionSortList_;
     NSArray *sortingSortList_;
+    
+    NSArray *sortSetting_;
 
 }
 
@@ -31,5 +33,7 @@
 @property (nonatomic ,retain)NSArray *levelSortList;
 @property (nonatomic ,retain)NSArray *versionSortList;
 @property (nonatomic ,retain)NSArray *sortingSortList;
+
+@property (nonatomic ,retain)NSArray *sortSetting;
 
 @end
