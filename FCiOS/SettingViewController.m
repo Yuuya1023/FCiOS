@@ -48,12 +48,37 @@
         [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelButton];
 
+        //アプリバージョン
+        appVersion = [[UILabel alloc] initWithFrame:CGRectMake(15, 28, 100, 20)];
+        appVersion.text = @"App Version";
+        appVersion.font = DEFAULT_FONT;
+        [self.view addSubview:appVersion];
+        
+        appVersionText = [[UILabel alloc] initWithFrame:CGRectMake(190, 20, 50, 40)];
+        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        appVersionText.text = [NSString stringWithFormat:@"%.2f",[version floatValue]];
+        appVersionText.font = DEFAULT_FONT;
+        appVersionText.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:appVersionText];
+        
+        //DBバージョン
+        dataVersion = [[UILabel alloc] initWithFrame:CGRectMake(15, 78, 100, 20)];
+        dataVersion.text = @"DB Version";
+        dataVersion.font = DEFAULT_FONT;
+        [self.view addSubview:dataVersion];
+        
+        dataVersionText = [[UILabel alloc] initWithFrame:CGRectMake(190, 70, 50, 40)];
+        dataVersionText.text = [NSString stringWithFormat:@"%.2f",[USER_DEFAULT floatForKey:DATABSEVERSION_KEY]];
+        dataVersionText.font = DEFAULT_FONT;
+        dataVersionText.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:dataVersionText];
+        
         //ソーティング
-        defaultSort = [[UILabel alloc] initWithFrame:CGRectMake(15, 28, 100, 20)];
+        defaultSort = [[UILabel alloc] initWithFrame:CGRectMake(15, 148, 100, 20)];
         defaultSort.text = @"Default Sort";
         defaultSort.font = DEFAULT_FONT;
         
-        defaultSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 20, 190, 40)];
+        defaultSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 140, 190, 40)];
         defaultSortLabel.text = @"NAME";
         defaultSortLabel.font = DEFAULT_FONT;
         defaultSortLabel.textAlignment = NSTextAlignmentRight;
@@ -61,20 +86,20 @@
         
         defaultSortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         defaultSortButton.tag = 0;
-        defaultSortButton.frame = CGRectMake(125, 20, 190, 40);
+        defaultSortButton.frame = CGRectMake(125, 140, 190, 40);
         [defaultSortButton addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:defaultSort];
         [self.view addSubview:defaultSortButton];
         [self.view addSubview:defaultSortLabel];
         
         //カスタム
-        custom = [[UILabel alloc] initWithFrame:CGRectMake(15, 88, 100, 20)];
+        custom = [[UILabel alloc] initWithFrame:CGRectMake(15, 208, 100, 20)];
         custom.text = @"Custom Sort";
         custom.font = DEFAULT_FONT;
         [self.view addSubview:custom];
         
         //SP
-        customLabelSP = [[UILabel alloc] initWithFrame:CGRectMake(115, 80, 190, 40)];
+        customLabelSP = [[UILabel alloc] initWithFrame:CGRectMake(115, 200, 190, 40)];
         customLabelSP.text = @"SP";
         customLabelSP.font = DEFAULT_FONT;
         customLabelSP.textAlignment = NSTextAlignmentRight;
@@ -82,13 +107,13 @@
         
         custom_SP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         custom_SP.tag = 1;
-        custom_SP.frame = CGRectMake(125, 80, 190, 40);
+        custom_SP.frame = CGRectMake(125, 200, 190, 40);
         [custom_SP addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:custom_SP];
         [self.view addSubview:customLabelSP];
         
         //DP
-        customLabelDP = [[UILabel alloc] initWithFrame:CGRectMake(115, 130, 190, 40)];
+        customLabelDP = [[UILabel alloc] initWithFrame:CGRectMake(115, 250, 190, 40)];
         customLabelDP.text = @"DP";
         customLabelDP.font = DEFAULT_FONT;
         customLabelDP.textAlignment = NSTextAlignmentRight;
@@ -96,7 +121,7 @@
         
         custom_DP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         custom_DP.tag = 2;
-        custom_DP.frame = CGRectMake(125, 130, 190, 40);
+        custom_DP.frame = CGRectMake(125, 250, 190, 40);
         [custom_DP addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:custom_DP];
         [self.view addSubview:customLabelDP];

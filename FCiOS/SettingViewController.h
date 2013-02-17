@@ -18,6 +18,12 @@
     NSArray *customSPList_;
     NSArray *customDPList_;
     
+    UILabel *appVersion;
+    UILabel *appVersionText;
+    
+    UILabel *dataVersion;
+    UILabel *dataVersionText;
+    
     UILabel *defaultSort;
     UILabel *defaultSortLabel;
     UIButton * defaultSortButton;
