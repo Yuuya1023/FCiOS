@@ -36,9 +36,6 @@
     UILabel *playRank;
     UILabel *sorting;
     
-    UILabel *buttonLabel;
-    UILabel *cancelLabel;
-    
     UIButton *versionSelect;
     UIButton *levelSelect;
     UIButton *clearSelect;

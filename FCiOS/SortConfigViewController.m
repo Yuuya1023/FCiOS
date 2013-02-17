@@ -42,38 +42,25 @@
         //キャンセルボタン
         cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         cancelButton.frame = CGRectMake(15, 320, 100, 40);
+        [cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
+        [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        cancelButton.titleLabel.font = DEFAULT_FONT;
+        cancelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         cancelButton.alpha = 0.0;
-        
-        cancelLabel = [[UILabel alloc] init];
-        cancelLabel.frame = cancelButton.frame;
-        cancelLabel.center = cancelButton.center;
-        cancelLabel.textAlignment = NSTextAlignmentCenter;
-        cancelLabel.adjustsFontSizeToFitWidth = YES;
-        cancelLabel.text = @"CANCEL";
-        cancelLabel.font = DEFAULT_FONT;
-        cancelLabel.alpha = 0.0;
-        cancelLabel.backgroundColor = [UIColor clearColor];
         
         [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelButton];
-        [self.view addSubview:cancelLabel];
         
         //ソート結果表示ボタン
         resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         resultButton.frame = CGRectMake(105, 318, 120, 40);
-
-        buttonLabel = [[UILabel alloc] init];
-        buttonLabel.frame = resultButton.frame;
-        buttonLabel.center = resultButton.center;
-        buttonLabel.textAlignment = NSTextAlignmentCenter;
-        buttonLabel.adjustsFontSizeToFitWidth = YES;
-        buttonLabel.text = @"RESULT";
-        buttonLabel.font = DEFAULT_FONT;
-        buttonLabel.backgroundColor = [UIColor clearColor];
+        [resultButton setTitle:@"RESULT" forState:UIControlStateNormal];
+        [resultButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        resultButton.titleLabel.font = DEFAULT_FONT;
+        resultButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         
         [resultButton addTarget:self action:NSSelectorFromString(@"showResult:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:resultButton];
-        [self.view addSubview:buttonLabel];
         
         //バージョン
         version = [[UILabel alloc] initWithFrame:CGRectMake(15, 28, 100, 20)];
@@ -184,7 +171,7 @@
         sorting.font = DEFAULT_FONT;
         
         sortingSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 270, 190, 40)];
-        sortingSortLabel.text = @"NONE";
+        sortingSortLabel.text = @"NAME";
         sortingSortLabel.font = DEFAULT_FONT;
         sortingSortLabel.textAlignment = NSTextAlignmentRight;
         sortingSortLabel.backgroundColor = [UIColor clearColor];
@@ -299,9 +286,7 @@
     if (isSelecting) {
         self.tablelVIew.alpha = 1.0;
         resultButton.alpha = 0.0;
-        buttonLabel.alpha = 0.0;
         cancelButton.alpha = 1.0;
-        cancelLabel.alpha = 1.0;
         if (tag != 0) {
             version.alpha = 0.2;
         }
@@ -324,9 +309,7 @@
     else{
         self.tablelVIew.alpha = 0.0;
         resultButton.alpha = 1.0;
-        buttonLabel.alpha = 1.0;
         cancelButton.alpha = 0.0;
-        cancelLabel.alpha = 0.0;
         
         version.alpha = 1.0;
         level.alpha = 1.0;

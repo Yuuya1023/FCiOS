@@ -43,7 +43,6 @@
         [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         cancelButton.titleLabel.font = DEFAULT_FONT;
         cancelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-        cancelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         cancelButton.alpha = 0.0;
         
         [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];

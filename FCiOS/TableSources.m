@@ -12,7 +12,6 @@
 @synthesize clearList = clearList_;
 @synthesize levelList = levelList_;
 @synthesize versionList = versionList_;
-@synthesize sortingList = sortingList_;
 
 @synthesize clearSortList = clearSortList_;
 @synthesize levelSortList = levelSortList_;
@@ -70,11 +69,6 @@
                             @"19 Lincle",
                             @"20 tricoro",
                             nil];
-//        self.sortingList = [[NSArray alloc] initWithObjects:
-//                            @"1",
-//                            @"2",
-//                            @"3",
-//                            nil];
         
         //ソート用
         self.clearSortList = [[NSArray alloc] initWithObjects:
@@ -133,7 +127,7 @@
                                 nil];
         
         self.sortingSortList = [[NSArray alloc] initWithObjects:
-                                @"NONE",
+                                @"NAME",
                                 @"CLEAR LAMP (ASC)",
                                 @"CLEAR LAMP (DESC)",
                                 @"Difficulity (ASC)",
