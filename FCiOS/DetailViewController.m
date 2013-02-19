@@ -391,22 +391,18 @@
         
         //ソート順
         switch (self.sortingType) {
-                case 0:
-                [sql appendFormat:@") AS tblResults ORDER BY LOWER(tblResults.name) ASC"];
-                break;
-            case 1:
-                [sql appendFormat:@") AS tblResults ORDER BY tblResults.status ASC,LOWER(tblResults.name) ASC"];
-                break;
-            case 2:
-                [sql appendFormat:@") AS tblResults ORDER BY tblResults.status DESC,LOWER(tblResults.name) ASC"];
-                break;
-            case 3:
+            case 0:
                 [sql appendFormat:@") AS tblResults ORDER BY tblResults.level ASC,LOWER(tblResults.name) ASC"];
                 break;
-            case 4:
+            case 1:
                 [sql appendFormat:@") AS tblResults ORDER BY tblResults.level DESC,LOWER(tblResults.name) ASC"];
                 break;
-                
+            case 2:
+                [sql appendFormat:@") AS tblResults ORDER BY tblResults.status ASC,tblResults.level ASC,LOWER(tblResults.name) ASC"];
+                break;
+            case 3:
+                [sql appendFormat:@") AS tblResults ORDER BY tblResults.status DESC,tblResults.level ASC,LOWER(tblResults.name) ASC"];
+                break;
             default:
                 break;
         }

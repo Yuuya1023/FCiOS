@@ -167,11 +167,11 @@
         
         //ソーティング
         sorting = [[UILabel alloc] initWithFrame:CGRectMake(15, 278, 100, 20)];
-        sorting.text = @"Sorting";
+        sorting.text = @"Sort Type";
         sorting.font = DEFAULT_FONT;
         
         sortingSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 270, 190, 40)];
-        sortingSortLabel.text = @"NAME";
+        sortingSortLabel.text = @"Difficulity (ASC)";
         sortingSortLabel.font = DEFAULT_FONT;
         sortingSortLabel.textAlignment = NSTextAlignmentRight;
         sortingSortLabel.backgroundColor = [UIColor clearColor];

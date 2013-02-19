@@ -127,19 +127,17 @@
                                 nil];
         
         self.sortingSortList = [[NSArray alloc] initWithObjects:
-                                @"NAME",
-                                @"CLEAR LAMP (ASC)",
-                                @"CLEAR LAMP (DESC)",
                                 @"Difficulity (ASC)",
                                 @"Difficulity (DESC)",
+                                @"CLEAR LAMP (ASC)",
+                                @"CLEAR LAMP (DESC)",
                                 nil];
         
         self.sortSetting = [[NSArray alloc] initWithObjects:
-                            @"NAME",
-                            @"CLEAR LAMP (ASC)",
-                            @"CLEAR LAMP (DESC)",
                             @"Difficulity (ASC)",
                             @"Difficulity (DESC)",
+                            @"CLEAR LAMP (ASC)",
+                            @"CLEAR LAMP (DESC)",
                             nil];
     }
     return self;
