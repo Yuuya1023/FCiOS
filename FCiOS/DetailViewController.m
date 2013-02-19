@@ -216,10 +216,15 @@
 }
 
 - (void)setTableData{
-    NSLog(@"%d %d %d %d %d",self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType);
+    NSLog(@"setTableData %d %d %d %d %d",self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType);
     [self.tableData removeAllObjects];
     [self dbSelector];
-    self.title = [NSString stringWithFormat:@"%d曲",[self.tableData count]];
+    
+    NSString *playStyle = @"SP";
+    if (self.playStyleSortType == 1) {
+        playStyle = @"DP";
+    }
+    self.title = [NSString stringWithFormat:@"%@  %d曲",playStyle,[self.tableData count]];
     //セルチェックリスト
     for (int i = 0; i <= [self.tableData count]; i++){
         [self.checkList addObject:@"0"];
@@ -673,7 +678,22 @@
         UIActionSheet *as = [[UIActionSheet alloc] init];
         as.delegate = self;
         as.tag = indexPath.row;
-        as.title = @"選択してください。";
+    
+        NSString *typeStr;
+        switch ([type intValue]) {
+            case 0:
+                typeStr = @"(N)";
+                break;
+            case 1:
+                typeStr = @"(H)";
+                break;
+            case 2:
+                typeStr = @"(A)";
+                break;
+            default:
+                break;
+        }
+        as.title = [NSString stringWithFormat:@"%@ %@",name,typeStr];
         [as addButtonWithTitle:@"TO FULLCOMBO"];
         [as addButtonWithTitle:@"TO EXHARDCLEAR"];
         [as addButtonWithTitle:@"TO HARDCLEAR"];

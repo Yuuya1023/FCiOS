@@ -189,7 +189,7 @@
         self.tablelVIew.delegate = self;
         self.tablelVIew.dataSource = self;
         self.tablelVIew.alpha = 0.0;
-        self.tablelVIew.backgroundColor = [UIColor blackColor];
+        self.tablelVIew.backgroundColor = [UIColor viewFlipsideBackgroundColor];
         [self.view addSubview:self.tablelVIew];
         
         }
