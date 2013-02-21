@@ -21,6 +21,8 @@
     //ユーザーデフォルトに初期値を設定
     NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
     [defaults setObject:@"1.0" forKey:DATABSEVERSION_KEY];
+    [defaults setObject:@"0" forKey:DEFAULT_PLAYRANK_KEY];
+    [defaults setObject:@"0" forKey:DEFAULT_PLAYSTYLE_KEY];
     [USER_DEFAULT registerDefaults:defaults];
     [USER_DEFAULT synchronize];
 //    NSLog(@"%f",[USER_DEFAULT floatForKey:DATABSEVERSION_KEY]);

@@ -13,8 +13,14 @@
     #import <Foundation/Foundation.h>
 #endif
 
+
 #define DEFAULT_FONT [UIFont fontWithName:@"GillSans" size:18]
 #define USER_DEFAULT [NSUserDefaults standardUserDefaults]
+
+
+//Key
 #define DATABSEVERSION_KEY @"databaseVersion"
 #define UPDATED_USERDATA_KEY @"updatedUserData"
 #define DEFAULT_SORT_KEY @"defaultSort"
+#define DEFAULT_PLAYSTYLE_KEY @"defaultPlayStyle"
+#define DEFAULT_PLAYRANK_KEY @"defaultPlayRank"

@@ -37,8 +37,35 @@
         self.title = @"Home";
         self.tabBarItem.image = [UIImage imageNamed:@"home"];
         
+        //選択されているプレイスタイル&プレイランクをセット
+        playStyleSortType = [USER_DEFAULT integerForKey:DEFAULT_PLAYSTYLE_KEY];
+        playRankSortType = [USER_DEFAULT integerForKey:DEFAULT_PLAYRANK_KEY];
+        
         //ソートボタン
-        self.button = [[UIBarButtonItem alloc] initWithTitle:@"SP ANOTHER"
+        NSString *playStyle;
+        if (playStyleSortType == 0) {
+            playStyle = @"SP";
+        }
+        else{
+            playStyle = @"DP";
+        }
+        
+        NSString *playRank;
+        switch (playRankSortType) {
+            case 0:
+                playRank = @"NORMAL";
+                break;
+            case 1:
+                playRank = @"HYPER";
+                break;
+            case 2:
+                playRank = @"ANOTHER";
+                break;
+            default:
+                playRank = @"ALL";
+                break;
+        }
+        self.button = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%@ %@",playStyle,playRank]
                                                        style:UIBarButtonItemStylePlain
                                                       target:self
                                                       action:NSSelectorFromString(@"setSortType:")];
@@ -57,10 +84,6 @@
         self.clearDetailArray = [[NSMutableArray alloc] init];
         self.levelDetailArray = [[NSMutableArray alloc] init];
         self.versionDetailArray = [[NSMutableArray alloc] init];
-        
-        //選択されているプレイスタイル&プレイランクをセット
-        playStyleSortType = 0;
-        playRankSortType = 2;
         
         [self reloadTable];
     }
@@ -138,21 +161,37 @@
                 playRankSql = [NSString stringWithFormat:@"Another"];
                 break;
             default:
+                playRankSql = @"UNION_ALL";
                 break;
         }
         
         //クリアランプ検索
         NSMutableString *sql_lamp = [NSMutableString stringWithFormat:@"SELECT status,count(music_id) FROM ( SELECT tblResults.* FROM("];
-        
-        [sql_lamp appendFormat:@"SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level != 0",
-         playStyleSql,
-         playRankSql,
-         playStyleSql,
-         playRankSql];
-        
+        if ([playRankSql isEqualToString:@"UNION_ALL"]) {
+            [sql_lamp appendFormat:@"SELECT music_id,%@_Normal_Level AS level,%@_Normal_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level != 0",
+             playStyleSql,
+             playStyleSql];
+            
+            [sql_lamp appendFormat:@" UNION ALL "];
+            [sql_lamp appendFormat:@"SELECT music_id,%@_Hyper_Level AS level,%@_Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level != 0",
+             playStyleSql,
+             playStyleSql];
+            
+            [sql_lamp appendFormat:@" UNION ALL "];
+            [sql_lamp appendFormat:@"SELECT music_id,%@_Another_Level AS level,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level != 0",
+             playStyleSql,
+             playStyleSql];
+        }
+        else{        
+            [sql_lamp appendFormat:@"SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level != 0",
+             playStyleSql,
+             playRankSql,
+             playStyleSql,
+             playRankSql];
+        }
         [sql_lamp appendFormat:@") AS tblResults) GROUP BY status"];
-
         NSLog(@"\n%@",sql_lamp);
+        
         FMResultSet *rs_lamp = [database executeQuery:sql_lamp];
         while ([rs_lamp next]) {
             int status = [rs_lamp intForColumn:@"status"];
@@ -163,7 +202,6 @@
         }
         
         [rs_lamp close];
-
         
         //難易度検索
         for (int i = 1; i <= 12; i++) {
@@ -177,12 +215,34 @@
             [dic setObject:@"0" forKey:@"FC"];
             [dic setObject:@"0" forKey:@"sum"];
             
-            NSString *sql_level = [NSString stringWithFormat:@"SELECT status,count(status) AS min,count(music_id) FROM ( SELECT tblResults.* FROM(SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d) AS tblResults) GROUP BY status",
-                                   playStyleSql,
-                                   playRankSql,
-                                   playStyleSql,
-                                   playRankSql,
-                                   i];
+            NSMutableString *sql_level = [NSMutableString stringWithFormat:@"SELECT status,count(status) AS min,count(music_id) FROM ( SELECT tblResults.* FROM("];
+            if ([playRankSql isEqualToString:@"UNION_ALL"]) {
+                [sql_level appendFormat:@"SELECT music_id,%@_Normal_Level AS level,%@_Normal_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d",
+                playStyleSql,
+                playStyleSql,
+                i];
+
+                [sql_level appendFormat:@" UNION ALL "];
+                [sql_level appendFormat:@"SELECT music_id,%@_Hyper_Level AS level,%@_Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d",
+                 playStyleSql,
+                 playStyleSql,
+                 i];
+                
+                [sql_level appendFormat:@" UNION ALL "];
+                [sql_level appendFormat:@"SELECT music_id,%@_Another_Level AS level,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d",
+                 playStyleSql,
+                 playStyleSql,
+                 i];
+            }
+            else{
+                [sql_level appendFormat:@"SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d",
+                                    playStyleSql,
+                                    playRankSql,
+                                    playStyleSql,
+                                    playRankSql,
+                                    i];
+            }
+            [sql_level appendFormat:@") AS tblResults) GROUP BY status"];
         
             NSLog(@"sql_level \n%@",sql_level);
             FMResultSet *rs_level = [database executeQuery:sql_level];
@@ -234,12 +294,34 @@
             [dic setObject:@"0" forKey:@"FC"];
             [dic setObject:@"0" forKey:@"sum"];
             
-            NSString *sql_version = [NSString stringWithFormat:@"SELECT status,count(music_id) FROM ( SELECT tblResults.* FROM(SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d) AS tblResults WHERE level != 0) GROUP BY status",
-                                   playStyleSql,
-                                   playRankSql,
-                                   playStyleSql,
-                                   playRankSql,
-                                   i];
+            NSMutableString *sql_version = [NSMutableString stringWithFormat:@"SELECT status,count(music_id) FROM ( SELECT tblResults.* FROM("];
+            if ([playRankSql isEqualToString:@"UNION_ALL"]) {
+                [sql_version appendFormat:@"SELECT music_id,%@_Normal_Level AS level,%@_Normal_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d",
+                 playStyleSql,
+                 playStyleSql,
+                 i];
+                
+                [sql_version appendFormat:@" UNION ALL "];
+                [sql_version appendFormat:@"SELECT music_id,%@_Hyper_Level AS level,%@_Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d",
+                 playStyleSql,
+                 playStyleSql,
+                 i];
+                
+                [sql_version appendFormat:@" UNION ALL "];
+                [sql_version appendFormat:@"SELECT music_id,%@_Another_Level AS level,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d",
+                 playStyleSql,
+                 playStyleSql,
+                 i];
+            }
+            else{
+                [sql_version appendFormat:@"SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d",
+                                    playStyleSql,
+                                    playRankSql,
+                                    playStyleSql,
+                                    playRankSql,
+                                    i];
+            }
+            [sql_version appendFormat:@") AS tblResults WHERE level != 0) GROUP BY status"];
             
             NSLog(@"sql_version \n%@",sql_version);
             FMResultSet *rs_version = [database executeQuery:sql_version];
@@ -294,14 +376,16 @@
     as.delegate = self;
 //    as.tag = -1;
     as.title = @"選択してください。";
+    [as addButtonWithTitle:@"SP ALL"];
     [as addButtonWithTitle:@"SP NORMAL"];
     [as addButtonWithTitle:@"SP HYPER"];
     [as addButtonWithTitle:@"SP ANOTHER"];
+    [as addButtonWithTitle:@"DP ALL"];
     [as addButtonWithTitle:@"DP NORMAL"];
     [as addButtonWithTitle:@"DP HYPER"];
     [as addButtonWithTitle:@"DP ANOTHER"];
     [as addButtonWithTitle:@"キャンセル"];
-    as.cancelButtonIndex = 6;
+    as.cancelButtonIndex = 8;
     [as showFromTabBar:self.tabBarController.tabBar];
 }
 
@@ -334,41 +418,55 @@
 
 -(void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     
+    NSLog(@"index %d",buttonIndex);
     switch (buttonIndex) {
         case 0:
+            playStyleSortType = 0;
+            playRankSortType = 4;
+            self.button.title = @"SP ALL";
+            break;
+        case 1:
             playStyleSortType = 0;
             playRankSortType = 0;
             self.button.title = @"SP NORMAL";
             break;
-        case 1:
+        case 2:
             playStyleSortType = 0;
             playRankSortType = 1;
             self.button.title = @"SP HYPER";
             break;
-        case 2:
+        case 3:
             playStyleSortType = 0;
             playRankSortType = 2;
             self.button.title = @"SP ANOTHER";
             break;
-        case 3:
+        case 4:
+            playStyleSortType = 1;
+            playRankSortType = 4;
+            self.button.title = @"DP ALL";
+            break;
+        case 5:
             playStyleSortType = 1;
             playRankSortType = 0;
             self.button.title = @"DP NORMAL";
             break;
-        case 4:
+        case 6:
             playStyleSortType = 1;
             playRankSortType = 1;
             self.button.title = @"DP HYPER";
             break;
-        case 5:
+        case 7:
             playStyleSortType = 1;
             playRankSortType = 2;
             self.button.title = @"DP ANOTHER";
             break;
-            
         default:
+            return;
             break;
     }
+    [USER_DEFAULT setInteger:playStyleSortType forKey:DEFAULT_PLAYSTYLE_KEY];
+    [USER_DEFAULT setInteger:playRankSortType forKey:DEFAULT_PLAYRANK_KEY];
+    [USER_DEFAULT synchronize];
     
     //セルの曲数を取得
     [self reloadTable];
