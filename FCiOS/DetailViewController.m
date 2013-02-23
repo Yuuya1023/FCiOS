@@ -52,12 +52,14 @@
         //タイトルビュー
         UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
         
-        self.editStateButton = [[UIButton alloc] initWithFrame:CGRectMake(10, -1, 40, 40)];
+        self.editStateButton = [[UIButton alloc] init];
         if ([USER_DEFAULT boolForKey:EDITING_MODE_KEY]) {
-            [self.editStateButton setImage:[UIImage imageNamed:@"brush"] forState:UIControlStateNormal];
+            [self.editStateButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+            self.editStateButton.frame = CGRectMake(16, 5, 30, 30);
         }
         else{
             [self.editStateButton setImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
+            self.editStateButton.frame = CGRectMake(13, 5, 30, 30);
         }
         [self.editStateButton addTarget:self action:@selector(changeEditMode:) forControlEvents:UIControlEventTouchUpInside];
         [titleView addSubview:self.editStateButton];
@@ -240,10 +242,12 @@
 
 - (void)changeEditMode:(UIButton *)b{
     if (![USER_DEFAULT boolForKey:EDITING_MODE_KEY]) {
-        [self.editStateButton setImage:[UIImage imageNamed:@"brush"] forState:UIControlStateNormal];
+        [self.editStateButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+        self.editStateButton.frame = CGRectMake(16, 5, 30, 30);
     }
     else{
         [self.editStateButton setImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
+        self.editStateButton.frame = CGRectMake(13, 5, 30, 30);
     }
     [USER_DEFAULT setBool:![USER_DEFAULT boolForKey:EDITING_MODE_KEY] forKey:EDITING_MODE_KEY];
     [USER_DEFAULT synchronize];
@@ -510,7 +514,7 @@
         }
         
         //フッターの統計ラベルに表示
-        viewMode.text = [NSString stringWithFormat:@"FC:%d EXH:%d H:%d C:%d EC:%d AC:%d F:%d NO:%d",fcCount,exCount,hcCount,clCount,ecCount,acCount,faCount,npCount];
+        viewMode.text = [NSString stringWithFormat:@"FC:%d EX:%d H:%d C:%d EC:%d AC:%d F:%d NO:%d",fcCount,exCount,hcCount,clCount,ecCount,acCount,faCount,npCount];
         
         [rs2 close];
         [database close];
