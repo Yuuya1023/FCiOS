@@ -39,8 +39,11 @@
     NSMutableArray *tableData_;
     BOOL editing;
     
+    UILabel *titleLabel_;
     UIBarButtonItem *button_;
     UIBarButtonItem *allSelectButton_;
+    UIButton *editStateButton_;
+
     BOOL allChecking;
     NSArray *editTypes;
     UILabel *viewMode;
@@ -54,8 +57,10 @@
 }
 
 @property (nonatomic ,retain) UITableView *table;
+@property (nonatomic ,retain) UILabel *titleLabel;
 @property (nonatomic ,retain) UIBarButtonItem *button;
-@property (nonatomic ,retain) UIBarButtonItem * allSelectButton;
+@property (nonatomic ,retain) UIBarButtonItem *allSelectButton;
+@property (nonatomic ,retain) UIButton *editStateButton;
 
 @property (nonatomic, assign) int versionSortType;
 @property (nonatomic, assign) int levelSortType;

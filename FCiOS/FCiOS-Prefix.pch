@@ -15,6 +15,7 @@
 
 
 #define DEFAULT_FONT [UIFont fontWithName:@"GillSans" size:18]
+#define DEFAULT_FONT_TITLE [UIFont fontWithName:@"GillSans" size:20]
 #define USER_DEFAULT [NSUserDefaults standardUserDefaults]
 
 
@@ -24,3 +25,4 @@
 #define DEFAULT_SORT_KEY @"defaultSort"
 #define DEFAULT_PLAYSTYLE_KEY @"defaultPlayStyle"
 #define DEFAULT_PLAYRANK_KEY @"defaultPlayRank"
+#define EDITING_MODE_KEY @"editingMode"

@@ -15,7 +15,9 @@
 
 @implementation DetailViewController
 @synthesize table = table_;
+@synthesize titleLabel = titleLabel_;
 @synthesize button = button_;
+@synthesize editStateButton = editStateButton_;
 @synthesize allSelectButton = allSelectButton_;
 
 @synthesize versionSortType = versionSortType_;
@@ -47,12 +49,33 @@
                                                                   action:@selector(editData:)];
         self.navigationItem.rightBarButtonItem = self.button;
         
+        //タイトルビュー
+        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+        
+        self.editStateButton = [[UIButton alloc] initWithFrame:CGRectMake(10, -1, 40, 40)];
+        if ([USER_DEFAULT boolForKey:EDITING_MODE_KEY]) {
+            [self.editStateButton setImage:[UIImage imageNamed:@"brush"] forState:UIControlStateNormal];
+        }
+        else{
+            [self.editStateButton setImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
+        }
+        [self.editStateButton addTarget:self action:@selector(changeEditMode:) forControlEvents:UIControlEventTouchUpInside];
+        [titleView addSubview:self.editStateButton];
+        
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 110, 40)];
+        self.titleLabel.backgroundColor = [UIColor clearColor];
+        self.titleLabel.textColor = [UIColor whiteColor];
+        self.titleLabel.font = DEFAULT_FONT_TITLE;
+        [titleView addSubview:self.titleLabel];
+        
+        self.navigationItem.titleView = titleView;
+        
+
         self.allSelectButton = [[UIBarButtonItem alloc] initWithTitle:@"すべて選択"
                                                        style:UIBarButtonItemStylePlain
                                                       target:self
                                                       action:@selector(allSelect:)];
 
-        
         
         //ツールバー
         toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 108, [UIScreen mainScreen].bounds.size.width, 44)];
@@ -215,6 +238,17 @@
     allChecking = !allChecking;
 }
 
+- (void)changeEditMode:(UIButton *)b{
+    if (![USER_DEFAULT boolForKey:EDITING_MODE_KEY]) {
+        [self.editStateButton setImage:[UIImage imageNamed:@"brush"] forState:UIControlStateNormal];
+    }
+    else{
+        [self.editStateButton setImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
+    }
+    [USER_DEFAULT setBool:![USER_DEFAULT boolForKey:EDITING_MODE_KEY] forKey:EDITING_MODE_KEY];
+    [USER_DEFAULT synchronize];
+}
+
 - (void)setTableData{
     NSLog(@"setTableData %d %d %d %d %d",self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType);
     [self.tableData removeAllObjects];
@@ -224,7 +258,7 @@
     if (self.playStyleSortType == 1) {
         playStyle = @"DP";
     }
-    self.title = [NSString stringWithFormat:@"%@  %d曲",playStyle,[self.tableData count]];
+    self.titleLabel.text = [NSString stringWithFormat:@"%@  %d曲",playStyle,[self.tableData count]];
     //セルチェックリスト
     for (int i = 0; i <= [self.tableData count]; i++){
         [self.checkList addObject:@"0"];
@@ -671,6 +705,9 @@
         }
     }
     else{
+        if (![USER_DEFAULT boolForKey:EDITING_MODE_KEY]) {
+            return;
+        }
         NSString *name = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];
         NSString *type = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"type"];
         NSLog(@"cell name %@, type = %@",name,type);
