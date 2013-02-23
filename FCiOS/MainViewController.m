@@ -34,6 +34,14 @@
 //        self.table.separatorColor = [UIColor lightGrayColor];
         [self.view addSubview:self.tablelView];
         
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.text = @"Home";
+        titleLabel.font = DEFAULT_FONT_TITLE;
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.textColor = [UIColor whiteColor];
+        self.navigationItem.titleView = titleLabel;
+        
         self.title = @"Home";
         self.tabBarItem.image = [UIImage imageNamed:@"home"];
         

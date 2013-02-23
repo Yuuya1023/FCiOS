@@ -26,6 +26,14 @@
 {
     self = [super init];
     if (self) {
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.text = @"Sort";
+        titleLabel.font = DEFAULT_FONT_TITLE;
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.textColor = [UIColor whiteColor];
+        self.navigationItem.titleView = titleLabel;
+        
         self.title = @"Sort";
         self.tabBarItem.image = [UIImage imageNamed:@"sort"];
         
