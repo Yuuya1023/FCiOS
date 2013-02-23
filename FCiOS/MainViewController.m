@@ -127,6 +127,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
+    [self.tablelView deselectRowAtIndexPath:[self.tablelView indexPathForSelectedRow] animated:YES];
     if ([USER_DEFAULT boolForKey:UPDATED_USERDATA_KEY]) {
         [self reloadTable];
         [USER_DEFAULT setBool:NO forKey:UPDATED_USERDATA_KEY];

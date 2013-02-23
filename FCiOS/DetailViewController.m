@@ -85,7 +85,7 @@
         
         //ツールバーアイテム
         //通常
-        viewMode = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, self.view.bounds.size.width - 25, 40)];
+        viewMode = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, self.view.bounds.size.width - 20, 40)];
         viewMode.adjustsFontSizeToFitWidth = YES;
         viewMode.text = @"";
         viewMode.font = DEFAULT_FONT;
