@@ -155,6 +155,7 @@
     toolBar.items = toolbarItems;
     [self clearCheckList];
     [self.table reloadData];
+    self.editStateButton.hidden = NO;
 }
 
 - (void)commitUpdate{
@@ -606,6 +607,7 @@
             someEditType = 7 - buttonIndex;
             editMode.text = [editTypes objectAtIndex:buttonIndex];
             toolBar.items = toolbarItemsInEditing;
+            self.editStateButton.hidden = YES;
         }
         //セルをタップした際
         else {
