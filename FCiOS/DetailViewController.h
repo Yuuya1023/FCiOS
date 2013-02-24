@@ -39,6 +39,7 @@
     NSMutableArray *tableData_;
     BOOL editing;
     
+    UIView *titleView_;
     UILabel *titleLabel_;
     UIBarButtonItem *button_;
     UIBarButtonItem *allSelectButton_;
@@ -57,6 +58,7 @@
 }
 
 @property (nonatomic ,retain) UITableView *table;
+@property (nonatomic ,retain) UIView *titleView;
 @property (nonatomic ,retain) UILabel *titleLabel;
 @property (nonatomic ,retain) UIBarButtonItem *button;
 @property (nonatomic ,retain) UIBarButtonItem *allSelectButton;

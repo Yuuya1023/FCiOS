@@ -15,6 +15,7 @@
 
 @implementation DetailViewController
 @synthesize table = table_;
+@synthesize titleView = titleView_;
 @synthesize titleLabel = titleLabel_;
 @synthesize button = button_;
 @synthesize editStateButton = editStateButton_;
@@ -50,7 +51,8 @@
         self.navigationItem.rightBarButtonItem = self.button;
         
         //タイトルビュー
-        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+        self.titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+//        self.titleView.backgroundColor = [UIColor blueColor];
         
         self.editStateButton = [[UIButton alloc] init];
         if ([USER_DEFAULT boolForKey:EDITING_MODE_KEY]) {
@@ -62,15 +64,15 @@
             self.editStateButton.frame = CGRectMake(13, 5, 30, 30);
         }
         [self.editStateButton addTarget:self action:@selector(changeEditMode:) forControlEvents:UIControlEventTouchUpInside];
-        [titleView addSubview:self.editStateButton];
+        [self.titleView addSubview:self.editStateButton];
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 110, 40)];
         self.titleLabel.backgroundColor = [UIColor clearColor];
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.font = DEFAULT_FONT_TITLE;
-        [titleView addSubview:self.titleLabel];
+        [self.titleView addSubview:self.titleLabel];
         
-        self.navigationItem.titleView = titleView;
+        self.navigationItem.titleView = self.titleView;
         
 
         self.allSelectButton = [[UIBarButtonItem alloc] initWithTitle:@"すべて選択"
@@ -156,6 +158,7 @@
     [self clearCheckList];
     [self.table reloadData];
     self.editStateButton.hidden = NO;
+    self.titleView.frame = CGRectMake(0, 0, 200, 40);
 }
 
 - (void)commitUpdate{

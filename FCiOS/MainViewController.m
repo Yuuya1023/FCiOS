@@ -544,7 +544,7 @@
         case 0:
             cell.nameLabel.text = [self.clearList objectAtIndex:indexPath.row];
             cell.folderDetailLabel.text = [NSString stringWithFormat:@"Count : %@",[self.clearDetailArray objectAtIndex:7 - indexPath.row]];
-            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_%d",7 - indexPath.row]];
+            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_main_%d",7 - indexPath.row]];
             break;
         case 1:
             cell.nameLabel.text = [self.levelList objectAtIndex:indexPath.row];
@@ -554,7 +554,7 @@
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"H"],
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"C"],
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"sum"]];
-            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_%@",[[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"min"]]];
+            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_main_%@",[[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"min"]]];
             break;
         case 2:
             cell.nameLabel.text = [self.versionList objectAtIndex:indexPath.row];
@@ -564,7 +564,7 @@
                                            [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"H"],
                                            [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"C"],
                                            [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"sum"]];
-            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_%@",[[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"min"]]];
+            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_main_%@",[[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"min"]]];
             break;
             
         default:
