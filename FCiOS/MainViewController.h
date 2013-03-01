@@ -29,6 +29,9 @@
     int playStyleSortType;
     int playRankSortType;
     int sortingType;
+    
+    UIView *grayView;
+    UIActivityIndicatorView *indicator;
 }
 
 @property (nonatomic, retain)UITableView *tablelView;
