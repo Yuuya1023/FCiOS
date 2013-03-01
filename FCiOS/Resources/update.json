@@ -1,48 +1,36 @@
 [
   {
-  "version":"1.0",
-  "description": "アップデート",
-  "sql":[
-         {
-         "music": "insert into musicMaster values(    21001    ,'405nm'    ,    'noname',    20,    5     ,    9     ,    11     ,    5     ,    9     ,    11     ,0,0,1,2)",
-         "user" : "INSERT INTO userData (music_id) values (21001);"
-         }
-         ]
-  },
-  {
   "version":"1.1",
-  "description": "アップデート2",
+  "description": "Café de Tranイベントの曲を追加しました。（全7曲）",
   "sql":[
          {
-         "music": "INSERT INTO musicMaster",
-         "user" : "INSERT INTO userData"
+         "music": "insert into musicMaster values(20061,'Rainbow after snow','noname',20,3,7,10,5,8,10,0,0,1,2)",
+         "user" : "INSERT INTO userData (music_id) values (20061)"
          },
          {
-         "music": "INSERT INTO musicMaster2",
-         "user" : "INSERT INTO userData2"
+         "music": "insert into musicMaster values(20062,'Beastie Starter','noname',20,3,7,11,3,7,11,0,0,1,2)",
+         "user" : "INSERT INTO userData (music_id) values (20062)"
          },
          {
-         "music": "INSERT INTO musicMaster3",
-         "user" : "INSERT INTO userData3"
+         "music": "insert into musicMaster values(20063,'アストライアの双皿','noname',20,4,9,12,5,9,12,0,0,1,2)",
+         "user" : "INSERT INTO userData (music_id) values (20063)"
+         },
+         {
+         "music": "insert into musicMaster values(20064,'†渚の小悪魔ラヴリィ～レイディオ†(IIDX EDIT)','noname',20,3,9,12,3,9,12,0,0,1,2)",
+         "user" : "INSERT INTO userData (music_id) values (20064)"
+         },
+         {
+         "music": "insert into musicMaster values(20065,'Holy Snow','noname',20,4,8,10,6,10,12,0,0,1,2)",
+         "user" : "INSERT INTO userData (music_id) values (20065)"
+         },
+         {
+         "music": "insert into musicMaster values(20066,'True Blue','noname',20,5,10,12,5,10,12,0,0,1,2)",
+         "user" : "INSERT INTO userData (music_id) values (20066)"
+         },
+         {
+         "music": "insert into musicMaster values(20067,'Confiserie','noname',20,5,10,12,5,10,12,0,0,1,2)",
+         "user" : "INSERT INTO userData (music_id) values (20067)"
          }
          ]
- },
- {
- "version":"1.2",
- "description": "アップデート3",
- "sql":[
-        {
-        "music": "INSERT INTO musicMaster",
-        "user" : "INSERT INTO userData"
-        },
-        {
-        "music": "INSERT INTO musicMaster2",
-        "user" : "INSERT INTO userData2"
-        },
-        {
-        "music": "INSERT INTO musicMaster3",
-        "user" : "INSERT INTO userData3"
-        }
-        ]
  }
 ]

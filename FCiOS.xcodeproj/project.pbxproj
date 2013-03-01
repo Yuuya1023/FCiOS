@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		182E301C16B54FFD00E2B504 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 182E301B16B54FFD00E2B504 /* libsqlite3.0.dylib */; };
+		18979FFB16E0F57B0001D2E9 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 18979FFA16E0F57B0001D2E9 /* Utilities.m */; };
 		1898338516CA773000CC53A2 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898337F16CA773000CC53A2 /* folder.png */; };
 		1898338616CA773000CC53A2 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898337F16CA773000CC53A2 /* folder.png */; };
 		1898338716CA773000CC53A2 /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898338016CA773000CC53A2 /* folder@2x.png */; };
@@ -145,6 +146,8 @@
 
 /* Begin PBXFileReference section */
 		182E301B16B54FFD00E2B504 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		18979FF916E0F57B0001D2E9 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		18979FFA16E0F57B0001D2E9 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		1898337F16CA773000CC53A2 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		1898338016CA773000CC53A2 /* folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@2x.png"; sourceTree = "<group>"; };
 		1898338116CA773000CC53A2 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
@@ -375,6 +378,8 @@
 				18A2C1FD16B4353C00CECE75 /* TableSources.m */,
 				189EB6BF16C6C3020005CA3D /* DatabaseManager.h */,
 				189EB6C016C6C3020005CA3D /* DatabaseManager.m */,
+				18979FF916E0F57B0001D2E9 /* Utilities.h */,
+				18979FFA16E0F57B0001D2E9 /* Utilities.m */,
 				18A2C1F716B42ED000CECE75 /* MainViewController.xib */,
 				18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */,
 				1898B37B16BD8EDF00275758 /* DetailViewController.xib */,
@@ -653,6 +658,7 @@
 				189EB6BD16C6B8CF0005CA3D /* HomeDetailCell.m in Sources */,
 				189EB6C116C6C3020005CA3D /* DatabaseManager.m in Sources */,
 				18A0011116D0DD380075F3F8 /* SettingViewController.m in Sources */,
+				18979FFB16E0F57B0001D2E9 /* Utilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@
     #import <Foundation/Foundation.h>
 #endif
 
+#import "Utilities.h"
 
 #define DEFAULT_FONT [UIFont fontWithName:@"GillSans" size:18]
 #define DEFAULT_FONT_TITLE [UIFont fontWithName:@"GillSans" size:20]

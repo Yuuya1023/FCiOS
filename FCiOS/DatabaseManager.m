@@ -71,42 +71,35 @@ static dispatch_queue_t serialQueue;
 }
 
 
-- (void)updateDatabase:(NSDictionary *)dictionary{
+- (BOOL)updateDatabase:(NSDictionary *)dictionary{
 //    NSLog(@"dic %@",dictionary);
-    for (NSDictionary *key_sql in dictionary) {
-        NSLog(@"music ,%@",[key_sql objectForKey:@"music"]);
-        NSLog(@"user  ,%@",[key_sql objectForKey:@"user"]);
+    BOOL isSuccess = NO;
+    if ([self.music_DB open]) {
+        [self.music_DB beginTransaction];
         
-        //更新処理
-        if ([self.music_DB open]) {
-            [self.music_DB beginTransaction];
+        for (NSDictionary *key_sql in dictionary) {
+//            NSLog(@"music ,%@",[key_sql objectForKey:@"music"]);
+//            NSLog(@"user  ,%@",[key_sql objectForKey:@"user"]);
+        
+            //更新処理
             [self.music_DB executeUpdate:[key_sql objectForKey:@"music"]];
-            if ([self.music_DB hadError]) {
-                [self.music_DB rollback];
-                NSLog(@"error_music");
-            }
-            else{
-                [self.music_DB commit];
-                NSLog(@"commit_music");
-            }
-            
-            [self.music_DB beginTransaction];
             [self.music_DB executeUpdate:[key_sql objectForKey:@"user"]];
-            if ([self.music_DB hadError]) {
-                [self.music_DB rollback];
-                NSLog(@"error_userData");
-            }
-            else{
-                [self.music_DB commit];
-                NSLog(@"commit_userData");
-            }
-            
-            [self.music_DB close];
+        }
+        if ([self.music_DB hadError]) {
+            [self.music_DB rollback];
+            NSLog(@"update error");
         }
         else{
-            NSLog(@"Could not open db.");
+            [self.music_DB commit];
+            NSLog(@"commit update");
+            isSuccess = YES;
         }
+        [self.music_DB close];
     }
+    else{
+        NSLog(@"Could not open db.");
+    }
+    return  isSuccess;
 }
 
 - (void)setDatabaseVersion:(float)version{

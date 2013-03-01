@@ -80,8 +80,8 @@
         self.navigationItem.leftBarButtonItem = self.button;
         
         //更新ボタン
-//        UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:NSSelectorFromString(@"update:")];
-//        self.navigationItem.rightBarButtonItem = updateButton;
+        UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:NSSelectorFromString(@"update:")];
+        self.navigationItem.rightBarButtonItem = updateButton;
         
         TableSources *tableSources = [[TableSources alloc] init];
         self.clearList = tableSources.clearList;
@@ -408,19 +408,45 @@
     DatabaseManager *dbManager = [DatabaseManager sharedInstance];
     
 //    NSLog(@"json %@",jsonObject);
+    
+    //リストが取れなかったとき
+    if ([jsonObject count] < 1) {
+        [Utilities showDefaultAlertWithTitle:@"" message:@"新着情報がありませんでした。"];
+        return;
+    }
+    
+    NSMutableString *updateDescription = [[NSMutableString alloc] init];
     for(NSDictionary *key in jsonObject){
 //        NSLog(@"key = %@",key);
         
         //現在のバージョンより上だったらアップデート
-        if ([[key objectForKey:@"version"] floatValue] >= [USER_DEFAULT floatForKey:DATABSEVERSION_KEY]) {
+        if ([[key objectForKey:@"version"] floatValue] > [USER_DEFAULT floatForKey:DATABSEVERSION_KEY]) {
             NSLog(@"version %@",[key objectForKey:@"version"]);
             NSLog(@"description%@",[key objectForKey:@"description"]);
+            
             //sqlのdictionaryを渡し、アップデート
-            [dbManager updateDatabase:[key objectForKey:@"sql"]];
+            if(![dbManager updateDatabase:[key objectForKey:@"sql"]]){
+                //失敗
+                NSLog(@"update returned");
+                [Utilities showDefaultAlertWithTitle:@"更新失敗" message:@"お手数ですが時間をおいて再度お試しください。"];
+                return;
+            }
+            else{
+                //成功
+                [updateDescription appendFormat:@"version:%@\n",[key objectForKey:@"version"]];
+                [updateDescription appendFormat:@"%@\n",[key objectForKey:@"description"]];
+                [USER_DEFAULT setObject:[key objectForKey:@"version"] forKey:DATABSEVERSION_KEY];
+                [USER_DEFAULT synchronize];
+            }
         }
+        else{
+            [Utilities showDefaultAlertWithTitle:@"" message:@"すでに最新バージョンです。"];
+            return;
+        }
+        NSLog(@"update verion:%@",[key objectForKey:@"version"]);
     }
-
-    
+    [Utilities showDefaultAlertWithTitle:@"更新成功" message:[NSString stringWithFormat:@"%@",updateDescription]];
+    [self reloadTable];
 }
 
 #pragma mark - UIActionSheet Delegate

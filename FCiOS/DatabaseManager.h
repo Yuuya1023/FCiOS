@@ -17,7 +17,7 @@
 @property (nonatomic ,retain) FMDatabase *music_DB;
 
 + (DatabaseManager *)sharedInstance;
-- (void)updateDatabase:(NSDictionary *)dictionary;
+- (BOOL)updateDatabase:(NSDictionary *)dictionary;
 - (void)setDatabaseVersion:(float)version;
 
 @end
