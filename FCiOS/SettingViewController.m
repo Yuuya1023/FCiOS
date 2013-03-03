@@ -47,93 +47,105 @@
         
         [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelButton];
-
+        
+        //アイコン
+        UIImageView *appStore = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon-72"]];
+        appStore.frame = CGRectMake(25, 20, 72, 72);
+        [self.view addSubview:appStore];
+        
+        //ロゴ
+        UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+        logo.frame = CGRectMake(130, 15, 100, 41);
+        [self.view addSubview:logo];
+        
         //アプリバージョン
-        appVersion = [[UILabel alloc] initWithFrame:CGRectMake(15, 28, 100, 20)];
-        appVersion.text = @"App Version";
+        appVersion = [[UILabel alloc] initWithFrame:CGRectMake(132, 53, 120, 20)];
+        appVersion.text = @"App Version :";
         appVersion.font = DEFAULT_FONT;
         [self.view addSubview:appVersion];
         
-        appVersionText = [[UILabel alloc] initWithFrame:CGRectMake(190, 20, 50, 40)];
+        appVersionText = [[UILabel alloc] initWithFrame:CGRectMake(250, 53, 50, 20)];
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-        appVersionText.text = [NSString stringWithFormat:@"%.2f",[version floatValue]];
+        appVersionText.text = [NSString stringWithFormat:@"%@",version];
         appVersionText.font = DEFAULT_FONT;
         appVersionText.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:appVersionText];
-        
+
+
         //DBバージョン
-        dataVersion = [[UILabel alloc] initWithFrame:CGRectMake(15, 78, 100, 20)];
-        dataVersion.text = @"DB Version";
+        dataVersion = [[UILabel alloc] initWithFrame:CGRectMake(132, 70, 120, 20)];
+        dataVersion.text = @"DB Version :";
         dataVersion.font = DEFAULT_FONT;
         [self.view addSubview:dataVersion];
         
-        dataVersionText = [[UILabel alloc] initWithFrame:CGRectMake(190, 70, 50, 40)];
-        dataVersionText.text = [NSString stringWithFormat:@"%.2f",[USER_DEFAULT floatForKey:DATABSEVERSION_KEY]];
+        dataVersionText = [[UILabel alloc] initWithFrame:CGRectMake(250, 70, 50, 20)];
+//        dataVersionText.text = [NSString stringWithFormat:@"%@",[USER_DEFAULT objectForKey:DATABSEVERSION_KEY]];
         dataVersionText.font = DEFAULT_FONT;
         dataVersionText.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:dataVersionText];
+
         
-        //ソーティング
-        defaultSort = [[UILabel alloc] initWithFrame:CGRectMake(15, 148, 100, 20)];
-        defaultSort.text = @"Default Sort";
-        defaultSort.font = DEFAULT_FONT;
-        
-        defaultSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 140, 190, 40)];
-        defaultSortLabel.text = @"NAME";
-        defaultSortLabel.font = DEFAULT_FONT;
-        defaultSortLabel.textAlignment = NSTextAlignmentRight;
-        defaultSortLabel.backgroundColor = [UIColor clearColor];
-        
-        defaultSortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        defaultSortButton.tag = 0;
-        defaultSortButton.frame = CGRectMake(125, 140, 190, 40);
-        [defaultSortButton addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:defaultSort];
-        [self.view addSubview:defaultSortButton];
-        [self.view addSubview:defaultSortLabel];
-        
-        //カスタム
-        custom = [[UILabel alloc] initWithFrame:CGRectMake(15, 208, 100, 20)];
-        custom.text = @"Custom Sort";
-        custom.font = DEFAULT_FONT;
-        [self.view addSubview:custom];
-        
-        //SP
-        customLabelSP = [[UILabel alloc] initWithFrame:CGRectMake(115, 200, 190, 40)];
-        customLabelSP.text = @"SP";
-        customLabelSP.font = DEFAULT_FONT;
-        customLabelSP.textAlignment = NSTextAlignmentRight;
-        customLabelSP.backgroundColor = [UIColor clearColor];
-        
-        custom_SP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        custom_SP.tag = 1;
-        custom_SP.frame = CGRectMake(125, 200, 190, 40);
-        [custom_SP addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:custom_SP];
-        [self.view addSubview:customLabelSP];
-        
-        //DP
-        customLabelDP = [[UILabel alloc] initWithFrame:CGRectMake(115, 250, 190, 40)];
-        customLabelDP.text = @"DP";
-        customLabelDP.font = DEFAULT_FONT;
-        customLabelDP.textAlignment = NSTextAlignmentRight;
-        customLabelDP.backgroundColor = [UIColor clearColor];
-        
-        custom_DP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        custom_DP.tag = 2;
-        custom_DP.frame = CGRectMake(125, 250, 190, 40);
-        [custom_DP addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:custom_DP];
-        [self.view addSubview:customLabelDP];
-        
-        
-        //テーブル
-        self.tablelView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height)];
-        self.tablelView.delegate = self;
-        self.tablelView.dataSource = self;
-        self.tablelView.alpha = 0.0;
-        self.tablelView.backgroundColor = [UIColor blackColor];
-        [self.view addSubview:self.tablelView];
+//        //ソーティング
+//        defaultSort = [[UILabel alloc] initWithFrame:CGRectMake(15, 148, 100, 20)];
+//        defaultSort.text = @"Default Sort";
+//        defaultSort.font = DEFAULT_FONT;
+//        
+//        defaultSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 140, 190, 40)];
+//        defaultSortLabel.text = @"NAME";
+//        defaultSortLabel.font = DEFAULT_FONT;
+//        defaultSortLabel.textAlignment = NSTextAlignmentRight;
+//        defaultSortLabel.backgroundColor = [UIColor clearColor];
+//        
+//        defaultSortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        defaultSortButton.tag = 0;
+//        defaultSortButton.frame = CGRectMake(125, 140, 190, 40);
+//        [defaultSortButton addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
+//        [self.view addSubview:defaultSort];
+//        [self.view addSubview:defaultSortButton];
+//        [self.view addSubview:defaultSortLabel];
+//        
+//        //カスタム
+//        custom = [[UILabel alloc] initWithFrame:CGRectMake(15, 208, 100, 20)];
+//        custom.text = @"Custom Sort";
+//        custom.font = DEFAULT_FONT;
+//        [self.view addSubview:custom];
+//        
+//        //SP
+//        customLabelSP = [[UILabel alloc] initWithFrame:CGRectMake(115, 200, 190, 40)];
+//        customLabelSP.text = @"SP";
+//        customLabelSP.font = DEFAULT_FONT;
+//        customLabelSP.textAlignment = NSTextAlignmentRight;
+//        customLabelSP.backgroundColor = [UIColor clearColor];
+//        
+//        custom_SP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        custom_SP.tag = 1;
+//        custom_SP.frame = CGRectMake(125, 200, 190, 40);
+//        [custom_SP addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
+//        [self.view addSubview:custom_SP];
+//        [self.view addSubview:customLabelSP];
+//        
+//        //DP
+//        customLabelDP = [[UILabel alloc] initWithFrame:CGRectMake(115, 250, 190, 40)];
+//        customLabelDP.text = @"DP";
+//        customLabelDP.font = DEFAULT_FONT;
+//        customLabelDP.textAlignment = NSTextAlignmentRight;
+//        customLabelDP.backgroundColor = [UIColor clearColor];
+//        
+//        custom_DP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        custom_DP.tag = 2;
+//        custom_DP.frame = CGRectMake(125, 250, 190, 40);
+//        [custom_DP addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
+//        [self.view addSubview:custom_DP];
+//        [self.view addSubview:customLabelDP];
+//        
+//        
+//        //テーブル
+//        self.tablelView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height)];
+//        self.tablelView.delegate = self;
+//        self.tablelView.dataSource = self;
+//        self.tablelView.alpha = 0.0;
+//        self.tablelView.backgroundColor = [UIColor blackColor];
+//        [self.view addSubview:self.tablelView];
     }
     return self;
 }
@@ -144,6 +156,10 @@
 	// Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+    dataVersionText.text = [NSString stringWithFormat:@"%@",[USER_DEFAULT objectForKey:DATABSEVERSION_KEY]];
+}
 
 - (void)selectSort:(UIButton *)b{
     selectedType = b.tag;

@@ -417,9 +417,29 @@
         
     }completion:^(BOOL finished){
         //アップデート開始
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"update" ofType:@"json"];
-        NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
-        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+        NSURL *url = [NSURL URLWithString:UPDATE_JSON_PATH];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURLResponse *response = nil;
+        NSError *error = nil;
+        NSData *data = [
+                        NSURLConnection
+                        sendSynchronousRequest : request
+                        returningResponse : &response
+                        error : &error
+                        ];
+        
+        // error
+        if (error != nil) {
+            [self hideAnimation];
+            [Utilities showDefaultAlertWithTitle:@"更新情報の取得に失敗しました" message:@"お手数ですが時間をおいて再度お試しください。"];
+            return;
+        }
+        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        
+        
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"update" ofType:@"json"];
+//        NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
+//        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
     
         DatabaseManager *dbManager = [DatabaseManager sharedInstance];
     

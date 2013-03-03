@@ -18,7 +18,7 @@
 #define DEFAULT_FONT [UIFont fontWithName:@"GillSans" size:18]
 #define DEFAULT_FONT_TITLE [UIFont fontWithName:@"GillSans" size:20]
 #define USER_DEFAULT [NSUserDefaults standardUserDefaults]
-
+#define UPDATE_JSON_PATH @"http://eightfor.sakura.ne.jp/FCiOS/update/update.json"
 
 //Key
 #define DATABSEVERSION_KEY @"databaseVersion"

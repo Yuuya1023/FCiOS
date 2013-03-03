@@ -38,14 +38,14 @@
     UIViewController *viewController2 = [[SortConfigViewController alloc] init];
     nvc2.viewControllers = @[viewController2];
     
-//    UINavigationController *nvc3 = [[UINavigationController alloc] init];
-//    nvc3.navigationBar.barStyle = UIBarStyleBlack;
-//    UIViewController *viewController3 = [[SettingViewController alloc] init];
-//    nvc3.viewControllers = @[viewController3];
+    UINavigationController *nvc3 = [[UINavigationController alloc] init];
+    nvc3.navigationBar.barStyle = UIBarStyleBlack;
+    UIViewController *viewController3 = [[SettingViewController alloc] init];
+    nvc3.viewControllers = @[viewController3];
 
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[nvc1,nvc2/*,nvc3*/];
+    self.tabBarController.viewControllers = @[nvc1,nvc2,nvc3];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
