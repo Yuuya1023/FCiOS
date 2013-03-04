@@ -63,8 +63,6 @@
 		189D2C1C16D9E50000BD532B /* clearLampImage_main_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0D16D9E50000BD532B /* clearLampImage_main_6.png */; };
 		189D2C1D16D9E50000BD532B /* clearLampImage_main_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0E16D9E50000BD532B /* clearLampImage_main_7.png */; };
 		189D2C1E16D9E50000BD532B /* clearLampImage_main_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0E16D9E50000BD532B /* clearLampImage_main_7.png */; };
-		189D3E0516C9044C00BC5CA4 /* update.json in Resources */ = {isa = PBXBuildFile; fileRef = 189D3E0416C9044C00BC5CA4 /* update.json */; };
-		189D3E0616C9044C00BC5CA4 /* update.json in Resources */ = {isa = PBXBuildFile; fileRef = 189D3E0416C9044C00BC5CA4 /* update.json */; };
 		189EB69D16C68DB40005CA3D /* MusicDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB69C16C68DB40005CA3D /* MusicDetailCell.m */; };
 		189EB69E16C68DB40005CA3D /* MusicDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB69C16C68DB40005CA3D /* MusicDetailCell.m */; };
 		189EB6AB16C6A7A20005CA3D /* clearLampImage_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6A316C6A7A20005CA3D /* clearLampImage_0.png */; };
@@ -180,7 +178,6 @@
 		189D2C0C16D9E50000BD532B /* clearLampImage_main_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearLampImage_main_5.png; sourceTree = "<group>"; };
 		189D2C0D16D9E50000BD532B /* clearLampImage_main_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearLampImage_main_6.png; sourceTree = "<group>"; };
 		189D2C0E16D9E50000BD532B /* clearLampImage_main_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearLampImage_main_7.png; sourceTree = "<group>"; };
-		189D3E0416C9044C00BC5CA4 /* update.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = update.json; sourceTree = "<group>"; };
 		189EB69B16C68DB40005CA3D /* MusicDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicDetailCell.h; sourceTree = "<group>"; };
 		189EB69C16C68DB40005CA3D /* MusicDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicDetailCell.m; sourceTree = "<group>"; };
 		189EB6A316C6A7A20005CA3D /* clearLampImage_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearLampImage_0.png; sourceTree = "<group>"; };
@@ -431,7 +428,6 @@
 				18C77FDA16E3ADFE006704D9 /* logo@2x.png */,
 				189B317116D19DE0003DE7DA /* icon */,
 				1898337E16CA773000CC53A2 /* barIcon */,
-				189D3E0416C9044C00BC5CA4 /* update.json */,
 				189EB6A216C6A7A20005CA3D /* clearLamp */,
 				18D06FBA16B55D6400519380 /* musicMaster.db */,
 				18A2C1DC16B3C24000CECE75 /* Default-568h@2x.png */,
@@ -546,7 +542,6 @@
 				189EB6B516C6A7A20005CA3D /* clearLampImage_5.png in Resources */,
 				189EB6B716C6A7A20005CA3D /* clearLampImage_6.png in Resources */,
 				189EB6B916C6A7A20005CA3D /* clearLampImage_7.png in Resources */,
-				189D3E0516C9044C00BC5CA4 /* update.json in Resources */,
 				1898338516CA773000CC53A2 /* folder.png in Resources */,
 				1898338716CA773000CC53A2 /* folder@2x.png in Resources */,
 				1898338916CA773000CC53A2 /* home.png in Resources */,
@@ -599,7 +594,6 @@
 				189EB6B616C6A7A20005CA3D /* clearLampImage_5.png in Resources */,
 				189EB6B816C6A7A20005CA3D /* clearLampImage_6.png in Resources */,
 				189EB6BA16C6A7A20005CA3D /* clearLampImage_7.png in Resources */,
-				189D3E0616C9044C00BC5CA4 /* update.json in Resources */,
 				1898338616CA773000CC53A2 /* folder.png in Resources */,
 				1898338816CA773000CC53A2 /* folder@2x.png in Resources */,
 				1898338A16CA773000CC53A2 /* home.png in Resources */,
@@ -793,13 +787,13 @@
 		18A2C1D716B3C1B700CECE75 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuya Nambu (Z672L5L4QF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: YUYA NAMBU";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FCiOS/FCiOS-Prefix.pch";
 				INFOPLIST_FILE = "FCiOS/FCiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2A3DA749-3E0B-4F2C-B2E2-52C41507368F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "03407806-0D36-4798-92CB-BBABE8283F93";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
