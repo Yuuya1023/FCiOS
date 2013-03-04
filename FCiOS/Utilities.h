@@ -10,6 +10,7 @@
 
 @interface Utilities : NSObject
 
-+(void)showDefaultAlertWithTitle:(NSString *)title message:(NSString *)message;
++ (void)showDefaultAlertWithTitle:(NSString *)title message:(NSString *)message;
++ (BOOL)isOS4;
 
 @end

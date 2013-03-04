@@ -55,16 +55,16 @@
         
         //ロゴ
         UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-        logo.frame = CGRectMake(130, 15, 100, 41);
+        logo.frame = CGRectMake(125, 15, 100, 41);
         [self.view addSubview:logo];
         
         //アプリバージョン
-        appVersion = [[UILabel alloc] initWithFrame:CGRectMake(132, 53, 120, 20)];
+        appVersion = [[UILabel alloc] initWithFrame:CGRectMake(127, 53, 120, 20)];
         appVersion.text = @"App Version :";
         appVersion.font = DEFAULT_FONT;
         [self.view addSubview:appVersion];
         
-        appVersionText = [[UILabel alloc] initWithFrame:CGRectMake(250, 53, 50, 20)];
+        appVersionText = [[UILabel alloc] initWithFrame:CGRectMake(245, 53, 50, 20)];
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         appVersionText.text = [NSString stringWithFormat:@"%@",version];
         appVersionText.font = DEFAULT_FONT;
@@ -73,12 +73,13 @@
 
 
         //DBバージョン
-        dataVersion = [[UILabel alloc] initWithFrame:CGRectMake(132, 70, 120, 20)];
+        dataVersion = [[UILabel alloc] initWithFrame:CGRectMake(127, 70, 120, 20)];
         dataVersion.text = @"DB Version :";
         dataVersion.font = DEFAULT_FONT;
+        dataVersion.backgroundColor = [UIColor clearColor];
         [self.view addSubview:dataVersion];
         
-        dataVersionText = [[UILabel alloc] initWithFrame:CGRectMake(250, 70, 50, 20)];
+        dataVersionText = [[UILabel alloc] initWithFrame:CGRectMake(245, 70, 50, 20)];
 //        dataVersionText.text = [NSString stringWithFormat:@"%@",[USER_DEFAULT objectForKey:DATABSEVERSION_KEY]];
         dataVersionText.font = DEFAULT_FONT;
         dataVersionText.textAlignment = NSTextAlignmentCenter;

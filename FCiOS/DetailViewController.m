@@ -118,7 +118,9 @@
                                                                    target:self
                                                                    action:@selector(commitUpdate)
                                     ];
-        okBtn.tintColor = [UIColor redColor];
+        if (![Utilities isOS4]) {
+            okBtn.tintColor = [UIColor redColor];
+        }
         toolbarItemsInEditing = [[NSArray alloc] initWithObjects:labelBtn2,canelBtn,okBtn, nil];
 
         
@@ -232,12 +234,16 @@
 - (void)allSelect:(UIBarButtonItem *)b{
     if (!allChecking) {
         self.allSelectButton.title = @"すべて解除";
-        self.allSelectButton.tintColor = [UIColor redColor];
+        if (![Utilities isOS4]) {
+            self.allSelectButton.tintColor = [UIColor redColor];
+        }
         [self allCheckList];
     }
     else{
         self.allSelectButton.title = @"すべて選択";
-        self.allSelectButton.tintColor = [UIColor darkGrayColor];
+        if (![Utilities isOS4]) {
+            self.allSelectButton.tintColor = [UIColor darkGrayColor];
+        }
         [self clearCheckList];
     }
     [self.table reloadData];
@@ -604,7 +610,9 @@
         if (actionSheet.tag == -1) {
             self.navigationItem.rightBarButtonItem = self.allSelectButton;
             self.allSelectButton.title = @"すべて選択";
-            self.allSelectButton.tintColor = [UIColor darkGrayColor];
+            if (![Utilities isOS4]) {
+                self.allSelectButton.tintColor = [UIColor darkGrayColor];
+            }
             allChecking = NO;
             editing = YES;
             someEditType = 7 - buttonIndex;

@@ -20,4 +20,10 @@
     [alert show];
 }
 
++ (BOOL)isOS4{
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9) {
+        return NO;
+    }
+    return YES;
+}
 @end
