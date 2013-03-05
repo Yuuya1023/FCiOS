@@ -10,6 +10,11 @@
 
 @interface SettingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
     
+    UILabel *infomation;
+    UIImageView *appStore;
+    UIImageView *logo;
+    UILabel *settings;
+    
     UITableView *tableView_;
     
     NSArray *tableList_;

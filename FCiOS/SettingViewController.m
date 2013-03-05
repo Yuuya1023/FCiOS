@@ -49,18 +49,18 @@
 //        [self.view addSubview:infoBg];
         
         //info
-        UILabel *infomation = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 20)];
+        infomation = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 20)];
         infomation.text = @"information";
         infomation.font = DEFAULT_FONT_ITALIC;
         [self.view addSubview:infomation];
         
         //アイコン
-        UIImageView *appStore = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon-72"]];
+        appStore = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon-72"]];
         appStore.frame = CGRectMake(25, 33, 72, 72);
         [self.view addSubview:appStore];
         
         //ロゴ
-        UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+        logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
         logo.frame = CGRectMake(125, 28, 100, 41);
         logo.backgroundColor = [UIColor clearColor];
         [self.view addSubview:logo];
@@ -93,26 +93,26 @@
         [self.view addSubview:dataVersionText];
         
         //other
-        UILabel *settings = [[UILabel alloc] initWithFrame:CGRectMake(10, 120, 100, 20)];
+        settings = [[UILabel alloc] initWithFrame:CGRectMake(10, 123, 100, 20)];
         settings.text = @"other setting";
         settings.font = DEFAULT_FONT_ITALIC;
         [self.view addSubview:settings];
 
         
         //デフォルトソート
-        defaultSort = [[UILabel alloc] initWithFrame:CGRectMake(15, 155, 100, 20)];
+        defaultSort = [[UILabel alloc] initWithFrame:CGRectMake(15, 153, 100, 20)];
         defaultSort.text = @"Default Sort";
         defaultSort.font = DEFAULT_FONT;
         
-        defaultSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 147, 190, 40)];
-        defaultSortLabel.text = @"NAME";
+        defaultSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 145, 190, 40)];
+//        defaultSortLabel.text = [self.defaultSort objectAtIndex:[USER_DEFAULT integerForKey:DEFAULT_SORT_KEY]];
         defaultSortLabel.font = DEFAULT_FONT;
         defaultSortLabel.textAlignment = NSTextAlignmentRight;
         defaultSortLabel.backgroundColor = [UIColor clearColor];
         
         defaultSortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         defaultSortButton.tag = 0;
-        defaultSortButton.frame = CGRectMake(125, 147, 190, 40);
+        defaultSortButton.frame = CGRectMake(125, 145, 190, 40);
         [defaultSortButton addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:defaultSort];
         [self.view addSubview:defaultSortButton];
@@ -185,6 +185,7 @@
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
     dataVersionText.text = [NSString stringWithFormat:@"%@",[USER_DEFAULT objectForKey:DATABSEVERSION_KEY]];
+    defaultSortLabel.text = [self.defaultSort objectAtIndex:[USER_DEFAULT integerForKey:DEFAULT_SORT_KEY]];
 }
 
 - (void)selectSort:(UIButton *)b{
@@ -248,6 +249,12 @@
     if (isSelecting) {
         self.tablelView.alpha = 1.0;
         cancelButton.alpha = 1.0;
+        
+        infomation.alpha = 0.2;
+        appStore.alpha = 0.2;
+        logo.alpha = 0.2;
+        settings.alpha = 0.5;
+        
         if (tag != 0) {
             defaultSort.alpha = 0.2;
         }
@@ -258,6 +265,11 @@
     else{
         self.tablelView.alpha = 0.0;
         cancelButton.alpha = 0.0;
+        
+        infomation.alpha = 1.0;
+        appStore.alpha = 1.0;
+        logo.alpha = 1.0;
+        settings.alpha = 1.0;
         
         defaultSort.alpha = 1.0;
         custom.alpha = 1.0;
