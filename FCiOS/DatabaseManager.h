@@ -19,5 +19,6 @@
 + (DatabaseManager *)sharedInstance;
 - (BOOL)updateDatabase:(NSDictionary *)dictionary;
 - (void)setDatabaseVersion:(float)version;
++ (BOOL)updateDatabase;
 
 @end

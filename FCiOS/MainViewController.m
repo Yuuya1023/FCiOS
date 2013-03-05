@@ -417,84 +417,10 @@
         grayView.alpha = 0.6;
         
     }completion:^(BOOL finished){
-        //アップデート開始
-        NSURL *url = [NSURL URLWithString:UPDATE_JSON_PATH];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSURLResponse *response = nil;
-        NSError *error = nil;
-        NSData *data = [
-                        NSURLConnection
-                        sendSynchronousRequest : request
-                        returningResponse : &response
-                        error : &error
-                        ];
-        
-        // error
-        if (error != nil) {
-            [self hideAnimation];
-            [Utilities showDefaultAlertWithTitle:@"更新情報の取得に失敗しました" message:@"お手数ですが時間をおいて再度お試しください。"];
-            return;
-        }
-//        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        
-        //SBJson
-        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSArray *jsonArray = [jsonString JSONValue];
-    
-        DatabaseManager *dbManager = [DatabaseManager sharedInstance];
-
-        //リストが取れなかったとき
-        if ([jsonArray count] < 1) {
-            [self hideAnimation];
-            [Utilities showDefaultAlertWithTitle:@"更新情報の取得に失敗しました" message:@"お手数ですが時間をおいて再度お試しください。"];
-            return;
-        }
-    
-        NSMutableString *updateDescription = [[NSMutableString alloc] init];
-        int updateCount = 0;
-        for(NSDictionary *key in jsonArray){
-//          NSLog(@"key = %@",key);
-        
-            //現在のバージョンより上だったらアップデート
-//            NSLog(@"now version %f",[USER_DEFAULT floatForKey:DATABSEVERSION_KEY]);
-            if ([[key objectForKey:@"version"] floatValue] > [USER_DEFAULT floatForKey:DATABSEVERSION_KEY]) {
-//              NSLog(@"version %@",[key objectForKey:@"version"]);
-//              NSLog(@"description %@",[key objectForKey:@"description"]);
-            
-                //sqlのdictionaryを渡し、アップデート
-                if(![dbManager updateDatabase:[key objectForKey:@"sql"]]){
-                    //失敗
-                    NSLog(@"update returned");
-                    [self hideAnimation];
-                    if (updateCount > 0) {
-                        [Utilities showDefaultAlertWithTitle:@"一部更新に失敗しました"
-                                                     message:[NSString stringWithFormat:@"%@version:%@以降のデータの取得に失敗しました。お手数ですが時間をおいて再度お試しください。",updateDescription,[USER_DEFAULT objectForKey:DATABSEVERSION_KEY]]];
-                        [self reloadTable];
-                    }
-                    else{
-                        [Utilities showDefaultAlertWithTitle:@"更新失敗" message:@"お手数ですが時間をおいて再度お試しください。"];
-                    }
-                    return;
-                }
-                else{
-                    //成功
-                    updateCount++;
-                    [updateDescription appendFormat:@"version:%@\n",[key objectForKey:@"version"]];
-                    [updateDescription appendFormat:@"%@\n\n",[key objectForKey:@"description"]];
-                    [USER_DEFAULT setObject:[key objectForKey:@"version"] forKey:DATABSEVERSION_KEY];
-                    [USER_DEFAULT synchronize];
-                }
-            }
-            NSLog(@"update verion:%@",[key objectForKey:@"version"]);
-        }
-        [self hideAnimation];
-        if (updateCount == 0) {
-            [Utilities showDefaultAlertWithTitle:@"" message:@"すでに最新バージョンです"];
-        }
-        else{
-            [Utilities showDefaultAlertWithTitle:@"更新成功" message:[NSString stringWithFormat:@"%@",updateDescription]];
+        if([DatabaseManager updateDatabase]){
             [self reloadTable];
         }
+        [self hideAnimation];
     }];
 }
 
