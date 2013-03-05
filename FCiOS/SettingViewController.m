@@ -43,35 +43,35 @@
         self.customSPList = tableSources.clearSortList;
         self.customDPList = tableSources.clearList;
         
-        //キャンセルボタン
-        cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        cancelButton.frame = CGRectMake(15, 320, 100, 40);
-        [cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
-        [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        cancelButton.titleLabel.font = DEFAULT_FONT;
-        cancelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-        cancelButton.alpha = 0.0;
+//        //背景
+//        UIView *infoBg = [[UIView alloc] initWithFrame:CGRectMake(15, 15, 300, 80)];
+//        infoBg.backgroundColor = [UIColor lightGrayColor];
+//        [self.view addSubview:infoBg];
         
-        [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:cancelButton];
+        //info
+        UILabel *infomation = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 20)];
+        infomation.text = @"information";
+        infomation.font = DEFAULT_FONT_ITALIC;
+        [self.view addSubview:infomation];
         
         //アイコン
         UIImageView *appStore = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon-72"]];
-        appStore.frame = CGRectMake(25, 20, 72, 72);
+        appStore.frame = CGRectMake(25, 33, 72, 72);
         [self.view addSubview:appStore];
         
         //ロゴ
         UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-        logo.frame = CGRectMake(125, 15, 100, 41);
+        logo.frame = CGRectMake(125, 28, 100, 41);
+        logo.backgroundColor = [UIColor clearColor];
         [self.view addSubview:logo];
         
         //アプリバージョン
-        appVersion = [[UILabel alloc] initWithFrame:CGRectMake(127, 53, 120, 20)];
+        appVersion = [[UILabel alloc] initWithFrame:CGRectMake(127, 66, 120, 20)];
         appVersion.text = @"App Version :";
         appVersion.font = DEFAULT_FONT;
         [self.view addSubview:appVersion];
         
-        appVersionText = [[UILabel alloc] initWithFrame:CGRectMake(245, 53, 50, 20)];
+        appVersionText = [[UILabel alloc] initWithFrame:CGRectMake(245, 66, 50, 20)];
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         appVersionText.text = [NSString stringWithFormat:@"%@",version];
         appVersionText.font = DEFAULT_FONT;
@@ -80,38 +80,44 @@
 
 
         //DBバージョン
-        dataVersion = [[UILabel alloc] initWithFrame:CGRectMake(127, 70, 120, 20)];
+        dataVersion = [[UILabel alloc] initWithFrame:CGRectMake(127, 83, 120, 20)];
         dataVersion.text = @"DB Version :";
         dataVersion.font = DEFAULT_FONT;
         dataVersion.backgroundColor = [UIColor clearColor];
         [self.view addSubview:dataVersion];
         
-        dataVersionText = [[UILabel alloc] initWithFrame:CGRectMake(245, 70, 50, 20)];
+        dataVersionText = [[UILabel alloc] initWithFrame:CGRectMake(245, 83, 50, 20)];
 //        dataVersionText.text = [NSString stringWithFormat:@"%@",[USER_DEFAULT objectForKey:DATABSEVERSION_KEY]];
         dataVersionText.font = DEFAULT_FONT;
         dataVersionText.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:dataVersionText];
+        
+        //other
+        UILabel *settings = [[UILabel alloc] initWithFrame:CGRectMake(10, 120, 100, 20)];
+        settings.text = @"other setting";
+        settings.font = DEFAULT_FONT_ITALIC;
+        [self.view addSubview:settings];
 
         
-//        //ソーティング
-//        defaultSort = [[UILabel alloc] initWithFrame:CGRectMake(15, 148, 100, 20)];
-//        defaultSort.text = @"Default Sort";
-//        defaultSort.font = DEFAULT_FONT;
-//        
-//        defaultSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 140, 190, 40)];
-//        defaultSortLabel.text = @"NAME";
-//        defaultSortLabel.font = DEFAULT_FONT;
-//        defaultSortLabel.textAlignment = NSTextAlignmentRight;
-//        defaultSortLabel.backgroundColor = [UIColor clearColor];
-//        
-//        defaultSortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        defaultSortButton.tag = 0;
-//        defaultSortButton.frame = CGRectMake(125, 140, 190, 40);
-//        [defaultSortButton addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
-//        [self.view addSubview:defaultSort];
-//        [self.view addSubview:defaultSortButton];
-//        [self.view addSubview:defaultSortLabel];
-//        
+        //デフォルトソート
+        defaultSort = [[UILabel alloc] initWithFrame:CGRectMake(15, 155, 100, 20)];
+        defaultSort.text = @"Default Sort";
+        defaultSort.font = DEFAULT_FONT;
+        
+        defaultSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 147, 190, 40)];
+        defaultSortLabel.text = @"NAME";
+        defaultSortLabel.font = DEFAULT_FONT;
+        defaultSortLabel.textAlignment = NSTextAlignmentRight;
+        defaultSortLabel.backgroundColor = [UIColor clearColor];
+        
+        defaultSortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        defaultSortButton.tag = 0;
+        defaultSortButton.frame = CGRectMake(125, 147, 190, 40);
+        [defaultSortButton addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:defaultSort];
+        [self.view addSubview:defaultSortButton];
+        [self.view addSubview:defaultSortLabel];
+//
 //        //カスタム
 //        custom = [[UILabel alloc] initWithFrame:CGRectMake(15, 208, 100, 20)];
 //        custom.text = @"Custom Sort";
@@ -146,14 +152,26 @@
 //        [self.view addSubview:custom_DP];
 //        [self.view addSubview:customLabelDP];
 //        
-//        
-//        //テーブル
-//        self.tablelView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height)];
-//        self.tablelView.delegate = self;
-//        self.tablelView.dataSource = self;
-//        self.tablelView.alpha = 0.0;
-//        self.tablelView.backgroundColor = [UIColor blackColor];
-//        [self.view addSubview:self.tablelView];
+//
+        //キャンセルボタン
+        cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        cancelButton.frame = CGRectMake(15, 320, 100, 40);
+        [cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
+        [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        cancelButton.titleLabel.font = DEFAULT_FONT;
+        cancelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+        cancelButton.alpha = 0.0;
+        
+        [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:cancelButton];
+        
+        //テーブル
+        self.tablelView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height)];
+        self.tablelView.delegate = self;
+        self.tablelView.dataSource = self;
+        self.tablelView.alpha = 0.0;
+        self.tablelView.backgroundColor = [UIColor blackColor];
+        [self.view addSubview:self.tablelView];
     }
     return self;
 }

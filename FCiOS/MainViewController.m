@@ -735,6 +735,7 @@
     //プレイランクは選択されているもので検索
     detail.playRankSortType = playRankSortType;
     detail.playStyleSortType = playStyleSortType;
+    detail.sortingType = [USER_DEFAULT integerForKey:DEFAULT_SORT_KEY];
     
     [detail setTableData];
     [detail setHidesBottomBarWhenPushed:YES];
