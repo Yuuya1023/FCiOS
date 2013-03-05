@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "SBJson.h"
 
 @interface MainViewController ()
 
@@ -434,27 +435,24 @@
             [Utilities showDefaultAlertWithTitle:@"更新情報の取得に失敗しました" message:@"お手数ですが時間をおいて再度お試しください。"];
             return;
         }
-        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
         
-        
-//        NSString *path = [[NSBundle mainBundle] pathForResource:@"update" ofType:@"json"];
-//        NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
-//        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+        //SBJson
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSArray *jsonArray = [jsonString JSONValue];
     
         DatabaseManager *dbManager = [DatabaseManager sharedInstance];
-    
-//      NSLog(@"json %@",jsonObject);
-    
+
         //リストが取れなかったとき
-        if ([jsonObject count] < 1) {
+        if ([jsonArray count] < 1) {
             [self hideAnimation];
-            [Utilities showDefaultAlertWithTitle:@"" message:@"新着情報がありませんでした"];
+            [Utilities showDefaultAlertWithTitle:@"更新情報の取得に失敗しました" message:@"お手数ですが時間をおいて再度お試しください。"];
             return;
         }
     
         NSMutableString *updateDescription = [[NSMutableString alloc] init];
         int updateCount = 0;
-        for(NSDictionary *key in jsonObject){
+        for(NSDictionary *key in jsonArray){
 //          NSLog(@"key = %@",key);
         
             //現在のバージョンより上だったらアップデート
