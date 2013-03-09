@@ -28,7 +28,7 @@
         titleLabel.textColor = [UIColor whiteColor];
         self.navigationItem.titleView = titleLabel;
         //ページコントロール
-        UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pageControlBG"]];
+        bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pageControlBG"]];
         bg.frame = CGRectMake(85, [UIScreen mainScreen].bounds.size.height - 108, 150, 30);
         [self.view addSubview:bg];
         
@@ -54,19 +54,19 @@
         
         
         //ページたち
-        CustomSettingPageView *page1 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+        page1 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
         [self.pageView addSubview:page1];
         
-        CustomSettingPageView *page2 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+        page2 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
         [self.pageView addSubview:page2];
         
-        CustomSettingPageView *page3 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * 2, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+        page3 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * 2, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
         [self.pageView addSubview:page3];
         
-        CustomSettingPageView *page4 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * 3, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+        page4 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * 3, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
         [self.pageView addSubview:page4];
         
-        CustomSettingPageView *page5 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * 4, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+        page5 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * 4, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
         [self.pageView addSubview:page5];
     }
     return self;
@@ -92,6 +92,25 @@
     pageControl.currentPage = page;
     if (page + 1 != prePageNum) {
         titleLabel.text = [NSString stringWithFormat:@"SP %d/5",page + 1];
+        switch (prePageNum) {
+            case 1:
+                [page1 hideTable];
+                break;
+            case 2:
+                [page2 hideTable];
+                break;
+            case 3:
+                [page3 hideTable];
+                break;
+            case 4:
+                [page4 hideTable];
+                break;
+            case 5:
+                [page5 hideTable];
+                break;
+            default:
+                break;
+        }
     }
     prePageNum = page + 1;
 }

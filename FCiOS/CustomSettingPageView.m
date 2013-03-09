@@ -15,7 +15,6 @@
 @synthesize levelList = levelList_;
 @synthesize versionList = versionList_;
 @synthesize sortingList = sortingList_;
-@synthesize playStyleList = playStyleList_;
 @synthesize playRankList = playRankList_;
 
 - (id)initWithFrame:(CGRect)frame
@@ -29,12 +28,11 @@
         self.versionList = tableSources.versionSortList;
         self.sortingList = tableSources.sortingSortList;
         
-        self.playStyleList = [[NSArray alloc] initWithObjects:@"SINGLE PLAY",@"DOUBLE PLAY", nil];
         self.playRankList = [[NSArray alloc] initWithObjects:@"NORMAL",@"HYPER",@"ANOTHER",@"ALL", nil];
         
         //キャンセルボタン
         cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        cancelButton.frame = CGRectMake(15, 320, 100, 40);
+        cancelButton.frame = CGRectMake(15, 340, 100, 40);
         [cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
         [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         cancelButton.titleLabel.font = DEFAULT_FONT;
@@ -43,25 +41,41 @@
         
         [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:cancelButton];
+
+        //アクティブ
+        active = [[UILabel alloc] initWithFrame:CGRectMake(15, 18, 100, 20)];
+        active.text = @"Active";
+        active.font = DEFAULT_FONT;
+        active.backgroundColor = [UIColor clearColor];
         
-        //        //ソート結果表示ボタン
-        //        resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        //        resultButton.frame = CGRectMake(105, 318, 120, 40);
-        //        [resultButton setTitle:@"RESULT" forState:UIControlStateNormal];
-        //        [resultButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        //        resultButton.titleLabel.font = DEFAULT_FONT;
-        //        resultButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-        //
-        //        [resultButton addTarget:self action:NSSelectorFromString(@"showResult:") forControlEvents:UIControlEventTouchUpInside];
-        //        [self.view addSubview:resultButton];
+        activeSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(185, 15, 70, 40)];
+        activeSwitch.on = NO;
+        [activeSwitch addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [self addSubview:active];
+        [self addSubview:activeSwitch];
+
+        //タイトル
+        title = [[UILabel alloc] initWithFrame:CGRectMake(15, 58, 100, 20)];
+        title.text = @"Title";
+        title.font = DEFAULT_FONT;
+        title.backgroundColor = [UIColor clearColor];
+        
+        titleTextField = [[UITextField alloc] initWithFrame:CGRectMake(125, 50, 190, 40)];
+        titleTextField.borderStyle = UITextBorderStyleRoundedRect;
+        titleTextField.placeholder = @"タイトルを入力してください";
+        titleTextField.font = DEFAULT_FONT_TEXTFILED;
+        titleTextField.textAlignment = NSTextAlignmentRight;
+        titleTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        [self addSubview:title];
+        [self addSubview:titleTextField];
         
         //バージョン
-        version = [[UILabel alloc] initWithFrame:CGRectMake(15, 28, 100, 20)];
+        version = [[UILabel alloc] initWithFrame:CGRectMake(15, 108, 100, 20)];
         version.text = @"Version";
         version.font = DEFAULT_FONT;
         version.backgroundColor = [UIColor clearColor];
         
-        versionSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 20, 190, 40)];
+        versionSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 100, 190, 40)];
         versionSortLabel.text = @"20 tricoro";
         versionSortLabel.font = DEFAULT_FONT;
         versionSortType = 20;
@@ -70,19 +84,19 @@
         
         versionSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         versionSelect.tag = 0;
-        versionSelect.frame = CGRectMake(125, 20, 190, 40);
+        versionSelect.frame = CGRectMake(125, 100, 190, 40);
         [versionSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:versionSelect];
         [self addSubview:versionSortLabel];
         [self addSubview:version];
         
         //難易度
-        level = [[UILabel alloc] initWithFrame:CGRectMake(15, 78, 100, 20)];
+        level = [[UILabel alloc] initWithFrame:CGRectMake(15, 158, 100, 20)];
         level.text = @"Difficulity";
         level.font = DEFAULT_FONT;
         level.backgroundColor = [UIColor clearColor];
         
-        levelSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 70, 190, 40)];
+        levelSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 150, 190, 40)];
         levelSortLabel.text = @"ALL";
         levelSortLabel.font = DEFAULT_FONT;
         levelSortType = 0;
@@ -91,19 +105,19 @@
         
         levelSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         levelSelect.tag = 1;
-        levelSelect.frame = CGRectMake(125, 70, 190, 40);
+        levelSelect.frame = CGRectMake(125, 150, 190, 40);
         [levelSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:levelSelect];
         [self addSubview:levelSortLabel];
         [self addSubview:level];
         
         //クリアランプ
-        clear = [[UILabel alloc] initWithFrame:CGRectMake(15, 128, 100, 20)];
+        clear = [[UILabel alloc] initWithFrame:CGRectMake(15, 208, 100, 20)];
         clear.text = @"Clear Lamp";
         clear.font = DEFAULT_FONT;
         clear.backgroundColor = [UIColor clearColor];
         
-        clearSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 120, 190, 40)];
+        clearSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 200, 190, 40)];
         clearSortLabel.text = @"ALL";
         clearSortLabel.font = DEFAULT_FONT;
         clearSortType = 0;
@@ -112,38 +126,19 @@
         
         clearSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         clearSelect.tag = 2;
-        clearSelect.frame = CGRectMake(125, 120, 190, 40);
+        clearSelect.frame = CGRectMake(125, 200, 190, 40);
         [clearSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:clearSelect];
         [self addSubview:clearSortLabel];
         [self addSubview:clear];
-        
-        
-        //プレイスタイル
-        playStyle = [[UILabel alloc] initWithFrame:CGRectMake(15, 178, 100, 20)];
-        playStyle.text = @"PlayStyle";
-        playStyle.font = DEFAULT_FONT;
-        
-        playStyleSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 170, 190, 40)];
-        playStyleSortLabel.text = @"SINGLE PLAY";
-        playStyleSortLabel.font = DEFAULT_FONT;
-        playStyleSortLabel.textAlignment = NSTextAlignmentRight;
-        playStyleSortLabel.backgroundColor = [UIColor clearColor];
-        
-        playStyleSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        playStyleSelect.tag = 3;
-        playStyleSelect.frame = CGRectMake(125, 170, 190, 40);
-        [playStyleSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:playStyleSelect];
-        [self addSubview:playStyleSortLabel];
-        [self addSubview:playStyle];
+
         
         //プレイランク
-        playRank = [[UILabel alloc] initWithFrame:CGRectMake(15, 228, 100, 20)];
+        playRank = [[UILabel alloc] initWithFrame:CGRectMake(15, 258, 100, 20)];
         playRank.text = @"N/H/A";
         playRank.font = DEFAULT_FONT;
         
-        playRankSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 220, 190, 40)];
+        playRankSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 250, 190, 40)];
         playRankSortLabel.text = @"ANOTHER";
         playRankSortLabel.font = DEFAULT_FONT;
         playRankSortType = 2;
@@ -152,18 +147,18 @@
         
         playRankSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         playRankSelect.tag = 4;
-        playRankSelect.frame = CGRectMake(125, 220, 190, 40);
+        playRankSelect.frame = CGRectMake(125, 250, 190, 40);
         [playRankSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:playRankSelect];
         [self addSubview:playRankSortLabel];
         [self addSubview:playRank];
         
-        //ソーティング
-        sorting = [[UILabel alloc] initWithFrame:CGRectMake(15, 278, 100, 20)];
+        //ソートタイプ
+        sorting = [[UILabel alloc] initWithFrame:CGRectMake(15, 308, 100, 20)];
         sorting.text = @"Sort Type";
         sorting.font = DEFAULT_FONT;
         
-        sortingSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 270, 190, 40)];
+        sortingSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 300, 190, 40)];
         sortingSortLabel.text = @"Difficulity (ASC)";
         sortingSortLabel.font = DEFAULT_FONT;
         sortingSortLabel.textAlignment = NSTextAlignmentRight;
@@ -171,7 +166,7 @@
         
         sortingSelect = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         sortingSelect.tag = 5;
-        sortingSelect.frame = CGRectMake(125, 270, 190, 40);
+        sortingSelect.frame = CGRectMake(125, 300, 190, 40);
         [sortingSelect addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:sortingSelect];
         [self addSubview:sortingSortLabel];
@@ -188,6 +183,10 @@
     return self;
 }
 
+- (void)switchValueChanged:(UISwitch *)s{
+    
+}
+
 - (void)selectSort:(UIButton *)b{
     selectedType = b.tag;
     switch (b.tag) {
@@ -199,9 +198,6 @@
             break;
         case 2:
             self.tableList = self.clearList;
-            break;
-        case 3:
-            self.tableList = self.playStyleList;
             break;
         case 4:
             self.tableList = self.playRankList;
@@ -226,11 +222,20 @@
     }];
 }
 
+- (void)hideTable{
+    [UIView animateWithDuration:0.5f animations:^(void) {
+        [self setAlpha:NO tag:0];
+    }completion:^(BOOL finished){
+        self.tablelView.frame = CGRectMake(self.bounds.size.width, 0, (self.bounds.size.width / 2) + 40, self.bounds.size.height);
+    }];
+}
+
 - (void)setAlpha:(BOOL)isSelecting tag:(int)tag{
     if (isSelecting) {
         self.tablelView.alpha = 1.0;
-        resultButton.alpha = 0.0;
         cancelButton.alpha = 1.0;
+        active.alpha = 0.2;
+        title.alpha = 0.2;
         if (tag != 0) {
             version.alpha = 0.2;
         }
@@ -239,9 +244,6 @@
         }
         if (tag != 2) {
             clear.alpha = 0.2;
-        }
-        if (tag != 3) {
-            playStyle.alpha = 0.2;
         }
         if (tag != 4) {
             playRank.alpha = 0.2;
@@ -252,13 +254,13 @@
     }
     else{
         self.tablelView.alpha = 0.0;
-        resultButton.alpha = 1.0;
         cancelButton.alpha = 0.0;
         
+        active.alpha = 1.0;
+        title.alpha = 1.0;
         version.alpha = 1.0;
         level.alpha = 1.0;
         clear.alpha = 1.0;
-        playStyle.alpha = 1.0;
         playRank.alpha = 1.0;
         sorting.alpha = 1.0;
     }
@@ -307,10 +309,6 @@
             case 2:
                 clearSortLabel.text = [self.clearList objectAtIndex:indexPath.row];
                 clearSortType = indexPath.row;
-                break;
-            case 3:
-                playStyleSortLabel.text = [self.playStyleList objectAtIndex:indexPath.row];
-                playStyleSortType = indexPath.row;
                 break;
             case 4:
                 playRankSortLabel.text = [self.playRankList objectAtIndex:indexPath.row];

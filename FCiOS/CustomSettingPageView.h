@@ -17,31 +17,30 @@
     NSArray *levelList_;
     NSArray *versionList_;
     NSArray *sortingList_;
-    NSArray *playStyleList_;
     NSArray *playRankList_;
     
     UILabel *versionSortLabel;
     UILabel *levelSortLabel;
     UILabel *clearSortLabel;
-    UILabel *playStyleSortLabel;
     UILabel *playRankSortLabel;
     UILabel *sortingSortLabel;
     
+    UILabel *active;
+    UILabel *title;
     UILabel *version;
     UILabel *level;
     UILabel *clear;
-    UILabel *playStyle;
     UILabel *playRank;
     UILabel *sorting;
     
+    UISwitch *activeSwitch;
+    UITextField *titleTextField;
     UIButton *versionSelect;
     UIButton *levelSelect;
     UIButton *clearSelect;
-    UIButton *playStyleSelect;
     UIButton *playRankSelect;
     UIButton *sortingSelect;
     
-    UIButton *resultButton;
     UIButton *cancelButton;
     
     int versionSortType;
@@ -61,8 +60,9 @@
 @property (nonatomic ,retain)NSArray *levelList;
 @property (nonatomic ,retain)NSArray *versionList;
 @property (nonatomic ,retain)NSArray *sortingList;
-@property (nonatomic ,retain)NSArray *playStyleList;
 @property (nonatomic ,retain)NSArray *playRankList;
+
+- (void)hideTable;
 
 @end
 

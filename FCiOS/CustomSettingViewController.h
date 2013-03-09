@@ -15,6 +15,13 @@
     UIScrollView *pageView_;
     UIPageControl *pageControl;
     int prePageNum;
+    UIImageView *bg;
+    
+    CustomSettingPageView *page1;
+    CustomSettingPageView *page2;
+    CustomSettingPageView *page3;
+    CustomSettingPageView *page4;
+    CustomSettingPageView *page5;
 }
 
 @property (nonatomic ,retain) UIScrollView *pageView;
