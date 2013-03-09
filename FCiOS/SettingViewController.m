@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "TableSources.h"
+#import "CustomSettingViewController.h"
 
 @interface SettingViewController ()
 
@@ -117,42 +118,43 @@
         [self.view addSubview:defaultSort];
         [self.view addSubview:defaultSortButton];
         [self.view addSubview:defaultSortLabel];
-//
-//        //カスタム
-//        custom = [[UILabel alloc] initWithFrame:CGRectMake(15, 208, 100, 20)];
-//        custom.text = @"Custom Sort";
-//        custom.font = DEFAULT_FONT;
-//        [self.view addSubview:custom];
-//        
-//        //SP
-//        customLabelSP = [[UILabel alloc] initWithFrame:CGRectMake(115, 200, 190, 40)];
-//        customLabelSP.text = @"SP";
-//        customLabelSP.font = DEFAULT_FONT;
-//        customLabelSP.textAlignment = NSTextAlignmentRight;
-//        customLabelSP.backgroundColor = [UIColor clearColor];
-//        
-//        custom_SP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        custom_SP.tag = 1;
-//        custom_SP.frame = CGRectMake(125, 200, 190, 40);
-//        [custom_SP addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
-//        [self.view addSubview:custom_SP];
-//        [self.view addSubview:customLabelSP];
-//        
-//        //DP
-//        customLabelDP = [[UILabel alloc] initWithFrame:CGRectMake(115, 250, 190, 40)];
-//        customLabelDP.text = @"DP";
-//        customLabelDP.font = DEFAULT_FONT;
-//        customLabelDP.textAlignment = NSTextAlignmentRight;
-//        customLabelDP.backgroundColor = [UIColor clearColor];
-//        
-//        custom_DP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        custom_DP.tag = 2;
-//        custom_DP.frame = CGRectMake(125, 250, 190, 40);
-//        [custom_DP addTarget:self action:NSSelectorFromString(@"selectSort:") forControlEvents:UIControlEventTouchUpInside];
-//        [self.view addSubview:custom_DP];
-//        [self.view addSubview:customLabelDP];
-//        
-//
+        
+
+        //カスタム
+        custom = [[UILabel alloc] initWithFrame:CGRectMake(15, 208, 100, 20)];
+        custom.text = @"Custom Sort";
+        custom.font = DEFAULT_FONT;
+        [self.view addSubview:custom];
+        
+        //SP
+        customLabelSP = [[UILabel alloc] initWithFrame:CGRectMake(115, 200, 190, 40)];
+        customLabelSP.text = @"SP";
+        customLabelSP.font = DEFAULT_FONT;
+        customLabelSP.textAlignment = NSTextAlignmentRight;
+        customLabelSP.backgroundColor = [UIColor clearColor];
+        
+        custom_SP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        custom_SP.tag = 1;
+        custom_SP.frame = CGRectMake(125, 200, 190, 40);
+        [custom_SP addTarget:self action:NSSelectorFromString(@"customSetting:") forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:custom_SP];
+        [self.view addSubview:customLabelSP];
+        
+        //DP
+        customLabelDP = [[UILabel alloc] initWithFrame:CGRectMake(115, 250, 190, 40)];
+        customLabelDP.text = @"DP";
+        customLabelDP.font = DEFAULT_FONT;
+        customLabelDP.textAlignment = NSTextAlignmentRight;
+        customLabelDP.backgroundColor = [UIColor clearColor];
+        
+        custom_DP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        custom_DP.tag = 2;
+        custom_DP.frame = CGRectMake(125, 250, 190, 40);
+        [custom_DP addTarget:self action:NSSelectorFromString(@"customSetting:") forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:custom_DP];
+        [self.view addSubview:customLabelDP];
+        
+
         //キャンセルボタン
         cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         cancelButton.frame = CGRectMake(15, 320, 100, 40);
@@ -210,6 +212,12 @@
     }];
 }
 
+- (void)customSetting:(UIButton *)b{
+    CustomSettingViewController *customPage = [[CustomSettingViewController alloc] init];
+    [customPage setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:customPage animated:YES];
+}
+
 - (void)cancel:(UIButton *)b{
     [UIView animateWithDuration:0.5f animations:^(void) {
         self.tablelView.frame = CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 40, self.view.bounds.size.height);
@@ -252,7 +260,6 @@
         
         infomation.alpha = 0.2;
         appStore.alpha = 0.2;
-        logo.alpha = 0.2;
         settings.alpha = 0.5;
         
         if (tag != 0) {
@@ -268,7 +275,6 @@
         
         infomation.alpha = 1.0;
         appStore.alpha = 1.0;
-        logo.alpha = 1.0;
         settings.alpha = 1.0;
         
         defaultSort.alpha = 1.0;
