@@ -55,18 +55,23 @@
         
         //ページたち
         page1 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+        [page1 setTextWithPage:1 style:0];
         [self.pageView addSubview:page1];
         
         page2 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+        [page2 setTextWithPage:2 style:0];
         [self.pageView addSubview:page2];
         
         page3 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * 2, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+        [page3 setTextWithPage:3 style:0];
         [self.pageView addSubview:page3];
         
         page4 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * 3, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+        [page4 setTextWithPage:4 style:0];
         [self.pageView addSubview:page4];
         
         page5 = [[CustomSettingPageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * 4, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+        [page5 setTextWithPage:5 style:0];
         [self.pageView addSubview:page5];
     }
     return self;

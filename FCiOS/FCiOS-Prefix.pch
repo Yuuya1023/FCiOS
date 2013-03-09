@@ -29,3 +29,16 @@
 #define DEFAULT_PLAYSTYLE_KEY @"defaultPlayStyle"
 #define DEFAULT_PLAYRANK_KEY @"defaultPlayRank"
 #define EDITING_MODE_KEY @"editingMode"
+
+//customKey
+#define CUSTOM_SP1 @"custom_sp1"
+#define CUSTOM_SP2 @"custom_sp2"
+#define CUSTOM_SP3 @"custom_sp3"
+#define CUSTOM_SP4 @"custom_sp4"
+#define CUSTOM_SP5 @"custom_sp5"
+
+#define CUSTOM_DP1 @"custom_dp1"
+#define CUSTOM_DP2 @"custom_dp2"
+#define CUSTOM_DP3 @"custom_dp3"
+#define CUSTOM_DP4 @"custom_dp4"
+#define CUSTOM_DP5 @"custom_dp5"

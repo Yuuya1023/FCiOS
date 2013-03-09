@@ -43,14 +43,9 @@
     
     UIButton *cancelButton;
     
-    int versionSortType;
-    int levelSortType;
-    int clearSortType;
-    int playStyleSortType;
-    int playRankSortType;
-    int sortingType;
-    
     int selectedType;
+    
+    NSString *currentCustomKey;
 }
 
 @property (nonatomic, retain)UITableView *tablelView;
@@ -62,6 +57,7 @@
 @property (nonatomic ,retain)NSArray *sortingList;
 @property (nonatomic ,retain)NSArray *playRankList;
 
+- (void)setTextWithPage:(int)page style:(int)style;
 - (void)hideTable;
 
 @end

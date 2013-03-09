@@ -78,7 +78,6 @@
         versionSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 100, 190, 40)];
         versionSortLabel.text = @"20 tricoro";
         versionSortLabel.font = DEFAULT_FONT;
-        versionSortType = 20;
         versionSortLabel.textAlignment = NSTextAlignmentRight;
         versionSortLabel.backgroundColor = [UIColor clearColor];
         
@@ -99,7 +98,6 @@
         levelSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 150, 190, 40)];
         levelSortLabel.text = @"ALL";
         levelSortLabel.font = DEFAULT_FONT;
-        levelSortType = 0;
         levelSortLabel.textAlignment = NSTextAlignmentRight;
         levelSortLabel.backgroundColor = [UIColor clearColor];
         
@@ -120,7 +118,6 @@
         clearSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 200, 190, 40)];
         clearSortLabel.text = @"ALL";
         clearSortLabel.font = DEFAULT_FONT;
-        clearSortType = 0;
         clearSortLabel.textAlignment = NSTextAlignmentRight;
         clearSortLabel.backgroundColor = [UIColor clearColor];
         
@@ -141,7 +138,6 @@
         playRankSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 250, 190, 40)];
         playRankSortLabel.text = @"ANOTHER";
         playRankSortLabel.font = DEFAULT_FONT;
-        playRankSortType = 2;
         playRankSortLabel.textAlignment = NSTextAlignmentRight;
         playRankSortLabel.backgroundColor = [UIColor clearColor];
         
@@ -185,6 +181,34 @@
 
 - (void)switchValueChanged:(UISwitch *)s{
     
+}
+
+- (void)setTextWithPage:(int)page style:(int)style{
+    
+    NSString *playStyle = @"";
+    if (style == 0) {
+        playStyle = @"sp";
+    }
+    else{
+        playStyle = @"dp";
+    }
+    NSString *key = [NSString stringWithFormat:@"custom_%@%d",playStyle,page];
+    NSDictionary *dic = [USER_DEFAULT objectForKey:key];
+    currentCustomKey = key;
+    
+    if ([[dic objectForKey:@"active"] isEqualToString:@"0"]) {
+        activeSwitch.on = NO;
+    }
+    else{
+        activeSwitch.on = YES;
+    }
+
+    titleTextField.text = [dic objectForKey:@"title"];
+    versionSortLabel.text = [self.versionList objectAtIndex:[[dic objectForKey:@"version"] intValue]];
+    levelSortLabel.text = [self.levelList objectAtIndex:[[dic objectForKey:@"difficulity"] intValue]];
+    clearSortLabel.text = [self.clearList objectAtIndex:[[dic objectForKey:@"clearLamp"] intValue]];
+    playRankSortLabel.text = [self.playRankList objectAtIndex:[[dic objectForKey:@"playRank"] intValue]];
+    sortingSortLabel.text = [self.sortingList objectAtIndex:[[dic objectForKey:@"sortType"] intValue]];
 }
 
 - (void)selectSort:(UIButton *)b{
@@ -294,33 +318,36 @@
 }
 
 -(void)tableView: (UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[USER_DEFAULT objectForKey:currentCustomKey]];
     [UIView animateWithDuration:0.5f animations:^(void) {
         self.tablelView.frame = CGRectMake(self.bounds.size.width, 0, (self.bounds.size.width / 2) + 30, self.bounds.size.height);
         [self setAlpha:NO tag:0];
         switch (selectedType) {
             case 0:
                 versionSortLabel.text = [self.versionList objectAtIndex:indexPath.row];
-                versionSortType = indexPath.row;
+                [dic setObject:[NSString stringWithFormat:@"%d",indexPath.row] forKey:@"version"];
                 break;
             case 1:
                 levelSortLabel.text = [self.levelList objectAtIndex:indexPath.row];
-                levelSortType = indexPath.row;
+                [dic setObject:[NSString stringWithFormat:@"%d",indexPath.row] forKey:@"difficulity"];
                 break;
             case 2:
                 clearSortLabel.text = [self.clearList objectAtIndex:indexPath.row];
-                clearSortType = indexPath.row;
+                [dic setObject:[NSString stringWithFormat:@"%d",indexPath.row] forKey:@"clearLamp"];
                 break;
             case 4:
                 playRankSortLabel.text = [self.playRankList objectAtIndex:indexPath.row];
-                playRankSortType = indexPath.row;
+                [dic setObject:[NSString stringWithFormat:@"%d",indexPath.row] forKey:@"playRank"];
                 break;
             case 5:
                 sortingSortLabel.text = [self.sortingList objectAtIndex:indexPath.row];
-                sortingType = indexPath.row;
+                [dic setObject:[NSString stringWithFormat:@"%d",indexPath.row] forKey:@"sortType"];
                 break;
             default:
                 break;
         }
+        [USER_DEFAULT setObject:dic forKey:currentCustomKey];
+        [USER_DEFAULT synchronize];
     }];
 }
 /*

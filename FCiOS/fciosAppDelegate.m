@@ -24,6 +24,26 @@
     [defaults setObject:@"1.0" forKey:DATABSEVERSION_KEY];
     [defaults setObject:@"0" forKey:DEFAULT_PLAYRANK_KEY];
     [defaults setObject:@"0" forKey:DEFAULT_PLAYSTYLE_KEY];
+    
+    NSDictionary *customDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                      @"0",@"active",
+                                      @"",@"title",
+                                      @"20",@"version",
+                                      @"0",@"difficulity",
+                                      @"0",@"clearLamp",
+                                      @"0",@"playRank",
+                                      @"0",@"sortType",
+                                      nil];
+    [defaults setObject:customDictionary forKey:CUSTOM_SP1];
+    [defaults setObject:customDictionary forKey:CUSTOM_SP2];
+    [defaults setObject:customDictionary forKey:CUSTOM_SP3];
+    [defaults setObject:customDictionary forKey:CUSTOM_SP4];
+    [defaults setObject:customDictionary forKey:CUSTOM_SP5];
+    [defaults setObject:customDictionary forKey:CUSTOM_DP1];
+    [defaults setObject:customDictionary forKey:CUSTOM_DP2];
+    [defaults setObject:customDictionary forKey:CUSTOM_DP3];
+    [defaults setObject:customDictionary forKey:CUSTOM_DP4];
+    [defaults setObject:customDictionary forKey:CUSTOM_DP5];
     [USER_DEFAULT registerDefaults:defaults];
     [USER_DEFAULT synchronize];
 //    NSLog(@"%f",[USER_DEFAULT floatForKey:DATABSEVERSION_KEY]);
