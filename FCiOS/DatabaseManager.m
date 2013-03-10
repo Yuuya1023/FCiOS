@@ -207,4 +207,227 @@ static dispatch_queue_t serialQueue;
     [USER_DEFAULT synchronize];
 }
 
+
+
+
+
+
+- (void)customSortSelecter:(int)style{
+    if ([self.music_DB open]) {
+        
+        NSString *key;
+        if (style == 0) {
+            key = @"custom_sp";
+        }
+        else{
+            key = @"custom_dp";
+        }
+        
+        NSString *playStyleSql = [self SQLPlayStyleString:style];
+        
+        
+        for (int i = 1; i <= 5; i++) {
+            
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[USER_DEFAULT objectForKey:[NSString stringWithFormat:@"%@%d",key,i]]];
+            if ([[dic objectForKey:@"active"] isEqualToString:@"0"]) {
+                NSLog(@"custom%d not active.",i);
+            }
+            else{
+                NSString *versionSql = [self SQLVersionString:[[dic objectForKey:@"version"] intValue]];
+                NSString *playRankSql = [self SQLPlayRankString:[[dic objectForKey:@"playRank"] intValue]];
+                NSString *clearLampSql = [self SQLClearLampString:[[dic objectForKey:@"clearLamp"] intValue]];
+                NSString *levelSql = [self SQLLevelString:[[dic objectForKey:@"difficulity"] intValue]];
+            
+                NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT count(music_id) FROM ( SELECT tblResults.* FROM("];
+                if ([playRankSql isEqualToString:@"UNION_ALL"]) {
+                    [sql appendFormat:@"SELECT music_id FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version%@ AND %@_Normal_Level%@ AND %@_Normal_Status%@",
+                     versionSql,
+                     playStyleSql,
+                     levelSql,
+                     playStyleSql,
+                     clearLampSql];
+                
+                    [sql appendFormat:@" UNION ALL "];
+                    [sql appendFormat:@"SELECT music_id FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version%@ AND %@_Hyper_Level%@ AND %@_Hyper_Status%@",
+                     versionSql,
+                     playStyleSql,
+                     levelSql,
+                     playStyleSql,
+                     clearLampSql];
+                
+                    [sql appendFormat:@" UNION ALL "];
+                    [sql appendFormat:@"SELECT music_id FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version%@ AND %@_Another_Level%@ AND %@_Another_Status%@",
+                     versionSql,
+                     playStyleSql,
+                     levelSql,
+                     playStyleSql,
+                     clearLampSql];
+                }
+                else{
+                    [sql appendFormat:@"SELECT music_id FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version%@ AND %@_%@_Level%@ AND %@_%@_Status%@",
+                     versionSql,
+                     playStyleSql,
+                     playRankSql,
+                     levelSql,
+                     playStyleSql,
+                     playRankSql,
+                     clearLampSql];
+                }
+                [sql appendFormat:@") AS tblResults)"];
+                NSLog(@"\n%@",sql);
+            
+                FMResultSet *rs_lamp = [self.music_DB executeQuery:sql];
+                while ([rs_lamp next]) {
+                    int count =  [rs_lamp intForColumn:@"count(music_id)"];
+                    NSLog(@"result%d %d",i,count);
+                
+                    [dic setObject:[NSString stringWithFormat:@"%d",count] forKey:@"count"];
+                    [USER_DEFAULT setObject:dic forKey:[NSString stringWithFormat:@"%@%d",key,i]];
+                    [USER_DEFAULT synchronize];
+                }
+            }
+        }
+        
+    }
+    else{
+        NSLog(@"Could not open db.");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+- (NSString *)SQLVersionString:(int)type{
+    NSString *sql;
+    if (type == 0) {
+        sql = @"< 21";
+    }
+    else{
+        sql = [NSString stringWithFormat:@" = %d",type];
+    }
+    return sql;
+}
+
+- (NSString *)SQLLevelString:(int)type{
+    NSString *sql;
+    if (type == 0) {
+        sql = @"< 13";
+    }
+    else{
+        sql = [NSString stringWithFormat:@" = %d",type];
+    }
+    
+    return sql;
+}
+
+- (NSString *)SQLPlayStyleString:(int)type{
+    NSString *sql;
+    if (type == 0) {
+        sql = [NSString stringWithFormat:@"SP"];
+    }
+    else{
+        sql = [NSString stringWithFormat:@"DP"];
+    }
+    return sql;
+}
+
+- (NSString *)SQLPlayRankString:(int)type{
+    NSString *sql;
+    switch (type) {
+        case 0:
+            sql = [NSString stringWithFormat:@"Normal"];
+            break;
+        case 1:
+            sql = [NSString stringWithFormat:@"Hyper"];
+            break;
+        case 2:
+            sql = [NSString stringWithFormat:@"Another"];
+            break;
+        default:
+            sql = @"UNION_ALL";
+            break;
+    }
+    return sql;
+}
+
+- (NSString *)SQLClearLampString:(int)type{
+    NSString *sql;
+    switch (type) {
+        case 1:
+            sql = @" = 7";
+            break;
+        case 2:
+            sql = @" = 6";
+            break;
+        case 3:
+            sql = @" = 5";
+            break;
+        case 4:
+            sql = @" = 4";
+            break;
+        case 5:
+            sql = @" = 3";
+            break;
+        case 6:
+            sql = @" = 2";
+            break;
+        case 7:
+            sql = @" = 1";
+            break;
+        case 8:
+            sql = @" = 0";
+            break;
+        case 9:
+            sql = @" < 7";
+            break;
+        case 10:
+            sql = @" < 6";
+            break;
+        case 11:
+            sql = @" < 5";
+            break;
+        case 12:
+            sql = @" < 4";
+            break;
+        case 13:
+            sql = @" < 3";
+            break;
+        default:
+            sql = @" < 999";
+            break;
+    }
+    return sql;
+}
+
+- (NSString *)SQLSortTypeString:(int)type{
+    NSString *sql;
+    switch (type) {
+        case 0:
+            sql = @") AS tblResults ORDER BY tblResults.level ASC,LOWER(tblResults.name) ASC";
+            break;
+        case 1:
+            sql = @") AS tblResults ORDER BY tblResults.level DESC,LOWER(tblResults.name) ASC";
+            break;
+        case 2:
+            sql = @") AS tblResults ORDER BY tblResults.status ASC,tblResults.level ASC,LOWER(tblResults.name) ASC";
+            break;
+        case 3:
+            sql = @") AS tblResults ORDER BY tblResults.status DESC,tblResults.level ASC,LOWER(tblResults.name) ASC";
+            break;
+        default:
+            break;
+    }
+    return sql;
+}
+
+
 @end

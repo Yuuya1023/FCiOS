@@ -33,6 +33,7 @@
                                       @"0",@"clearLamp",
                                       @"0",@"playRank",
                                       @"0",@"sortType",
+                                      @"0",@"count",
                                       nil];
     [defaults setObject:customDictionary forKey:CUSTOM_SP1];
     [defaults setObject:customDictionary forKey:CUSTOM_SP2];

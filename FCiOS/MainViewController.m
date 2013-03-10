@@ -401,7 +401,7 @@
 
 - (void)update:(UIBarButtonItem *)b{
     NSLog(@"reload");
-    
+        
     //ぐるぐるを出す
     grayView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     grayView.backgroundColor = [UIColor blackColor];

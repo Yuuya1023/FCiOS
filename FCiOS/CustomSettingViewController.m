@@ -7,6 +7,7 @@
 //
 
 #import "CustomSettingViewController.h"
+#import "DatabaseManager.h"
 
 @interface CustomSettingViewController ()
 
@@ -132,5 +133,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void) viewWillDisappear:(BOOL)animated {
+    NSLog(@"viewWillDisappear");
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        DatabaseManager *dbManager = [DatabaseManager sharedInstance];
+        [dbManager customSortSelecter:currentPlayStyle];
+    }
+    [super viewWillDisappear:animated];
+}
+
 
 @end
