@@ -49,7 +49,7 @@
         active.backgroundColor = [UIColor clearColor];
         
         activeSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(185, 15, 70, 40)];
-        activeSwitch.on = NO;
+//        activeSwitch.on = NO;
         [activeSwitch addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
         [self addSubview:active];
         [self addSubview:activeSwitch];
@@ -61,7 +61,9 @@
         title.backgroundColor = [UIColor clearColor];
         
         titleTextField = [[UITextField alloc] initWithFrame:CGRectMake(125, 50, 190, 40)];
+        titleTextField.delegate = self;
         titleTextField.borderStyle = UITextBorderStyleRoundedRect;
+        titleTextField.returnKeyType = UIReturnKeyDone;
         titleTextField.placeholder = @"タイトルを入力してください";
         titleTextField.font = DEFAULT_FONT_TEXTFILED;
         titleTextField.textAlignment = NSTextAlignmentRight;
@@ -76,7 +78,7 @@
         version.backgroundColor = [UIColor clearColor];
         
         versionSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 100, 190, 40)];
-        versionSortLabel.text = @"20 tricoro";
+//        versionSortLabel.text = @"20 tricoro";
         versionSortLabel.font = DEFAULT_FONT;
         versionSortLabel.textAlignment = NSTextAlignmentRight;
         versionSortLabel.backgroundColor = [UIColor clearColor];
@@ -96,7 +98,7 @@
         level.backgroundColor = [UIColor clearColor];
         
         levelSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 150, 190, 40)];
-        levelSortLabel.text = @"ALL";
+//        levelSortLabel.text = @"ALL";
         levelSortLabel.font = DEFAULT_FONT;
         levelSortLabel.textAlignment = NSTextAlignmentRight;
         levelSortLabel.backgroundColor = [UIColor clearColor];
@@ -116,7 +118,7 @@
         clear.backgroundColor = [UIColor clearColor];
         
         clearSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 200, 190, 40)];
-        clearSortLabel.text = @"ALL";
+//        clearSortLabel.text = @"ALL";
         clearSortLabel.font = DEFAULT_FONT;
         clearSortLabel.textAlignment = NSTextAlignmentRight;
         clearSortLabel.backgroundColor = [UIColor clearColor];
@@ -136,7 +138,7 @@
         playRank.font = DEFAULT_FONT;
         
         playRankSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 250, 190, 40)];
-        playRankSortLabel.text = @"ANOTHER";
+//        playRankSortLabel.text = @"ANOTHER";
         playRankSortLabel.font = DEFAULT_FONT;
         playRankSortLabel.textAlignment = NSTextAlignmentRight;
         playRankSortLabel.backgroundColor = [UIColor clearColor];
@@ -155,7 +157,7 @@
         sorting.font = DEFAULT_FONT;
         
         sortingSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 300, 190, 40)];
-        sortingSortLabel.text = @"Difficulity (ASC)";
+//        sortingSortLabel.text = @"Difficulity (ASC)";
         sortingSortLabel.font = DEFAULT_FONT;
         sortingSortLabel.textAlignment = NSTextAlignmentRight;
         sortingSortLabel.backgroundColor = [UIColor clearColor];
@@ -179,10 +181,6 @@
     return self;
 }
 
-- (void)switchValueChanged:(UISwitch *)s{
-    
-}
-
 - (void)setTextWithPage:(int)page style:(int)style{
     
     NSString *playStyle = @"";
@@ -202,7 +200,7 @@
     else{
         activeSwitch.on = YES;
     }
-
+    
     titleTextField.text = [dic objectForKey:@"title"];
     versionSortLabel.text = [self.versionList objectAtIndex:[[dic objectForKey:@"version"] intValue]];
     levelSortLabel.text = [self.levelList objectAtIndex:[[dic objectForKey:@"difficulity"] intValue]];
@@ -210,6 +208,38 @@
     playRankSortLabel.text = [self.playRankList objectAtIndex:[[dic objectForKey:@"playRank"] intValue]];
     sortingSortLabel.text = [self.sortingList objectAtIndex:[[dic objectForKey:@"sortType"] intValue]];
 }
+
+
+
+
+
+
+- (void)switchValueChanged:(UISwitch *)s{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[USER_DEFAULT objectForKey:currentCustomKey]];
+    if (s.isOn) {
+        [dic setObject:@"1" forKey:@"active"];
+    }
+    else{
+        [dic setObject:@"0" forKey:@"active"];
+    }
+    [USER_DEFAULT setObject:dic forKey:currentCustomKey];
+    [USER_DEFAULT synchronize];
+}
+
+
+-(BOOL)textFieldShouldReturn:(UITextField*)textField{
+    NSLog(@"title %@",textField.text);
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[USER_DEFAULT objectForKey:currentCustomKey]];
+    [dic setObject:textField.text forKey:@"title"];
+    [USER_DEFAULT setObject:dic forKey:currentCustomKey];
+    [USER_DEFAULT synchronize];
+    
+    [titleTextField resignFirstResponder];
+    return YES;
+}
+
+
+
 
 - (void)selectSort:(UIButton *)b{
     selectedType = b.tag;
@@ -235,6 +265,7 @@
     [self.tablelView reloadData];
     [UIView animateWithDuration:0.5f animations:^(void) {
         self.tablelView.frame = CGRectMake((self.bounds.size.width / 2) -40, 0, (self.bounds.size.width / 2) + 40, self.bounds.size.height);
+        [titleTextField resignFirstResponder];
         [self setAlpha:YES tag:b.tag];
     }];
 }
@@ -248,6 +279,7 @@
 
 - (void)hideTable{
     [UIView animateWithDuration:0.5f animations:^(void) {
+        [titleTextField resignFirstResponder];
         [self setAlpha:NO tag:0];
     }completion:^(BOOL finished){
         self.tablelView.frame = CGRectMake(self.bounds.size.width, 0, (self.bounds.size.width / 2) + 40, self.bounds.size.height);

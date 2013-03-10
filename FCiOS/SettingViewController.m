@@ -134,7 +134,7 @@
         customLabelSP.backgroundColor = [UIColor clearColor];
         
         custom_SP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        custom_SP.tag = 1;
+        custom_SP.tag = 0;
         custom_SP.frame = CGRectMake(125, 200, 190, 40);
         [custom_SP addTarget:self action:NSSelectorFromString(@"customSetting:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:custom_SP];
@@ -148,7 +148,7 @@
         customLabelDP.backgroundColor = [UIColor clearColor];
         
         custom_DP = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        custom_DP.tag = 2;
+        custom_DP.tag = 1;
         custom_DP.frame = CGRectMake(125, 250, 190, 40);
         [custom_DP addTarget:self action:NSSelectorFromString(@"customSetting:") forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:custom_DP];
@@ -214,6 +214,7 @@
 
 - (void)customSetting:(UIButton *)b{
     CustomSettingViewController *customPage = [[CustomSettingViewController alloc] init];
+    [customPage setPagesWithPlayStyle:b.tag];
     [customPage setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:customPage animated:YES];
 }

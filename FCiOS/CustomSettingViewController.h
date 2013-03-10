@@ -16,6 +16,7 @@
     UIPageControl *pageControl;
     int prePageNum;
     UIImageView *bg;
+    int currentPlayStyle;
     
     CustomSettingPageView *page1;
     CustomSettingPageView *page2;
@@ -25,5 +26,7 @@
 }
 
 @property (nonatomic ,retain) UIScrollView *pageView;
+
+- (void)setPagesWithPlayStyle:(int)style;
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomSettingPageView : UIView<UITableViewDataSource,UITableViewDelegate>{
+@interface CustomSettingPageView : UIView<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>{
     
     UITableView *tableView_;
     
