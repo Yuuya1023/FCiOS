@@ -591,6 +591,7 @@
         }
         
         [database close];
+        [dbManager customSortSelecter:style];
         [self setTableData];
     }
     else{

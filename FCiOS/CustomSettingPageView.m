@@ -228,17 +228,18 @@
 
 
 -(BOOL)textFieldShouldReturn:(UITextField*)textField{
-    NSLog(@"title %@",textField.text);
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[USER_DEFAULT objectForKey:currentCustomKey]];
-    [dic setObject:textField.text forKey:@"title"];
-    [USER_DEFAULT setObject:dic forKey:currentCustomKey];
-    [USER_DEFAULT synchronize];
-    
+    [self saveText:textField.text];
     [titleTextField resignFirstResponder];
     return YES;
 }
 
-
+- (void)saveText:(NSString *)text{
+    NSLog(@"title %@",text);
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[USER_DEFAULT objectForKey:currentCustomKey]];
+    [dic setObject:text forKey:@"title"];
+    [USER_DEFAULT setObject:dic forKey:currentCustomKey];
+    [USER_DEFAULT synchronize];
+}
 
 
 - (void)selectSort:(UIButton *)b{
@@ -279,6 +280,7 @@
 
 - (void)hideTable{
     [UIView animateWithDuration:0.5f animations:^(void) {
+        [self saveText:titleTextField.text];
         [titleTextField resignFirstResponder];
         [self setAlpha:NO tag:0];
     }completion:^(BOOL finished){

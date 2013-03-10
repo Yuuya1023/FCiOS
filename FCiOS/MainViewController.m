@@ -19,6 +19,7 @@
 @synthesize clearList = clearList_;
 @synthesize levelList = levelList_;
 @synthesize versionList = versionList_;
+@synthesize customDetailArray = customDetailArray_;
 @synthesize clearDetailArray = clearDetailArray_;
 @synthesize levelDetailArray = levelDetailArray_;
 @synthesize versionDetailArray = versionDetailArray_;
@@ -90,6 +91,7 @@
         self.levelList = tableSources.levelList;
         
         //配列初期化
+        self.customDetailArray = [[NSMutableArray alloc] init];
         self.clearDetailArray = [[NSMutableArray alloc] init];
         self.levelDetailArray = [[NSMutableArray alloc] init];
         self.versionDetailArray = [[NSMutableArray alloc] init];
@@ -112,6 +114,7 @@
 
 - (void)reloadTable{
     [self initializeArray];
+    [self setCustomDetail:playStyleSortType];
     [self dbSelector];
 }
 
@@ -134,7 +137,36 @@
         [USER_DEFAULT setBool:NO forKey:UPDATED_USERDATA_KEY];
         [USER_DEFAULT synchronize];
     }
+    else{
+        [self setCustomDetail:playStyleSortType];
+    }
+
+}
+
+- (void)setCustomDetail:(int)style{
+    [self.customDetailArray removeAllObjects];
+    NSString *key;
+    if (style == 0) {
+        key = @"custom_sp";
+    }
+    else{
+        key = @"custom_dp";
+    }
     
+    for (int i = 1; i <= 5; i++) {
+        NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[USER_DEFAULT objectForKey:[NSString stringWithFormat:@"%@%d",key,i]]];
+        if ([[dic objectForKey:@"active"] isEqualToString:@"0"]) {
+            NSLog(@"custom%d not active.",i);
+        }
+        else{
+            NSDictionary *tmpDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                    [dic objectForKey:@"title"],@"title",
+                                    [dic objectForKey:@"count"],@"count",
+                                    nil];
+            [self.customDetailArray addObject:tmpDic];
+        }
+    }
+    [self.tablelView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -499,19 +531,22 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     switch (section) {
         case 0:
+            return @"CUSTOM";
+            break;
+        case 1:
             return @"CLEAR";
         break;
-        case 1:
+        case 2:
             return @"LEVEL";
         break;
-        case 2:
+        case 3:
             return @"VERSION";
         break;
 
@@ -526,12 +561,15 @@
     // Return the number of rows in the section.
     switch (section) {
         case 0:
-            return [self.clearList count];
+            return [self.customDetailArray count];
             break;
         case 1:
-            return [self.levelList count];
+            return [self.clearList count];
             break;
         case 2:
+            return [self.levelList count];
+            break;
+        case 3:
             return [self.versionList count];
             break;
             
@@ -553,11 +591,16 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case 0:
+            cell.nameLabel.text = [[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"title"];
+            cell.folderDetailLabel.text = [NSString stringWithFormat:@"Count : %@",[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"count"]];
+            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_main_%d",0]];
+            break;
+        case 1:
             cell.nameLabel.text = [self.clearList objectAtIndex:indexPath.row];
             cell.folderDetailLabel.text = [NSString stringWithFormat:@"Count : %@",[self.clearDetailArray objectAtIndex:7 - indexPath.row]];
             cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_main_%d",7 - indexPath.row]];
             break;
-        case 1:
+        case 2:
             cell.nameLabel.text = [self.levelList objectAtIndex:indexPath.row];
             cell.folderDetailLabel.text = [NSString stringWithFormat:@"FC: %@  EX: %@  H: %@  C: %@   /%@",
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"FC"],
@@ -567,7 +610,7 @@
                                            [[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"sum"]];
             cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_main_%@",[[self.levelDetailArray objectAtIndex:indexPath.row] objectForKey:@"min"]]];
             break;
-        case 2:
+        case 3:
             cell.nameLabel.text = [self.versionList objectAtIndex:indexPath.row];
             cell.folderDetailLabel.text = [NSString stringWithFormat:@"FC: %@  EX: %@  H: %@  C: %@   /%@",
                                            [[self.versionDetailArray objectAtIndex:indexPath.row] objectForKey:@"FC"],

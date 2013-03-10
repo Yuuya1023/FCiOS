@@ -20,6 +20,7 @@
     NSArray *clearList_;
     NSArray *levelList_;
     NSArray *versionList_;
+    NSMutableArray *customDetailArray_;
     NSMutableArray *clearDetailArray_;
     NSMutableArray *levelDetailArray_;
     NSMutableArray *versionDetailArray_;
@@ -40,6 +41,7 @@
 @property (nonatomic ,retain)NSArray *clearList;
 @property (nonatomic ,retain)NSArray *levelList;
 @property (nonatomic ,retain)NSArray *versionList;
+@property (nonatomic ,retain)NSMutableArray *customDetailArray;
 @property (nonatomic ,retain)NSMutableArray *clearDetailArray;
 @property (nonatomic ,retain)NSMutableArray *levelDetailArray;
 @property (nonatomic ,retain)NSMutableArray *versionDetailArray;
