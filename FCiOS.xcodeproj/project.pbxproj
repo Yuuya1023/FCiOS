@@ -89,6 +89,7 @@
 		189F095C16EB67CE008B1A21 /* CustomSettingPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F095B16EB67CE008B1A21 /* CustomSettingPageView.m */; };
 		189F095E16EB7397008B1A21 /* pageControlBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 189F095D16EB7397008B1A21 /* pageControlBG.png */; };
 		189F095F16EB7397008B1A21 /* pageControlBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 189F095D16EB7397008B1A21 /* pageControlBG.png */; };
+		189FDA80170DA656009B26E2 /* update.json in Resources */ = {isa = PBXBuildFile; fileRef = 189FDA7F170DA656009B26E2 /* update.json */; };
 		18A0011116D0DD380075F3F8 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0011016D0DD380075F3F8 /* SettingViewController.m */; };
 		18A0011216D0DD380075F3F8 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0011016D0DD380075F3F8 /* SettingViewController.m */; };
 		18A0011616D0DE2F0075F3F8 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A0011416D0DE2F0075F3F8 /* setting.png */; };
@@ -225,6 +226,7 @@
 		189F095A16EB67CE008B1A21 /* CustomSettingPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSettingPageView.h; sourceTree = "<group>"; };
 		189F095B16EB67CE008B1A21 /* CustomSettingPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSettingPageView.m; sourceTree = "<group>"; };
 		189F095D16EB7397008B1A21 /* pageControlBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pageControlBG.png; sourceTree = "<group>"; };
+		189FDA7F170DA656009B26E2 /* update.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = update.json; sourceTree = "<group>"; };
 		18A0010F16D0DD380075F3F8 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		18A0011016D0DD380075F3F8 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		18A0011416D0DE2F0075F3F8 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 				18A2C1DC16B3C24000CECE75 /* Default-568h@2x.png */,
 				18A2C1DD16B3C24000CECE75 /* Default.png */,
 				18A2C1DE16B3C24000CECE75 /* Default@2x.png */,
+				189FDA7F170DA656009B26E2 /* update.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				18C77FDB16E3ADFF006704D9 /* logo.png in Resources */,
 				18C77FDD16E3ADFF006704D9 /* logo@2x.png in Resources */,
 				189F095E16EB7397008B1A21 /* pageControlBG.png in Resources */,
+				189FDA80170DA656009B26E2 /* update.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -911,13 +915,13 @@
 		18A2C1D716B3C1B700CECE75 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: YUYA NAMBU";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuya Nambu (Z672L5L4QF)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FCiOS/FCiOS-Prefix.pch";
 				INFOPLIST_FILE = "FCiOS/FCiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "03407806-0D36-4798-92CB-BBABE8283F93";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2A3DA749-3E0B-4F2C-B2E2-52C41507368F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

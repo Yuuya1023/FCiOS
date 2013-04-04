@@ -129,6 +129,13 @@ static dispatch_queue_t serialQueue;
 
 
 + (BOOL)updateDatabase{
+    
+#ifdef DEBUG
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"update" ofType:@"json"];
+    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+#else
     NSURL *url = [NSURL URLWithString:UPDATE_JSON_PATH];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLResponse *response = nil;
@@ -143,10 +150,14 @@ static dispatch_queue_t serialQueue;
         [Utilities showDefaultAlertWithTitle:@"更新情報の取得に失敗しました" message:@"お手数ですが時間をおいて再度お試しください。"];
         return NO;
     }
-    
     //SBJson
     NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+#endif
+    
     NSArray *jsonArray = [jsonString JSONValue];
+
+    
     
     DatabaseManager *dbManager = [DatabaseManager sharedInstance];
     

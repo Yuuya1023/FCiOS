@@ -1,0 +1,58 @@
+[
+  {
+  "version":"1.1",
+  "description": "Café de Tranイベントの曲を追加しました。（全7曲）",
+  "sql":[
+         {
+         "music_id": "20061",
+         "music": "insert into musicMaster values(?,'Rainbow after snow','noname',20,3,7,10,5,8,10,0,0,1,2)"
+         },
+         {
+         "music_id": "20062",
+         "music": "insert into musicMaster values(?,'Beastie Starter','noname',20,3,7,11,3,7,11,0,0,1,2)"
+         },
+         {
+         "music_id": "20063",
+         "music": "insert into musicMaster values(?,'アストライアの双皿','noname',20,4,9,12,5,9,12,0,0,1,2)"
+         },
+         {
+         "music_id": "20064",
+         "music": "insert into musicMaster values(?,'†渚の小悪魔ラヴリィ～レイディオ†(IIDX EDIT)','noname',20,3,9,12,3,9,12,0,0,1,2)"
+         },
+         {
+         "music_id": "20065",
+         "music": "insert into musicMaster values(?,'Holy Snow','noname',20,4,8,10,6,10,12,0,0,1,2)"
+         },
+         {
+         "music_id": "20066",
+         "music": "insert into musicMaster values(?,'True Blue','noname',20,5,10,12,5,10,12,0,0,1,2)"
+         },
+         {
+         "music_id": "20067",
+         "music": "insert into musicMaster values(?,'Confiserie','noname',20,5,10,12,5,10,12,0,0,1,2)"
+         }
+         ]
+  },
+ {
+ "version":"1.2",
+ "description": "「ぼくらの宇宙戦争」イベントの楽曲を一部追加しました。（全4曲）",
+ "sql":[
+        {
+        "music_id": "20068",
+        "music": "insert into musicMaster values(?,'BRAVE GLOW','noname',20,4,8,10,4,8,10,0,0,1,2)"
+        },
+        {
+        "music_id": "20069",
+        "music": "insert into musicMaster values(?,'VEGA','noname',20,5,9,11,5,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20070",
+        "music": "insert into musicMaster values(?,'カジノファイヤーことみちゃん','noname',20,4,8,11,4,8,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20071",
+        "music": "insert into musicMaster values(?,'Saturn','noname',20,7,10,11,6,10,11,0,0,1,2)"
+        }
+        ]
+ }
+]
