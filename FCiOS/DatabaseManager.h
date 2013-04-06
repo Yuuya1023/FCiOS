@@ -23,11 +23,11 @@
 
 - (void)customSortSelecter:(int)style;
 
-- (NSString *)SQLVersionString:(int)type;
-- (NSString *)SQLLevelString:(int)type;
-- (NSString *)SQLPlayStyleString:(int)type;
-- (NSString *)SQLPlayRankString:(int)type;
-- (NSString *)SQLClearLampString:(int)type;
-- (NSString *)SQLSortTypeString:(int)type;
++ (NSString *)SQLVersionString:(int)type;
++ (NSString *)SQLLevelString:(int)type;
++ (NSString *)SQLPlayStyleString:(int)type;
++ (NSString *)SQLPlayRankString:(int)type;
++ (NSString *)SQLClearLampString:(int)type;
++ (NSString *)SQLSortTypeString:(int)type;
 
 @end

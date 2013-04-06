@@ -162,6 +162,12 @@
             NSDictionary *tmpDic = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     [dic objectForKey:@"title"],@"title",
                                     [dic objectForKey:@"count"],@"count",
+                                    [dic objectForKey:@"version"],@"version",
+                                    [dic objectForKey:@"difficulity"],@"difficulity",
+                                    [dic objectForKey:@"clearLamp"],@"clearLamp",
+                                    [dic objectForKey:@"playRank"],@"playRank",
+                                    [dic objectForKey:@"sortType"],@"sortType",
+                                    [dic objectForKey:@"min"],@"min",
                                     nil];
             [self.customDetailArray addObject:tmpDic];
         }
@@ -539,7 +545,7 @@
     switch (section) {
         case 0:
             return @"CUSTOM";
-            break;
+        break;
         case 1:
             return @"CLEAR";
         break;
@@ -593,7 +599,7 @@
         case 0:
             cell.nameLabel.text = [[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"title"];
             cell.folderDetailLabel.text = [NSString stringWithFormat:@"Count : %@",[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"count"]];
-            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_main_%d",0]];
+            cell.clearLamp.image = [UIImage imageNamed:[NSString stringWithFormat:@"clearLampImage_main_%@",[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"min"]]];
             break;
         case 1:
             cell.nameLabel.text = [self.clearList objectAtIndex:indexPath.row];
@@ -673,22 +679,37 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DetailViewController *detail = [[DetailViewController alloc] init];
+    
+    detail.playRankSortType = playRankSortType;
+    detail.playStyleSortType = playStyleSortType;
+    detail.sortingType = [USER_DEFAULT integerForKey:DEFAULT_SORT_KEY];
+    
     switch (indexPath.section) {
         case 0:
+            detail.playRankSortType = [[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"playRank"] intValue];
+            detail.sortingType = [[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"sortType"] intValue];
+
+            detail.clearSortType = [[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"clearLamp"] intValue];
+            
+            detail.levelSortType = [[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"difficulity"] intValue];
+            detail.versionSortType = [[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"version"] intValue];
+            break;
+            
+        case 1:
             detail.clearSortType = indexPath.row + 1;
             
             detail.levelSortType = 0;
             detail.versionSortType = 0;
             break;
             
-        case 1:
+        case 2:
             detail.levelSortType = indexPath.row + 1;
             
             detail.clearSortType = 0;
             detail.versionSortType = 0;
             break;
             
-        case 2:
+        case 3:
             detail.versionSortType = indexPath.row + 1;
             
             detail.clearSortType = 0;
@@ -700,9 +721,7 @@
     }
     
     //プレイランクは選択されているもので検索
-    detail.playRankSortType = playRankSortType;
-    detail.playStyleSortType = playStyleSortType;
-    detail.sortingType = [USER_DEFAULT integerForKey:DEFAULT_SORT_KEY];
+    
     
     [detail setTableData];
     [detail setHidesBottomBarWhenPushed:YES];
