@@ -537,11 +537,20 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 4;
+    if ([self.customDetailArray count] == 0) {
+        return 3;
+    }
+    else{
+        return 4;
+    }
 }
 
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if ([self.customDetailArray count] == 0) {
+        section += 1;
+    }
+
     switch (section) {
         case 0:
             return @"CUSTOM";
@@ -564,6 +573,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if ([self.customDetailArray count] == 0) {
+        section += 1;
+    }
     // Return the number of rows in the section.
     switch (section) {
         case 0:
@@ -594,8 +606,13 @@
     }
     
     // Configure the cell...
+    int section = indexPath.section;
+    if ([self.customDetailArray count] == 0) {
+        section += 1;
+    }
+    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    switch (indexPath.section) {
+    switch (section) {
         case 0:
             cell.nameLabel.text = [[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"title"];
             cell.folderDetailLabel.text = [NSString stringWithFormat:@"Count : %@",[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"count"]];
@@ -684,7 +701,11 @@
     detail.playStyleSortType = playStyleSortType;
     detail.sortingType = [USER_DEFAULT integerForKey:DEFAULT_SORT_KEY];
     
-    switch (indexPath.section) {
+    int section = indexPath.section;
+    if ([self.customDetailArray count] == 0) {
+        section += 1;
+    }
+    switch (section) {
         case 0:
             detail.playRankSortType = [[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"playRank"] intValue];
             detail.sortingType = [[[self.customDetailArray objectAtIndex:indexPath.row] objectForKey:@"sortType"] intValue];

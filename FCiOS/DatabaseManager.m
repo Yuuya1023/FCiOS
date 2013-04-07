@@ -254,7 +254,8 @@ static dispatch_queue_t serialQueue;
             
                 NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT status,count(music_id) FROM ( SELECT tblResults.* FROM("];
                 if ([playRankSql isEqualToString:@"UNION_ALL"]) {
-                    [sql appendFormat:@"SELECT music_id,%@_Normal_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version%@ AND %@_Normal_Level%@ AND %@_Normal_Status%@",
+                    [sql appendFormat:@"SELECT music_id,%@_Normal_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND %@_Normal_Level != 0 AND version%@ AND %@_Normal_Level%@ AND %@_Normal_Status%@",
+                     playStyleSql,
                      playStyleSql,
                      versionSql,
                      playStyleSql,
@@ -263,7 +264,8 @@ static dispatch_queue_t serialQueue;
                      clearLampSql];
                 
                     [sql appendFormat:@" UNION ALL "];
-                    [sql appendFormat:@"SELECT music_id,%@_Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version%@ AND %@_Hyper_Level%@ AND %@_Hyper_Status%@",
+                    [sql appendFormat:@"SELECT music_id,%@_Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND %@_Hyper_Level != 0 AND version%@ AND %@_Hyper_Level%@ AND %@_Hyper_Status%@",
+                     playStyleSql,
                      playStyleSql,
                      versionSql,
                      playStyleSql,
@@ -272,7 +274,8 @@ static dispatch_queue_t serialQueue;
                      clearLampSql];
                 
                     [sql appendFormat:@" UNION ALL "];
-                    [sql appendFormat:@"SELECT music_id,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version%@ AND %@_Another_Level%@ AND %@_Another_Status%@",
+                    [sql appendFormat:@"SELECT music_id,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND %@_Another_Level != 0 AND version%@ AND %@_Another_Level%@ AND %@_Another_Status%@",
+                     playStyleSql,
                      playStyleSql,
                      versionSql,
                      playStyleSql,
@@ -281,7 +284,9 @@ static dispatch_queue_t serialQueue;
                      clearLampSql];
                 }
                 else{
-                    [sql appendFormat:@"SELECT music_id,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version%@ AND %@_%@_Level%@ AND %@_%@_Status%@",
+                    [sql appendFormat:@"SELECT music_id,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND %@_%@_Level != 0 AND version%@ AND %@_%@_Level%@ AND %@_%@_Status%@",
+                     playStyleSql,
+                     playRankSql,
                      playStyleSql,
                      playRankSql,
                      versionSql,
@@ -307,6 +312,9 @@ static dispatch_queue_t serialQueue;
                 }
                 NSLog(@"result%d %d",min,resultSum);
                 [dic setObject:[NSString stringWithFormat:@"%d",resultSum] forKey:@"count"];
+                if (min == -1) {
+                    min = 0;
+                }
                 [dic setObject:[NSString stringWithFormat:@"%d",min] forKey:@"min"];
                 [USER_DEFAULT setObject:dic forKey:[NSString stringWithFormat:@"%@%d",key,i]];
                 [USER_DEFAULT synchronize];
