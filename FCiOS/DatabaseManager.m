@@ -410,6 +410,27 @@ static dispatch_queue_t serialQueue;
 
 
 
+- (void)addColumnUsersMemo{
+    if ([self.music_DB open]) {
+        
+        NSString *searchSql = @"select memo from userData";
+        FMResultSet *rs = [self.music_DB executeQuery:searchSql];
+        while ([rs next]) {
+            NSLog(@"memo isExist");
+            return;
+        }
+
+        NSLog(@"update");
+        NSString *addSql = @"ALTER TABLE userData ADD COLUMN memo TEXT";
+        //更新処理
+        [self.music_DB executeUpdate:addSql];
+    }
+    else{
+        NSLog(@"Could not open db.");
+    }
+}
+
+
 
 
 

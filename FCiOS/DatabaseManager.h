@@ -23,6 +23,8 @@
 
 - (void)customSortSelecter:(int)style;
 
+- (void)addColumnUsersMemo;
+
 + (NSString *)SQLVersionString:(int)type;
 + (NSString *)SQLLevelString:(int)type;
 + (NSString *)SQLPlayStyleString:(int)type;

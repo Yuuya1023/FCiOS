@@ -11,6 +11,8 @@
 #import "SortConfigViewController.h"
 #import "SettingViewController.h"
 
+#import "DatabaseManager.h"
+
 @implementation fciosAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -18,6 +20,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+    //ユーザーデータにメモカラム追加
+    [[DatabaseManager sharedInstance] addColumnUsersMemo];
     
     //ユーザーデフォルトに初期値を設定
     NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
