@@ -24,6 +24,10 @@
 - (void)customSortSelecter:(int)style;
 
 - (void)addColumnUsersMemo;
+- (NSString *)getMemoWithMusicId:(NSString *)musicId;
+- (BOOL)updateMemoWithMusicId:(int)musicId text:(NSString *)text;
+
++ (NSString *)sqlSanitizing:(NSString *)sql;
 
 + (NSString *)SQLVersionString:(int)type;
 + (NSString *)SQLLevelString:(int)type;

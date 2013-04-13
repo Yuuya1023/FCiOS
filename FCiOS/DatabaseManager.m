@@ -430,9 +430,96 @@ static dispatch_queue_t serialQueue;
     }
 }
 
+- (NSString *)getMemoWithMusicId:(NSString *)musicId{
+    NSString *memo = @"";
+    if ([self.music_DB open]) {
+        
+        NSString *sql = [NSString stringWithFormat:@"SELECT memo FROM userData WHERE music_id = %@",musicId];
+        FMResultSet *rs = [self.music_DB executeQuery:sql];
+        while ([rs next]) {
+            memo = [rs stringForColumn:@"memo"];
+            NSLog(@"memomo %@",memo);
+        }
+    }
+    
+    return memo;
+}
 
 
+- (BOOL)updateMemoWithMusicId:(int)musicId text:(NSString *)text{
+    NSLog(@"updateMemoWithMusicId %d, text %@",musicId,text);
+    BOOL isSuccess = NO;
+    if ([self.music_DB open]) {
+        [self.music_DB beginTransaction];
+        NSString *sql = [NSString stringWithFormat:@"UPDATE userData SET memo = '%@' WHERE music_id = %d",
+                         [DatabaseManager sqlSanitizing:text],
+                         musicId];
+        [self.music_DB executeUpdate:sql];
+        
+        
+        if ([self.music_DB hadError]) {
+            [self.music_DB rollback];
+            NSLog(@"update error");
+        }
+        else{
+            [self.music_DB commit];
+            NSLog(@"commit update");
+            isSuccess = YES;
+        }
+        [self.music_DB close];
+    }
 
+
+    return isSuccess;
+}
+
+
++ (NSString *)sqlSanitizing:(NSString *)sql{
+//    NSString *sqlTmp = sql;
+    NSLog(@"before %@",sql);
+    NSString *tmp = [sql stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    NSString *tmp2 = [tmp stringByReplacingOccurrencesOfString:@"'" withString:@""];
+    NSString *tmp3 = [tmp2 stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    NSString *tmp4 = [tmp3 stringByReplacingOccurrencesOfString:@"," withString:@""];
+    NSString *tmp5 = [tmp4 stringByReplacingOccurrencesOfString:@"&" withString:@""];
+    NSString *tmp6 = [tmp5 stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    NSString *tmp7 = [tmp6 stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    NSString *tmp8 = [tmp7 stringByReplacingOccurrencesOfString:@":" withString:@""];
+    NSString *tmp9 = [tmp8 stringByReplacingOccurrencesOfString:@";" withString:@""];
+    NSString *tmp10 = [tmp9 stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    NSString *tmp11 = [tmp10 stringByReplacingOccurrencesOfString:@">" withString:@""];
+    NSString *tmp12 = [tmp11 stringByReplacingOccurrencesOfString:@"=" withString:@""];
+    NSString *tmp13 = [tmp12 stringByReplacingOccurrencesOfString:@"*" withString:@""];
+    NSString *tmp14 = [tmp13 stringByReplacingOccurrencesOfString:@"_" withString:@""];
+    NSString *tmp15 = [tmp14 stringByReplacingOccurrencesOfString:@"?" withString:@""];
+    NSString *tmp16 = [tmp15 stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    NSString *tmp17 = [tmp16 stringByReplacingOccurrencesOfString:@")" withString:@""];
+    NSString *tmp18 = [tmp17 stringByReplacingOccurrencesOfString:@"!" withString:@""];
+    NSString *tmp19 = [tmp18 stringByReplacingOccurrencesOfString:@")" withString:@""];
+    NSString *tmp20 = [tmp19 stringByReplacingOccurrencesOfString:@"|" withString:@""];
+    NSString *tmp21 = [tmp20 stringByReplacingOccurrencesOfString:@"¥" withString:@""];
+    NSString *tmp22 = [tmp21 stringByReplacingOccurrencesOfString:@"@" withString:@""];
+    NSString *tmp23 = [tmp22 stringByReplacingOccurrencesOfString:@"." withString:@""];
+    NSString *tmp24 = [tmp23 stringByReplacingOccurrencesOfString:@"[" withString:@""];
+    NSString *tmp25 = [tmp24 stringByReplacingOccurrencesOfString:@"]" withString:@""];
+    NSString *tmp26 = [tmp25 stringByReplacingOccurrencesOfString:@"{" withString:@""];
+    NSString *tmp27 = [tmp26 stringByReplacingOccurrencesOfString:@"}" withString:@""];
+    NSString *tmp28 = [tmp27 stringByReplacingOccurrencesOfString:@"#" withString:@""];
+    NSString *tmp29 = [tmp28 stringByReplacingOccurrencesOfString:@"%" withString:@""];
+    NSString *tmp30 = [tmp29 stringByReplacingOccurrencesOfString:@"^" withString:@""];
+    NSString *tmp31 = [tmp30 stringByReplacingOccurrencesOfString:@"•" withString:@""];
+    NSString *tmp32 = [tmp31 stringByReplacingOccurrencesOfString:@"£" withString:@""];
+    NSString *tmp33 = [tmp32 stringByReplacingOccurrencesOfString:@"€" withString:@""];
+    NSString *tmp34 = [tmp33 stringByReplacingOccurrencesOfString:@"$" withString:@""];
+    NSString *tmp35 = [tmp34 stringByReplacingOccurrencesOfString:@"~" withString:@""];
+    NSString *tmp36 = [tmp35 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    
+    //¥@.
+    //[]{}#%^•£€$~
+    
+    NSLog(@"after %@",tmp36);
+    return tmp36;
+}
 
 
 

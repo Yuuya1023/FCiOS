@@ -15,7 +15,7 @@
 #import "DatabaseManager.h"
 #import "MusicDetailCell.h"
 
-@interface DetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>{
+@interface DetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UITextFieldDelegate,UITextViewDelegate>{
     UITableView *table_;
     
     int versionSortType_;
@@ -55,6 +55,11 @@
     UIToolbar *toolBar;
     
     NSMutableArray *checkList_;
+    
+    UIView *grayViewForMemo;
+    UILabel *memoTitle;
+    UIButton *memoUpdateButton;
+    UITextView *memoTextView;
 }
 
 @property (nonatomic ,retain) UITableView *table;

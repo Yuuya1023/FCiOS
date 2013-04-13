@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface DetailViewController ()
@@ -122,6 +123,46 @@
             okBtn.tintColor = [UIColor redColor];
         }
         toolbarItemsInEditing = [[NSArray alloc] initWithObjects:labelBtn2,canelBtn,okBtn, nil];
+        
+        
+        //メモ用
+        {
+            //背景
+            grayViewForMemo = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+            grayViewForMemo.backgroundColor = [UIColor blackColor];
+            grayViewForMemo.alpha = 0.0;
+            
+            //曲名
+            memoTitle = [[UILabel alloc] init];
+            memoTitle.frame = CGRectMake(10, 60, 220, 40);
+            memoTitle.alpha = 0.0;
+            memoTitle.backgroundColor = [UIColor clearColor];
+            memoTitle.font = DEFAULT_FONT_TITLE;
+            memoTitle.textColor = [UIColor whiteColor];
+            memoTitle.adjustsFontSizeToFitWidth = YES;
+            
+            
+            //更新ボタン
+            memoUpdateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            memoUpdateButton.frame = CGRectMake(250, 65, 60, 30);
+            memoUpdateButton.titleLabel.font = DEFAULT_FONT;
+            [memoUpdateButton setTitle:@"OK" forState:UIControlStateNormal];
+            [memoUpdateButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+            
+//            [[memoUpdateButton layer] setCornerRadius:8.0f];
+//            [[memoUpdateButton layer] setMasksToBounds:YES];
+            [[memoUpdateButton layer] setBorderWidth:1.0f];
+            [[memoUpdateButton layer] setBorderColor:[UIColor whiteColor].CGColor];
+            
+            
+            [memoUpdateButton addTarget:self action:NSSelectorFromString(@"memoEditFinished:") forControlEvents:UIControlEventTouchUpInside];
+            
+            //メモ
+            memoTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 105, 300, 115)];
+            memoTextView.delegate = self;
+            memoTextView.font = DEFAULT_FONT;
+            memoTextView.alpha = 0.0;
+        }
 
         
         //エディットタイプ配列
@@ -151,8 +192,13 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
 
+
+/////////////////////////////////
+// 編集モードから抜ける
+/////////////////////////////////
 - (void)cancel{
     editing = NO;
     self.navigationItem.rightBarButtonItem = self.button;
@@ -163,6 +209,12 @@
     self.titleView.frame = CGRectMake(0, 0, 200, 40);
 }
 
+
+
+
+/////////////////////////////////
+// データアップデート
+/////////////////////////////////
 - (void)commitUpdate{
     NSLog(@"update");
     
@@ -599,6 +651,63 @@
     }
 }
 
+
+
+/////////////////////////////////
+// メモ編集モード
+/////////////////////////////////
+- (void)memoEditModeWithMusicId:(NSString *)musicId title:(NSString *)title{
+    
+    [self.navigationController.view addSubview:grayViewForMemo];
+    [self.navigationController.view addSubview:memoTitle];
+    [self.navigationController.view addSubview:memoUpdateButton];
+    [self.navigationController.view addSubview:memoTextView];
+
+    memoTitle.text = title;
+    memoUpdateButton.tag = [musicId intValue];
+    
+    NSString *memo = [[DatabaseManager sharedInstance] getMemoWithMusicId:musicId];
+//    NSLog(@"memo %@",memo);
+    
+    [UIView animateWithDuration:0.3f animations:^(void) {
+        memoTextView.text = memo;
+        
+        grayViewForMemo.alpha = 0.8;
+        memoTitle.alpha = 1.0;
+        memoTextView.alpha = 0.8;
+        [memoTextView becomeFirstResponder];
+        
+    }completion:^(BOOL finished){
+        
+    }];
+}
+
+
+
+/////////////////////////////////
+// メモ保存
+/////////////////////////////////
+- (void)memoEditFinished:(UIButton *)b{
+    NSLog(@"memoEditFinished %@",memoTextView.text);
+    
+    [[DatabaseManager sharedInstance] updateMemoWithMusicId:b.tag text:memoTextView.text];
+    
+    [UIView animateWithDuration:0.3f animations:^(void) {
+        grayViewForMemo.alpha = 0.0;
+        memoTitle.alpha = 0.0;
+        memoTextView.alpha = 0.0;
+        [memoTextView resignFirstResponder];
+        
+    }completion:^(BOOL finished){
+        [grayViewForMemo removeFromSuperview];
+        [memoTitle removeFromSuperview];
+        [memoUpdateButton removeFromSuperview];
+        [memoTextView removeFromSuperview];
+        
+    }];
+}
+
+
 #pragma mark - UIActionSheet Delegate
 
 -(void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -724,6 +833,8 @@
     }
     else{
         if (![USER_DEFAULT boolForKey:EDITING_MODE_KEY]) {
+            [self memoEditModeWithMusicId:[[self.tableData objectAtIndex:indexPath.row] objectForKey:@"music_id"]
+                                    title:[[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"]];
             return;
         }
         NSString *name = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];

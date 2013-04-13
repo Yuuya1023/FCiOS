@@ -95,6 +95,86 @@
 		18A0011916D0DE2F0075F3F8 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A0011516D0DE2F0075F3F8 /* setting@2x.png */; };
 		18A162DD17198A1200110E9C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A162DC17198A1200110E9C /* DetailViewController.m */; };
 		18A162DE17198A1200110E9C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A162DC17198A1200110E9C /* DetailViewController.m */; };
+		18A162E11719942100110E9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C19E16B3C1B700CECE75 /* main.m */; };
+		18A162E21719942100110E9C /* fciosAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C1A216B3C1B700CECE75 /* fciosAppDelegate.m */; };
+		18A162E31719942100110E9C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C1F616B42ED000CECE75 /* MainViewController.m */; };
+		18A162E41719942100110E9C /* TableSources.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C1FD16B4353C00CECE75 /* TableSources.m */; };
+		18A162E51719942100110E9C /* SortConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C20F16B43D6D00CECE75 /* SortConfigViewController.m */; };
+		18A162E61719942100110E9C /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D06FBF16B55EE200519380 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18A162E71719942100110E9C /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D06FC116B55EE200519380 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18A162E81719942100110E9C /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D06FC316B55EE200519380 /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18A162E91719942100110E9C /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D06FC516B55EE200519380 /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18A162EA1719942100110E9C /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D06FC716B55EE200519380 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18A162EB1719942100110E9C /* MusicDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB69C16C68DB40005CA3D /* MusicDetailCell.m */; };
+		18A162EC1719942100110E9C /* HomeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6BC16C6B8CF0005CA3D /* HomeDetailCell.m */; };
+		18A162ED1719942100110E9C /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 189EB6C016C6C3020005CA3D /* DatabaseManager.m */; };
+		18A162EE1719942100110E9C /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0011016D0DD380075F3F8 /* SettingViewController.m */; };
+		18A162EF1719942100110E9C /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 18979FFA16E0F57B0001D2E9 /* Utilities.m */; };
+		18A162F01719942100110E9C /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB7FF16E64234007254C7 /* NSObject+SBJson.m */; };
+		18A162F11719942100110E9C /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB80216E64234007254C7 /* SBJsonParser.m */; };
+		18A162F21719942100110E9C /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB80416E64234007254C7 /* SBJsonStreamParser.m */; };
+		18A162F31719942100110E9C /* SBJsonStreamParserAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB80616E64234007254C7 /* SBJsonStreamParserAccumulator.m */; };
+		18A162F41719942100110E9C /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB80816E64234007254C7 /* SBJsonStreamParserAdapter.m */; };
+		18A162F51719942100110E9C /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB80A16E64234007254C7 /* SBJsonStreamParserState.m */; };
+		18A162F61719942100110E9C /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB80C16E64234007254C7 /* SBJsonStreamWriter.m */; };
+		18A162F71719942100110E9C /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB80E16E64234007254C7 /* SBJsonStreamWriterAccumulator.m */; };
+		18A162F81719942100110E9C /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB81016E64234007254C7 /* SBJsonStreamWriterState.m */; };
+		18A162F91719942100110E9C /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB81216E64234007254C7 /* SBJsonTokeniser.m */; };
+		18A162FA1719942100110E9C /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB81416E64234007254C7 /* SBJsonUTF8Stream.m */; };
+		18A162FB1719942100110E9C /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCB81616E64234007254C7 /* SBJsonWriter.m */; };
+		18A162FC1719942100110E9C /* CustomSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F095816EB5D35008B1A21 /* CustomSettingViewController.m */; };
+		18A162FD1719942100110E9C /* CustomSettingPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F095B16EB67CE008B1A21 /* CustomSettingPageView.m */; };
+		18A162FE1719942100110E9C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A162DC17198A1200110E9C /* DetailViewController.m */; };
+		18A163001719942100110E9C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 182E301B16B54FFD00E2B504 /* libsqlite3.0.dylib */; };
+		18A163011719942100110E9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19216B3C1B700CECE75 /* UIKit.framework */; };
+		18A163021719942100110E9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19416B3C1B700CECE75 /* Foundation.framework */; };
+		18A163031719942100110E9C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19616B3C1B700CECE75 /* CoreGraphics.framework */; };
+		18A163051719942100110E9C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C19B16B3C1B700CECE75 /* InfoPlist.strings */; };
+		18A163061719942100110E9C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1DC16B3C24000CECE75 /* Default-568h@2x.png */; };
+		18A163071719942100110E9C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1DD16B3C24000CECE75 /* Default.png */; };
+		18A163081719942100110E9C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1DE16B3C24000CECE75 /* Default@2x.png */; };
+		18A163091719942100110E9C /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C1F716B42ED000CECE75 /* MainViewController.xib */; };
+		18A1630A1719942100110E9C /* SortConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2C21016B43D6D00CECE75 /* SortConfigViewController.xib */; };
+		18A1630B1719942100110E9C /* musicMaster.db in Resources */ = {isa = PBXBuildFile; fileRef = 18D06FBA16B55D6400519380 /* musicMaster.db */; };
+		18A1630C1719942100110E9C /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1898B37B16BD8EDF00275758 /* DetailViewController.xib */; };
+		18A1630D1719942100110E9C /* clearLampImage_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6A316C6A7A20005CA3D /* clearLampImage_0.png */; };
+		18A1630E1719942100110E9C /* clearLampImage_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6A416C6A7A20005CA3D /* clearLampImage_1.png */; };
+		18A1630F1719942100110E9C /* clearLampImage_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6A516C6A7A20005CA3D /* clearLampImage_2.png */; };
+		18A163101719942100110E9C /* clearLampImage_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6A616C6A7A20005CA3D /* clearLampImage_3.png */; };
+		18A163111719942100110E9C /* clearLampImage_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6A716C6A7A20005CA3D /* clearLampImage_4.png */; };
+		18A163121719942100110E9C /* clearLampImage_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6A816C6A7A20005CA3D /* clearLampImage_5.png */; };
+		18A163131719942100110E9C /* clearLampImage_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6A916C6A7A20005CA3D /* clearLampImage_6.png */; };
+		18A163141719942100110E9C /* clearLampImage_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 189EB6AA16C6A7A20005CA3D /* clearLampImage_7.png */; };
+		18A163151719942100110E9C /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898337F16CA773000CC53A2 /* folder.png */; };
+		18A163161719942100110E9C /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898338016CA773000CC53A2 /* folder@2x.png */; };
+		18A163171719942100110E9C /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898338116CA773000CC53A2 /* home.png */; };
+		18A163181719942100110E9C /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898338216CA773000CC53A2 /* home@2x.png */; };
+		18A163191719942100110E9C /* sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898338316CA773000CC53A2 /* sort.png */; };
+		18A1631A1719942100110E9C /* sort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898338416CA773000CC53A2 /* sort@2x.png */; };
+		18A1631B1719942100110E9C /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A0011416D0DE2F0075F3F8 /* setting.png */; };
+		18A1631C1719942100110E9C /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A0011516D0DE2F0075F3F8 /* setting@2x.png */; };
+		18A1631D1719942100110E9C /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 189B323616D19DE1003DE7DA /* Icon-72.png */; };
+		18A1631E1719942100110E9C /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 189B323716D19DE1003DE7DA /* Icon-72@2x.png */; };
+		18A1631F1719942100110E9C /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 189B323816D19DE1003DE7DA /* Icon-Small-50.png */; };
+		18A163201719942100110E9C /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 189B323916D19DE1003DE7DA /* Icon-Small-50@2x.png */; };
+		18A163211719942100110E9C /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 189B323A16D19DE1003DE7DA /* Icon-Small.png */; };
+		18A163221719942100110E9C /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 189B323B16D19DE1003DE7DA /* Icon-Small@2x.png */; };
+		18A163231719942100110E9C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 189B323C16D19DE1003DE7DA /* Icon.png */; };
+		18A163241719942100110E9C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 189B323D16D19DE1003DE7DA /* Icon@2x.png */; };
+		18A163251719942100110E9C /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 189B323F16D19DE1003DE7DA /* iTunesArtwork */; };
+		18A163261719942100110E9C /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898875A16D8F90000D22BE1 /* lock.png */; };
+		18A163271719942100110E9C /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898876E16D9368600D22BE1 /* edit.png */; };
+		18A163281719942100110E9C /* clearLampImage_main_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0716D9E50000BD532B /* clearLampImage_main_0.png */; };
+		18A163291719942100110E9C /* clearLampImage_main_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0816D9E50000BD532B /* clearLampImage_main_1.png */; };
+		18A1632A1719942100110E9C /* clearLampImage_main_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0916D9E50000BD532B /* clearLampImage_main_2.png */; };
+		18A1632B1719942100110E9C /* clearLampImage_main_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0A16D9E50000BD532B /* clearLampImage_main_3.png */; };
+		18A1632C1719942100110E9C /* clearLampImage_main_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0B16D9E50000BD532B /* clearLampImage_main_4.png */; };
+		18A1632D1719942100110E9C /* clearLampImage_main_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0C16D9E50000BD532B /* clearLampImage_main_5.png */; };
+		18A1632E1719942100110E9C /* clearLampImage_main_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0D16D9E50000BD532B /* clearLampImage_main_6.png */; };
+		18A1632F1719942100110E9C /* clearLampImage_main_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D2C0E16D9E50000BD532B /* clearLampImage_main_7.png */; };
+		18A163301719942100110E9C /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 18C77FD916E3ADFE006704D9 /* logo.png */; };
+		18A163311719942100110E9C /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18C77FDA16E3ADFE006704D9 /* logo@2x.png */; };
+		18A163321719942100110E9C /* pageControlBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 189F095D16EB7397008B1A21 /* pageControlBG.png */; };
 		18A2C19316B3C1B700CECE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19216B3C1B700CECE75 /* UIKit.framework */; };
 		18A2C19516B3C1B700CECE75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19416B3C1B700CECE75 /* Foundation.framework */; };
 		18A2C19716B3C1B700CECE75 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2C19616B3C1B700CECE75 /* CoreGraphics.framework */; };
@@ -229,6 +309,8 @@
 		18A0011516D0DE2F0075F3F8 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		18A162DB17198A1200110E9C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		18A162DC17198A1200110E9C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		18A163361719942100110E9C /* FCiOS copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FCiOS copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18A163371719942100110E9C /* FCiOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FCiOS copy-Info.plist"; path = "/Users/y-nanbu/xcode/FCiOS/FCiOS copy-Info.plist"; sourceTree = "<absolute>"; };
 		18A2C18E16B3C1B700CECE75 /* FCiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A2C19216B3C1B700CECE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18A2C19416B3C1B700CECE75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -297,6 +379,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		18A162FF1719942100110E9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A163001719942100110E9C /* libsqlite3.0.dylib in Frameworks */,
+				18A163011719942100110E9C /* UIKit.framework in Frameworks */,
+				18A163021719942100110E9C /* Foundation.framework in Frameworks */,
+				18A163031719942100110E9C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		18A2C18B16B3C1B700CECE75 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,6 +486,7 @@
 				18A2C1CA16B3C1B700CECE75 /* FCiOSTests */,
 				18A2C19116B3C1B700CECE75 /* Frameworks */,
 				18A2C18F16B3C1B700CECE75 /* Products */,
+				18A163371719942100110E9C /* FCiOS copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -401,6 +495,7 @@
 			children = (
 				18A2C18E16B3C1B700CECE75 /* FCiOS.app */,
 				18A2C1C316B3C1B700CECE75 /* FCiOSTests.octest */,
+				18A163361719942100110E9C /* FCiOS copy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -553,6 +648,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		18A162DF1719942100110E9C /* FCiOS_DEBUG */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18A163331719942100110E9C /* Build configuration list for PBXNativeTarget "FCiOS_DEBUG" */;
+			buildPhases = (
+				18A162E01719942100110E9C /* Sources */,
+				18A162FF1719942100110E9C /* Frameworks */,
+				18A163041719942100110E9C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FCiOS_DEBUG;
+			productName = FCiOS;
+			productReference = 18A163361719942100110E9C /* FCiOS copy.app */;
+			productType = "com.apple.product-type.application";
+		};
 		18A2C18D16B3C1B700CECE75 /* FCiOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18A2C1D516B3C1B700CECE75 /* Build configuration list for PBXNativeTarget "FCiOS" */;
@@ -612,12 +724,66 @@
 			projectRoot = "";
 			targets = (
 				18A2C18D16B3C1B700CECE75 /* FCiOS */,
+				18A162DF1719942100110E9C /* FCiOS_DEBUG */,
 				18A2C1C216B3C1B700CECE75 /* FCiOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		18A163041719942100110E9C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A163051719942100110E9C /* InfoPlist.strings in Resources */,
+				18A163061719942100110E9C /* Default-568h@2x.png in Resources */,
+				18A163071719942100110E9C /* Default.png in Resources */,
+				18A163081719942100110E9C /* Default@2x.png in Resources */,
+				18A163091719942100110E9C /* MainViewController.xib in Resources */,
+				18A1630A1719942100110E9C /* SortConfigViewController.xib in Resources */,
+				18A1630B1719942100110E9C /* musicMaster.db in Resources */,
+				18A1630C1719942100110E9C /* DetailViewController.xib in Resources */,
+				18A1630D1719942100110E9C /* clearLampImage_0.png in Resources */,
+				18A1630E1719942100110E9C /* clearLampImage_1.png in Resources */,
+				18A1630F1719942100110E9C /* clearLampImage_2.png in Resources */,
+				18A163101719942100110E9C /* clearLampImage_3.png in Resources */,
+				18A163111719942100110E9C /* clearLampImage_4.png in Resources */,
+				18A163121719942100110E9C /* clearLampImage_5.png in Resources */,
+				18A163131719942100110E9C /* clearLampImage_6.png in Resources */,
+				18A163141719942100110E9C /* clearLampImage_7.png in Resources */,
+				18A163151719942100110E9C /* folder.png in Resources */,
+				18A163161719942100110E9C /* folder@2x.png in Resources */,
+				18A163171719942100110E9C /* home.png in Resources */,
+				18A163181719942100110E9C /* home@2x.png in Resources */,
+				18A163191719942100110E9C /* sort.png in Resources */,
+				18A1631A1719942100110E9C /* sort@2x.png in Resources */,
+				18A1631B1719942100110E9C /* setting.png in Resources */,
+				18A1631C1719942100110E9C /* setting@2x.png in Resources */,
+				18A1631D1719942100110E9C /* Icon-72.png in Resources */,
+				18A1631E1719942100110E9C /* Icon-72@2x.png in Resources */,
+				18A1631F1719942100110E9C /* Icon-Small-50.png in Resources */,
+				18A163201719942100110E9C /* Icon-Small-50@2x.png in Resources */,
+				18A163211719942100110E9C /* Icon-Small.png in Resources */,
+				18A163221719942100110E9C /* Icon-Small@2x.png in Resources */,
+				18A163231719942100110E9C /* Icon.png in Resources */,
+				18A163241719942100110E9C /* Icon@2x.png in Resources */,
+				18A163251719942100110E9C /* iTunesArtwork in Resources */,
+				18A163261719942100110E9C /* lock.png in Resources */,
+				18A163271719942100110E9C /* edit.png in Resources */,
+				18A163281719942100110E9C /* clearLampImage_main_0.png in Resources */,
+				18A163291719942100110E9C /* clearLampImage_main_1.png in Resources */,
+				18A1632A1719942100110E9C /* clearLampImage_main_2.png in Resources */,
+				18A1632B1719942100110E9C /* clearLampImage_main_3.png in Resources */,
+				18A1632C1719942100110E9C /* clearLampImage_main_4.png in Resources */,
+				18A1632D1719942100110E9C /* clearLampImage_main_5.png in Resources */,
+				18A1632E1719942100110E9C /* clearLampImage_main_6.png in Resources */,
+				18A1632F1719942100110E9C /* clearLampImage_main_7.png in Resources */,
+				18A163301719942100110E9C /* logo.png in Resources */,
+				18A163311719942100110E9C /* logo@2x.png in Resources */,
+				18A163321719942100110E9C /* pageControlBG.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		18A2C18C16B3C1B700CECE75 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -743,6 +909,43 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		18A162E01719942100110E9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A162E11719942100110E9C /* main.m in Sources */,
+				18A162E21719942100110E9C /* fciosAppDelegate.m in Sources */,
+				18A162E31719942100110E9C /* MainViewController.m in Sources */,
+				18A162E41719942100110E9C /* TableSources.m in Sources */,
+				18A162E51719942100110E9C /* SortConfigViewController.m in Sources */,
+				18A162E61719942100110E9C /* FMDatabase.m in Sources */,
+				18A162E71719942100110E9C /* FMDatabaseAdditions.m in Sources */,
+				18A162E81719942100110E9C /* FMDatabasePool.m in Sources */,
+				18A162E91719942100110E9C /* FMDatabaseQueue.m in Sources */,
+				18A162EA1719942100110E9C /* FMResultSet.m in Sources */,
+				18A162EB1719942100110E9C /* MusicDetailCell.m in Sources */,
+				18A162EC1719942100110E9C /* HomeDetailCell.m in Sources */,
+				18A162ED1719942100110E9C /* DatabaseManager.m in Sources */,
+				18A162EE1719942100110E9C /* SettingViewController.m in Sources */,
+				18A162EF1719942100110E9C /* Utilities.m in Sources */,
+				18A162F01719942100110E9C /* NSObject+SBJson.m in Sources */,
+				18A162F11719942100110E9C /* SBJsonParser.m in Sources */,
+				18A162F21719942100110E9C /* SBJsonStreamParser.m in Sources */,
+				18A162F31719942100110E9C /* SBJsonStreamParserAccumulator.m in Sources */,
+				18A162F41719942100110E9C /* SBJsonStreamParserAdapter.m in Sources */,
+				18A162F51719942100110E9C /* SBJsonStreamParserState.m in Sources */,
+				18A162F61719942100110E9C /* SBJsonStreamWriter.m in Sources */,
+				18A162F71719942100110E9C /* SBJsonStreamWriterAccumulator.m in Sources */,
+				18A162F81719942100110E9C /* SBJsonStreamWriterState.m in Sources */,
+				18A162F91719942100110E9C /* SBJsonTokeniser.m in Sources */,
+				18A162FA1719942100110E9C /* SBJsonUTF8Stream.m in Sources */,
+				18A162FB1719942100110E9C /* SBJsonWriter.m in Sources */,
+				18A162FC1719942100110E9C /* CustomSettingViewController.m in Sources */,
+				18A162FD1719942100110E9C /* CustomSettingPageView.m in Sources */,
+				18A162FE1719942100110E9C /* DetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		18A2C18A16B3C1B700CECE75 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -843,6 +1046,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		18A163341719942100110E9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuya Nambu (Z672L5L4QF)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FCiOS/FCiOS-Prefix.pch";
+				INFOPLIST_FILE = "FCiOS copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = "FCiOS copy";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AFAEBA61-439D-466E-9764-40CADF85874E";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		18A163351719942100110E9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuya Nambu (Z672L5L4QF)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FCiOS/FCiOS-Prefix.pch";
+				INFOPLIST_FILE = "FCiOS copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = "FCiOS copy";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AFAEBA61-439D-466E-9764-40CADF85874E";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		18A2C1D316B3C1B700CECE75 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -960,6 +1193,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		18A163331719942100110E9C /* Build configuration list for PBXNativeTarget "FCiOS_DEBUG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18A163341719942100110E9C /* Debug */,
+				18A163351719942100110E9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		18A2C18816B3C1B700CECE75 /* Build configuration list for PBXProject "FCiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
