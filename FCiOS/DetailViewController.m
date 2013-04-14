@@ -248,9 +248,11 @@
             else{
             }
         }
+        
+        //アップデート
         int status = someEditType;
         int style = self.playStyleSortType;
-        [self dbUpdate:array changeToStatus:status style:style];
+        BOOL b = [self dbUpdate:array changeToStatus:status style:style];
         
         [UIView animateWithDuration:0.3f animations:^(void) {
             grayView.alpha = 0.0;
@@ -259,6 +261,13 @@
             [indicator removeFromSuperview];
             [grayView removeFromSuperview];
             [self cancel];
+            
+            if (b) {
+                [Utilities showMessage:UPDATE_SUCCEEDED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+            }
+            else{
+                [Utilities showMessage:UPDATE_FAILED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+            }
         }];
     }];
 }
@@ -587,7 +596,8 @@
     
 }
 
-- (void)dbUpdate:(NSMutableArray *)list changeToStatus:(int)status style:(int)style{
+- (BOOL)dbUpdate:(NSMutableArray *)list changeToStatus:(int)status style:(int)style{
+    BOOL isSuccess = NO;
     
     DatabaseManager *dbManager = [DatabaseManager sharedInstance];
     FMDatabase *database = dbManager.music_DB;
@@ -637,6 +647,7 @@
             [database rollback];
         }
         else{
+            isSuccess = YES;
             [USER_DEFAULT setBool:YES forKey:UPDATED_USERDATA_KEY];
             [USER_DEFAULT synchronize];
             [database commit];
@@ -649,6 +660,7 @@
     else{
         NSLog(@"Could not open db.");
     }
+    return isSuccess;
 }
 
 
@@ -667,6 +679,7 @@
     memoUpdateButton.tag = [musicId intValue];
     
     NSString *memo = [[DatabaseManager sharedInstance] getMemoWithMusicId:musicId];
+    tmpText = memo;
 //    NSLog(@"memo %@",memo);
     
     [UIView animateWithDuration:0.3f animations:^(void) {
@@ -690,7 +703,7 @@
 - (void)memoEditFinished:(UIButton *)b{
     NSLog(@"memoEditFinished %@",memoTextView.text);
     
-    BOOL isSuccess = [[DatabaseManager sharedInstance] updateMemoWithMusicId:b.tag text:memoTextView.text];
+//    BOOL textChanged = ![tmpText isEqualToString:memoTextView.text];
     
     [UIView animateWithDuration:0.3f animations:^(void) {
         grayViewForMemo.alpha = 0.0;
@@ -704,11 +717,14 @@
         [memoUpdateButton removeFromSuperview];
         [memoTextView removeFromSuperview];
         
-        if (isSuccess) {
-            [Utilities showMessage:UPDATE_SUCCEEDED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
-        }
-        else{
-            [Utilities showMessage:UPDATE_FAILED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+        if (![tmpText isEqualToString:memoTextView.text]) {
+            //変更があったら更新
+            if ([[DatabaseManager sharedInstance] updateMemoWithMusicId:b.tag text:memoTextView.text]) {
+                [Utilities showMessage:UPDATE_SUCCEEDED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+            }
+            else{
+                [Utilities showMessage:UPDATE_FAILED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+            }
         }
     }];
 }
@@ -752,7 +768,12 @@
             int status = 7 - buttonIndex;
             int style = self.playStyleSortType;
 
-            [self dbUpdate:array changeToStatus:status style:style];
+            if([self dbUpdate:array changeToStatus:status style:style]){
+                [Utilities showMessage:UPDATE_SUCCEEDED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+            }
+            else{
+                [Utilities showMessage:UPDATE_FAILED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+            }
         }
     }
     

@@ -60,6 +60,7 @@
     UILabel *memoTitle;
     UIButton *memoUpdateButton;
     UITextView *memoTextView;
+    NSString *tmpText;
 }
 
 @property (nonatomic ,retain) UITableView *table;
