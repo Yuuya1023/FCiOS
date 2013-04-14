@@ -513,10 +513,7 @@ static dispatch_queue_t serialQueue;
     NSString *tmp34 = [tmp33 stringByReplacingOccurrencesOfString:@"$" withString:@""];
     NSString *tmp35 = [tmp34 stringByReplacingOccurrencesOfString:@"~" withString:@""];
     NSString *tmp36 = [tmp35 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-    
-    //¥@.
-    //[]{}#%^•£€$~
-    
+        
     NSLog(@"after %@",tmp36);
     return tmp36;
 }

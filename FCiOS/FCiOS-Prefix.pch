@@ -42,3 +42,10 @@
 #define CUSTOM_DP3 @"custom_dp3"
 #define CUSTOM_DP4 @"custom_dp4"
 #define CUSTOM_DP5 @"custom_dp5"
+
+
+#define UPDATE_SUCCEEDED_MESSAGE @"Update succeeded."
+#define UPDATE_FAILED_MESSAGE @"Update failed."
+
+#define MESSAGE_FIELD CGRectMake(10, [UIScreen mainScreen].bounds.size.height - 180, 300, 40)
+

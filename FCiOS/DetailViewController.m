@@ -61,7 +61,7 @@
             self.editStateButton.frame = CGRectMake(16, 5, 30, 30);
         }
         else{
-            [self.editStateButton setImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
+            [self.editStateButton setImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
             self.editStateButton.frame = CGRectMake(13, 5, 30, 30);
         }
         [self.editStateButton addTarget:self action:@selector(changeEditMode:) forControlEvents:UIControlEventTouchUpInside];
@@ -308,7 +308,7 @@
         self.editStateButton.frame = CGRectMake(16, 5, 30, 30);
     }
     else{
-        [self.editStateButton setImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
+        [self.editStateButton setImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
         self.editStateButton.frame = CGRectMake(13, 5, 30, 30);
     }
     [USER_DEFAULT setBool:![USER_DEFAULT boolForKey:EDITING_MODE_KEY] forKey:EDITING_MODE_KEY];
@@ -675,7 +675,7 @@
         grayViewForMemo.alpha = 0.8;
         memoTitle.alpha = 1.0;
         memoTextView.alpha = 0.8;
-        [memoTextView becomeFirstResponder];
+//        [memoTextView becomeFirstResponder];
         
     }completion:^(BOOL finished){
         
@@ -690,7 +690,7 @@
 - (void)memoEditFinished:(UIButton *)b{
     NSLog(@"memoEditFinished %@",memoTextView.text);
     
-    [[DatabaseManager sharedInstance] updateMemoWithMusicId:b.tag text:memoTextView.text];
+    BOOL isSuccess = [[DatabaseManager sharedInstance] updateMemoWithMusicId:b.tag text:memoTextView.text];
     
     [UIView animateWithDuration:0.3f animations:^(void) {
         grayViewForMemo.alpha = 0.0;
@@ -704,6 +704,12 @@
         [memoUpdateButton removeFromSuperview];
         [memoTextView removeFromSuperview];
         
+        if (isSuccess) {
+            [Utilities showMessage:UPDATE_SUCCEEDED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+        }
+        else{
+            [Utilities showMessage:UPDATE_FAILED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+        }
     }];
 }
 
@@ -835,42 +841,43 @@
         if (![USER_DEFAULT boolForKey:EDITING_MODE_KEY]) {
             [self memoEditModeWithMusicId:[[self.tableData objectAtIndex:indexPath.row] objectForKey:@"music_id"]
                                     title:[[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"]];
-            return;
         }
-        NSString *name = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];
-        NSString *type = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"type"];
-        NSLog(@"cell name %@, type = %@",name,type);
-        
-        UIActionSheet *as = [[UIActionSheet alloc] init];
-        as.delegate = self;
-        as.tag = indexPath.row;
-    
-        NSString *typeStr;
-        switch ([type intValue]) {
-            case 0:
-                typeStr = @"(N)";
-                break;
-            case 1:
-                typeStr = @"(H)";
-                break;
-            case 2:
-                typeStr = @"(A)";
-                break;
-            default:
-                break;
+        else{
+            NSString *name = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"name"];
+            NSString *type = [[self.tableData objectAtIndex:indexPath.row] objectForKey:@"type"];
+            NSLog(@"cell name %@, type = %@",name,type);
+            
+            UIActionSheet *as = [[UIActionSheet alloc] init];
+            as.delegate = self;
+            as.tag = indexPath.row;
+            
+            NSString *typeStr;
+            switch ([type intValue]) {
+                case 0:
+                    typeStr = @"(N)";
+                    break;
+                case 1:
+                    typeStr = @"(H)";
+                    break;
+                case 2:
+                    typeStr = @"(A)";
+                    break;
+                default:
+                    break;
+            }
+            as.title = [NSString stringWithFormat:@"%@ %@",name,typeStr];
+            [as addButtonWithTitle:@"TO FULLCOMBO"];
+            [as addButtonWithTitle:@"TO EXHARDCLEAR"];
+            [as addButtonWithTitle:@"TO HARDCLEAR"];
+            [as addButtonWithTitle:@"TO CLEAR"];
+            [as addButtonWithTitle:@"TO EASYCLEAR"];
+            [as addButtonWithTitle:@"TO ASSISTCLEAR"];
+            [as addButtonWithTitle:@"TO FAILED"];
+            [as addButtonWithTitle:@"TO NOPLAY"];
+            [as addButtonWithTitle:@"キャンセル"];
+            as.cancelButtonIndex = 8;
+            [as showFromTabBar:self.tabBarController.tabBar];
         }
-        as.title = [NSString stringWithFormat:@"%@ %@",name,typeStr];
-        [as addButtonWithTitle:@"TO FULLCOMBO"];
-        [as addButtonWithTitle:@"TO EXHARDCLEAR"];
-        [as addButtonWithTitle:@"TO HARDCLEAR"];
-        [as addButtonWithTitle:@"TO CLEAR"];
-        [as addButtonWithTitle:@"TO EASYCLEAR"];
-        [as addButtonWithTitle:@"TO ASSISTCLEAR"];
-        [as addButtonWithTitle:@"TO FAILED"];
-        [as addButtonWithTitle:@"TO NOPLAY"];
-        [as addButtonWithTitle:@"キャンセル"];
-        as.cancelButtonIndex = 8;
-        [as showFromTabBar:self.tabBarController.tabBar];
     }
 
 }

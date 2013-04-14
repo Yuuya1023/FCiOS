@@ -11,6 +11,9 @@
 @interface Utilities : NSObject
 
 + (void)showDefaultAlertWithTitle:(NSString *)title message:(NSString *)message;
++ (void)showMessage:(NSString *)message cgRect:(CGRect)cgRect inView:(UIView *)inView;
+
++ (BOOL)isDevice5thGen;
 + (BOOL)isOS4;
 
 @end

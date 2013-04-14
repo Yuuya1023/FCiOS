@@ -95,7 +95,7 @@
         
         //other
         settings = [[UILabel alloc] initWithFrame:CGRectMake(10, 123, 100, 20)];
-        settings.text = @"other setting";
+        settings.text = @"setting";
         settings.font = DEFAULT_FONT_ITALIC;
         [self.view addSubview:settings];
 
