@@ -158,7 +158,13 @@
             [memoUpdateButton addTarget:self action:NSSelectorFromString(@"memoEditFinished:") forControlEvents:UIControlEventTouchUpInside];
             
             //メモ
-            memoTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 105, 300, 115)];
+            memoTextView = [[UITextView alloc] init];
+            if ([Utilities isDevice5thGen]) {
+                memoTextView.frame = CGRectMake(10, 105, 300, 410);
+            }
+            else{
+                memoTextView.frame = CGRectMake(10, 105, 300, 325);
+            }
             memoTextView.delegate = self;
             memoTextView.font = DEFAULT_FONT;
             memoTextView.alpha = 0.0;
@@ -727,6 +733,34 @@
             }
         }
     }];
+}
+
+
+-(BOOL)textViewShouldBeginEditing:(UITextView*)textView{
+    
+    [UIView animateWithDuration:0.2f animations:^(void) {
+        if ([Utilities isDevice5thGen]) {
+            memoTextView.frame = CGRectMake(10, 105, 300, 195);
+        }
+        else{
+            memoTextView.frame = CGRectMake(10, 105, 300, 115);
+        }
+    }];
+        
+    return YES;
+}
+
+-(BOOL)textViewShouldEndEditing:(UITextView*)textView{
+    
+    [UIView animateWithDuration:0.2f animations:^(void) {
+        if ([Utilities isDevice5thGen]) {
+            memoTextView.frame = CGRectMake(10, 105, 300, 410);
+        }
+        else{
+            memoTextView.frame = CGRectMake(10, 105, 300, 325);
+        }
+    }];
+    return YES;
 }
 
 

@@ -34,6 +34,7 @@
 
     UILabel *label = [[UILabel alloc] initWithFrame:cgRect];
     label.text = message;
+    label.font = DEFAULT_FONT;
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor whiteColor];
     label.alpha = 0.0;
