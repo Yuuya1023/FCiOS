@@ -61,6 +61,20 @@
     UIButton *memoUpdateButton;
     UITextView *memoTextView;
     NSString *tmpText;
+    
+    UIScrollView *pageView;
+    
+    UILabel *normal;
+    UILabel *hyper;
+    UILabel *another;
+    
+    UILabel *normalLevel;
+    UILabel *hyperLevel;
+    UILabel *anotherLevel;
+    
+    UIButton *normalUpdate;
+    UIButton *hyperUpdate;
+    UIButton *anotherUpdate;
 }
 
 @property (nonatomic ,retain) UITableView *table;
