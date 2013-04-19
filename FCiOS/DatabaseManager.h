@@ -28,6 +28,7 @@
 - (BOOL)updateMemoWithMusicId:(int)musicId text:(NSString *)text;
 
 + (NSString *)sqlSanitizing:(NSString *)sql;
++ (NSString *)decodeString:(NSString *)str;
 
 + (NSString *)SQLVersionString:(int)type;
 + (NSString *)SQLLevelString:(int)type;
