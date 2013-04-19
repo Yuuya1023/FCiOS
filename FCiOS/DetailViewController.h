@@ -75,6 +75,7 @@
     UIButton *normalUpdate;
     UIButton *hyperUpdate;
     UIButton *anotherUpdate;
+
 }
 
 @property (nonatomic ,retain) UITableView *table;

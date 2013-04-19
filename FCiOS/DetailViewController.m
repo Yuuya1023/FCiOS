@@ -61,7 +61,7 @@
             self.editStateButton.frame = CGRectMake(16, 5, 30, 30);
         }
         else{
-            [self.editStateButton setImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
+            [self.editStateButton setImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
             self.editStateButton.frame = CGRectMake(13, 5, 30, 30);
         }
         [self.editStateButton addTarget:self action:@selector(changeEditMode:) forControlEvents:UIControlEventTouchUpInside];
@@ -130,9 +130,9 @@
             //ページ
             pageView = [[UIScrollView alloc] init];
             pageView.frame = CGRectMake(0, 100, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 100);
-            pageView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * 2, [UIScreen mainScreen].bounds.size.height - 100);
-            pageView.delegate = self;
-            pageView.pagingEnabled = YES;
+//            pageView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * 2, [UIScreen mainScreen].bounds.size.height - 100);
+//            pageView.delegate = self;
+//            pageView.pagingEnabled = YES;
             pageView.showsHorizontalScrollIndicator = NO;
             pageView.bounces = NO;
             
@@ -179,81 +179,85 @@
             memoTextView.alpha = 0.0;
             
             
-            //ラベル
-            float width = [UIScreen mainScreen].bounds.size.width;
-            normal = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 10, 100, 40)];
-            normal.text = @"NORMAL";
-            normal.font = DEFAULT_FONT;
-            normal.alpha = 0.0;
-            normal.textColor = [UIColor blueColor];
-            normal.backgroundColor = [UIColor clearColor];
-            
-            hyper = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 110, 100, 40)];
-            hyper.text = @"HYPER";
-            hyper.font = DEFAULT_FONT;
-            hyper.alpha = 0.0;
-            hyper.textColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.0 alpha:1.0];
-            hyper.backgroundColor = [UIColor clearColor];
-            
-            another = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 210, 100, 40)];
-            another.text = @"ANOTHER";
-            another.font = DEFAULT_FONT;
-            another.alpha = 0.0;
-            another.textColor = [UIColor redColor];
-            another.backgroundColor = [UIColor clearColor];
-            
-            
-            normalLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 10, 100, 40)];
-            normalLevel.text = @"LEVEL 10";
-            normalLevel.font = DEFAULT_FONT;
-            normalLevel.alpha = 0.0;
-            normalLevel.textColor = [UIColor whiteColor];
-            normalLevel.backgroundColor = [UIColor clearColor];
-            
-            hyperLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 110, 100, 40)];
-            hyperLevel.text = @"LEVEL 10";
-            hyperLevel.font = DEFAULT_FONT;
-            hyperLevel.alpha = 0.0;
-            hyperLevel.textColor = [UIColor whiteColor];
-            hyperLevel.backgroundColor = [UIColor clearColor];
-            
-            anotherLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 210, 100, 40)];
-            anotherLevel.text = @"LEVEL 10";
-            anotherLevel.font = DEFAULT_FONT;
-            anotherLevel.alpha = 0.0;
-            anotherLevel.textColor = [UIColor whiteColor];
-            anotherLevel.backgroundColor = [UIColor clearColor];
-            
-            
-            normalUpdate = [UIButton buttonWithType:UIButtonTypeCustom];
-            normalUpdate.frame = CGRectMake(width + 80, 50, 230, 40);
-            normalUpdate.alpha = 0.0;
-            [normalUpdate setTitle:@"FULLCOMBO" forState:UIControlStateNormal];
-            [normalUpdate setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
-            
-            [[normalUpdate layer] setBorderWidth:1.0f];
-            [[normalUpdate layer] setBorderColor:[UIColor whiteColor].CGColor];
-            [normalUpdate addTarget:self action:NSSelectorFromString(@"updateFromViewMode:") forControlEvents:UIControlEventTouchUpInside];
-            
-            hyperUpdate = [UIButton buttonWithType:UIButtonTypeCustom];
-            hyperUpdate.frame = CGRectMake(width + 80, 150, 230, 40);
-            hyperUpdate.alpha = 0.0;
-            [hyperUpdate setTitle:@"FULLCOMBO" forState:UIControlStateNormal];
-            [hyperUpdate setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
-            
-            [[hyperUpdate layer] setBorderWidth:1.0f];
-            [[hyperUpdate layer] setBorderColor:[UIColor whiteColor].CGColor];
-            [hyperUpdate addTarget:self action:NSSelectorFromString(@"updateFromViewMode:") forControlEvents:UIControlEventTouchUpInside];
-            
-            anotherUpdate = [UIButton buttonWithType:UIButtonTypeCustom];
-            anotherUpdate.frame = CGRectMake(width + 80, 250, 230, 40);
-            anotherUpdate.alpha = 0.0;
-            [anotherUpdate setTitle:@"FULLCOMBO" forState:UIControlStateNormal];
-            [anotherUpdate setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
-            
-            [[anotherUpdate layer] setBorderWidth:1.0f];
-            [[anotherUpdate layer] setBorderColor:[UIColor whiteColor].CGColor];
-            [anotherUpdate addTarget:self action:NSSelectorFromString(@"updateFromViewMode:") forControlEvents:UIControlEventTouchUpInside];
+//            //ラベル
+//            float width = [UIScreen mainScreen].bounds.size.width;
+//            normal = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 10, 100, 40)];
+//            normal.text = @"NORMAL";
+//            normal.font = DEFAULT_FONT;
+//            normal.alpha = 0.0;
+//            normal.textColor = [UIColor blueColor];
+//            normal.backgroundColor = [UIColor clearColor];
+//            
+//            hyper = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 110, 100, 40)];
+//            hyper.text = @"HYPER";
+//            hyper.font = DEFAULT_FONT;
+//            hyper.alpha = 0.0;
+//            hyper.textColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.0 alpha:1.0];
+//            hyper.backgroundColor = [UIColor clearColor];
+//            
+//            another = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 210, 100, 40)];
+//            another.text = @"ANOTHER";
+//            another.font = DEFAULT_FONT;
+//            another.alpha = 0.0;
+//            another.textColor = [UIColor redColor];
+//            another.backgroundColor = [UIColor clearColor];
+//            
+//            
+//            normalLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 10, 100, 40)];
+//            normalLevel.text = @"LEVEL 10";
+//            normalLevel.font = DEFAULT_FONT;
+//            normalLevel.alpha = 0.0;
+//            normalLevel.textColor = [UIColor whiteColor];
+//            normalLevel.backgroundColor = [UIColor clearColor];
+//            
+//            hyperLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 110, 100, 40)];
+//            hyperLevel.text = @"LEVEL 10";
+//            hyperLevel.font = DEFAULT_FONT;
+//            hyperLevel.alpha = 0.0;
+//            hyperLevel.textColor = [UIColor whiteColor];
+//            hyperLevel.backgroundColor = [UIColor clearColor];
+//            
+//            anotherLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 210, 100, 40)];
+//            anotherLevel.text = @"LEVEL 10";
+//            anotherLevel.font = DEFAULT_FONT;
+//            anotherLevel.alpha = 0.0;
+//            anotherLevel.textColor = [UIColor whiteColor];
+//            anotherLevel.backgroundColor = [UIColor clearColor];
+//            
+//            
+//            normalUpdate = [UIButton buttonWithType:UIButtonTypeCustom];
+//            normalUpdate.frame = CGRectMake(width + 80, 50, 230, 40);
+//            normalUpdate.alpha = 0.0;
+//            [normalUpdate setTitle:@"FULLCOMBO" forState:UIControlStateNormal];
+//            [normalUpdate setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+//            [normalUpdate setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+//            
+//            [[normalUpdate layer] setBorderWidth:1.0f];
+//            [[normalUpdate layer] setBorderColor:[UIColor whiteColor].CGColor];
+//            [normalUpdate addTarget:self action:NSSelectorFromString(@"updateFromViewMode:") forControlEvents:UIControlEventTouchUpInside];
+//            
+//            hyperUpdate = [UIButton buttonWithType:UIButtonTypeCustom];
+//            hyperUpdate.frame = CGRectMake(width + 80, 150, 230, 40);
+//            hyperUpdate.alpha = 0.0;
+//            [hyperUpdate setTitle:@"FULLCOMBO" forState:UIControlStateNormal];
+//            [hyperUpdate setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+//            [hyperUpdate setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+//            
+//            [[hyperUpdate layer] setBorderWidth:1.0f];
+//            [[hyperUpdate layer] setBorderColor:[UIColor whiteColor].CGColor];
+//            [hyperUpdate addTarget:self action:NSSelectorFromString(@"updateFromViewMode:") forControlEvents:UIControlEventTouchUpInside];
+//            
+//            anotherUpdate = [UIButton buttonWithType:UIButtonTypeCustom];
+//            anotherUpdate.frame = CGRectMake(width + 80, 250, 230, 40);
+//            anotherUpdate.alpha = 0.0;
+//            [anotherUpdate setTitle:@"FULLCOMBO" forState:UIControlStateNormal];
+//            [anotherUpdate setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+//            [anotherUpdate setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+//            
+//            [[anotherUpdate layer] setBorderWidth:1.0f];
+//            [[anotherUpdate layer] setBorderColor:[UIColor whiteColor].CGColor];
+//            [anotherUpdate addTarget:self action:NSSelectorFromString(@"updateFromViewMode:") forControlEvents:UIControlEventTouchUpInside];
+
         }
 
         
@@ -413,7 +417,7 @@
         self.editStateButton.frame = CGRectMake(16, 5, 30, 30);
     }
     else{
-        [self.editStateButton setImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
+        [self.editStateButton setImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
         self.editStateButton.frame = CGRectMake(13, 5, 30, 30);
     }
     [USER_DEFAULT setBool:![USER_DEFAULT boolForKey:EDITING_MODE_KEY] forKey:EDITING_MODE_KEY];
@@ -772,18 +776,17 @@
     [self.navigationController.view addSubview:memoUpdateButton];
     [pageView addSubview:memoTextView];
     
-    [pageView addSubview:normal];
-    [pageView addSubview:hyper];
-    [pageView addSubview:another];
-    
-    [pageView addSubview:normalLevel];
-    [pageView addSubview:hyperLevel];
-    [pageView addSubview:anotherLevel];
-    
-    [pageView addSubview:normalUpdate];
-    [pageView addSubview:hyperUpdate];
-    [pageView addSubview:anotherUpdate];
-    
+//    [pageView addSubview:normal];
+//    [pageView addSubview:hyper];
+//    [pageView addSubview:another];
+//    
+//    [pageView addSubview:normalLevel];
+//    [pageView addSubview:hyperLevel];
+//    [pageView addSubview:anotherLevel];
+//    
+//    [pageView addSubview:normalUpdate];
+//    [pageView addSubview:hyperUpdate];
+//    [pageView addSubview:anotherUpdate];
 
     memoTitle.text = title;
     memoUpdateButton.tag = [musicId intValue];
@@ -799,15 +802,15 @@
         memoTitle.alpha = 1.0;
         memoTextView.alpha = 0.8;
         
-        normal.alpha = 1.0;
-        hyper.alpha = 1.0;
-        another.alpha = 1.0;
-        normalLevel.alpha = 1.0;
-        hyperLevel.alpha = 1.0;
-        anotherLevel.alpha = 1.0;
-        normalUpdate.alpha = 1.0;
-        hyperUpdate.alpha = 1.0;
-        anotherUpdate.alpha = 1.0;
+//        normal.alpha = 1.0;
+//        hyper.alpha = 1.0;
+//        another.alpha = 1.0;
+//        normalLevel.alpha = 1.0;
+//        hyperLevel.alpha = 1.0;
+//        anotherLevel.alpha = 1.0;
+//        normalUpdate.alpha = 1.0;
+//        hyperUpdate.alpha = 1.0;
+//        anotherUpdate.alpha = 1.0;
         
     }completion:^(BOOL finished){
         
@@ -829,27 +832,27 @@
         memoTitle.alpha = 0.0;
         memoTextView.alpha = 0.0;
         
-        normal.alpha = 0.0;
-        hyper.alpha = 0.0;
-        another.alpha = 0.0;
-        normalLevel.alpha = 0.0;
-        hyperLevel.alpha = 0.0;
-        anotherLevel.alpha = 0.0;
-        normalUpdate.alpha = 0.0;
-        hyperUpdate.alpha = 0.0;
-        anotherUpdate.alpha = 0.0;
+//        normal.alpha = 0.0;
+//        hyper.alpha = 0.0;
+//        another.alpha = 0.0;
+//        normalLevel.alpha = 0.0;
+//        hyperLevel.alpha = 0.0;
+//        anotherLevel.alpha = 0.0;
+//        normalUpdate.alpha = 0.0;
+//        hyperUpdate.alpha = 0.0;
+//        anotherUpdate.alpha = 0.0;
         [memoTextView resignFirstResponder];
         
     }completion:^(BOOL finished){
-        [normal removeFromSuperview];
-        [hyper removeFromSuperview];
-        [another removeFromSuperview];
-        [normalLevel removeFromSuperview];
-        [hyperLevel removeFromSuperview];
-        [anotherLevel removeFromSuperview];
-        [normalUpdate removeFromSuperview];
-        [hyperUpdate removeFromSuperview];
-        [anotherUpdate removeFromSuperview];
+//        [normal removeFromSuperview];
+//        [hyper removeFromSuperview];
+//        [another removeFromSuperview];
+//        [normalLevel removeFromSuperview];
+//        [hyperLevel removeFromSuperview];
+//        [anotherLevel removeFromSuperview];
+//        [normalUpdate removeFromSuperview];
+//        [hyperUpdate removeFromSuperview];
+//        [anotherUpdate removeFromSuperview];
         
         [grayViewForMemo removeFromSuperview];
         [memoTitle removeFromSuperview];
@@ -869,6 +872,27 @@
     }];
 }
 
+/////////////////////////////////
+// scrollViewDidScroll
+/////////////////////////////////
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    int page = (round)(scrollView.contentOffset.x / scrollView.bounds.size.width);
+////    NSLog(@"scrollViewDidScroll %d",page);
+//    
+//    if (page == 1) {
+//        [UIView animateWithDuration:0.2f animations:^(void) {
+//            if ([Utilities isDevice5thGen]) {
+//                memoTextView.frame = CGRectMake(10, 5, 300, 410);
+//            }
+//            else{
+//                memoTextView.frame = CGRectMake(10, 5, 300, 325);
+//            }
+//        }];
+//        [memoTextView resignFirstResponder];
+//        
+//        
+//    }
+//}
 
 -(BOOL)textViewShouldBeginEditing:(UITextView*)textView{
     
@@ -1070,5 +1094,6 @@
     }
 
 }
+
 
 @end
