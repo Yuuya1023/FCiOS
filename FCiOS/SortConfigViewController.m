@@ -48,16 +48,16 @@
         self.playRankList = [[NSArray alloc] initWithObjects:@"NORMAL",@"HYPER",@"ANOTHER",@"ALL", nil];
         
         //キャンセルボタン
-        cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        cancelButton.frame = CGRectMake(15, 320, 100, 40);
-        [cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
-        [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        cancelButton.titleLabel.font = DEFAULT_FONT;
-        cancelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-        cancelButton.alpha = 0.0;
-        
-        [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:cancelButton];
+//        cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        cancelButton.frame = CGRectMake(15, 320, 100, 40);
+//        [cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
+//        [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        cancelButton.titleLabel.font = DEFAULT_FONT;
+//        cancelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+//        cancelButton.alpha = 0.0;
+//        
+//        [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];
+//        [self.view addSubview:cancelButton];
         
         //ソート結果表示ボタン
         resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -192,14 +192,34 @@
         [self.view addSubview:sortingSortLabel];
         [self.view addSubview:sorting];
 
+
+        int y = 92;
+        if (![Utilities isDevice5thGen]) {
+            y = 180;
+        }
+        float positionX = (self.view.bounds.size.width / 2) - 40;
+        pageSizeX = (self.view.bounds.size.width / 2) + 40;
+        
+        pageView = [[UIScrollView alloc] init];
+        pageView.frame = CGRectMake(positionX, 0, pageSizeX, self.view.bounds.size.height - y);
+        pageView.contentSize = CGSizeMake(pageSizeX * 2, self.view.bounds.size.height - y);
+        pageView.delegate = self;
+        pageView.pagingEnabled = YES;
+        pageView.bounces = NO;
+        pageView.showsHorizontalScrollIndicator = NO;
+        pageView.alpha = 0.0;
+        pageView.backgroundColor = [UIColor clearColor];
+        
+        [self.view addSubview:pageView];
+        
+        
         //テーブル
-        self.tablelVIew = [[UITableView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 40, self.view.bounds.size.height)];
+        self.tablelVIew = [[UITableView alloc] initWithFrame:CGRectMake(pageSizeX, 0, (self.view.bounds.size.width / 2) + 40, self.view.bounds.size.height - y)];
         self.tablelVIew.delegate = self;
         self.tablelVIew.dataSource = self;
-        self.tablelVIew.alpha = 0.0;
+        self.tablelVIew.alpha = 1.0;
         self.tablelVIew.backgroundColor = [UIColor viewFlipsideBackgroundColor];
-        [self.view addSubview:self.tablelVIew];
-        
+        [pageView addSubview:self.tablelVIew];
         }
     return self;
 }
@@ -208,6 +228,44 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    float page = pageView.contentOffset.x / pageView.bounds.size.width;
+    NSLog(@"page %f",page);
+    
+    if (scrollView.alpha != 1.0) {
+        return;
+    }
+    
+    if (page == 0) {
+        pageView.alpha = 0.0;
+    }
+    
+    float alpha = 1 - (page * 0.8);
+    
+    if (selectedType != 0) {
+        version.alpha = alpha;
+    }
+    if (selectedType != 1) {
+        level.alpha = alpha;
+    }
+    if (selectedType != 2) {
+        clear.alpha = alpha;
+    }
+    if (selectedType != 3) {
+        playStyle.alpha = alpha;
+    }
+    if (selectedType != 4) {
+        playRank.alpha = alpha;
+    }
+    if (selectedType != 5) {
+        sorting.alpha = alpha;
+    }
+    
+    resultButton.alpha = 1 - page;
+    
+    
 }
 
 - (void)selectSort:(UIButton *)b{
@@ -236,7 +294,9 @@
     }
     [self.tablelVIew reloadData];
     [UIView animateWithDuration:0.5f animations:^(void) {
-        self.tablelVIew.frame = CGRectMake((self.view.bounds.size.width / 2) -40, 0, (self.view.bounds.size.width / 2) + 40, self.view.bounds.size.height);
+//        self.tablelVIew.frame = CGRectMake((self.view.bounds.size.width / 2) -40, 0, (self.view.bounds.size.width / 2) + 40, self.view.bounds.size.height);
+        pageView.contentOffset = CGPointMake(pageSizeX, 0);
+        pageView.alpha = 1.0;
         [self setAlpha:YES tag:b.tag];
     }];
 }
@@ -257,7 +317,9 @@
 
 - (void)cancel:(UIButton *)b{
     [UIView animateWithDuration:0.5f animations:^(void) {
-        self.tablelVIew.frame = CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 40, self.view.bounds.size.height);
+//        self.tablelVIew.frame = CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 40, self.view.bounds.size.height);
+        pageView.contentOffset = CGPointMake(0, 0);
+        pageView.alpha = 0.0;
         [self setAlpha:NO tag:0];
     }];
 }
@@ -294,7 +356,7 @@
     if (isSelecting) {
         self.tablelVIew.alpha = 1.0;
         resultButton.alpha = 0.0;
-        cancelButton.alpha = 1.0;
+//        cancelButton.alpha = 1.0;
         if (tag != 0) {
             version.alpha = 0.2;
         }
@@ -317,7 +379,7 @@
     else{
         self.tablelVIew.alpha = 0.0;
         resultButton.alpha = 1.0;
-        cancelButton.alpha = 0.0;
+//        cancelButton.alpha = 0.0;
         
         version.alpha = 1.0;
         level.alpha = 1.0;
@@ -330,7 +392,9 @@
 
 -(void)tableView: (UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [UIView animateWithDuration:0.5f animations:^(void) {
-        self.tablelVIew.frame = CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height);
+//        self.tablelVIew.frame = CGRectMake(self.view.bounds.size.width, 0, (self.view.bounds.size.width / 2) + 30, self.view.bounds.size.height);
+        pageView.contentOffset = CGPointMake(0, 0);
+        pageView.alpha = 0.0;
         [self setAlpha:NO tag:0];
         switch (selectedType) {
             case 0:

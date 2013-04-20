@@ -44,7 +44,7 @@
     UIButton *sortingSelect;
     
     UIButton *resultButton;
-    UIButton *cancelButton;
+//    UIButton *cancelButton;
     
     int versionSortType;
     int levelSortType;
@@ -54,6 +54,9 @@
     int sortingType;
     
     int selectedType;
+    
+    UIScrollView *pageView;
+    float pageSizeX;
 }
 
 @property (nonatomic, retain)UITableView *tablelVIew;
