@@ -264,9 +264,10 @@
     }
     
     resultButton.alpha = 1 - page;
-    
-    
 }
+
+
+
 
 - (void)selectSort:(UIButton *)b{
     selectedType = b.tag;

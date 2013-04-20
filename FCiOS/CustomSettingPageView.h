@@ -41,11 +41,14 @@
     UIButton *playRankSelect;
     UIButton *sortingSelect;
     
-    UIButton *cancelButton;
+//    UIButton *cancelButton;
     
     int selectedType;
     
     NSString *currentCustomKey;
+    
+    UIScrollView *pageView;
+    float pageSizeX;
 }
 
 @property (nonatomic, retain)UITableView *tablelView;

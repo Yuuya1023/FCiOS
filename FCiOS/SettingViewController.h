@@ -39,9 +39,12 @@
     UIButton *custom_SP;
     UIButton *custom_DP;
 
-    UIButton *cancelButton;
+//    UIButton *cancelButton;
     
     int selectedType;
+    
+    UIScrollView *pageView;
+    float pageSizeX;
 }
 
 @property (nonatomic, retain)UITableView *tablelView;
