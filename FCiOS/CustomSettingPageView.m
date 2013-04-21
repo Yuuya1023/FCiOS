@@ -203,7 +203,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     float page = pageView.contentOffset.x / pageView.bounds.size.width;
-    NSLog(@"page %f",page);
+//    NSLog(@"page %f",page);
     
     if (scrollView.alpha != 1.0) {
         return;

@@ -59,16 +59,23 @@
 //        [cancelButton addTarget:self action:NSSelectorFromString(@"cancel:") forControlEvents:UIControlEventTouchUpInside];
 //        [self.view addSubview:cancelButton];
         
-        //ソート結果表示ボタン
-        resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        resultButton.frame = CGRectMake(105, 318, 120, 40);
-        [resultButton setTitle:@"RESULT" forState:UIControlStateNormal];
-        [resultButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        resultButton.titleLabel.font = DEFAULT_FONT;
-        resultButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-        
-        [resultButton addTarget:self action:NSSelectorFromString(@"showResult:") forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:resultButton];
+        {
+            int y = 0;
+            if ([Utilities isDevice5thGen]) {
+                y = 40;
+            }
+            
+            //ソート結果表示ボタン
+            resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            resultButton.frame = CGRectMake(105, 318 + y, 120, 40);
+            [resultButton setTitle:@"RESULT" forState:UIControlStateNormal];
+            [resultButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            resultButton.titleLabel.font = DEFAULT_FONT;
+            resultButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+            
+            [resultButton addTarget:self action:NSSelectorFromString(@"showResult:") forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:resultButton];
+        }
         
         //バージョン
         version = [[UILabel alloc] initWithFrame:CGRectMake(15, 28, 100, 20)];
@@ -192,34 +199,35 @@
         [self.view addSubview:sortingSortLabel];
         [self.view addSubview:sorting];
 
-
-        int y = 92;
-        if (![Utilities isDevice5thGen]) {
-            y = 180;
+        {
+            int y = 92;
+            if (![Utilities isDevice5thGen]) {
+                y = 180;
+            }
+            float positionX = (self.view.bounds.size.width / 2) - 40;
+            pageSizeX = (self.view.bounds.size.width / 2) + 40;
+            
+            pageView = [[UIScrollView alloc] init];
+            pageView.frame = CGRectMake(positionX, 0, pageSizeX, self.view.bounds.size.height - y);
+            pageView.contentSize = CGSizeMake(pageSizeX * 2, self.view.bounds.size.height - y);
+            pageView.delegate = self;
+            pageView.pagingEnabled = YES;
+            pageView.bounces = NO;
+            pageView.showsHorizontalScrollIndicator = NO;
+            pageView.alpha = 0.0;
+            pageView.backgroundColor = [UIColor clearColor];
+            
+            [self.view addSubview:pageView];
+            
+            
+            //テーブル
+            self.tablelVIew = [[UITableView alloc] initWithFrame:CGRectMake(pageSizeX, 0, (self.view.bounds.size.width / 2) + 40, self.view.bounds.size.height - y)];
+            self.tablelVIew.delegate = self;
+            self.tablelVIew.dataSource = self;
+            self.tablelVIew.alpha = 1.0;
+            self.tablelVIew.backgroundColor = [UIColor viewFlipsideBackgroundColor];
+            [pageView addSubview:self.tablelVIew];
         }
-        float positionX = (self.view.bounds.size.width / 2) - 40;
-        pageSizeX = (self.view.bounds.size.width / 2) + 40;
-        
-        pageView = [[UIScrollView alloc] init];
-        pageView.frame = CGRectMake(positionX, 0, pageSizeX, self.view.bounds.size.height - y);
-        pageView.contentSize = CGSizeMake(pageSizeX * 2, self.view.bounds.size.height - y);
-        pageView.delegate = self;
-        pageView.pagingEnabled = YES;
-        pageView.bounces = NO;
-        pageView.showsHorizontalScrollIndicator = NO;
-        pageView.alpha = 0.0;
-        pageView.backgroundColor = [UIColor clearColor];
-        
-        [self.view addSubview:pageView];
-        
-        
-        //テーブル
-        self.tablelVIew = [[UITableView alloc] initWithFrame:CGRectMake(pageSizeX, 0, (self.view.bounds.size.width / 2) + 40, self.view.bounds.size.height - y)];
-        self.tablelVIew.delegate = self;
-        self.tablelVIew.dataSource = self;
-        self.tablelVIew.alpha = 1.0;
-        self.tablelVIew.backgroundColor = [UIColor viewFlipsideBackgroundColor];
-        [pageView addSubview:self.tablelVIew];
         }
     return self;
 }
@@ -232,7 +240,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     float page = pageView.contentOffset.x / pageView.bounds.size.width;
-    NSLog(@"page %f",page);
+//    NSLog(@"page %f",page);
     
     if (scrollView.alpha != 1.0) {
         return;
