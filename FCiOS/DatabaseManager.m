@@ -131,7 +131,7 @@ static dispatch_queue_t serialQueue;
 + (BOOL)updateDatabase{
     
 #ifdef DEBUG
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"update" ofType:@"json"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"update_test" ofType:@"json"];
     NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     

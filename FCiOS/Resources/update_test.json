@@ -1,0 +1,148 @@
+[
+  {
+  "version":"1.1",
+  "description": "Café de Tranイベントの曲を追加しました。（全7曲）",
+  "sql":[
+         {
+         "music_id": "20061",
+         "music": "insert into musicMaster values(?,'Rainbow after snow','noname',20,3,7,10,5,8,10,0,0,1,2)"
+         },
+         {
+         "music_id": "20062",
+         "music": "insert into musicMaster values(?,'Beastie Starter','noname',20,3,7,11,3,7,11,0,0,1,2)"
+         },
+         {
+         "music_id": "20063",
+         "music": "insert into musicMaster values(?,'アストライアの双皿','noname',20,4,9,12,5,9,12,0,0,1,2)"
+         },
+         {
+         "music_id": "20064",
+         "music": "insert into musicMaster values(?,'†渚の小悪魔ラヴリィ～レイディオ†(IIDX EDIT)','noname',20,3,9,12,3,9,12,0,0,1,2)"
+         },
+         {
+         "music_id": "20065",
+         "music": "insert into musicMaster values(?,'Holy Snow','noname',20,4,8,10,6,10,12,0,0,1,2)"
+         },
+         {
+         "music_id": "20066",
+         "music": "insert into musicMaster values(?,'True Blue','noname',20,5,10,12,5,10,12,0,0,1,2)"
+         },
+         {
+         "music_id": "20067",
+         "music": "insert into musicMaster values(?,'Confiserie','noname',20,5,10,12,5,10,12,0,0,1,2)"
+         }
+         ]
+  },
+ {
+ "version":"1.2",
+ "description": "「ぼくらの宇宙戦争」イベントの楽曲を一部追加しました。（全4曲）",
+ "sql":[
+        {
+        "music_id": "20068",
+        "music": "insert into musicMaster values(?,'BRAVE GLOW','noname',20,4,8,10,4,8,10,0,0,1,2)"
+        },
+        {
+        "music_id": "20069",
+        "music": "insert into musicMaster values(?,'VEGA','noname',20,5,9,11,5,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20070",
+        "music": "insert into musicMaster values(?,'カジノファイヤーことみちゃん','noname',20,4,8,11,4,8,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20071",
+        "music": "insert into musicMaster values(?,'Saturn','noname',20,7,10,11,6,10,11,0,0,1,2)"
+        }
+        ]
+ },
+ {
+ "version":"1.3",
+ "description": "「ぼくらの宇宙戦争」、「私立BEMANI学園」の楽曲を追加しました。（全14曲）",
+ "sql":[
+        {
+        "music_id": "20061",
+        "music": "insert into musicMaster values(?,'Rainbow after snow','noname',20,3,7,10,5,8,10,0,0,1,2)"
+        },
+        {
+        "music_id": "20062",
+        "music": "insert into musicMaster values(?,'Beastie Starter','noname',20,3,7,11,3,7,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20063",
+        "music": "insert into musicMaster values(?,'アストライアの双皿','noname',20,4,9,12,5,9,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20064",
+        "music": "insert into musicMaster values(?,'†渚の小悪魔ラヴリィ～レイディオ†(IIDX EDIT)','noname',20,3,9,12,3,9,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20065",
+        "music": "insert into musicMaster values(?,'Holy Snow','noname',20,4,8,10,6,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20066",
+        "music": "insert into musicMaster values(?,'True Blue','noname',20,5,10,12,5,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20067",
+        "music": "insert into musicMaster values(?,'Confiserie','noname',20,5,10,12,5,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20072",
+        "music": "insert into musicMaster values(?,'New Lights','noname',20,6,9,10,6,9,10,0,0,1,2)"
+        },
+        {
+        "music_id": "20073",
+        "music": "insert into musicMaster values(?,'Fractal','noname',20,6,9,10,8,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20074",
+        "music": "insert into musicMaster values(?,'即席！脳直★ミュージックシステム','noname',20,6,10,12,6,9,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20075",
+        "music": "insert into musicMaster values(?,'Cookie Bouquets','noname',20,5,9,11,7,10,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20076",
+        "music": "insert into musicMaster values(?,'創世ノート','noname',20,4,9,11,4,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20077",
+        "music": "insert into musicMaster values(?,'ラキラキ','noname',20,4,8,10,4,8,10,0,0,1,2)"
+        },
+        {
+        "music_id": "20078",
+        "music": "insert into musicMaster values(?,'晴天Bon Voyage','noname',20,3,7,9,4,7,9,0,0,1,2)"
+        },
+        {
+        "music_id": "20079",
+        "music": "insert into musicMaster values(?,'Empathetic','noname',20,4,7,10,4,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20080",
+        "music": "insert into musicMaster values(?,'Synergy For Angels','noname',20,4,8,11,4,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20081",
+        "music": "insert into musicMaster values(?,'GAIA','noname',20,5,10,12,5,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20082",
+        "music": "insert into musicMaster values(?,'虹色の花','noname',20,4,8,10,4,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20083",
+        "music": "insert into musicMaster values(?,'STULTI','noname',20,5,10,12,5,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20084",
+        "music": "insert into musicMaster values(?,'お米の美味しい炊き方、そしてお米を食べることによるその効果。','noname',20,5,8,10,5,9,10,0,0,1,2)"
+        },
+        {
+        "music_id": "20085",
+        "music": "insert into musicMaster values(?,'Elemental Creation','noname',20,7,10,12,8,10,12,0,0,1,2)"
+        }
+        ]
+ }
+]
