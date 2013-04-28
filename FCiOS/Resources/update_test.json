@@ -144,5 +144,15 @@
         "music": "insert into musicMaster values(?,'Elemental Creation','noname',20,7,10,12,8,10,12,0,0,1,2)"
         }
         ]
+ },
+ {
+ "version":"1.31",
+ "description": "一部楽曲を追加修正しました。",
+ "sql":[
+        {
+        "music_id": "20071",
+        "music": "insert into musicMaster values(?,'Saturn','noname',20,7,10,11,6,10,11,0,0,1,2)"
+        }
+        ]
  }
 ]
