@@ -178,5 +178,19 @@
         "music": "insert into musicMaster values(?,'BRAVE GLOW','noname',20,4,8,10,4,8,10,0,0,1,2)"
         }
         ]
+ },
+ {
+ "version":"1.41",
+ "description": "一部楽曲を追加修正しました。",
+ "sql":[
+        {
+        "music_id": "20069",
+        "music": "insert into musicMaster values(?,'VEGA','noname',20,5,9,11,5,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20070",
+        "music": "insert into musicMaster values(?,'カジノファイヤーことみちゃん','noname',20,4,8,11,4,8,12,0,0,1,2)"
+        }
+        ]
  }
 ]
