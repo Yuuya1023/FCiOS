@@ -192,5 +192,43 @@
         "music": "insert into musicMaster values(?,'カジノファイヤーことみちゃん','noname',20,4,8,11,4,8,12,0,0,1,2)"
         }
         ]
+ },
+ {
+ "version":"1.5",
+ "description": "「クプロ・ミミニャミ・パステルくんのみんなで宇宙戦争!!」の楽曲を追加しました。（全8曲）",
+ "sql":[
+        {
+        "music_id": "20087",
+        "music": "insert into musicMaster values(?,'SHION','noname',20,4,7,10,4,7,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20088",
+        "music": "insert into musicMaster values(?,'梅雪夜','noname',20,5,7,10,5,8,10,0,0,1,2)"
+        },
+        {
+        "music_id": "20089",
+        "music": "insert into musicMaster values(?,'音楽','noname',20,5,10,12,5,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20090",
+        "music": "insert into musicMaster values(?,'examination leave','noname',20,6,9,11,6,10,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20091",
+        "music": "insert into musicMaster values(?,'朧','noname',20,4,7,10,4,7,10,0,0,1,2)"
+        },
+        {
+        "music_id": "20092",
+        "music": "insert into musicMaster values(?,'VALLIS-NERIA','noname',20,6,10,11,7,10,11,0,0,1,2)"
+        },
+        {
+        "music_id": "20093",
+        "music": "insert into musicMaster values(?,'シュレーディンガーの猫','noname',20,6,10,12,7,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "20094",
+        "music": "insert into musicMaster values(?,'Valanga','noname',20,7,10,12,6,10,12,0,0,1,2)"
+        }
+        ]
  }
 ]
