@@ -29,6 +29,10 @@
 #define DEFAULT_PLAYSTYLE_KEY @"defaultPlayStyle"
 #define DEFAULT_PLAYRANK_KEY @"defaultPlayRank"
 #define EDITING_MODE_KEY @"editingMode"
+#define SP_TAG_LIST_KEY @"spTagList"
+#define DP_TAG_LIST_KEY @"dpTagList"
+#define SP_TAG_LIST_LAST_KEY @"spTagListLastKey"
+#define DP_TAG_LIST_LAST_KEY @"dpTagListLastKey"
 
 //customKey
 #define CUSTOM_SP1 @"custom_sp1"

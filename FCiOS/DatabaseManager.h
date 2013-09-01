@@ -24,6 +24,8 @@
 - (void)customSortSelecter:(int)style;
 
 - (void)addColumnUsersMemo;
+- (void)addColumnUsersTag;
+
 - (NSString *)getMemoWithMusicId:(NSString *)musicId;
 - (BOOL)updateMemoWithMusicId:(int)musicId text:(NSString *)text;
 

@@ -45,6 +45,7 @@
 //        self.table.separatorColor = [UIColor lightGrayColor];
         [self.view addSubview:self.table];
         
+        
         self.button = [[UIBarButtonItem alloc] initWithTitle:@"一括編集"
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
@@ -502,6 +503,10 @@
             case 2:
                 playRankSql = [NSString stringWithFormat:@"Another"];
                 break;
+            case 3:
+                playRankSql = [NSString stringWithFormat:@"AnotherAndHyper"];
+                break;
+                
             default:
                 playRankSql = @"UNION_ALL";
                 break;
@@ -574,6 +579,27 @@
              playStyleSql,
              levelSql,
              statusSort];
+            
+            [sql appendFormat:@" UNION ALL "];
+            [sql appendFormat:@"SELECT music_id,name,version,%@Another_Level AS level ,%@Another_Status AS status,selectType_Another AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND  %@Another_Level%@ %@ AND deleteFlg = 0 AND level != 0",
+             playStyleSql,
+             playStyleSql,
+             versionSql,
+             playStyleSql,
+             levelSql,
+             statusSort];
+            
+        }
+        else if ([playRankSql isEqualToString:@"AnotherAndHyper"]) {
+            
+            [sql appendFormat:@"SELECT music_id,name,version,%@Hyper_Level AS level,%@Hyper_Status AS status,selectType_Hyper AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Hyper_Level%@ %@ AND deleteFlg = 0 AND level != 0 AND %@Another_Level = 0",
+             playStyleSql,
+             playStyleSql,
+             versionSql,
+             playStyleSql,
+             levelSql,
+             statusSort,
+             playStyleSql];
             
             [sql appendFormat:@" UNION ALL "];
             [sql appendFormat:@"SELECT music_id,name,version,%@Another_Level AS level ,%@Another_Status AS status,selectType_Another AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND  %@Another_Level%@ %@ AND deleteFlg = 0 AND level != 0",

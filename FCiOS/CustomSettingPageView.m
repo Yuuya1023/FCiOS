@@ -28,7 +28,7 @@
         self.versionList = tableSources.versionSortList;
         self.sortingList = tableSources.sortingSortList;
         
-        self.playRankList = [[NSArray alloc] initWithObjects:@"NORMAL",@"HYPER",@"ANOTHER",@"ALL", nil];
+        self.playRankList = [[NSArray alloc] initWithObjects:@"NORMAL",@"HYPER",@"ANOTHER",@"A+H",@"ALL", nil];
         
         //キャンセルボタン
 //        cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];

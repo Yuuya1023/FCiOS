@@ -38,6 +38,10 @@
     UILabel *customLabelDP;
     UIButton *custom_SP;
     UIButton *custom_DP;
+    
+    UILabel *tagSetting;
+    UILabel *tagSettingLabel;
+    UIButton *tagSettingButton;
 
 //    UIButton *cancelButton;
     

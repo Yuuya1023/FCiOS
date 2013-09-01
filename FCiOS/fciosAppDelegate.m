@@ -21,8 +21,9 @@
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
-    //ユーザーデータにメモカラム追加
+    //ユーザーデータにカラム追加
     [[DatabaseManager sharedInstance] addColumnUsersMemo];
+    [[DatabaseManager sharedInstance] addColumnUsersTag];
     
     //ユーザーデフォルトに初期値を設定
     NSMutableDictionary *defaults = [NSMutableDictionary dictionary];

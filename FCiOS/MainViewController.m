@@ -71,6 +71,10 @@
             case 2:
                 playRank = @"ANOTHER";
                 break;
+            case 3:
+                playRank = @"A+H";
+                break;
+                
             default:
                 playRank = @"ALL";
                 break;
@@ -208,6 +212,10 @@
             case 2:
                 playRankSql = [NSString stringWithFormat:@"Another"];
                 break;
+            case 3:
+                playRankSql = [NSString stringWithFormat:@"AnotherAndHyper"];
+                break;
+                
             default:
                 playRankSql = @"UNION_ALL";
                 break;
@@ -229,6 +237,19 @@
             [sql_lamp appendFormat:@"SELECT music_id,%@_Another_Level AS level,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level != 0",
              playStyleSql,
              playStyleSql];
+        }
+        else if ([playRankSql isEqualToString:@"AnotherAndHyper"]) {
+            
+            [sql_lamp appendFormat:@"SELECT music_id,%@_Hyper_Level AS level,%@_Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level != 0 AND %@_Another_Level = 0",
+             playStyleSql,
+             playStyleSql,
+             playStyleSql];
+            
+            [sql_lamp appendFormat:@" UNION ALL "];
+            [sql_lamp appendFormat:@"SELECT music_id,%@_Another_Level AS level,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level != 0",
+             playStyleSql,
+             playStyleSql];
+            
         }
         else{        
             [sql_lamp appendFormat:@"SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level != 0",
@@ -281,6 +302,21 @@
                  playStyleSql,
                  playStyleSql,
                  i];
+            }
+            else if ([playRankSql isEqualToString:@"AnotherAndHyper"]) {
+                
+                [sql_level appendFormat:@"SELECT music_id,%@_Hyper_Level AS level,%@_Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d AND %@_Another_Level = 0",
+                 playStyleSql,
+                 playStyleSql,
+                 i,
+                 playStyleSql];
+                
+                [sql_level appendFormat:@" UNION ALL "];
+                [sql_level appendFormat:@"SELECT music_id,%@_Another_Level AS level,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d",
+                 playStyleSql,
+                 playStyleSql,
+                 i];
+                
             }
             else{
                 [sql_level appendFormat:@"SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND level = %d",
@@ -361,6 +397,21 @@
                  playStyleSql,
                  i];
             }
+            else if ([playRankSql isEqualToString:@"AnotherAndHyper"]) {
+                
+                [sql_version appendFormat:@"SELECT music_id,%@_Hyper_Level AS level,%@_Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d AND %@_Another_Level = 0",
+                 playStyleSql,
+                 playStyleSql,
+                 i,
+                 playStyleSql];
+                
+                [sql_version appendFormat:@" UNION ALL "];
+                [sql_version appendFormat:@"SELECT music_id,%@_Another_Level AS level,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d",
+                 playStyleSql,
+                 playStyleSql,
+                 i];
+                
+            }
             else{
                 [sql_version appendFormat:@"SELECT music_id,%@_%@_Level AS level,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND version = %d",
                                     playStyleSql,
@@ -428,12 +479,14 @@
     [as addButtonWithTitle:@"SP NORMAL"];
     [as addButtonWithTitle:@"SP HYPER"];
     [as addButtonWithTitle:@"SP ANOTHER"];
+    [as addButtonWithTitle:@"SP A+H"];
     [as addButtonWithTitle:@"DP ALL"];
     [as addButtonWithTitle:@"DP NORMAL"];
     [as addButtonWithTitle:@"DP HYPER"];
     [as addButtonWithTitle:@"DP ANOTHER"];
+    [as addButtonWithTitle:@"DP A+H"];
     [as addButtonWithTitle:@"キャンセル"];
-    as.cancelButtonIndex = 8;
+    as.cancelButtonIndex = 10;
     [as showFromTabBar:self.tabBarController.tabBar];
 }
 
@@ -499,25 +552,36 @@
             self.button.title = @"SP ANOTHER";
             break;
         case 4:
+            playStyleSortType = 0;
+            playRankSortType = 3;
+            self.button.title = @"SP A+H";
+            break;
+        case 5:
             playStyleSortType = 1;
             playRankSortType = 4;
             self.button.title = @"DP ALL";
             break;
-        case 5:
+        case 6:
             playStyleSortType = 1;
             playRankSortType = 0;
             self.button.title = @"DP NORMAL";
             break;
-        case 6:
+        case 7:
             playStyleSortType = 1;
             playRankSortType = 1;
             self.button.title = @"DP HYPER";
             break;
-        case 7:
+        case 8:
             playStyleSortType = 1;
             playRankSortType = 2;
             self.button.title = @"DP ANOTHER";
             break;
+        case 9:
+            playStyleSortType = 1;
+            playRankSortType = 3;
+            self.button.title = @"DP A+H";
+            break;
+            
         default:
             return;
             break;

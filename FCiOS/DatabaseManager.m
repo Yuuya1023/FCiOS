@@ -283,6 +283,29 @@ static dispatch_queue_t serialQueue;
                      playStyleSql,
                      clearLampSql];
                 }
+                if ([playRankSql isEqualToString:@"AnotherAndHyper"]) {
+                    
+                    [sql appendFormat:@"SELECT music_id,%@_Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND %@_Hyper_Level != 0 AND version%@ AND %@_Hyper_Level%@ AND %@_Hyper_Status%@ AND %@_Another_Level = 0",
+                     playStyleSql,
+                     playStyleSql,
+                     versionSql,
+                     playStyleSql,
+                     levelSql,
+                     playStyleSql,
+                     clearLampSql,
+                     playStyleSql];
+                    
+                    [sql appendFormat:@" UNION ALL "];
+                    [sql appendFormat:@"SELECT music_id,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND %@_Another_Level != 0 AND version%@ AND %@_Another_Level%@ AND %@_Another_Status%@",
+                     playStyleSql,
+                     playStyleSql,
+                     versionSql,
+                     playStyleSql,
+                     levelSql,
+                     playStyleSql,
+                     clearLampSql];
+                    
+                }
                 else{
                     [sql appendFormat:@"SELECT music_id,%@_%@_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE deleteFlg = 0 AND %@_%@_Level != 0 AND version%@ AND %@_%@_Level%@ AND %@_%@_Status%@",
                      playStyleSql,
@@ -420,10 +443,39 @@ static dispatch_queue_t serialQueue;
             return;
         }
 
-        NSLog(@"update");
+        NSLog(@"addColumnUsersMemo");
         NSString *addSql = @"ALTER TABLE userData ADD COLUMN memo TEXT";
         //更新処理
         [self.music_DB executeUpdate:addSql];
+    }
+    else{
+        NSLog(@"Could not open db.");
+    }
+}
+
+- (void)addColumnUsersTag{
+    if ([self.music_DB open]) {
+        
+        NSString *searchSql = @"select AnotherTag from userData";
+        FMResultSet *rs = [self.music_DB executeQuery:searchSql];
+        while ([rs next]) {
+            NSLog(@"tag isExist");
+            return;
+        }
+        
+        NSLog(@"addColumnUsersTag");
+        {
+            NSString *addSql = @"ALTER TABLE userData ADD COLUMN anotherTag INTEGER DEFAULT -1";
+            [self.music_DB executeUpdate:addSql];
+        }
+        {
+            NSString *addSql = @"ALTER TABLE userData ADD COLUMN hyperTag INTEGER DEFAULT -1";
+            [self.music_DB executeUpdate:addSql];
+        }
+        {
+            NSString *addSql = @"ALTER TABLE userData ADD COLUMN normalTag INTEGER DEFAULT -1";
+            [self.music_DB executeUpdate:addSql];
+        }
     }
     else{
         NSLog(@"Could not open db.");
@@ -611,6 +663,10 @@ static dispatch_queue_t serialQueue;
         case 2:
             sql = [NSString stringWithFormat:@"Another"];
             break;
+        case 3:
+            sql = [NSString stringWithFormat:@"AnotherAndHyper"];
+            break;
+            
         default:
             sql = @"UNION_ALL";
             break;

@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "TableSources.h"
 #import "CustomSettingViewController.h"
+#import "TagSettingViewController.h"
 
 @interface SettingViewController ()
 
@@ -154,6 +155,29 @@
         [self.view addSubview:custom_DP];
         [self.view addSubview:customLabelDP];
         
+        
+        //タグ設定
+        tagSetting = [[UILabel alloc] initWithFrame:CGRectMake(15, 298, 100, 40)];
+        tagSetting.text = @"Tag";
+        tagSetting.font = DEFAULT_FONT;
+        tagSetting.textAlignment = NSTextAlignmentLeft;
+        tagSetting.backgroundColor = [UIColor clearColor];
+        
+        tagSettingLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 298, 190, 40)];
+        tagSettingLabel.text = @"Tag Setting";
+        tagSettingLabel.font = DEFAULT_FONT;
+        tagSettingLabel.textAlignment = NSTextAlignmentRight;
+        tagSettingLabel.backgroundColor = [UIColor clearColor];
+        
+        tagSettingButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        tagSettingButton.tag = 2;
+        tagSettingButton.frame = CGRectMake(125, 300, 190, 40);
+        [tagSettingButton addTarget:self action:NSSelectorFromString(@"tagSetting:") forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:tagSetting];
+        [self.view addSubview:tagSettingButton];
+        [self.view addSubview:tagSettingLabel];
+        
 
         //キャンセルボタン
 //        cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -235,6 +259,9 @@
     if (selectedType != 1 && selectedType != 2) {
         custom.alpha = alpha;
     }
+    if (selectedType != 2) {
+        tagSetting.alpha = alpha;
+    }
 }
 
 
@@ -273,6 +300,15 @@
     [customPage setPagesWithPlayStyle:b.tag];
     [customPage setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:customPage animated:YES];
+}
+
+
+- (void)tagSetting:(UIButton *)b{
+
+    TagSettingViewController *tagSettingPage = [[TagSettingViewController alloc] init];
+    [tagSettingPage setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:tagSettingPage animated:YES];
+    
 }
 
 - (void)cancel:(UIButton *)b{
@@ -327,6 +363,9 @@
         if (tag != 1 && tag != 2) {
             custom.alpha = 0.2;
         }
+        if (tag != 2) {
+            tagSetting.alpha = 0.2;
+        }
     }
     else{
         self.tablelView.alpha = 0.0;
@@ -338,6 +377,7 @@
         
         defaultSort.alpha = 1.0;
         custom.alpha = 1.0;
+        tagSetting.alpha = 1.0;
     }
 }
 
