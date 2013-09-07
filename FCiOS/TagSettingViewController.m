@@ -8,6 +8,7 @@
 
 #import "TagSettingViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "DatabaseManager.h"
 
 @interface TagSettingViewController ()
 
@@ -311,6 +312,8 @@
                     [USER_DEFAULT synchronize];
                     NSLog(@"%@",spTagList_);
                     
+                    int tagId = [[keys objectAtIndex:indexPath.row] intValue];
+                    [[DatabaseManager sharedInstance] removeTag:tagId playStyle:0];
                     [self.tableView reloadData];
                 }
                     break;
@@ -323,6 +326,8 @@
                     [USER_DEFAULT synchronize];
                     NSLog(@"%@",dpTagList_);
                     
+                    int tagId = [[keys objectAtIndex:indexPath.row] intValue];
+                    [[DatabaseManager sharedInstance] removeTag:tagId playStyle:1];
                     [self.tableView reloadData];
                 }
                     break;
@@ -374,7 +379,7 @@
     }
     
     [UIView animateWithDuration:0.3f animations:^(void) {
-        grayView_.alpha = 0.8;
+        grayView_.alpha = 0.9;
         tagNameField_.alpha = 1.0;
         cancelButton_.alpha = 1.0;
         okButton_.alpha = 1.0;
@@ -385,7 +390,7 @@
 
 
 
-#pragma mark -
+#pragma mark - UIButton
 
 - (void)delete:(UIBarButtonItem *)b{
     
@@ -497,7 +502,7 @@
     }
 }
 
-
+#pragma mark -
 
 - (void)closeEditView{
     

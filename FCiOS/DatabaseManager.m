@@ -11,6 +11,7 @@
 
 #define XXSerialQueueName "databaseManager.SerialQueue"
 
+
 static DatabaseManager *sharedManager;
 static dispatch_queue_t serialQueue;
 
@@ -456,7 +457,7 @@ static dispatch_queue_t serialQueue;
 - (void)addColumnUsersTag{
     if ([self.music_DB open]) {
         
-        NSString *searchSql = @"select AnotherTag from userData";
+        NSString *searchSql = @"SELECT DP_normalTag FROM userData";
         FMResultSet *rs = [self.music_DB executeQuery:searchSql];
         while ([rs next]) {
             NSLog(@"tag isExist");
@@ -465,15 +466,27 @@ static dispatch_queue_t serialQueue;
         
         NSLog(@"addColumnUsersTag");
         {
-            NSString *addSql = @"ALTER TABLE userData ADD COLUMN anotherTag INTEGER DEFAULT -1";
+            NSString *addSql = @"ALTER TABLE userData ADD COLUMN SP_anotherTag INTEGER DEFAULT -1";
             [self.music_DB executeUpdate:addSql];
         }
         {
-            NSString *addSql = @"ALTER TABLE userData ADD COLUMN hyperTag INTEGER DEFAULT -1";
+            NSString *addSql = @"ALTER TABLE userData ADD COLUMN SP_hyperTag INTEGER DEFAULT -1";
             [self.music_DB executeUpdate:addSql];
         }
         {
-            NSString *addSql = @"ALTER TABLE userData ADD COLUMN normalTag INTEGER DEFAULT -1";
+            NSString *addSql = @"ALTER TABLE userData ADD COLUMN SP_normalTag INTEGER DEFAULT -1";
+            [self.music_DB executeUpdate:addSql];
+        }
+        {
+            NSString *addSql = @"ALTER TABLE userData ADD COLUMN DP_anotherTag INTEGER DEFAULT -1";
+            [self.music_DB executeUpdate:addSql];
+        }
+        {
+            NSString *addSql = @"ALTER TABLE userData ADD COLUMN DP_hyperTag INTEGER DEFAULT -1";
+            [self.music_DB executeUpdate:addSql];
+        }
+        {
+            NSString *addSql = @"ALTER TABLE userData ADD COLUMN DP_normalTag INTEGER DEFAULT -1";
             [self.music_DB executeUpdate:addSql];
         }
     }
@@ -482,30 +495,47 @@ static dispatch_queue_t serialQueue;
     }
 }
 
-- (NSString *)getMemoWithMusicId:(NSString *)musicId{
-    NSString *memo = @"";
+- (NSDictionary *)getMemoAndTagWithMusicId:(NSString *)musicId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if ([self.music_DB open]) {
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT memo FROM userData WHERE music_id = %@",musicId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM userData WHERE music_id = %@",musicId];
         FMResultSet *rs = [self.music_DB executeQuery:sql];
         while ([rs next]) {
-            memo = [DatabaseManager decodeString:[rs stringForColumn:@"memo"]];
-            NSLog(@"memomo %@",memo);
+            [dic setValue:[DatabaseManager decodeString:[rs stringForColumn:@"memo"]] forKey:@"memo"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_anotherTag"]] forKey:@"SP_anotherTag"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_hyperTag"]] forKey:@"SP_hyperTag"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_normalTag"]] forKey:@"SP_normalTag"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"DP_anotherTag"]] forKey:@"DP_anotherTag"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"DP_hyperTag"]] forKey:@"DP_hyperTag"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"DP_normalTag"]] forKey:@"DP_normalTag"];
         }
     }
     
-    return memo;
+    NSLog(@"\n getMemoAndTagWithMusicId \n %@",dic);
+    
+    return [NSDictionary dictionaryWithDictionary:dic];
 }
 
 
-- (BOOL)updateMemoWithMusicId:(int)musicId text:(NSString *)text{
+- (BOOL)updateMemoAndTagWithMusicId:(int)musicId text:(NSString *)text tagUpdateInfo:(NSDictionary *)tagUpdateInfo{
     NSLog(@"updateMemoWithMusicId %d, text %@",musicId,text);
     BOOL isSuccess = NO;
     if ([self.music_DB open]) {
         [self.music_DB beginTransaction];
-        NSString *sql = [NSString stringWithFormat:@"UPDATE userData SET memo = '%@' WHERE music_id = %d",
+        
+        // タグの更新情報
+        NSMutableString *tagUpdateQuery = [[NSMutableString alloc] init];
+        for(NSString *key in tagUpdateInfo){
+            [tagUpdateQuery appendFormat:@", %@ = %@",key,[tagUpdateInfo objectForKey:key]];
+        }
+        NSString *sql = [NSString stringWithFormat:@"UPDATE userData SET memo = '%@'%@ WHERE music_id = %d",
                          [DatabaseManager sqlSanitizing:text],
+                         tagUpdateQuery,
                          musicId];
+        NSLog(@"%@",sql);
+        
+        
         [self.music_DB executeUpdate:sql];
         
         
@@ -524,6 +554,66 @@ static dispatch_queue_t serialQueue;
 
     return isSuccess;
 }
+
+
+
+- (BOOL)removeTag:(int)tagId playStyle:(int)playStyle{
+    BOOL isSuccess = false;
+    
+    if ([self.music_DB open]) {
+        [self.music_DB beginTransaction];
+        
+        NSString *style = @"SP";
+        if (playStyle == 1) {
+            style = @"DP";
+        }
+        
+        {
+            NSString *sql = [NSString stringWithFormat:@"UPDATE userData SET %@_normalTag = -1 WHERE %@_normalTag = %d",
+                             style,
+                             style,
+                             tagId];
+            NSLog(@"%@",sql);
+            [self.music_DB executeUpdate:sql];
+        }
+        {
+            NSString *sql = [NSString stringWithFormat:@"UPDATE userData SET %@_hyperTag = -1 WHERE %@_hyperTag = %d",
+                             style,
+                             style,
+                             tagId];
+            NSLog(@"%@",sql);
+            [self.music_DB executeUpdate:sql];
+        }
+        {
+            NSString *sql = [NSString stringWithFormat:@"UPDATE userData SET %@_anotherTag = -1 WHERE %@_anotherTag = %d",
+                             style,
+                             style,
+                             tagId];
+            NSLog(@"%@",sql);
+            [self.music_DB executeUpdate:sql];
+        }
+        
+        
+        if ([self.music_DB hadError]) {
+            [self.music_DB rollback];
+            NSLog(@"update error");
+        }
+        else{
+            [self.music_DB commit];
+            NSLog(@"commit update");
+            isSuccess = YES;
+        }
+        [self.music_DB close];
+    }
+    
+    
+    return isSuccess;
+}
+
+
+
+
+#pragma  mark - 
 
 
 + (NSString *)sqlSanitizing:(NSString *)sql{

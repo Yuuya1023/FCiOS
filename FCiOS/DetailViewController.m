@@ -10,6 +10,36 @@
 #import <QuartzCore/QuartzCore.h>
 
 
+
+
+
+typedef enum {
+    TAG_NORMAL_BUTTON       = 100,
+    TAG_HYPER_BUTTON        = 101,
+    TAG_ANOTHER_BUTTON      = 102
+}TAG_BUTTON_TYPE;
+
+
+typedef enum {
+    PLAY_STYLE_SP           = 0,
+    PLAY_STYLE_DP           = 1
+}PLAY_STYLE_TYPE;
+
+typedef enum {
+    ACTION_SHEET_FOR_UPDATE                 = -1,
+    ACTION_SHEET_FOR_TAG_SETTING_NORMAL     = -100,
+    ACTION_SHEET_FOR_TAG_SETTING_HYPER      = -101,
+    ACTION_SHEET_FOR_TAG_SETTING_ANOTHER    = -102
+}ACTION_SHEET_TYPE;
+
+
+
+
+
+
+
+
+
 @interface DetailViewController ()
 
 @end
@@ -128,12 +158,15 @@
         
         //メモ用
         {
+            // 2ページ目のx始点用
+            float width = [UIScreen mainScreen].bounds.size.width;
+            
             //ページ
             pageView = [[UIScrollView alloc] init];
-            pageView.frame = CGRectMake(0, 100, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 100);
-//            pageView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * 2, [UIScreen mainScreen].bounds.size.height - 100);
-//            pageView.delegate = self;
-//            pageView.pagingEnabled = YES;
+            pageView.frame = CGRectMake(0, 100, width, [UIScreen mainScreen].bounds.size.height - 100);
+            pageView.contentSize = CGSizeMake(width * 2, [UIScreen mainScreen].bounds.size.height - 100);
+            pageView.delegate = self;
+            pageView.pagingEnabled = YES;
             pageView.showsHorizontalScrollIndicator = NO;
             pageView.bounces = NO;
             
@@ -167,42 +200,150 @@
             
             [memoUpdateButton addTarget:self action:NSSelectorFromString(@"memoEditFinished:") forControlEvents:UIControlEventTouchUpInside];
             
+            
+            // 下部のページ案内
+            rightPage_ = [[UILabel alloc] init];
+            rightPage_.alpha = 0.0;
+            rightPage_.text = @"タグ設定 >";
+            rightPage_.font = DEFAULT_FONT;
+            rightPage_.textColor = [UIColor whiteColor];
+            rightPage_.backgroundColor = [UIColor clearColor];
+            
+            [pageView addSubview:rightPage_];
+            
+            leftPage_ = [[UILabel alloc] init];
+            leftPage_.alpha = 0.0;
+            leftPage_.text = @"< メモ編集";
+            leftPage_.font = DEFAULT_FONT;
+            leftPage_.textColor = [UIColor whiteColor];
+            leftPage_.backgroundColor = [UIColor clearColor];
+            
+            [pageView addSubview:leftPage_];
+            
+            
+            
             //メモ
             memoTextView = [[UITextView alloc] init];
             if ([Utilities isDevice5thGen]) {
                 memoTextView.frame = CGRectMake(10, 5, 300, 410);
+                rightPage_.frame = CGRectMake(200, 425, 100, 40);
+                leftPage_.frame = CGRectMake(10 + width, 425, 100, 40);
             }
             else{
                 memoTextView.frame = CGRectMake(10, 5, 300, 325);
+                rightPage_.frame = CGRectMake(200, 340, 100, 40);
+                leftPage_.frame = CGRectMake(10 + width, 340, 100, 40);
             }
             memoTextView.delegate = self;
             memoTextView.font = DEFAULT_FONT;
             memoTextView.alpha = 0.0;
             
             
-//            //ラベル
-//            float width = [UIScreen mainScreen].bounds.size.width;
-//            normal = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 10, 100, 40)];
-//            normal.text = @"NORMAL";
-//            normal.font = DEFAULT_FONT;
-//            normal.alpha = 0.0;
-//            normal.textColor = [UIColor blueColor];
-//            normal.backgroundColor = [UIColor clearColor];
-//            
-//            hyper = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 110, 100, 40)];
-//            hyper.text = @"HYPER";
-//            hyper.font = DEFAULT_FONT;
-//            hyper.alpha = 0.0;
-//            hyper.textColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.0 alpha:1.0];
-//            hyper.backgroundColor = [UIColor clearColor];
-//            
-//            another = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 210, 100, 40)];
-//            another.text = @"ANOTHER";
-//            another.font = DEFAULT_FONT;
-//            another.alpha = 0.0;
-//            another.textColor = [UIColor redColor];
-//            another.backgroundColor = [UIColor clearColor];
-//            
+            //ラベル
+            normal = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 10, 100, 40)];
+            normal.text = @"NORMAL";
+            normal.font = DEFAULT_FONT;
+            normal.alpha = 0.0;
+            normal.textColor = [UIColor blueColor];
+            normal.backgroundColor = [UIColor clearColor];
+
+            hyper = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 110, 100, 40)];
+            hyper.text = @"HYPER";
+            hyper.font = DEFAULT_FONT;
+            hyper.alpha = 0.0;
+            hyper.textColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.0 alpha:1.0];
+            hyper.backgroundColor = [UIColor clearColor];
+
+            another = [[UILabel alloc] initWithFrame:CGRectMake(width + 25, 210, 100, 40)];
+            another.text = @"ANOTHER";
+            another.font = DEFAULT_FONT;
+            another.alpha = 0.0;
+            another.textColor = [UIColor redColor];
+            another.backgroundColor = [UIColor clearColor];
+            
+            [pageView addSubview:normal];
+            [pageView addSubview:hyper];
+            [pageView addSubview:another];
+            
+            
+            // タグ用リスト
+            spTagList_ = [[USER_DEFAULT objectForKey:SP_TAG_LIST_KEY] mutableCopy];
+            if (!spTagList_) {
+                spTagList_ = [[NSMutableDictionary alloc] init];
+            }
+            dpTagList_ = [[USER_DEFAULT objectForKey:DP_TAG_LIST_KEY] mutableCopy];
+            if (!dpTagList_) {
+                dpTagList_ = [[NSMutableDictionary alloc] init];
+            }
+            
+            // タグ文字
+            tagNormal = [[UILabel alloc] initWithFrame:CGRectMake(width + 50, 50, 100, 40)];
+            tagNormal.text = @"Tag";
+            tagNormal.font = DEFAULT_FONT;
+            tagNormal.alpha = 0.0;
+            tagNormal.textColor = [UIColor whiteColor];
+            tagNormal.backgroundColor = [UIColor clearColor];
+            
+            tagHyper = [[UILabel alloc] initWithFrame:CGRectMake(width + 50, 150, 100, 40)];
+            tagHyper.text = @"Tag";
+            tagHyper.font = DEFAULT_FONT;
+            tagHyper.alpha = 0.0;
+            tagHyper.textColor = [UIColor whiteColor];
+            tagHyper.backgroundColor = [UIColor clearColor];
+            
+            tagAnother = [[UILabel alloc] initWithFrame:CGRectMake(width + 50, 250, 100, 40)];
+            tagAnother.text = @"Tag";
+            tagAnother.font = DEFAULT_FONT;
+            tagAnother.alpha = 0.0;
+            tagAnother.textColor = [UIColor whiteColor];
+            tagAnother.backgroundColor = [UIColor clearColor];
+            
+            [pageView addSubview:tagNormal];
+            [pageView addSubview:tagHyper];
+            [pageView addSubview:tagAnother];
+            
+            
+            // タグ変更ボタン
+            tagNormalButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            tagNormalButton.tag = TAG_NORMAL_BUTTON;
+            tagNormalButton.frame = CGRectMake(width + 110, 55, 200, 35);
+            tagNormalButton.titleLabel.font = DEFAULT_FONT;
+            tagNormalButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+            [tagNormalButton setTitle:@"たぐたぐたぐ" forState:UIControlStateNormal];
+            [tagNormalButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+            
+            [[tagNormalButton layer] setBorderWidth:1.0f];
+            [[tagNormalButton layer] setBorderColor:[UIColor whiteColor].CGColor];
+            [tagNormalButton addTarget:self action:NSSelectorFromString(@"tagSelect:") forControlEvents:UIControlEventTouchUpInside];
+            [pageView addSubview:tagNormalButton];
+            
+            tagHyperButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            tagHyperButton.tag = TAG_HYPER_BUTTON;
+            tagHyperButton.frame = CGRectMake(width + 110, 155, 200, 35);
+            tagHyperButton.titleLabel.font = DEFAULT_FONT;
+            tagHyperButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+            [tagHyperButton setTitle:@"たぐたぐたぐ" forState:UIControlStateNormal];
+            [tagHyperButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+            
+            [[tagHyperButton layer] setBorderWidth:1.0f];
+            [[tagHyperButton layer] setBorderColor:[UIColor whiteColor].CGColor];
+            [tagHyperButton addTarget:self action:NSSelectorFromString(@"tagSelect:") forControlEvents:UIControlEventTouchUpInside];
+            [pageView addSubview:tagHyperButton];
+            
+            tagAnotherButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            tagAnotherButton.tag = TAG_ANOTHER_BUTTON;
+            tagAnotherButton.frame = CGRectMake(width + 110, 255, 200, 35);
+            tagAnotherButton.titleLabel.font = DEFAULT_FONT;
+            tagAnotherButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+            [tagAnotherButton setTitle:@"たぐたぐたぐ" forState:UIControlStateNormal];
+            [tagAnotherButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+            
+            [[tagAnotherButton layer] setBorderWidth:1.0f];
+            [[tagAnotherButton layer] setBorderColor:[UIColor whiteColor].CGColor];
+            [tagAnotherButton addTarget:self action:NSSelectorFromString(@"tagSelect:") forControlEvents:UIControlEventTouchUpInside];
+            [pageView addSubview:tagAnotherButton];
+            
+//
 //            
 //            normalLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 10, 100, 40)];
 //            normalLevel.text = @"LEVEL 10";
@@ -280,9 +421,7 @@
     return self;
 }
 
-- (void)updateFromViewMode:(UIButton *)b{
-    NSLog(@"pppp");
-}
+
 
 - (void)viewDidLoad
 {
@@ -373,11 +512,14 @@
     }];
 }
 
+
+#pragma mark - UIBarButtonItem
+
 - (void)editData:(UIBarButtonItem *)b{
     if (!editing) {
         UIActionSheet *as = [[UIActionSheet alloc] init];
         as.delegate = self;
-        as.tag = -1;
+        as.tag = ACTION_SHEET_FOR_UPDATE;
         as.title = @"選択してください。";
         [as addButtonWithTitle:@"TO FULLCOMBO"];
         [as addButtonWithTitle:@"TO EXHARDCLEAR"];
@@ -412,6 +554,12 @@
     allChecking = !allChecking;
 }
 
+
+
+
+
+#pragma mark - UIButton
+
 - (void)changeEditMode:(UIButton *)b{
     if (![USER_DEFAULT boolForKey:EDITING_MODE_KEY]) {
         [self.editStateButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
@@ -424,6 +572,69 @@
     [USER_DEFAULT setBool:![USER_DEFAULT boolForKey:EDITING_MODE_KEY] forKey:EDITING_MODE_KEY];
     [USER_DEFAULT synchronize];
 }
+
+- (void)tagSelect:(UIButton *)b{
+    
+    UIActionSheet *as = [[UIActionSheet alloc] init];
+    as.delegate = self;
+    as.title = @"選択してください。";
+    
+    switch (b.tag) {
+        case TAG_NORMAL_BUTTON:
+            as.tag = ACTION_SHEET_FOR_TAG_SETTING_NORMAL;
+            break;
+        case TAG_HYPER_BUTTON:
+            as.tag = ACTION_SHEET_FOR_TAG_SETTING_HYPER;
+            break;
+        case TAG_ANOTHER_BUTTON:
+            as.tag = ACTION_SHEET_FOR_TAG_SETTING_ANOTHER;
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSMutableDictionary *list;
+    switch (self.playStyleSortType) {
+        case PLAY_STYLE_SP:
+            list = spTagList_;
+            break;
+        case PLAY_STYLE_DP:
+            list = dpTagList_;
+            break;
+            
+        default:
+            break;
+    }
+    
+    if ([list count] == 0) {
+        [Utilities showDefaultAlertWithTitle:@"タグが設定されていません" message:@"設定画面よりタグを追加してください。"];
+        return;
+    }
+    
+    for(NSString *value in list){
+        [as addButtonWithTitle:[NSString stringWithFormat:@"%@",[list objectForKey:value]]];
+    }
+    [as addButtonWithTitle:@"タグを外す"];
+    [as addButtonWithTitle:@"キャンセル"];
+
+    as.destructiveButtonIndex = [list count];
+    as.cancelButtonIndex = [list count] + 1;
+    [as showFromTabBar:self.tabBarController.tabBar];
+    
+}
+
+
+- (void)updateFromViewMode:(UIButton *)b{
+    NSLog(@"pppp");
+}
+
+
+#pragma mark -
+
+
+
+
 
 - (void)setTableData{
     NSLog(@"setTableData %d %d %d %d %d",self.versionSortType,self.levelSortType,self.playStyleSortType,self.playRankSortType,self.sortingType);
@@ -460,6 +671,9 @@
     }
 }
 
+
+#pragma mark - SQLite
+
 - (void)dbSelector{
     DatabaseManager *dbManager = [DatabaseManager sharedInstance];
     FMDatabase *database = dbManager.music_DB;
@@ -484,79 +698,9 @@
         else{
             levelSql = [NSString stringWithFormat:@" = %d",self.levelSortType];
         }
-        NSString *playStyleSql;
-        if (self.playStyleSortType == 0) {
-            playStyleSql = [NSString stringWithFormat:@"SP_"];
-        }
-        else{
-            playStyleSql = [NSString stringWithFormat:@"DP_"];
-        }
-        
-        NSString *playRankSql;
-        switch (self.playRankSortType) {
-            case 0:
-                playRankSql = [NSString stringWithFormat:@"Normal"];
-                break;
-            case 1:
-                playRankSql = [NSString stringWithFormat:@"Hyper"];
-                break;
-            case 2:
-                playRankSql = [NSString stringWithFormat:@"Another"];
-                break;
-            case 3:
-                playRankSql = [NSString stringWithFormat:@"AnotherAndHyper"];
-                break;
-                
-            default:
-                playRankSql = @"UNION_ALL";
-                break;
-        }
-        
-        //クリアランプそーと
-        NSString *statusSort = @"";
-        switch (self.clearSortType) {
-            case 1:
-                statusSort = @"AND status = 7";
-                break;
-            case 2:
-                statusSort = @"AND status = 6";
-                break;
-            case 3:
-                statusSort = @"AND status = 5";
-                break;
-            case 4:
-                statusSort = @"AND status = 4";
-                break;
-            case 5:
-                statusSort = @"AND status = 3";
-                break;
-            case 6:
-                statusSort = @"AND status = 2";
-                break;
-            case 7:
-                statusSort = @"AND status = 1";
-                break;
-            case 8:
-                statusSort = @"AND status = 0";
-                break;
-            case 9:
-                statusSort = @"AND status < 7";
-                break;
-            case 10:
-                statusSort = @"AND status < 6";
-                break;
-            case 11:
-                statusSort = @"AND status < 5";
-                break;
-            case 12:
-                statusSort = @"AND status < 4";
-                break;
-            case 13:
-                statusSort = @"AND status < 3";
-                break;
-            default:
-                break;
-        }
+        NSString *playStyleSql = [NSString stringWithFormat:@"%@_",[DatabaseManager SQLPlayStyleString:self.playStyleSortType]];
+        NSString *playRankSql = [DatabaseManager SQLPlayRankString:self.playRankSortType];
+        NSString *statusSort = [NSString stringWithFormat:@"AND status%@",[DatabaseManager SQLClearLampString:self.clearSortType]];
         
 
         NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT tblResults.* FROM("];
@@ -790,6 +934,7 @@
 }
 
 
+#pragma mark - memo edit mode
 
 /////////////////////////////////
 // メモ編集モード
@@ -801,11 +946,8 @@
     [self.navigationController.view addSubview:memoTitle];
     [self.navigationController.view addSubview:memoUpdateButton];
     [pageView addSubview:memoTextView];
-    
-//    [pageView addSubview:normal];
-//    [pageView addSubview:hyper];
-//    [pageView addSubview:another];
-//    
+
+//
 //    [pageView addSubview:normalLevel];
 //    [pageView addSubview:hyperLevel];
 //    [pageView addSubview:anotherLevel];
@@ -817,20 +959,74 @@
     memoTitle.text = title;
     memoUpdateButton.tag = [musicId intValue];
     
-    NSString *memo = [[DatabaseManager sharedInstance] getMemoWithMusicId:musicId];
-    tmpText = memo;
-//    NSLog(@"memo %@",memo);
+    NSDictionary *res = [[DatabaseManager sharedInstance] getMemoAndTagWithMusicId:musicId];
+    tmpText = [res objectForKey:@"memo"];
+    
+    NSDictionary *list;
+    switch (self.playStyleSortType) {
+        case PLAY_STYLE_SP:
+        {
+            list = [NSDictionary dictionaryWithDictionary:spTagList_];
+            normalTagId_ = [[res objectForKey:@"SP_normalTag"] intValue];
+            hyperTagId_ = [[res objectForKey:@"SP_hyperTag"] intValue];
+            anotherTagId_ = [[res objectForKey:@"SP_anotherTag"] intValue];
+        }
+            break;
+        case PLAY_STYLE_DP:
+        {
+            list = [NSDictionary dictionaryWithDictionary:dpTagList_];
+            normalTagId_ = [[res objectForKey:@"DP_normalTag"] intValue];
+            hyperTagId_ = [[res objectForKey:@"DP_hyperTag"] intValue];
+            anotherTagId_ = [[res objectForKey:@"DP_anotherTag"] intValue];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    // タグのセット
+    tagEdited_ = NO;
+    if (normalTagId_ == -1) {
+        [tagNormalButton setTitle:@"未設定" forState:UIControlStateNormal];
+    }
+    else{
+        [tagNormalButton setTitle:[list objectForKey:[NSString stringWithFormat:@"%d",normalTagId_]] forState:UIControlStateNormal];
+    }
+    
+    if (hyperTagId_ == -1) {
+        [tagHyperButton setTitle:@"未設定" forState:UIControlStateNormal];
+    }
+    else{
+        [tagHyperButton setTitle:[list objectForKey:[NSString stringWithFormat:@"%d",hyperTagId_]] forState:UIControlStateNormal];
+    }
+    
+    if (anotherTagId_ == -1) {
+        [tagAnotherButton setTitle:@"未設定" forState:UIControlStateNormal];
+    }
+    else{
+        [tagAnotherButton setTitle:[list objectForKey:[NSString stringWithFormat:@"%d",anotherTagId_]] forState:UIControlStateNormal];
+    }
+    
+    
     
     [UIView animateWithDuration:0.3f animations:^(void) {
-        memoTextView.text = memo;
+        memoTextView.text = tmpText;
         
         grayViewForMemo.alpha = 0.9;
         memoTitle.alpha = 1.0;
         memoTextView.alpha = 0.8;
         
-//        normal.alpha = 1.0;
-//        hyper.alpha = 1.0;
-//        another.alpha = 1.0;
+        normal.alpha = 1.0;
+        hyper.alpha = 1.0;
+        another.alpha = 1.0;
+        
+        tagNormal.alpha = 1.0;
+        tagHyper.alpha = 1.0;
+        tagAnother.alpha = 1.0;
+        
+        rightPage_.alpha = 1.0;
+        leftPage_.alpha = 1.0;
 //        normalLevel.alpha = 1.0;
 //        hyperLevel.alpha = 1.0;
 //        anotherLevel.alpha = 1.0;
@@ -858,9 +1054,16 @@
         memoTitle.alpha = 0.0;
         memoTextView.alpha = 0.0;
         
-//        normal.alpha = 0.0;
-//        hyper.alpha = 0.0;
-//        another.alpha = 0.0;
+        normal.alpha = 0.0;
+        hyper.alpha = 0.0;
+        another.alpha = 0.0;
+        
+        tagNormal.alpha = 0.0;
+        tagHyper.alpha = 0.0;
+        tagAnother.alpha = 0.0;
+        
+        rightPage_.alpha = 0.0;
+        leftPage_.alpha = 0.0;
 //        normalLevel.alpha = 0.0;
 //        hyperLevel.alpha = 0.0;
 //        anotherLevel.alpha = 0.0;
@@ -870,9 +1073,7 @@
         [memoTextView resignFirstResponder];
         
     }completion:^(BOOL finished){
-//        [normal removeFromSuperview];
-//        [hyper removeFromSuperview];
-//        [another removeFromSuperview];
+
 //        [normalLevel removeFromSuperview];
 //        [hyperLevel removeFromSuperview];
 //        [anotherLevel removeFromSuperview];
@@ -886,9 +1087,19 @@
         [memoTextView removeFromSuperview];
         [pageView removeFromSuperview];
         
-        if (![tmpText isEqualToString:memoTextView.text]) {
+        if (![tmpText isEqualToString:memoTextView.text] || tagEdited_) {
             //変更があったら更新
-            if ([[DatabaseManager sharedInstance] updateMemoWithMusicId:b.tag text:memoTextView.text]) {
+            NSString *playStyle = @"SP";
+            if (self.playStyleSortType == PLAY_STYLE_DP) {
+                playStyle = @"DP";
+            }
+            NSDictionary *tagInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                     [NSString stringWithFormat:@"%d",normalTagId_],[NSString stringWithFormat:@"%@_normalTag",playStyle],
+                                     [NSString stringWithFormat:@"%d",hyperTagId_],[NSString stringWithFormat:@"%@_hyperTag",playStyle],
+                                     [NSString stringWithFormat:@"%d",anotherTagId_],[NSString stringWithFormat:@"%@_anotherTag",playStyle],
+                                     nil];
+            
+            if ([[DatabaseManager sharedInstance] updateMemoAndTagWithMusicId:b.tag text:memoTextView.text tagUpdateInfo:tagInfo]) {
                 [Utilities showMessage:UPDATE_SUCCEEDED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
             }
             else{
@@ -898,27 +1109,34 @@
     }];
 }
 
+
+
+#pragma mark - UIScrollView Delegate
+
 /////////////////////////////////
 // scrollViewDidScroll
 /////////////////////////////////
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    int page = (round)(scrollView.contentOffset.x / scrollView.bounds.size.width);
-////    NSLog(@"scrollViewDidScroll %d",page);
-//    
-//    if (page == 1) {
-//        [UIView animateWithDuration:0.2f animations:^(void) {
-//            if ([Utilities isDevice5thGen]) {
-//                memoTextView.frame = CGRectMake(10, 5, 300, 410);
-//            }
-//            else{
-//                memoTextView.frame = CGRectMake(10, 5, 300, 325);
-//            }
-//        }];
-//        [memoTextView resignFirstResponder];
-//        
-//        
-//    }
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    int page = (round)(scrollView.contentOffset.x / scrollView.bounds.size.width);
+//    NSLog(@"scrollViewDidScroll %d",page);
+    
+    if (page == 1) {
+        [UIView animateWithDuration:0.2f animations:^(void) {
+            if ([Utilities isDevice5thGen]) {
+                memoTextView.frame = CGRectMake(10, 5, 300, 410);
+            }
+            else{
+                memoTextView.frame = CGRectMake(10, 5, 300, 325);
+            }
+        }];
+        [memoTextView resignFirstResponder];
+        
+        
+    }
+}
+
+
+#pragma mark - UITextView Delegate
 
 -(BOOL)textViewShouldBeginEditing:(UITextView*)textView{
     
@@ -952,56 +1170,141 @@
 
 -(void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     
-    if (buttonIndex == 8) {
-        [self cancel];
-    }
-    else{
-        //一括編集から出した場合
-        if (actionSheet.tag == -1) {
-            self.navigationItem.rightBarButtonItem = self.allSelectButton;
-            self.allSelectButton.title = @"すべて選択";
-            if (![Utilities isOS4]) {
-                self.allSelectButton.tintColor = [UIColor darkGrayColor];
+    NSLog(@"clickedButtonAtIndex %d",buttonIndex);
+    
+    // タグのIDを保持
+    int tagId;
+    NSString *tagName;
+    if (actionSheet.tag == ACTION_SHEET_FOR_TAG_SETTING_NORMAL ||
+        actionSheet.tag == ACTION_SHEET_FOR_TAG_SETTING_HYPER ||
+        actionSheet.tag == ACTION_SHEET_FOR_TAG_SETTING_ANOTHER)
+    {
+        switch (self.playStyleSortType) {
+            case PLAY_STYLE_SP:
+            {
+                if (buttonIndex == [spTagList_ count] + 1) {
+                    [self cancel];
+                    return;
+                }
+                else if (buttonIndex == [spTagList_ count]){
+                    tagId = -1;
+                    tagName = @"未設定";
+                }
+                else{
+                    tagId = [[[spTagList_ allKeys] objectAtIndex:buttonIndex] intValue];
+                    tagName = [spTagList_ objectForKey:[NSString stringWithFormat:@"%d",tagId]];
+                }
             }
-            allChecking = NO;
-            editing = YES;
-            someEditType = 7 - buttonIndex;
-            editMode.text = [editTypes objectAtIndex:buttonIndex];
-            toolBar.items = toolbarItemsInEditing;
-            self.editStateButton.hidden = YES;
-        }
-        //セルをタップした際
-        else {
-            NSLog(@"tag = %d",actionSheet.tag);
-            int tag = actionSheet.tag;
-            //update
-            //アップデート対象のidとtypeを配列に入れる
-            NSMutableArray *array = [[NSMutableArray alloc] init];
-            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 [[self.tableData objectAtIndex:tag] objectForKey:@"music_id"],@"music_id",
-                                 [[self.tableData objectAtIndex:tag] objectForKey:@"type"],@"type",
-                                 nil];
-            [array addObject:dic];
-            
-            int status = 7 - buttonIndex;
-            int style = self.playStyleSortType;
-
-            if([self dbUpdate:array changeToStatus:status style:style]){
-                [Utilities showMessage:UPDATE_SUCCEEDED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+                break;
+            case PLAY_STYLE_DP:
+            {
+                if (buttonIndex == [dpTagList_ count] + 1) {
+                    [self cancel];
+                    return;
+                }
+                else if (buttonIndex == [dpTagList_ count]){
+                    tagId = -1;
+                    tagName = @"未設定";
+                }
+                else{
+                    tagId = [[[dpTagList_ allKeys] objectAtIndex:buttonIndex] intValue];
+                    tagName = [dpTagList_ objectForKey:[NSString stringWithFormat:@"%d",tagId]];
+                }
             }
-            else{
-                [Utilities showMessage:UPDATE_FAILED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
-            }
+                break;
+                
+            default:
+                break;
         }
     }
     
+    switch (actionSheet.tag) {
+        case ACTION_SHEET_FOR_UPDATE:
+        {
+            //一括編集から出した場合
+            if (buttonIndex == 8) {
+                [self cancel];
+            }
+            else{
+                self.navigationItem.rightBarButtonItem = self.allSelectButton;
+                self.allSelectButton.title = @"すべて選択";
+                if (![Utilities isOS4]) {
+                    self.allSelectButton.tintColor = [UIColor darkGrayColor];
+                }
+                allChecking = NO;
+                editing = YES;
+                someEditType = 7 - buttonIndex;
+                editMode.text = [editTypes objectAtIndex:buttonIndex];
+                toolBar.items = toolbarItemsInEditing;
+                self.editStateButton.hidden = YES;
+            }
+        }
+            break;
+        case ACTION_SHEET_FOR_TAG_SETTING_NORMAL:
+        {
+            if (normalTagId_ != tagId) {
+                tagEdited_ = YES;
+                normalTagId_ = tagId;
+                [tagNormalButton setTitle:tagName forState:UIControlStateNormal];
+                NSLog(@"normalTagId_ %d",normalTagId_);
+            }
+        }
+            break;
+        case ACTION_SHEET_FOR_TAG_SETTING_HYPER:
+        {
+            if (hyperTagId_ != tagId) {
+                tagEdited_ = YES;
+                hyperTagId_ = tagId;
+                [tagHyperButton setTitle:tagName forState:UIControlStateNormal];
+                NSLog(@"hyperTagId_ %d",hyperTagId_);
+            }
+        }
+            break;
+        case ACTION_SHEET_FOR_TAG_SETTING_ANOTHER:
+        {
+            if (anotherTagId_ != tagId) {
+                tagEdited_ = YES;
+                anotherTagId_ = tagId;
+                [tagAnotherButton setTitle:tagName forState:UIControlStateNormal];
+                NSLog(@"anotherTagId_ %d",anotherTagId_);
+            }
+        }
+            break;
+
+        default:
+        {
+            //セルをタップした際
+            if (buttonIndex == 8) {
+                [self cancel];
+            }
+            else{
+                NSLog(@"tag = %d",actionSheet.tag);
+                int tag = actionSheet.tag;
+                //update
+                //アップデート対象のidとtypeを配列に入れる
+                NSMutableArray *array = [[NSMutableArray alloc] init];
+                NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                     [[self.tableData objectAtIndex:tag] objectForKey:@"music_id"],@"music_id",
+                                     [[self.tableData objectAtIndex:tag] objectForKey:@"type"],@"type",
+                                     nil];
+                [array addObject:dic];
+                
+                int status = 7 - buttonIndex;
+                int style = self.playStyleSortType;
+                
+                if([self dbUpdate:array changeToStatus:status style:style]){
+                    [Utilities showMessage:UPDATE_SUCCEEDED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+                }
+                else{
+                    [Utilities showMessage:UPDATE_FAILED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+                }
+            }
+        }
+            break;
+    }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 #pragma mark - Table view data source
 
@@ -1119,6 +1422,14 @@
         }
     }
 
+}
+
+#pragma mark -
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 

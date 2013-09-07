@@ -26,8 +26,9 @@
 - (void)addColumnUsersMemo;
 - (void)addColumnUsersTag;
 
-- (NSString *)getMemoWithMusicId:(NSString *)musicId;
-- (BOOL)updateMemoWithMusicId:(int)musicId text:(NSString *)text;
+- (NSDictionary *)getMemoAndTagWithMusicId:(NSString *)musicId;
+- (BOOL)updateMemoAndTagWithMusicId:(int)musicId text:(NSString *)text tagUpdateInfo:(NSDictionary *)tagUpdateInfo;
+- (BOOL)removeTag:(int)tagId playStyle:(int)playStyle;
 
 + (NSString *)sqlSanitizing:(NSString *)sql;
 + (NSString *)decodeString:(NSString *)str;

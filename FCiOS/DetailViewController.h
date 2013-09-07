@@ -17,6 +17,7 @@
 
 @interface DetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UITextFieldDelegate,UITextViewDelegate>{
     UITableView *table_;
+    UITableView *halfTableView_;
     
     int versionSortType_;
     int levelSortType_;
@@ -68,6 +69,14 @@
     UILabel *hyper;
     UILabel *another;
     
+    UILabel *tagAnother;
+    UILabel *tagHyper;
+    UILabel *tagNormal;
+    
+    UIButton *tagAnotherButton;
+    UIButton *tagHyperButton;
+    UIButton *tagNormalButton;
+    
     UILabel *normalLevel;
     UILabel *hyperLevel;
     UILabel *anotherLevel;
@@ -76,6 +85,18 @@
     UIButton *hyperUpdate;
     UIButton *anotherUpdate;
 
+    NSMutableDictionary *spTagList_;
+    NSMutableDictionary *dpTagList_;
+    
+    int normalTagId_;
+    int hyperTagId_;
+    int anotherTagId_;
+    
+    BOOL tagEdited_;
+    
+    UILabel *rightPage_;
+    UILabel *leftPage_;
+    
 }
 
 @property (nonatomic ,retain) UITableView *table;
