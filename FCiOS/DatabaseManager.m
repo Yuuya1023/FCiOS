@@ -353,6 +353,105 @@ static dispatch_queue_t serialQueue;
 
 
 
+- (void)tagSortSelecter:(int)style{
+    if ([self.music_DB open]) {
+        
+        NSMutableDictionary *setDic = [[NSMutableDictionary alloc] init];
+        
+        
+        NSString *playStyle;
+        NSMutableDictionary *tagList;
+        NSArray *keys;
+        if (style == 0) {
+            playStyle = @"SP";
+            
+            tagList = [[USER_DEFAULT objectForKey:SP_TAG_LIST_KEY] mutableCopy];
+            if (!tagList) {
+                tagList = [[NSMutableDictionary alloc] init];
+            }
+            keys = [tagList allKeys];
+        }
+        else{
+            playStyle = @"DP";
+            
+            tagList = [[USER_DEFAULT objectForKey:DP_TAG_LIST_KEY] mutableCopy];
+            if (!tagList) {
+                tagList = [[NSMutableDictionary alloc] init];
+            }
+            keys = [tagList allKeys];
+        }
+        
+        
+        
+        for (int i = 0; i < [keys count]; i++) {
+            
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            int resultSum = 0;
+            int min = -1;
+            
+            NSString *tag = [keys objectAtIndex:i];
+            
+            
+                        
+            NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT status,count(music_id) FROM ( SELECT tblResults.* FROM("];
+            [sql appendFormat:@"SELECT music_id,%@_Normal_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@_normalTag = %@ AND deleteFlg = 0",
+             playStyle,
+             playStyle,
+             tag];
+            
+            [sql appendFormat:@" UNION ALL "];
+            [sql appendFormat:@"SELECT music_id,%@_Hyper_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@_hyperTag = %@ AND deleteFlg = 0",
+             playStyle,
+             playStyle,
+             tag];
+            
+            [sql appendFormat:@" UNION ALL "];
+            [sql appendFormat:@"SELECT music_id,%@_Another_Status AS status FROM musicMaster JOIN userData USING(music_id) WHERE %@_anotherTag = %@ AND deleteFlg = 0",
+             playStyle,
+             playStyle,
+             tag];
+            
+            
+            [sql appendFormat:@") AS tblResults) GROUP BY status"];
+            NSLog(@"\n%@",sql);
+            
+            FMResultSet *rs_lamp = [self.music_DB executeQuery:sql];
+            while ([rs_lamp next]) {
+                int status = [rs_lamp intForColumn:@"status"];
+                int count =  [rs_lamp intForColumn:@"count(music_id)"];
+                resultSum += count;
+                
+                if (min == -1 && count > 0) {
+                    min = status;
+                }
+            }
+            NSLog(@"result%d %d",min,resultSum);
+            [dic setObject:[NSString stringWithFormat:@"%d",resultSum] forKey:@"count"];
+            if (min == -1) {
+                min = 0;
+            }
+            [dic setObject:[NSString stringWithFormat:@"%d",min] forKey:@"min"];
+            
+            // キー = tagId
+            [setDic setObject:dic forKey:tag];
+        }
+        
+        // ユーザーデフォルトに保存
+        if (style == 0) {
+            [USER_DEFAULT setObject:setDic forKey:SP_TAG_INFO_KEY];
+        }
+        else{
+            [USER_DEFAULT setObject:setDic forKey:DP_TAG_INFO_KEY];
+        }
+        [USER_DEFAULT synchronize];
+    }
+    else{
+        NSLog(@"Could not open db.");
+    }
+}
+
+
+
 
 
 
@@ -499,10 +598,17 @@ static dispatch_queue_t serialQueue;
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if ([self.music_DB open]) {
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM userData WHERE music_id = %@",musicId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM musicMaster JOIN userData USING(music_id) WHERE music_id = %@",musicId];
         FMResultSet *rs = [self.music_DB executeQuery:sql];
         while ([rs next]) {
             [dic setValue:[DatabaseManager decodeString:[rs stringForColumn:@"memo"]] forKey:@"memo"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_Another_Level"]] forKey:@"SP_Another_Level"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_Hyper_Level"]] forKey:@"SP_Hyper_Level"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_Normal_Level"]] forKey:@"SP_Normal_Level"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"DP_Another_Level"]] forKey:@"DP_Another_Level"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"DP_Hyper_Level"]] forKey:@"DP_Hyper_Level"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"DP_Normal_Level"]] forKey:@"DP_Normal_Level"];
+            
             [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_anotherTag"]] forKey:@"SP_anotherTag"];
             [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_hyperTag"]] forKey:@"SP_hyperTag"];
             [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_normalTag"]] forKey:@"SP_normalTag"];

@@ -8,6 +8,7 @@
 
 #import "fciosAppDelegate.h"
 #import "MainViewController.h"
+#import "FavoriteViewController.h"
 #import "SortConfigViewController.h"
 #import "SettingViewController.h"
 
@@ -62,17 +63,22 @@
     
     UINavigationController *nvc2 = [[UINavigationController alloc] init];
     nvc2.navigationBar.barStyle = UIBarStyleBlack;
-    UIViewController *viewController2 = [[SortConfigViewController alloc] init];
+    UIViewController *viewController2 = [[FavoriteViewController alloc] init];
     nvc2.viewControllers = @[viewController2];
     
     UINavigationController *nvc3 = [[UINavigationController alloc] init];
     nvc3.navigationBar.barStyle = UIBarStyleBlack;
-    UIViewController *viewController3 = [[SettingViewController alloc] init];
+    UIViewController *viewController3 = [[SortConfigViewController alloc] init];
     nvc3.viewControllers = @[viewController3];
+    
+    UINavigationController *nvc4 = [[UINavigationController alloc] init];
+    nvc4.navigationBar.barStyle = UIBarStyleBlack;
+    UIViewController *viewController4 = [[SettingViewController alloc] init];
+    nvc4.viewControllers = @[viewController4];
 
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[nvc1,nvc2,nvc3];
+    self.tabBarController.viewControllers = @[nvc1,nvc2,nvc3,nvc4];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;

@@ -33,6 +33,8 @@
 #define DP_TAG_LIST_KEY @"dpTagList"
 #define SP_TAG_LIST_LAST_KEY @"spTagListLastKey"
 #define DP_TAG_LIST_LAST_KEY @"dpTagListLastKey"
+#define SP_TAG_INFO_KEY @"spTagInfo"
+#define DP_TAG_INFO_KEY @"dpTagInfo"
 
 //customKey
 #define CUSTOM_SP1 @"custom_sp1"

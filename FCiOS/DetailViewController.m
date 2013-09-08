@@ -58,6 +58,7 @@ typedef enum {
 @synthesize playStyleSortType = playStyleSortType_;
 @synthesize playRankSortType = playRankSortType_;
 @synthesize sortingType = sortingType_;
+@synthesize tagId = tagId_;
 
 @synthesize tableData = tableData_;
 @synthesize checkList = checkList_;
@@ -158,6 +159,9 @@ typedef enum {
         
         //メモ用
         {
+            shouldTagReflesh_ = NO;
+            self.tagId = -1;
+            
             // 2ページ目のx始点用
             float width = [UIScreen mainScreen].bounds.size.width;
             
@@ -202,21 +206,28 @@ typedef enum {
             
             
             // 下部のページ案内
-            rightPage_ = [[UILabel alloc] init];
+            rightPage_ = [UIButton buttonWithType:UIButtonTypeCustom];
             rightPage_.alpha = 0.0;
-            rightPage_.text = @"タグ設定 >";
-            rightPage_.font = DEFAULT_FONT;
-            rightPage_.textColor = [UIColor whiteColor];
+            rightPage_.titleLabel.font = DEFAULT_FONT;
             rightPage_.backgroundColor = [UIColor clearColor];
+            
+            [rightPage_ setTitle:@"タグ設定 >" forState:UIControlStateNormal];
+            [rightPage_ setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [rightPage_ setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+            [rightPage_ addTarget:self action:NSSelectorFromString(@"pageChange:") forControlEvents:UIControlEventTouchUpInside];
             
             [pageView addSubview:rightPage_];
             
-            leftPage_ = [[UILabel alloc] init];
+            leftPage_ = [UIButton buttonWithType:UIButtonTypeCustom];
             leftPage_.alpha = 0.0;
-            leftPage_.text = @"< メモ編集";
-            leftPage_.font = DEFAULT_FONT;
-            leftPage_.textColor = [UIColor whiteColor];
+            leftPage_.titleLabel.font = DEFAULT_FONT;
             leftPage_.backgroundColor = [UIColor clearColor];
+                        
+            [leftPage_ setTitle:@"< メモ編集" forState:UIControlStateNormal];
+            [leftPage_ setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [leftPage_ setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+            [leftPage_ addTarget:self action:NSSelectorFromString(@"pageChange:") forControlEvents:UIControlEventTouchUpInside];
+
             
             [pageView addSubview:leftPage_];
             
@@ -265,6 +276,31 @@ typedef enum {
             [pageView addSubview:hyper];
             [pageView addSubview:another];
             
+            // レベル表記
+            normalLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 10, 100, 40)];
+//            normalLevel.text = @"LEVEL 10";
+            normalLevel.font = DEFAULT_FONT;
+            normalLevel.textColor = [UIColor blueColor];
+            normalLevel.alpha = 0.0;
+            normalLevel.backgroundColor = [UIColor clearColor];
+            [pageView addSubview:normalLevel];
+            
+            hyperLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 110, 100, 40)];
+//            hyperLevel.text = @"LEVEL 10";
+            hyperLevel.font = DEFAULT_FONT;
+            hyperLevel.textColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.0 alpha:1.0];
+            hyperLevel.alpha = 0.0;
+            hyperLevel.backgroundColor = [UIColor clearColor];
+            [pageView addSubview:hyperLevel];
+            
+            anotherLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 210, 100, 40)];
+//            anotherLevel.text = @"LEVEL 10";
+            anotherLevel.font = DEFAULT_FONT;
+            anotherLevel.textColor = [UIColor redColor];
+            anotherLevel.alpha = 0.0;
+            anotherLevel.backgroundColor = [UIColor clearColor];
+            [pageView addSubview:anotherLevel];
+            
             
             // タグ用リスト
             spTagList_ = [[USER_DEFAULT objectForKey:SP_TAG_LIST_KEY] mutableCopy];
@@ -306,10 +342,11 @@ typedef enum {
             // タグ変更ボタン
             tagNormalButton = [UIButton buttonWithType:UIButtonTypeCustom];
             tagNormalButton.tag = TAG_NORMAL_BUTTON;
+            tagNormalButton.alpha = 0.0;
             tagNormalButton.frame = CGRectMake(width + 110, 55, 200, 35);
             tagNormalButton.titleLabel.font = DEFAULT_FONT;
             tagNormalButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-            [tagNormalButton setTitle:@"たぐたぐたぐ" forState:UIControlStateNormal];
+//            [tagNormalButton setTitle:@"たぐたぐたぐ" forState:UIControlStateNormal];
             [tagNormalButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
             
             [[tagNormalButton layer] setBorderWidth:1.0f];
@@ -319,10 +356,11 @@ typedef enum {
             
             tagHyperButton = [UIButton buttonWithType:UIButtonTypeCustom];
             tagHyperButton.tag = TAG_HYPER_BUTTON;
+            tagHyperButton.alpha = 0.0;
             tagHyperButton.frame = CGRectMake(width + 110, 155, 200, 35);
             tagHyperButton.titleLabel.font = DEFAULT_FONT;
             tagHyperButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-            [tagHyperButton setTitle:@"たぐたぐたぐ" forState:UIControlStateNormal];
+//            [tagHyperButton setTitle:@"たぐたぐたぐ" forState:UIControlStateNormal];
             [tagHyperButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
             
             [[tagHyperButton layer] setBorderWidth:1.0f];
@@ -332,10 +370,11 @@ typedef enum {
             
             tagAnotherButton = [UIButton buttonWithType:UIButtonTypeCustom];
             tagAnotherButton.tag = TAG_ANOTHER_BUTTON;
+            tagAnotherButton.alpha = 0.0;
             tagAnotherButton.frame = CGRectMake(width + 110, 255, 200, 35);
             tagAnotherButton.titleLabel.font = DEFAULT_FONT;
             tagAnotherButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-            [tagAnotherButton setTitle:@"たぐたぐたぐ" forState:UIControlStateNormal];
+//            [tagAnotherButton setTitle:@"たぐたぐたぐ" forState:UIControlStateNormal];
             [tagAnotherButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
             
             [[tagAnotherButton layer] setBorderWidth:1.0f];
@@ -343,29 +382,9 @@ typedef enum {
             [tagAnotherButton addTarget:self action:NSSelectorFromString(@"tagSelect:") forControlEvents:UIControlEventTouchUpInside];
             [pageView addSubview:tagAnotherButton];
             
+
+            
 //
-//            
-//            normalLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 10, 100, 40)];
-//            normalLevel.text = @"LEVEL 10";
-//            normalLevel.font = DEFAULT_FONT;
-//            normalLevel.alpha = 0.0;
-//            normalLevel.textColor = [UIColor whiteColor];
-//            normalLevel.backgroundColor = [UIColor clearColor];
-//            
-//            hyperLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 110, 100, 40)];
-//            hyperLevel.text = @"LEVEL 10";
-//            hyperLevel.font = DEFAULT_FONT;
-//            hyperLevel.alpha = 0.0;
-//            hyperLevel.textColor = [UIColor whiteColor];
-//            hyperLevel.backgroundColor = [UIColor clearColor];
-//            
-//            anotherLevel = [[UILabel alloc] initWithFrame:CGRectMake(width + 140, 210, 100, 40)];
-//            anotherLevel.text = @"LEVEL 10";
-//            anotherLevel.font = DEFAULT_FONT;
-//            anotherLevel.alpha = 0.0;
-//            anotherLevel.textColor = [UIColor whiteColor];
-//            anotherLevel.backgroundColor = [UIColor clearColor];
-//            
 //            
 //            normalUpdate = [UIButton buttonWithType:UIButtonTypeCustom];
 //            normalUpdate.frame = CGRectMake(width + 80, 50, 230, 40);
@@ -625,6 +644,20 @@ typedef enum {
 }
 
 
+- (void)pageChange:(UIButton *)b{
+    int page = (round)(pageView.contentOffset.x / pageView.bounds.size.width);
+    
+    float width = 0;
+    if (page == 0) {
+        width = [UIScreen mainScreen].bounds.size.width;
+    }
+    [UIView animateWithDuration:0.2f animations:^(void) {
+        [pageView setContentOffset:CGPointMake(width, 0)];
+    }];
+}
+
+
+
 - (void)updateFromViewMode:(UIButton *)b{
     NSLog(@"pppp");
 }
@@ -705,8 +738,31 @@ typedef enum {
 
         NSMutableString *sql = [NSMutableString stringWithFormat:@"SELECT tblResults.* FROM("];
         
-        //N/H/Aすべての結果を表示
-        if ([playRankSql isEqualToString:@"UNION_ALL"]) {
+        
+        if (self.tagId != -1) {
+            // タグ検索のみ
+            [sql appendFormat:@"SELECT music_id, name, version, %@Normal_Level AS level, %@Normal_Status AS status, selectType_Normal AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@normalTag = %d AND deleteFlg = 0 AND level != 0",
+             playStyleSql,
+             playStyleSql,
+             playStyleSql,
+             self.tagId];
+            
+            [sql appendFormat:@" UNION ALL "];
+            [sql appendFormat:@"SELECT music_id, name, version, %@Hyper_Level AS level, %@Hyper_Status AS status, selectType_Hyper AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@hyperTag = %d AND deleteFlg = 0 AND level != 0",
+             playStyleSql,
+             playStyleSql,
+             playStyleSql,
+             self.tagId];
+            
+            [sql appendFormat:@" UNION ALL "];
+            [sql appendFormat:@"SELECT music_id, name, version, %@Another_Level AS level, %@Another_Status AS status, selectType_Another AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@anotherTag = %d AND deleteFlg = 0 AND level != 0",
+             playStyleSql,
+             playStyleSql,
+             playStyleSql,
+             self.tagId];
+        }
+        else if ([playRankSql isEqualToString:@"UNION_ALL"]) {
+            //N/H/Aすべての結果を表示
             [sql appendFormat:@"SELECT music_id,name,version,%@Normal_Level AS level,%@Normal_Status AS status,selectType_Normal AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Normal_Level%@ %@ AND deleteFlg = 0 AND level != 0",
              playStyleSql,
              playStyleSql,
@@ -735,7 +791,7 @@ typedef enum {
             
         }
         else if ([playRankSql isEqualToString:@"AnotherAndHyper"]) {
-            
+            // Another + Hyper
             [sql appendFormat:@"SELECT music_id,name,version,%@Hyper_Level AS level,%@Hyper_Status AS status,selectType_Hyper AS type FROM musicMaster JOIN userData USING(music_id) WHERE %@ AND %@Hyper_Level%@ %@ AND deleteFlg = 0 AND level != 0 AND %@Another_Level = 0",
              playStyleSql,
              playStyleSql,
@@ -925,6 +981,7 @@ typedef enum {
         
         [database close];
         [dbManager customSortSelecter:style];
+        [dbManager tagSortSelecter:style];
         [self setTableData];
     }
     else{
@@ -963,6 +1020,9 @@ typedef enum {
     tmpText = [res objectForKey:@"memo"];
     
     NSDictionary *list;
+    int normalLv = 0;
+    int hyperLv = 0;
+    int anotherLv = 0;
     switch (self.playStyleSortType) {
         case PLAY_STYLE_SP:
         {
@@ -970,6 +1030,10 @@ typedef enum {
             normalTagId_ = [[res objectForKey:@"SP_normalTag"] intValue];
             hyperTagId_ = [[res objectForKey:@"SP_hyperTag"] intValue];
             anotherTagId_ = [[res objectForKey:@"SP_anotherTag"] intValue];
+            
+            normalLv = [[res objectForKey:@"SP_Normal_Level"] intValue];
+            hyperLv = [[res objectForKey:@"SP_Hyper_Level"] intValue];
+            anotherLv = [[res objectForKey:@"SP_Another_Level"] intValue];
         }
             break;
         case PLAY_STYLE_DP:
@@ -978,6 +1042,10 @@ typedef enum {
             normalTagId_ = [[res objectForKey:@"DP_normalTag"] intValue];
             hyperTagId_ = [[res objectForKey:@"DP_hyperTag"] intValue];
             anotherTagId_ = [[res objectForKey:@"DP_anotherTag"] intValue];
+            
+            normalLv = [[res objectForKey:@"DP_Normal_Level"] intValue];
+            hyperLv = [[res objectForKey:@"DP_Hyper_Level"] intValue];
+            anotherLv = [[res objectForKey:@"DP_Another_Level"] intValue];
         }
             break;
             
@@ -1017,19 +1085,34 @@ typedef enum {
         memoTitle.alpha = 1.0;
         memoTextView.alpha = 0.8;
         
-        normal.alpha = 1.0;
-        hyper.alpha = 1.0;
-        another.alpha = 1.0;
+        if (normalLv != 0) {
+            normal.alpha = 1.0;
+            normalLevel.alpha = 1.0;
+            normalLevel.text = [NSString stringWithFormat:@"LEVEL %d",normalLv];
+            tagNormal.alpha = 1.0;
+            tagNormalButton.alpha = 1.0;
+        }
         
-        tagNormal.alpha = 1.0;
-        tagHyper.alpha = 1.0;
-        tagAnother.alpha = 1.0;
+        if (hyperLv != 0) {
+            hyper.alpha = 1.0;
+            hyperLevel.alpha = 1.0;
+            hyperLevel.text = [NSString stringWithFormat:@"LEVEL %d",hyperLv];
+            tagHyper.alpha = 1.0;
+            tagHyperButton.alpha = 1.0;
+        }
+        
+        if (anotherLv != 0) {
+            another.alpha = 1.0;
+            anotherLevel.alpha = 1.0;
+            anotherLevel.text = [NSString stringWithFormat:@"LEVEL %d",anotherLv];
+            tagAnother.alpha = 1.0;
+            tagAnotherButton.alpha = 1.0;
+        }
         
         rightPage_.alpha = 1.0;
         leftPage_.alpha = 1.0;
-//        normalLevel.alpha = 1.0;
-//        hyperLevel.alpha = 1.0;
-//        anotherLevel.alpha = 1.0;
+        
+        
 //        normalUpdate.alpha = 1.0;
 //        hyperUpdate.alpha = 1.0;
 //        anotherUpdate.alpha = 1.0;
@@ -1064,9 +1147,11 @@ typedef enum {
         
         rightPage_.alpha = 0.0;
         leftPage_.alpha = 0.0;
-//        normalLevel.alpha = 0.0;
-//        hyperLevel.alpha = 0.0;
-//        anotherLevel.alpha = 0.0;
+        
+        normalLevel.alpha = 0.0;
+        hyperLevel.alpha = 0.0;
+        anotherLevel.alpha = 0.0;
+
 //        normalUpdate.alpha = 0.0;
 //        hyperUpdate.alpha = 0.0;
 //        anotherUpdate.alpha = 0.0;
@@ -1100,6 +1185,7 @@ typedef enum {
                                      nil];
             
             if ([[DatabaseManager sharedInstance] updateMemoAndTagWithMusicId:b.tag text:memoTextView.text tagUpdateInfo:tagInfo]) {
+                shouldTagReflesh_ = YES;
                 [Utilities showMessage:UPDATE_SUCCEEDED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
             }
             else{
@@ -1432,5 +1518,13 @@ typedef enum {
     // Dispose of any resources that can be recreated.
 }
 
+-(void) viewWillDisappear:(BOOL)animated {
+    NSLog(@"viewWillDisappear");
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound && shouldTagReflesh_) {
+        DatabaseManager *dbManager = [DatabaseManager sharedInstance];
+        [dbManager tagSortSelecter:self.playStyleSortType];
+    }
+    [super viewWillDisappear:animated];
+}
 
 @end

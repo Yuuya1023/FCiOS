@@ -525,4 +525,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void) viewWillDisappear:(BOOL)animated {
+    NSLog(@"viewWillDisappear");
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        DatabaseManager *dbManager = [DatabaseManager sharedInstance];
+        [dbManager tagSortSelecter:0];
+        [dbManager tagSortSelecter:1];
+    }
+    [super viewWillDisappear:animated];
+}
+
 @end

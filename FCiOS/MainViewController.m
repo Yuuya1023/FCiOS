@@ -118,7 +118,7 @@
 
 - (void)reloadTable{
     [self initializeArray];
-    [self setCustomDetail:playStyleSortType];
+//    [self setCustomDetail:playStyleSortType];
     [self dbSelector];
 }
 
@@ -142,7 +142,7 @@
         [USER_DEFAULT synchronize];
     }
     else{
-        [self setCustomDetail:playStyleSortType];
+//        [self setCustomDetail:playStyleSortType];
     }
 
 }

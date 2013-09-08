@@ -22,6 +22,7 @@
 + (BOOL)updateDatabase;
 
 - (void)customSortSelecter:(int)style;
+- (void)tagSortSelecter:(int)style;
 
 - (void)addColumnUsersMemo;
 - (void)addColumnUsersTag;

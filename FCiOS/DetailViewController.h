@@ -25,6 +25,7 @@
     int playStyleSortType_;
     int playRankSortType_;
     int sortingType_;
+    int tagId_;
     
     int fcCount;
     int exCount;
@@ -93,9 +94,10 @@
     int anotherTagId_;
     
     BOOL tagEdited_;
+    BOOL shouldTagReflesh_;
     
-    UILabel *rightPage_;
-    UILabel *leftPage_;
+    UIButton *rightPage_;
+    UIButton *leftPage_;
     
 }
 
@@ -112,6 +114,7 @@
 @property (nonatomic, assign) int playStyleSortType;
 @property (nonatomic, assign) int playRankSortType;
 @property (nonatomic, assign) int sortingType;
+@property (nonatomic, assign) int tagId;
 
 @property (nonatomic ,retain) NSMutableArray *tableData;
 
