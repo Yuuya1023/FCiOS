@@ -637,7 +637,7 @@ typedef enum {
     [as addButtonWithTitle:@"タグを外す"];
     [as addButtonWithTitle:@"キャンセル"];
 
-    as.destructiveButtonIndex = [list count];
+//    as.destructiveButtonIndex = [list count];
     as.cancelButtonIndex = [list count] + 1;
     [as showFromTabBar:self.tabBarController.tabBar];
     
