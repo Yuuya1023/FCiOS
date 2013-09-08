@@ -1145,6 +1145,10 @@ typedef enum {
         tagHyper.alpha = 0.0;
         tagAnother.alpha = 0.0;
         
+        tagNormalButton.alpha = 0.0;
+        tagHyperButton.alpha = 0.0;
+        tagAnotherButton.alpha = 0.0;
+        
         rightPage_.alpha = 0.0;
         leftPage_.alpha = 0.0;
         

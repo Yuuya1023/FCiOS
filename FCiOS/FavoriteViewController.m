@@ -155,14 +155,14 @@
         tagInfo = [[USER_DEFAULT objectForKey:DP_TAG_INFO_KEY] mutableCopy];
     }
     
-    for(NSString *key in tagList){
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setObject:key forKey:@"tagId"];
-        [dic setObject:[tagList objectForKey:key] forKey:@"tagName"];
-        [dic setObject:[[tagInfo objectForKey:key] objectForKey:@"count"] forKey:@"count"];
-        [dic setObject:[[tagInfo objectForKey:key] objectForKey:@"min"] forKey:@"min"];
-        
-        [self.tagDetailArray addObject:dic];
+    for(NSString *key in tagList){        
+        NSDictionary *dic2 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                              key, @"tagId",
+                              [tagList objectForKey:key], @"tagName",
+                              [[tagInfo objectForKey:key] objectForKey:@"count"] , @"count",
+                              [[tagInfo objectForKey:key] objectForKey:@"min"] , @"min",
+                              nil];
+        [self.tagDetailArray addObject:dic2];
     }
     
     NSLog(@"%@",self.tagDetailArray);

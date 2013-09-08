@@ -100,7 +100,7 @@
         
         // キャンセルボタン
         cancelButton_ = [UIButton buttonWithType:UIButtonTypeCustom];
-        cancelButton_.frame = CGRectMake(30, 300, 100, 40);
+        cancelButton_.frame = CGRectMake(30, 270, 100, 40);
         cancelButton_.titleLabel.font = DEFAULT_FONT;
         [cancelButton_ setTitle:@"キャンセル" forState:UIControlStateNormal];
         [cancelButton_ setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
@@ -113,7 +113,7 @@
         
         // OKボタン
         okButton_ = [UIButton buttonWithType:UIButtonTypeCustom];
-        okButton_.frame = CGRectMake(190, 300, 100, 40);
+        okButton_.frame = CGRectMake(190, 270, 100, 40);
         okButton_.titleLabel.font = DEFAULT_FONT;
         [okButton_ setTitle:@"OK" forState:UIControlStateNormal];
         [okButton_ setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
@@ -403,6 +403,8 @@
                                                                   target:self
                                                                   action:NSSelectorFromString(@"delete:")];
         self.navigationItem.rightBarButtonItem = button;
+        
+        [Utilities showDefaultAlertWithTitle:@"" message:@"曲に指定しているタグを削除すると自動的に未設定になりますのでご注意ください。"];
     }
     else{
         UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"削除"
@@ -427,6 +429,7 @@
         switch (b.tag) {
                 // 保存
             case EDIT_TARGET_SP:
+            {
                 if ([[spTagList_ allValues] containsObject:tagNameField_.text]) {
                     [Utilities showDefaultAlertWithTitle:@"" message:@"同じタグ名が存在します。"];
                     return;
@@ -437,6 +440,7 @@
                 [USER_DEFAULT setInteger:spTagListLastKey_ forKey:SP_TAG_LIST_LAST_KEY];
                 [USER_DEFAULT synchronize];
                 NSLog(@"%@",spTagList_);
+            }
                 break;
                 
             case EDIT_TARGET_DP:
@@ -471,7 +475,11 @@
         switch (b.tag) {
             // 保存
             case EDIT_TARGET_SP:
-                if ([[spTagList_ allValues] containsObject:tagNameField_.text]) {
+            {
+                NSMutableArray *temp = [NSMutableArray arrayWithArray:[spTagList_ allValues]];
+                NSLog(@"%@",temp);
+                [temp removeObjectAtIndex:editingIndex_ - 1];
+                if ([temp containsObject:tagNameField_.text]) {
                     [Utilities showDefaultAlertWithTitle:@"" message:@"同じタグ名が存在します。"];
                     return;
                 }
@@ -479,10 +487,15 @@
                 [USER_DEFAULT setObject:spTagList_ forKey:SP_TAG_LIST_KEY];
                 [USER_DEFAULT setInteger:spTagListLastKey_ forKey:SP_TAG_LIST_LAST_KEY];
                 NSLog(@"%@",spTagList_);
+            }
                 break;
                 
             case EDIT_TARGET_DP:
-                if ([[dpTagList_ allValues] containsObject:tagNameField_.text]) {
+            {
+                NSMutableArray *temp = [NSMutableArray arrayWithArray:[dpTagList_ allValues]];
+                NSLog(@"%@",temp);
+                [temp removeObjectAtIndex:editingIndex_ - 1];
+                if ([temp containsObject:tagNameField_.text]) {
                     [Utilities showDefaultAlertWithTitle:@"" message:@"同じタグ名が存在します。"];
                     return;
                 }
@@ -490,6 +503,7 @@
                 [USER_DEFAULT setObject:dpTagList_ forKey:DP_TAG_LIST_KEY];
                 [USER_DEFAULT setInteger:dpTagListLastKey_ forKey:DP_TAG_LIST_LAST_KEY];
                 NSLog(@"%@",dpTagList_);
+            }
                 break;
                 
             default:
@@ -505,6 +519,7 @@
 #pragma mark -
 
 - (void)closeEditView{
+    [tagNameField_ resignFirstResponder];
     
     [UIView animateWithDuration:0.3f animations:^(void) {
         grayView_.alpha = 0.0;
