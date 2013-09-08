@@ -46,7 +46,7 @@
         
         
         // テーブル
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 72) style:UITableViewStyleGrouped];
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 68) style:UITableViewStyleGrouped];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         
@@ -287,6 +287,7 @@
         }
         
         editingIndex_ = [[keys objectAtIndex:indexPath.row] integerValue];
+        prevName_ = [values objectAtIndex:indexPath.row];
         [tagNameField_ setText:[values objectAtIndex:indexPath.row]];
         [self showEditPopup:EDIT_TYPE_EDIT target:indexPath.section];
     }
@@ -471,15 +472,15 @@
     if ([tagNameField_.text length] == 0) {
         [Utilities showDefaultAlertWithTitle:@"" message:@"タグ名を入力してください。"];
     }
+    else if ([tagNameField_.text isEqualToString:prevName_]){
+        [self closeEditView];
+    }
     else{
         switch (b.tag) {
             // 保存
             case EDIT_TARGET_SP:
             {
-                NSMutableArray *temp = [NSMutableArray arrayWithArray:[spTagList_ allValues]];
-                NSLog(@"%@",temp);
-                [temp removeObjectAtIndex:editingIndex_ - 1];
-                if ([temp containsObject:tagNameField_.text]) {
+                if ([[spTagList_ allValues] containsObject:tagNameField_.text]) {
                     [Utilities showDefaultAlertWithTitle:@"" message:@"同じタグ名が存在します。"];
                     return;
                 }
@@ -492,10 +493,7 @@
                 
             case EDIT_TARGET_DP:
             {
-                NSMutableArray *temp = [NSMutableArray arrayWithArray:[dpTagList_ allValues]];
-                NSLog(@"%@",temp);
-                [temp removeObjectAtIndex:editingIndex_ - 1];
-                if ([temp containsObject:tagNameField_.text]) {
+                if ([[dpTagList_ allValues] containsObject:tagNameField_.text]) {
                     [Utilities showDefaultAlertWithTitle:@"" message:@"同じタグ名が存在します。"];
                     return;
                 }

@@ -33,6 +33,7 @@ typedef enum {
     UIView *grayView_;
     UITextField *tagNameField_;
     
+    NSString *prevName_;
     UILabel *tagName_;
     
     UIButton *cancelButton_;
