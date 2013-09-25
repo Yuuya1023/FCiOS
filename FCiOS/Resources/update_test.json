@@ -230,5 +230,15 @@
         "music": "insert into musicMaster values(?,'Valanga','noname',20,7,10,12,6,10,12,0,0,1,2)"
         }
         ]
+ },
+ {
+ "version":"1.51",
+ "description": "「クプロ・ミミニャミ・パステルくんのみんなで宇宙戦争!!」の楽曲を追加しました。（全1曲）",
+ "sql":[
+        {
+        "music_id": "20095",
+        "music": "insert into musicMaster values(?,'Zirkfied','noname',20,5,10,12,5,10,12,0,0,1,2)"
+        }
+        ]
  }
 ]
