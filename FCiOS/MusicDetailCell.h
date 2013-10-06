@@ -8,12 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+// デリゲートを定義
+@protocol MusicDetailCellDelegate <NSObject>
+
+// デリゲートメソッドを宣言
+- (void)cellLongPressedWithMusicName:(NSString *)name;
+
+@end
+
 @interface MusicDetailCell : UITableViewCell{
     UILabel *nameLabel_;
     UILabel *difficulityLabel_;
     UIImageView *clearLamp_;
     int difficulityType_;
     int clearLampType_;
+    
 }
 
 @property (nonatomic ,retain) UILabel *nameLabel;
@@ -21,6 +30,8 @@
 @property (nonatomic ,retain) UIImageView *clearLamp;
 @property (nonatomic ,assign) int difficulityType;
 @property (nonatomic ,assign) int clearLampType;
+
+@property (nonatomic, assign) id<MusicDetailCellDelegate> delegate;
 
 - (void)editMode:(BOOL)editMode;
 

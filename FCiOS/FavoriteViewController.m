@@ -165,6 +165,15 @@
         [self.tagDetailArray addObject:dic2];
     }
     
+//    // NSSortDescriptorを生成して
+//    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tagiId" ascending:YES];
+//    // 配列に入れておいて
+//    NSArray *sortarray = [NSArray arrayWithObject:sortDescriptor];
+//    // ソートしちゃる！
+//    NSArray *resultarray;
+//    resultarray = [resultarray sortedArrayUsingDescriptors:sortarray];
+//    NSLog(@"%@",resultarray);
+    
     NSLog(@"%@",self.tagDetailArray);
     
 }

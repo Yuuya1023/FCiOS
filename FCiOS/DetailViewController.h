@@ -15,7 +15,7 @@
 #import "DatabaseManager.h"
 #import "MusicDetailCell.h"
 
-@interface DetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UITextFieldDelegate,UITextViewDelegate>{
+@interface DetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UITextFieldDelegate,UITextViewDelegate,MusicDetailCellDelegate>{
     UITableView *table_;
     UITableView *halfTableView_;
     

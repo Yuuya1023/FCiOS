@@ -1420,6 +1420,7 @@ typedef enum {
     }
     
     // Configure the cell...
+    cell.delegate = self;
     if ([[self.checkList objectAtIndex:indexPath.row] isEqualToString:@"0"]) {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
@@ -1514,7 +1515,14 @@ typedef enum {
 
 }
 
-#pragma mark -
+#pragma mark - MusicDetailCellDelegate
+
+- (void)cellLongPressedWithMusicName:(NSString *)name{
+    
+    UIPasteboard *pastebd = [UIPasteboard generalPasteboard];
+    [pastebd setValue:name forPasteboardType: @"public.utf8-plain-text"];
+    [Utilities showMessage:[NSString stringWithFormat:@"「%@」is copied.",name] cgRect:MESSAGE_FIELD inView:self.view];
+}
 
 - (void)didReceiveMemoryWarning
 {

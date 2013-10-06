@@ -14,6 +14,7 @@
 @synthesize clearLamp = clearLamp_;
 @synthesize difficulityType = difficulityType_;
 @synthesize clearLampType = clearLampType_;
+@synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -52,7 +53,12 @@
         //クリアランプ
         self.clearLamp = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 40)];
         [self addSubview:self.clearLamp];
-        
+
+        // 長押し判定
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]
+                                                          initWithTarget:self action:@selector(handleLongPressGesture:)];
+        [self addGestureRecognizer:longPressGesture];
+
     }
     return self;
 }
@@ -72,5 +78,16 @@
 
     // Configure the view for the selected state
 }
+
+- (void)handleLongPressGesture:(id)sender {
+    UILongPressGestureRecognizer *s = (UILongPressGestureRecognizer *)sender;
+    if (s.state == UIGestureRecognizerStateBegan) {
+//        NSLog(@"began %@",self.nameLabel.text);
+        if (self.delegate) {
+            [self.delegate cellLongPressedWithMusicName:self.nameLabel.text];
+        }
+    }
+}
+
 
 @end

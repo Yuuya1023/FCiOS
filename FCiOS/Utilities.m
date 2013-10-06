@@ -39,6 +39,7 @@
     label.textColor = [UIColor whiteColor];
     label.alpha = 0.0;
     label.textAlignment = NSTextAlignmentCenter;
+    label.adjustsFontSizeToFitWidth = YES;
     
     [inView addSubview:grayView];
     [inView addSubview:label];
