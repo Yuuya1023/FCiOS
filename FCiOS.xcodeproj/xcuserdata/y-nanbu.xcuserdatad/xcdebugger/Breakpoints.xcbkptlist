@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "403984378.375631"
+         timestampString = "403985995.672764"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1273"
-         endingLineNumber = "1273"
+         startingLineNumber = "1279"
+         endingLineNumber = "1279"
          landmarkName = "-actionSheet:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "403984378.375631"
+         timestampString = "403985995.672764"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1085"
-         endingLineNumber = "1085"
+         startingLineNumber = "1091"
+         endingLineNumber = "1091"
          landmarkName = "-memoEditModeWithMusicId:title:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,12 +125,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "403984115.978452"
+         timestampString = "403985995.672764"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "712"
-         endingLineNumber = "712"
+         startingLineNumber = "713"
+         endingLineNumber = "713"
          landmarkName = "-dbSelector"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FCiOS/DetailViewController.m"
+         timestampString = "403985995.672764"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1536"
+         endingLineNumber = "1536"
+         landmarkName = "-didReceiveMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

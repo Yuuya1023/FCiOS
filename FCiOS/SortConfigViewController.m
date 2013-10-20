@@ -28,13 +28,13 @@
     if (self) {
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
         titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.text = @"Sort";
+        titleLabel.text = @"Search";
         titleLabel.font = DEFAULT_FONT_TITLE;
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.textColor = [UIColor whiteColor];
         self.navigationItem.titleView = titleLabel;
         
-        self.title = @"Sort";
+        self.title = @"Search";
         self.tabBarItem.image = [UIImage imageNamed:@"sort"];
         
         self.tableList = [[NSArray alloc] init];
