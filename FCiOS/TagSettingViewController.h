@@ -24,6 +24,9 @@ typedef enum {
     NSMutableDictionary *spTagList_;
     NSMutableDictionary *dpTagList_;
     
+    NSMutableArray *spSortedKeyList_;
+    NSMutableArray *dpSortedKeyList_;
+    
     int spTagListLastKey_;
     int dpTagListLastKey_;
     

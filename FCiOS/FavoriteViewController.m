@@ -157,7 +157,7 @@
     
     for(NSString *key in tagList){        
         NSDictionary *dic2 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              key, @"tagId",
+                              [NSNumber numberWithInt:[key integerValue]], @"tagId",
                               [tagList objectForKey:key], @"tagName",
                               [[tagInfo objectForKey:key] objectForKey:@"count"] , @"count",
                               [[tagInfo objectForKey:key] objectForKey:@"min"] , @"min",
@@ -165,15 +165,16 @@
         [self.tagDetailArray addObject:dic2];
     }
     
-//    // NSSortDescriptorを生成して
-//    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tagiId" ascending:YES];
-//    // 配列に入れておいて
-//    NSArray *sortarray = [NSArray arrayWithObject:sortDescriptor];
-//    // ソートしちゃる！
-//    NSArray *resultarray;
-//    resultarray = [resultarray sortedArrayUsingDescriptors:sortarray];
+//    NSLog(@"%@",self.tagDetailArray);
+    // NSSortDescriptorを生成して
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tagId" ascending:YES];
+    // 配列に入れておいて
+    NSArray *sortarray = [NSArray arrayWithObject:sortDescriptor];
+    // ソートしちゃる！
+    NSArray *resultarray = [self.tagDetailArray sortedArrayUsingDescriptors:sortarray];
 //    NSLog(@"%@",resultarray);
-    
+
+    self.tagDetailArray = [resultarray mutableCopy];
     NSLog(@"%@",self.tagDetailArray);
     
 }

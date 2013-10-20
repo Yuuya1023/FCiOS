@@ -713,6 +713,8 @@ typedef enum {
     if ([database open]) {
         [database setShouldCacheStatements:YES];
         
+        // 初期化
+        self.tableData = [[NSMutableArray alloc] init];
         
         //バージョン
         NSString *versionSql;
@@ -1073,6 +1075,7 @@ typedef enum {
         [tagAnotherButton setTitle:@"未設定" forState:UIControlStateNormal];
     }
     else{
+//        [tagAnotherButton setTitle:[list objectForKey:[NSNumber numberWithInt:anotherTagId_]] forState:UIControlStateNormal];
         [tagAnotherButton setTitle:[list objectForKey:[NSString stringWithFormat:@"%d",anotherTagId_]] forState:UIControlStateNormal];
     }
     
@@ -1183,9 +1186,9 @@ typedef enum {
                 playStyle = @"DP";
             }
             NSDictionary *tagInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                     [NSString stringWithFormat:@"%d",normalTagId_],[NSString stringWithFormat:@"%@_normalTag",playStyle],
-                                     [NSString stringWithFormat:@"%d",hyperTagId_],[NSString stringWithFormat:@"%@_hyperTag",playStyle],
-                                     [NSString stringWithFormat:@"%d",anotherTagId_],[NSString stringWithFormat:@"%@_anotherTag",playStyle],
+                                     [NSNumber numberWithInt:normalTagId_],[NSString stringWithFormat:@"%@_normalTag",playStyle],
+                                     [NSNumber numberWithInt:hyperTagId_],[NSString stringWithFormat:@"%@_hyperTag",playStyle],
+                                     [NSNumber numberWithInt:anotherTagId_],[NSString stringWithFormat:@"%@_anotherTag",playStyle],
                                      nil];
             
             if ([[DatabaseManager sharedInstance] updateMemoAndTagWithMusicId:b.tag text:memoTextView.text tagUpdateInfo:tagInfo]) {
@@ -1194,6 +1197,12 @@ typedef enum {
             }
             else{
                 [Utilities showMessage:UPDATE_FAILED_MESSAGE cgRect:MESSAGE_FIELD inView:self.view];
+            }
+            
+            // タグを更新したときのために更新
+            if (tagEdited_) {
+                [self dbSelector];
+                [self.table reloadData];
             }
         }
     }];

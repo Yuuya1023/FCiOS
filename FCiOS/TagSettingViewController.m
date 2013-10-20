@@ -19,6 +19,8 @@
 @synthesize spTagList = spTagList_;
 @synthesize dpTagList = dpTagList_;
 
+#pragma mark - init
+
 - (id)init
 {
     self = [super init];
@@ -26,23 +28,8 @@
         // Custom initialization
         self.title = @"Tag Setting";
         
-        // リスト
-        spTagList_ = [[USER_DEFAULT objectForKey:SP_TAG_LIST_KEY] mutableCopy];
-        if (!spTagList_) {
-            spTagList_ = [[NSMutableDictionary alloc] init];
-        }
-        NSLog(@"%@",spTagList_);
-        
-        dpTagList_ = [[USER_DEFAULT objectForKey:DP_TAG_LIST_KEY] mutableCopy];
-        if (!dpTagList_) {
-            dpTagList_ = [[NSMutableDictionary alloc] init];
-        }
-        NSLog(@"%@",dpTagList_);
-        
-        spTagListLastKey_ = [USER_DEFAULT integerForKey:SP_TAG_LIST_LAST_KEY];
-        dpTagListLastKey_ = [USER_DEFAULT integerForKey:DP_TAG_LIST_LAST_KEY];
-        
-        NSLog(@"%d",spTagListLastKey_);
+        // リストの初期化
+        [self initTagList];
         
         
         // テーブル
@@ -127,6 +114,68 @@
     return self;
 }
 
+
+- (void)initTagList{
+    
+    // リスト
+    // SP
+    {
+        spTagList_ = [[USER_DEFAULT objectForKey:SP_TAG_LIST_KEY] mutableCopy];
+        if (!spTagList_) {
+            spTagList_ = [[NSMutableDictionary alloc] init];
+        }
+        
+        // ソート
+        {            
+            NSArray *keys = [spTagList_ allKeys];
+            spSortedKeyList_ = [[NSMutableArray alloc] init];
+            for (int i = 0; i < [keys count]; i++) {
+                NSNumber *num = [NSNumber numberWithInt:[[keys objectAtIndex:i] intValue]];
+                [spSortedKeyList_ addObject:num];
+            }
+            
+            [spSortedKeyList_ sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                return [obj1 compare:obj2];
+            }];
+        }
+//        NSLog(@"%@",spSortedKeyList_);
+        NSLog(@"%@",spTagList_);
+    }
+    
+    // DP
+    {
+        dpTagList_ = [[USER_DEFAULT objectForKey:DP_TAG_LIST_KEY] mutableCopy];
+        if (!dpTagList_) {
+            dpTagList_ = [[NSMutableDictionary alloc] init];
+        }
+        
+        // ソート
+        {
+            NSArray *keys = [dpTagList_ allKeys];
+            dpSortedKeyList_ = [[NSMutableArray alloc] init];
+            for (int i = 0; i < [keys count]; i++) {
+                NSNumber *num = [NSNumber numberWithInt:[[keys objectAtIndex:i] intValue]];
+                [dpSortedKeyList_ addObject:num];
+            }
+            
+            [dpSortedKeyList_ sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                return [obj1 compare:obj2];
+            }];
+        }
+        NSLog(@"%@",dpTagList_);
+    }
+    
+    spTagListLastKey_ = [USER_DEFAULT integerForKey:SP_TAG_LIST_LAST_KEY];
+    dpTagListLastKey_ = [USER_DEFAULT integerForKey:DP_TAG_LIST_LAST_KEY];
+    
+    NSLog(@"%d",spTagListLastKey_);
+    
+}
+
+
+
+#pragma mark -
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -134,6 +183,7 @@
 }
 
 
+#pragma mark -
 
 - (BOOL)isAddCellWithSection:(NSInteger)section row:(NSInteger)row{
     
@@ -188,19 +238,19 @@
     switch (section) {
         case 0:
             if (tableView.editing) {
-                count = [spTagList_ count];
+                count = [spSortedKeyList_ count];
             }
             else{
-                count = [spTagList_ count] + 1;
+                count = [spSortedKeyList_ count] + 1;
             }
             spRowCount_ = count;
             break;
         case 1:
             if (tableView.editing) {
-                count = [dpTagList_ count];
+                count = [dpSortedKeyList_ count];
             }
             else{
-                count = [dpTagList_ count] + 1;
+                count = [dpSortedKeyList_ count] + 1;
             }
             dpRowCount_ = count;
             break;
@@ -224,16 +274,19 @@
     // Configure the cell...
     cell.textLabel.font = DEFAULT_FONT;
     
-    NSArray *values;
+    NSArray *keys;
+    NSMutableDictionary *values;
     int row = -1;
     switch (indexPath.section) {
         case 0:
             row = spRowCount_ - 1;
-            values = [spTagList_ allValues];
+            keys = spSortedKeyList_;
+            values = spTagList_;
             break;
         case 1:
             row = dpRowCount_ - 1;
-            values = [dpTagList_ allValues];
+            keys = dpSortedKeyList_;
+            values = dpTagList_;
             break;
             
         default:
@@ -244,7 +297,8 @@
         cell.textLabel.textAlignment = NSTextAlignmentRight;
     }
     else{
-        cell.textLabel.text = [values objectAtIndex:indexPath.row];
+        NSNumber *num = [keys objectAtIndex:indexPath.row];
+        cell.textLabel.text = [values objectForKey:[NSString stringWithFormat:@"%@",num]]; //[values objectAtIndex:indexPath.row];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
 //    NSLog(@"%@ \n%@ \n %@",[spTagList_ allKeys],values,spTagList_);
@@ -271,24 +325,25 @@
         NSLog(@"編集");
         // テキストフィールドに初期値をセット
         NSArray *keys;
-        NSArray *values;
+        NSMutableDictionary *values;
         switch (indexPath.section) {
             case EDIT_TARGET_SP:
-                keys = [spTagList_ allKeys];
-                values = [spTagList_ allValues];
+                keys = spSortedKeyList_;
+                values = spTagList_;
                 break;
             case EDIT_TARGET_DP:
-                keys = [dpTagList_ allKeys];
-                values = [dpTagList_ allValues];
+                keys = dpSortedKeyList_;
+                values = dpTagList_ ;
                 break;
                 
             default:
                 break;
         }
-        
         editingIndex_ = [[keys objectAtIndex:indexPath.row] integerValue];
-        prevName_ = [values objectAtIndex:indexPath.row];
-        [tagNameField_ setText:[values objectAtIndex:indexPath.row]];
+//        prevName_ = [values objectAtIndex:indexPath.row];
+//        [tagNameField_ setText:[values objectAtIndex:indexPath.row]];
+        prevName_ = [values objectForKey:[NSString stringWithFormat:@"%d",editingIndex_]];
+        [tagNameField_ setText:prevName_];
         [self showEditPopup:EDIT_TYPE_EDIT target:indexPath.section];
     }
 
@@ -306,7 +361,7 @@
             switch (indexPath.section) {
                 case EDIT_TARGET_SP:
                 {
-                    NSArray *keys = [spTagList_ allKeys];
+                    NSArray *keys = spSortedKeyList_;
                     [spTagList_ removeObjectForKey:[NSString stringWithFormat:@"%@",[keys objectAtIndex:indexPath.row]]];
                     [USER_DEFAULT setObject:spTagList_ forKey:SP_TAG_LIST_KEY];
                     [USER_DEFAULT setInteger:spTagListLastKey_ forKey:SP_TAG_LIST_LAST_KEY];
@@ -315,12 +370,13 @@
                     
                     int tagId = [[keys objectAtIndex:indexPath.row] intValue];
                     [[DatabaseManager sharedInstance] removeTag:tagId playStyle:0];
+                    [self initTagList];
                     [self.tableView reloadData];
                 }
                     break;
                 case EDIT_TARGET_DP:
                 {
-                    NSArray *keys = [dpTagList_ allKeys];
+                    NSArray *keys = dpSortedKeyList_;
                     [dpTagList_ removeObjectForKey:[NSString stringWithFormat:@"%@",[keys objectAtIndex:indexPath.row]]];
                     [USER_DEFAULT setObject:dpTagList_ forKey:DP_TAG_LIST_KEY];
                     [USER_DEFAULT setInteger:dpTagListLastKey_ forKey:DP_TAG_LIST_LAST_KEY];
@@ -329,6 +385,7 @@
                     
                     int tagId = [[keys objectAtIndex:indexPath.row] intValue];
                     [[DatabaseManager sharedInstance] removeTag:tagId playStyle:1];
+                    [self initTagList];
                     [self.tableView reloadData];
                 }
                     break;
@@ -461,7 +518,7 @@
                 break;
         }
         
-        
+        [self initTagList];
         [self.tableView reloadData];
         [self closeEditView];
     }
@@ -509,6 +566,7 @@
         }
         [USER_DEFAULT synchronize];
         
+        [self initTagList];
         [self.tableView reloadData];
         [self closeEditView];
     }
