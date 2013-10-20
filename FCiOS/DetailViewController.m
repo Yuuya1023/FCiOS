@@ -1201,8 +1201,7 @@ typedef enum {
             
             // タグを更新したときのために更新
             if (tagEdited_) {
-                [self dbSelector];
-                [self.table reloadData];
+                [self setTableData];
             }
         }
     }];
