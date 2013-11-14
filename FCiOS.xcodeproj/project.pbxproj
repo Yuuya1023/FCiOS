@@ -1190,13 +1190,13 @@
 		18A2C1D716B3C1B700CECE75 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: YUYA NAMBU";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuya Nambu (Z672L5L4QF)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FCiOS/FCiOS-Prefix.pch";
 				INFOPLIST_FILE = "FCiOS/FCiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "03407806-0D36-4798-92CB-BBABE8283F93";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2A3DA749-3E0B-4F2C-B2E2-52C41507368F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

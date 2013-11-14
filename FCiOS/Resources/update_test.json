@@ -240,5 +240,147 @@
         "music": "insert into musicMaster values(?,'Zirkfied','noname',20,5,10,12,5,10,12,0,0,1,2)"
         }
         ]
+ },
+ {
+ "version":"2.0",
+ "description": "SPADAの楽曲を追加しました。一覧画面などでSPADAが出ないため、申し訳ありませんがアプリのアップデートまでお待ちください。（全34曲）",
+ "sql":[
+        {
+        "music_id": "21001",
+        "music": "insert into musicMaster values(?,'Adularia','noname',20.1,6,10,12,6,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21002",
+        "music": "insert into musicMaster values(?,'ALBA -黎明-','noname',20.1,5,8,11,4,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21003",
+        "music": "insert into musicMaster values(?,'Atröpøs','noname',20.1,6,8,11,5,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21004",
+        "music": "insert into musicMaster values(?,'Critical Crystal','noname',20.1,6,8,11,6,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21005",
+        "music": "insert into musicMaster values(?,'DARK LEGACY','noname',20.1,6,9,12,7,9,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21006",
+        "music": "insert into musicMaster values(?,'Devilz Sacrifice -贖罪の羊-','noname',20.1,4,9,11,6,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21007",
+        "music": "insert into musicMaster values(?,'diagram','noname',20.1,3,7,11,4,7,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21008",
+        "music": "insert into musicMaster values(?,'Elektrick U-Phoria','noname',20.1,6,9,11,5,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21009",
+        "music": "insert into musicMaster values(?,'Element of SPADA','noname',20.1,3,7,9,3,5,9,0,0,1,2)"
+        },
+        {
+        "music_id": "21010",
+        "music": "insert into musicMaster values(?,'esrev:eR','noname',20.1,4,7,9,6,8,9,0,0,1,2)"
+        },
+        {
+        "music_id": "21011",
+        "music": "insert into musicMaster values(?,'EXTREME MACH COLLIDER','noname',20.1,5,8,11,5,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21012",
+        "music": "insert into musicMaster values(?,'Funny shuffle','noname',20.1,3,6,11,4,7,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21013",
+        "music": "insert into musicMaster values(?,'Give Me Your Love','noname',20.1,3,6,9,4,7,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21014",
+        "music": "insert into musicMaster values(?,'Insane Techniques','noname',20.1,4,7,10,3,6,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21015",
+        "music": "insert into musicMaster values(?,'INSOMNIA','noname',20.1,4,8,12,4,8,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21016",
+        "music": "insert into musicMaster values(?,'LA FESTA LA VITA!!','noname',20.1,5,9,11,5,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21017",
+        "music": "insert into musicMaster values(?,'Lighting Shower','noname',20.1,4,7,11,4,7,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21018",
+        "music": "insert into musicMaster values(?,'m1dy Deluxe','noname',20.1,6,9,11,6,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21019",
+        "music": "insert into musicMaster values(?,'MAD ATTACK','noname',20.1,3,6,9,3,9,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21020",
+        "music": "insert into musicMaster values(?,'MAGIC & LOVE','noname',20.1,5,9,11,4,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21021",
+        "music": "insert into musicMaster values(?,'Miracle 5ympho X','noname',20.1,5,8,10,6,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21022",
+        "music": "insert into musicMaster values(?,'NPC World','noname',20.1,5,8,10,5,9,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21023",
+        "music": "insert into musicMaster values(?,'Odin','noname',20.1,4,7,10,5,7,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21024",
+        "music": "insert into musicMaster values(?,'Overload Frontier','noname',20.1,5,8,11,6,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21025",
+        "music": "insert into musicMaster values(?,'rainbow guitar weeps','noname',20.1,5,9,11,6,9,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21026",
+        "music": "insert into musicMaster values(?,'RISE','noname',20.1,5,8,10,5,8,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21027",
+        "music": "insert into musicMaster values(?,'Valgus','noname',20.1,4,7,11,4,7,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21028",
+        "music": "insert into musicMaster values(?,'WOBBLE IMPACT','noname',20.1,3,7,10,3,7,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21029",
+        "music": "insert into musicMaster values(?,'Wonder Girl feat. Kanae Asaba','noname',20.1,4,6,11,5,7,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21030",
+        "music": "insert into musicMaster values(?,'罪と罰','noname',20.1,5,7,10,6,8,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21031",
+        "music": "insert into musicMaster values(?,'旋律のドグマ ～Misérables～','noname',20.1,6,10,12,6,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21032",
+        "music": "insert into musicMaster values(?,'超!!遠距離らぶ♡メ～ル','noname',20.1,3,7,10,4,7,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21033",
+        "music": "insert into musicMaster values(?,'廿','noname',20.1,5,8,10,5,8,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21034",
+        "music": "insert into musicMaster values(?,'牧神笛吹きて','noname',20.1,4,8,11,4,8,11,0,0,1,2)"
+        }
+        ]
  }
 ]
