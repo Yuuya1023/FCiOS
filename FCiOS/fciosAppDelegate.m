@@ -32,14 +32,14 @@
     
     //ユーザーデフォルトに初期値を設定
     NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
-    [defaults setObject:@"1.5" forKey:DATABSEVERSION_KEY];
+    [defaults setObject:@"2.0" forKey:DATABSEVERSION_KEY];
     [defaults setObject:@"0" forKey:DEFAULT_PLAYRANK_KEY];
     [defaults setObject:@"0" forKey:DEFAULT_PLAYSTYLE_KEY];
     
     NSDictionary *customDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
                                       @"0",@"active",
                                       @"",@"title",
-                                      @"20",@"version",
+                                      [NSString stringWithFormat:@"%d",NEWEST_VERSION],@"version",
                                       @"0",@"difficulity",
                                       @"0",@"clearLamp",
                                       @"0",@"playRank",
