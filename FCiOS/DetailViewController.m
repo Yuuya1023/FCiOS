@@ -719,7 +719,7 @@ typedef enum {
         //バージョン
         NSString *versionSql;
         if (self.versionSortType == 0) {
-            versionSql = @"version < 21";
+            versionSql = @"version != 0";
         }
         else{
             versionSql = [NSString stringWithFormat:@"version = %d",self.versionSortType];

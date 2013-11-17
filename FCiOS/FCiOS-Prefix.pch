@@ -15,6 +15,9 @@
 
 #import "Utilities.h"
 
+// 最大バージョン
+#define NEWEST_VERSION 21
+
 #define DEFAULT_FONT [UIFont fontWithName:@"GillSans" size:18]
 #define DEFAULT_FONT_TEXTFILED [UIFont fontWithName:@"GillSans" size:13]
 #define DEFAULT_FONT_ITALIC [UIFont fontWithName:@"GillSans-Italic" size:18]

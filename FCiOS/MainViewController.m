@@ -368,7 +368,7 @@
         
         
         //バージョン検索
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= NEWEST_VERSION; i++) {
             int resultSum = 0;
             int min = -1;
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];

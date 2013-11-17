@@ -68,6 +68,7 @@
                             @"18th Resort Anthem",
                             @"19th Lincle",
                             @"20th tricoro",
+                            @"21th SPADA",
                             nil];
         
         //ソート用
@@ -124,6 +125,7 @@
                                 @"18th Resort Anthem",
                                 @"19th Lincle",
                                 @"20th tricoro",
+                                @"21th SPADA",
                                 nil];
         
         self.sortingSortList = [[NSArray alloc] initWithObjects:

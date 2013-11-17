@@ -68,7 +68,7 @@
             //ソート結果表示ボタン
             resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             resultButton.frame = CGRectMake(105, 318 + y, 120, 40);
-            [resultButton setTitle:@"RESULT" forState:UIControlStateNormal];
+            [resultButton setTitle:@"SEARCH" forState:UIControlStateNormal];
             [resultButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             resultButton.titleLabel.font = DEFAULT_FONT;
             resultButton.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -84,9 +84,9 @@
         version.backgroundColor = [UIColor clearColor];
         
         versionSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 20, 190, 40)];
-        versionSortLabel.text = @"20 tricoro";
+        versionSortLabel.text = @"21th SPADA";
         versionSortLabel.font = DEFAULT_FONT;
-        versionSortType = 20;
+        versionSortType = NEWEST_VERSION;
         versionSortLabel.textAlignment = NSTextAlignmentRight;
         versionSortLabel.backgroundColor = [UIColor clearColor];
         
