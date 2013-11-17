@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DatabaseManager.m"
-         timestampString = "400272330.219792"
+         timestampString = "406366908.148075"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "435"
-         endingLineNumber = "435"
+         startingLineNumber = "452"
+         endingLineNumber = "452"
          landmarkName = "-tagSortSelecter:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -144,6 +144,32 @@
          startingLineNumber = "1535"
          endingLineNumber = "1535"
          landmarkName = "-didReceiveMemoryWarning"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FCiOS/DatabaseManager.m"
+         timestampString = "406366776.132149"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "85"
+         endingLineNumber = "85"
+         landmarkName = "-updateDatabase:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FCiOS/DatabaseManager.m"
+         timestampString = "406367319.045834"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "618"
+         endingLineNumber = "618"
+         landmarkName = "-modifySPADAVersion"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -22,9 +22,13 @@
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
-    //ユーザーデータにカラム追加
-    [[DatabaseManager sharedInstance] addColumnUsersMemo];
-    [[DatabaseManager sharedInstance] addColumnUsersTag];
+    //パッチ
+    {
+        [[DatabaseManager sharedInstance] addColumnUsersMemo];
+        [[DatabaseManager sharedInstance] addColumnUsersTag];
+        [[DatabaseManager sharedInstance] modifySPADAVersion];
+        
+    }
     
     //ユーザーデフォルトに初期値を設定
     NSMutableDictionary *defaults = [NSMutableDictionary dictionary];

@@ -82,30 +82,47 @@ static dispatch_queue_t serialQueue;
         for (NSDictionary *key_sql in dictionary) {
 //            NSLog(@"music ,%@",[key_sql objectForKey:@"music"]);
 //            NSLog(@"user  ,%@",[key_sql objectForKey:@"user"]);
-            NSString *music_id = [key_sql objectForKey:@"music_id"];
-            NSString *masterSql = [key_sql objectForKey:@"music"];
-            NSString *userSql = [NSString stringWithFormat:@"INSERT INTO userData (music_id) values (%@)",music_id];
-            //更新処理
-            [self.music_DB executeUpdate:masterSql ,music_id];
-            [self.music_DB executeUpdate:userSql];
             
+            NSString *query = [key_sql objectForKey:@"query"];
+            NSLog(@"query  ,%@",query);
+            if (query) {
+                
+                //更新処理
+                [self.music_DB executeUpdate:query];
+                
+            }
+            else{
             
-            //データが入っているか確認し入っていなかったらロールバックを行う
-            NSString *confirmSql = [NSString stringWithFormat:@"SELECT count(music_id) FROM musicMaster WHERE music_id = %@",music_id];
-            FMResultSet *rs_confirm = [self.music_DB executeQuery:confirmSql];
-            while ([rs_confirm next]) {
-                if ([rs_confirm intForColumn:@"count(music_id)"] == 0) {
-                    [self.music_DB rollback];
+                NSString *music_id = [key_sql objectForKey:@"music_id"];
+                NSString *masterSql = [key_sql objectForKey:@"music"];
+                
+                if (!music_id || !masterSql) {
                     return NO;
                 }
-            }
-            
-            NSString *confirmSql2 = [NSString stringWithFormat:@"SELECT count(music_id) FROM userData WHERE music_id = %@",music_id];
-            FMResultSet *rs_confirm2 = [self.music_DB executeQuery:confirmSql2];
-            while ([rs_confirm2 next]) {
-                if ([rs_confirm2 intForColumn:@"count(music_id)"] == 0) {
-                    [self.music_DB rollback];
-                    return NO;
+                
+                NSString *userSql = [NSString stringWithFormat:@"INSERT INTO userData (music_id) values (%@)",music_id];
+                //更新処理
+                [self.music_DB executeUpdate:masterSql ,music_id];
+                [self.music_DB executeUpdate:userSql];
+                
+                
+                //データが入っているか確認し入っていなかったらロールバックを行う
+                NSString *confirmSql = [NSString stringWithFormat:@"SELECT count(music_id) FROM musicMaster WHERE music_id = %@",music_id];
+                FMResultSet *rs_confirm = [self.music_DB executeQuery:confirmSql];
+                while ([rs_confirm next]) {
+                    if ([rs_confirm intForColumn:@"count(music_id)"] == 0) {
+                        [self.music_DB rollback];
+                        return NO;
+                    }
+                }
+                
+                NSString *confirmSql2 = [NSString stringWithFormat:@"SELECT count(music_id) FROM userData WHERE music_id = %@",music_id];
+                FMResultSet *rs_confirm2 = [self.music_DB executeQuery:confirmSql2];
+                while ([rs_confirm2 next]) {
+                    if ([rs_confirm2 intForColumn:@"count(music_id)"] == 0) {
+                        [self.music_DB rollback];
+                        return NO;
+                    }
                 }
             }
         }
@@ -532,6 +549,7 @@ static dispatch_queue_t serialQueue;
 
 
 
+#pragma mark - Patch
 
 - (void)addColumnUsersMemo{
     if ([self.music_DB open]) {
@@ -593,6 +611,46 @@ static dispatch_queue_t serialQueue;
         NSLog(@"Could not open db.");
     }
 }
+
+
+- (void)modifySPADAVersion
+{
+    
+    if ([self.music_DB open]) {
+        
+        BOOL shouldUpdate = NO;
+        NSString *searchSql = @"SELECT music_id FROM musicMaster WHERE version = 20.1";
+        FMResultSet *rs = [self.music_DB executeQuery:searchSql];
+        while ([rs next]) {
+            NSLog(@"shouldUpdate SPADA");
+            shouldUpdate = YES;
+            break;
+        }
+        
+        if (shouldUpdate) {
+            NSLog(@"modifySPADAVersion");
+            NSString *sql = @"UPDATE musicMaster SET version = 21 WHERE version = 20.1";
+            //更新処理
+            [self.music_DB executeUpdate:sql];
+        }
+    }
+    else{
+        NSLog(@"Could not open db.");
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark -
 
 - (NSDictionary *)getMemoAndTagWithMusicId:(NSString *)musicId{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

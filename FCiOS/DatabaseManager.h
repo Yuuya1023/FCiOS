@@ -26,6 +26,7 @@
 
 - (void)addColumnUsersMemo;
 - (void)addColumnUsersTag;
+- (void)modifySPADAVersion;
 
 - (NSDictionary *)getMemoAndTagWithMusicId:(NSString *)musicId;
 - (BOOL)updateMemoAndTagWithMusicId:(int)musicId text:(NSString *)text tagUpdateInfo:(NSDictionary *)tagUpdateInfo;
