@@ -382,5 +382,35 @@
         "music": "insert into musicMaster values(?,'牧神笛吹きて','noname',20.1,4,8,11,4,8,11,0,0,1,2)"
         }
         ]
+ },
+ {
+ "version":"2.01",
+ "description": "SPADA楽曲のレベル誤表記を修正しました。（全6曲）",
+ "sql":[
+        {
+        "music_id": "21006",
+        "music": "UPDATE musicMaster SET DP_Hyper_Level = 9 where music_id = ?"
+        },
+        {
+        "music_id": "21008",
+        "music": "UPDATE musicMaster SET DP_Another_Level = 12 where music_id = ?"
+        },
+        {
+        "music_id": "21011",
+        "music": "UPDATE musicMaster SET DP_Hyper_Level = 9, DP_Another_Level = 10 where music_id = ?"
+        },
+        {
+        "music_id": "21013",
+        "music": "UPDATE musicMaster SET DP_Another_Level = 10, SP_Hyper_Level = 7, SP_Normal_Level = 4 where music_id = ?"
+        },
+        {
+        "music_id": "21014",
+        "music": "UPDATE musicMaster SET DP_Hyper_Level = 8, DP_Normal_Level = 4 where music_id = ?"
+        },
+        {
+        "music_id": "21027",
+        "music": "UPDATE musicMaster SET DP_Another_Level = 10 where music_id = ?"
+        }
+        ]
  }
 ]
