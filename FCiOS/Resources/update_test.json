@@ -412,5 +412,131 @@
         "music": "UPDATE musicMaster SET DP_Another_Level = 10 where music_id = ?"
         }
         ]
+ },
+ {
+ "version":"2.02",
+ "description": "イベント楽曲の追加と削除曲に対応致しました。（全30曲）",
+ "sql":[
+        {
+        "music_id": "21035",
+        "music": "insert into musicMaster values(?,'Close the World feat.a☆ru','noname',21,5,10,12,5,9,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21036",
+        "music": "insert into musicMaster values(?,'お願いアインシュタイン','noname',21,5,8,10,5,8,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21037",
+        "music": "insert into musicMaster values(?,'Pharaoh','noname',21,3,8,11,3,8,9,0,0,1,2)"
+        },
+        {
+        "music_id": "21038",
+        "music": "insert into musicMaster values(?,'ra''am','noname',21,7,10,12,7,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21039",
+        "music": "insert into musicMaster values(?,'Unicorn tail','noname',21,5,9,11,4,9,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21040",
+        "music": "insert into musicMaster values(?,'Stella Sinistra','noname',21,3,7,11,5,9,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21041",
+        "music": "insert into musicMaster values(?,'マインド・ゲーム','noname',21,4,8,11,5,8,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21042",
+        "music": "insert into musicMaster values(?,'PUNISHER','noname',21,5,9,12,5,9,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21043",
+        "music": "insert into musicMaster values(?,'HYENA','noname',21,6,9,11,5,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "5003",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "5013",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "6018",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "7007",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "7013",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "8031",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "9005",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "9009",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "10032",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "12037",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "13032",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "14038",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "15018",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "16014",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "16029",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "17035",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "18007",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "18011",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "18015",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "18039",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        },
+        {
+        "music_id": "19038",
+        "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
+        }
+        ]
  }
 ]
