@@ -874,7 +874,7 @@ static dispatch_queue_t serialQueue;
 + (NSString *)SQLVersionString:(int)type{
     NSString *sql;
     if (type == 0) {
-        sql = @"< 21";
+        sql = @" != 0";
     }
     else{
         sql = [NSString stringWithFormat:@" = %d",type];
@@ -885,7 +885,7 @@ static dispatch_queue_t serialQueue;
 + (NSString *)SQLLevelString:(int)type{
     NSString *sql;
     if (type == 0) {
-        sql = @"< 13";
+        sql = @" != 0";
     }
     else{
         sql = [NSString stringWithFormat:@" = %d",type];
