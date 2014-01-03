@@ -45,7 +45,7 @@
         self.sortingList = tableSources.sortSetting;
         
         self.playStyleList = [[NSArray alloc] initWithObjects:@"SINGLE PLAY",@"DOUBLE PLAY", nil];
-        self.playRankList = [[NSArray alloc] initWithObjects:@"NORMAL",@"HYPER",@"ANOTHER",@"A+H",@"ALL", nil];
+        self.playRankList = tableSources.playRankList;
         
         //キャンセルボタン
 //        cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];

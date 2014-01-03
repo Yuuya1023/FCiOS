@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410462999.687107"
+         timestampString = "410473615.823068"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1318"
-         endingLineNumber = "1318"
+         startingLineNumber = "1678"
+         endingLineNumber = "1678"
          landmarkName = "-actionSheet:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410462999.687107"
+         timestampString = "410473615.823068"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1127"
-         endingLineNumber = "1127"
+         startingLineNumber = "1426"
+         endingLineNumber = "1426"
          landmarkName = "-memoEditModeWithMusicId:title:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410462347.554894"
+         timestampString = "410473615.823068"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "730"
-         endingLineNumber = "730"
+         startingLineNumber = "1028"
+         endingLineNumber = "1028"
          landmarkName = "-dbSelector"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410462999.687107"
+         timestampString = "410473615.823068"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1575"
-         endingLineNumber = "1575"
+         startingLineNumber = "1935"
+         endingLineNumber = "1935"
          landmarkName = "-didReceiveMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410462999.687107"
+         timestampString = "410473615.823068"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1049"
-         endingLineNumber = "1049"
+         startingLineNumber = "1348"
+         endingLineNumber = "1348"
          landmarkName = "-memoEditModeWithMusicId:title:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,12 +177,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410462999.687107"
+         timestampString = "410473615.823068"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1048"
-         endingLineNumber = "1048"
+         startingLineNumber = "1347"
+         endingLineNumber = "1347"
          landmarkName = "-memoEditModeWithMusicId:title:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FCiOS/DetailViewController.m"
+         timestampString = "410473689.168783"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "994"
+         endingLineNumber = "994"
+         landmarkName = "-setTableData"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

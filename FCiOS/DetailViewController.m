@@ -19,6 +19,9 @@ typedef enum {
     TAG_ANOTHER_BUTTON      = 102
 }TAG_BUTTON_TYPE;
 
+typedef enum {
+    TAG_VIEW_SLIDE           = 200
+}TAG_VIEW_TYPE;
 
 typedef enum {
     PLAY_STYLE_SP           = 0,
@@ -75,6 +78,268 @@ typedef enum {
 //        self.table.backgroundColor = [UIColor blackColor];
 //        self.table.separatorColor = [UIColor lightGrayColor];
         [self.view addSubview:self.table];
+        
+        
+        // スライドビュー
+        {
+            showSlideViewButton_ = [UIButton buttonWithType:UIButtonTypeInfoDark];
+            showSlideViewButton_.frame = CGRectMake(250, 200, 50, 50);
+            [showSlideViewButton_ addTarget:self action:NSSelectorFromString(@"showSlideView:") forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:showSlideViewButton_];
+            
+            slideView_ = [[UIView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+            slideView_.tag = TAG_VIEW_SLIDE;
+            slideView_.userInteractionEnabled = YES;
+            slideView_.alpha = 0.9;
+            slideView_.backgroundColor = [UIColor blackColor];
+            
+            UIButton *dummyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            dummyButton.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+            [dummyButton addTarget:self action:NSSelectorFromString(@"removeSlideView:") forControlEvents:UIControlEventTouchUpInside];
+            [slideView_ addSubview:dummyButton];
+            
+            
+            float positionY = 75.0f;
+            if ([Utilities isDevice5thGen]) {
+                positionY = 115.0f;
+            }
+            UILabel *statistics = [[UILabel alloc] initWithFrame:CGRectMake(40, positionY, 100, 20)];
+            statistics.text = @"Statistics";
+            statistics.backgroundColor = [UIColor clearColor];
+            statistics.font = DEFAULT_FONT_ITALIC;
+            statistics.textColor = [UIColor whiteColor];
+            [slideView_ addSubview:statistics];
+            
+            UILabel *fullCombo = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 30, 100, 20)];
+            fullCombo.text = @"Full Combo :";
+            fullCombo.backgroundColor = [UIColor clearColor];
+            fullCombo.font = DEFAULT_FONT;
+            fullCombo.textColor = [UIColor colorWithRed:1.0 green:0.757 blue:0.118 alpha:1.0];
+            [slideView_ addSubview:fullCombo];
+            
+            fullComboCount_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 30, 100, 20)];
+            fullComboCount_.text = @"1000000";
+            fullComboCount_.backgroundColor = [UIColor clearColor];
+            fullComboCount_.font = DEFAULT_FONT;
+            fullComboCount_.textColor = [UIColor colorWithRed:1.0 green:0.757 blue:0.118 alpha:1.0];
+            fullComboCount_.textAlignment = UITextAlignmentRight;
+            [slideView_ addSubview:fullComboCount_];
+            
+            
+            UILabel *exHard = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 50, 100, 20)];
+            exHard.text = @"EX Hard :";
+            exHard.backgroundColor = [UIColor clearColor];
+            exHard.font = DEFAULT_FONT;
+            exHard.textColor = [UIColor colorWithRed:0.98 green:0.204 blue:0.0 alpha:1.0];
+            [slideView_ addSubview:exHard];
+            
+            exHardCount_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 50, 100, 20)];
+            exHardCount_.text = @"100000";
+            exHardCount_.backgroundColor = [UIColor clearColor];
+            exHardCount_.font = DEFAULT_FONT;
+            exHardCount_.textColor = [UIColor colorWithRed:0.98 green:0.204 blue:0.0 alpha:1.0];
+            exHardCount_.textAlignment = UITextAlignmentRight;
+            [slideView_ addSubview:exHardCount_];
+            
+            
+            UILabel *hard = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 70, 100, 20)];
+            hard.text = @"Hard :";
+            hard.backgroundColor = [UIColor clearColor];
+            hard.font = DEFAULT_FONT;
+            hard.textColor = [UIColor colorWithRed:0.827 green:0.0 blue:0.0 alpha:1.0];
+            [slideView_ addSubview:hard];
+            
+            hardCount_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 70, 100, 20)];
+            hardCount_.text = @"10000";
+            hardCount_.backgroundColor = [UIColor clearColor];
+            hardCount_.font = DEFAULT_FONT;
+            hardCount_.textColor = [UIColor colorWithRed:0.827 green:0.0 blue:0.0 alpha:1.0];
+            hardCount_.textAlignment = UITextAlignmentRight;
+            [slideView_ addSubview:hardCount_];
+            
+            
+            UILabel *clear = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 90, 100, 20)];
+            clear.text = @"Clear :";
+            clear.backgroundColor = [UIColor clearColor];
+            clear.font = DEFAULT_FONT;
+            clear.textColor = [UIColor colorWithRed:0.008 green:0.451 blue:0.702 alpha:1.0];
+            [slideView_ addSubview:clear];
+            
+            clearCount_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 90, 100, 20)];
+            clearCount_.text = @"1000";
+            clearCount_.backgroundColor = [UIColor clearColor];
+            clearCount_.font = DEFAULT_FONT;
+            clearCount_.textColor = [UIColor colorWithRed:0.008 green:0.451 blue:0.702 alpha:1.0];
+            clearCount_.textAlignment = UITextAlignmentRight;
+            [slideView_ addSubview:clearCount_];
+            
+            
+            UILabel *easyClear = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 110, 100, 20)];
+            easyClear.text = @"Easy Clear :";
+            easyClear.backgroundColor = [UIColor clearColor];
+            easyClear.font = DEFAULT_FONT;
+            easyClear.textColor = [UIColor colorWithRed:0.0 green:0.718 blue:0.22 alpha:1.0];
+            [slideView_ addSubview:easyClear];
+            
+            easyClearCount_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 110, 100, 20)];
+            easyClearCount_.text = @"100";
+            easyClearCount_.backgroundColor = [UIColor clearColor];
+            easyClearCount_.font = DEFAULT_FONT;
+            easyClearCount_.textColor = [UIColor colorWithRed:0.0 green:0.718 blue:0.22 alpha:1.0];
+            easyClearCount_.textAlignment = UITextAlignmentRight;
+            [slideView_ addSubview:easyClearCount_];
+            
+            
+            UILabel *assistClear = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 130, 100, 20)];
+            assistClear.text = @"Assist Clear :";
+            assistClear.backgroundColor = [UIColor clearColor];
+            assistClear.font = DEFAULT_FONT;
+            assistClear.textColor = [UIColor colorWithRed:0.424 green:0.004 blue:0.529 alpha:1.0];
+            [slideView_ addSubview:assistClear];
+            
+            assistClearCount_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 130, 100, 20)];
+            assistClearCount_.text = @"10";
+            assistClearCount_.backgroundColor = [UIColor clearColor];
+            assistClearCount_.font = DEFAULT_FONT;
+            assistClearCount_.textColor = [UIColor colorWithRed:0.424 green:0.004 blue:0.529 alpha:1.0];
+            assistClearCount_.textAlignment = UITextAlignmentRight;
+            [slideView_ addSubview:assistClearCount_];
+            
+            
+            UILabel *failed = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 150, 100, 20)];
+            failed.text = @"Failed :";
+            failed.backgroundColor = [UIColor clearColor];
+            failed.font = DEFAULT_FONT;
+            failed.textColor = [UIColor colorWithRed:0.969 green:0.112 blue:0.31 alpha:1.0];
+            [slideView_ addSubview:failed];
+            
+            failedcount_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 150, 100, 20)];
+            failedcount_.text = @"1";
+            failedcount_.backgroundColor = [UIColor clearColor];
+            failedcount_.font = DEFAULT_FONT;
+            failedcount_.textColor = [UIColor colorWithRed:0.969 green:0.112 blue:0.31 alpha:1.0];
+            failedcount_.textAlignment = UITextAlignmentRight;
+            [slideView_ addSubview:failedcount_];
+            
+            
+            UILabel *noPlay = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 170, 100, 20)];
+            noPlay.text = @"No Play :";
+            noPlay.backgroundColor = [UIColor clearColor];
+            noPlay.font = DEFAULT_FONT;
+            noPlay.textColor = [UIColor grayColor];
+            [slideView_ addSubview:noPlay];
+            
+            noPlayCount_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 170, 100, 20)];
+            noPlayCount_.text = @"0";
+            noPlayCount_.backgroundColor = [UIColor clearColor];
+            noPlayCount_.font = DEFAULT_FONT;
+            noPlayCount_.textColor = [UIColor grayColor];
+            noPlayCount_.textAlignment = UITextAlignmentRight;
+            [slideView_ addSubview:noPlayCount_];
+            
+            allCount_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 195, 100, 20)];
+            allCount_.text = @"/   1111111";
+            allCount_.backgroundColor = [UIColor clearColor];
+            allCount_.font = DEFAULT_FONT;
+            allCount_.textColor = [UIColor whiteColor];
+            allCount_.textAlignment = UITextAlignmentRight;
+            [slideView_ addSubview:allCount_];
+            
+            
+            // 検索条件
+            UILabel *searchStatus = [[UILabel alloc] initWithFrame:CGRectMake(40, positionY + 220, 100, 20)];
+            searchStatus.text = @"Search Status";
+            searchStatus.backgroundColor = [UIColor clearColor];
+            searchStatus.font = DEFAULT_FONT_ITALIC;
+            searchStatus.textColor = [UIColor whiteColor];
+            [slideView_ addSubview:searchStatus];
+            
+            
+            UILabel *playStyle = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 250, 100, 20)];
+            playStyle.text = @"Play Style :";
+            playStyle.backgroundColor = [UIColor clearColor];
+            playStyle.font = DEFAULT_FONT;
+            playStyle.textColor = [UIColor whiteColor];
+            [slideView_ addSubview:playStyle];
+            
+            playStyleLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 250, 100, 20)];
+            playStyleLabel_.text = @"ALL";
+            playStyleLabel_.backgroundColor = [UIColor clearColor];
+            playStyleLabel_.font = DEFAULT_FONT;
+            playStyleLabel_.textColor = [UIColor whiteColor];
+            playStyleLabel_.textAlignment = UITextAlignmentRight;
+            playStyleLabel_.adjustsFontSizeToFitWidth = YES;
+            [slideView_ addSubview:playStyleLabel_];
+            
+            
+            UILabel *nhaForSlide = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 270, 100, 20)];
+            nhaForSlide.text = @"N/H/A :";
+            nhaForSlide.backgroundColor = [UIColor clearColor];
+            nhaForSlide.font = DEFAULT_FONT;
+            nhaForSlide.textColor = [UIColor whiteColor];
+            [slideView_ addSubview:nhaForSlide];
+            
+            nhaLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 270, 100, 20)];
+            nhaLabel_.text = @"ALL";
+            nhaLabel_.backgroundColor = [UIColor clearColor];
+            nhaLabel_.font = DEFAULT_FONT;
+            nhaLabel_.textColor = [UIColor whiteColor];
+            nhaLabel_.textAlignment = UITextAlignmentRight;
+            nhaLabel_.adjustsFontSizeToFitWidth = YES;
+            [slideView_ addSubview:nhaLabel_];
+            
+            
+            UILabel *difficultyForSlide = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 290, 100, 20)];
+            difficultyForSlide.text = @"Difficulty :";
+            difficultyForSlide.backgroundColor = [UIColor clearColor];
+            difficultyForSlide.font = DEFAULT_FONT;
+            difficultyForSlide.textColor = [UIColor whiteColor];
+            [slideView_ addSubview:difficultyForSlide];
+            
+            difficultyLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 290, 100, 20)];
+            difficultyLabel_.text = @"ALL";
+            difficultyLabel_.backgroundColor = [UIColor clearColor];
+            difficultyLabel_.font = DEFAULT_FONT;
+            difficultyLabel_.textColor = [UIColor whiteColor];
+            difficultyLabel_.textAlignment = UITextAlignmentRight;
+            difficultyLabel_.adjustsFontSizeToFitWidth = YES;
+            [slideView_ addSubview:difficultyLabel_];
+            
+            
+            UILabel *versionForSlide = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 310, 100, 20)];
+            versionForSlide.text = @"Version :";
+            versionForSlide.backgroundColor = [UIColor clearColor];
+            versionForSlide.font = DEFAULT_FONT;
+            versionForSlide.textColor = [UIColor whiteColor];
+            [slideView_ addSubview:versionForSlide];
+            
+            versionLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 310, 100, 20)];
+            versionLabel_.text = @"ALL";
+            versionLabel_.backgroundColor = [UIColor clearColor];
+            versionLabel_.font = DEFAULT_FONT;
+            versionLabel_.textColor = [UIColor whiteColor];
+            versionLabel_.textAlignment = UITextAlignmentRight;
+            versionLabel_.adjustsFontSizeToFitWidth = YES;
+            [slideView_ addSubview:versionLabel_];
+            
+            
+            UILabel *clearLampForSlide = [[UILabel alloc] initWithFrame:CGRectMake(50, positionY + 330, 100, 20)];
+            clearLampForSlide.text = @"Clear Lamp :";
+            clearLampForSlide.backgroundColor = [UIColor clearColor];
+            clearLampForSlide.font = DEFAULT_FONT;
+            clearLampForSlide.textColor = [UIColor whiteColor];
+            [slideView_ addSubview:clearLampForSlide];
+            
+            clearLampLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(160, positionY + 330, 100, 20)];
+            clearLampLabel_.text = @"ALL";
+            clearLampLabel_.backgroundColor = [UIColor clearColor];
+            clearLampLabel_.font = DEFAULT_FONT;
+            clearLampLabel_.textColor = [UIColor whiteColor];
+            clearLampLabel_.textAlignment = UITextAlignmentRight;
+            clearLampLabel_.adjustsFontSizeToFitWidth = YES;
+            [slideView_ addSubview:clearLampLabel_];
+
+        }
         
         
         self.button = [[UIBarButtonItem alloc] initWithTitle:@"一括編集"
@@ -680,6 +945,31 @@ typedef enum {
 }
 
 
+
+- (void)showSlideView:(UIButton *)b{
+    
+    [self.navigationController.view addSubview:slideView_];
+    [UIView animateWithDuration:0.2f animations:^(void) {
+        [slideView_ setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+        slideView_.alpha = 0.9f;
+        showSlideViewButton_.alpha = 0.0f;
+    }];
+    
+}
+
+- (void)removeSlideView:(UIButton *)b{
+    
+    [UIView animateWithDuration:0.2f animations:^(void) {
+        [slideView_ setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+        slideView_.alpha = 0.0f;
+        showSlideViewButton_.alpha = 1.0f;
+    }completion:^(BOOL finished){
+        [slideView_ removeFromSuperview];
+    }];
+    
+}
+
+
 #pragma mark -
 
 
@@ -700,6 +990,14 @@ typedef enum {
     for (int i = 0; i <= [self.tableData count]; i++){
         [self.checkList addObject:@"0"];
     }
+    
+    // スライドビュー検索条件情報
+    TableSources *tableSources = [[TableSources alloc] init];
+    playStyleLabel_.text = playStyle;
+    nhaLabel_.text = [tableSources.playRankList objectAtIndex:self.playRankSortType];
+    difficultyLabel_.text = [tableSources.levelSortList objectAtIndex:self.levelSortType];
+    versionLabel_.text = [tableSources.versionSortList objectAtIndex:self.versionSortType];
+    clearLampLabel_.text = [tableSources.clearSortList objectAtIndex:self.clearSortType];
 
     [self.table reloadData];
 }
@@ -937,7 +1235,8 @@ typedef enum {
         }
         
         //フッターの統計ラベルに表示
-        viewMode.text = [NSString stringWithFormat:@"FC:%d EX:%d H:%d C:%d EC:%d AC:%d F:%d NO:%d",fcCount,exCount,hcCount,clCount,ecCount,acCount,faCount,npCount];
+//        viewMode.text = [NSString stringWithFormat:@"FC:%d EX:%d H:%d C:%d EC:%d AC:%d F:%d NO:%d",fcCount,exCount,hcCount,clCount,ecCount,acCount,faCount,npCount];
+        [self setStatisticsData];
         
         [rs2 close];
         [database close];
@@ -1247,6 +1546,45 @@ typedef enum {
     }];
 }
 
+#pragma mark - Slide View
+
+- (void)setStatisticsData
+{
+    
+    fullComboCount_.text = [NSString stringWithFormat:@"%d",fcCount];
+    exHardCount_.text = [NSString stringWithFormat:@"%d",exCount];
+    hardCount_.text = [NSString stringWithFormat:@"%d",hcCount];
+    clearCount_.text = [NSString stringWithFormat:@"%d",clCount];
+    easyClearCount_.text = [NSString stringWithFormat:@"%d",ecCount];
+    assistClearCount_.text = [NSString stringWithFormat:@"%d",acCount];
+    failedcount_.text = [NSString stringWithFormat:@"%d",faCount];
+    noPlayCount_.text = [NSString stringWithFormat:@"%d",npCount];
+    allCount_.text = [NSString stringWithFormat:@"/   %d",fcCount + exCount + hcCount + clCount + ecCount + acCount + faCount + npCount];
+    
+}
+
+
+#pragma mark - UIResponder
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+//    NSLog(@"touchesBegan");
+//    UITouch *touch = [touches anyObject];
+//    switch (touch.view.tag) {
+//        case TAG_VIEW_SLIDE:
+//        {
+//            [UIView animateWithDuration:0.2f animations:^(void) {
+//                [slideView_ setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+//            }];
+//            [slideView_ removeFromSuperview];
+//        }
+//            break;
+//            
+//        default:
+//            break;
+//    }
+}
+
 
 
 #pragma mark - UIScrollView Delegate
@@ -1272,6 +1610,28 @@ typedef enum {
         
     }
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    
+    NSLog(@"scrollViewWillBeginDragging");
+    [UIView animateWithDuration:0.2f animations:^(void) {
+        showSlideViewButton_.alpha = 0.0;
+    }];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    
+    NSLog(@"scrollViewDidEndDragging");
+    [UIView animateWithDuration:0.2f animations:^(void) {
+        showSlideViewButton_.alpha = 1.0;
+    }];
+    
+}
+
+
 
 
 #pragma mark - UITextView Delegate

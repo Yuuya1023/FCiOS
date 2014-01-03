@@ -17,6 +17,7 @@
 @synthesize levelSortList = levelSortList_;
 @synthesize versionSortList = versionSortList_;
 //@synthesize sortingSortList = sortingSortList_;
+@synthesize playRankList = playRankList_;
 @synthesize sortSetting = sortSetting_;
 
 
@@ -144,6 +145,14 @@
                             @"Music Name (ASC)",
                             @"Music Name (DESC)",
                             nil];
+        
+        self.playRankList = [[NSArray alloc] initWithObjects:
+                             @"NORMAL",
+                             @"HYPER",
+                             @"ANOTHER",
+                             @"A+H",
+                             @"ALL",
+                             nil];
     }
     return self;
 }

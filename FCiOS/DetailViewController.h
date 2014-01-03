@@ -15,7 +15,17 @@
 #import "DatabaseManager.h"
 #import "MusicDetailCell.h"
 
-@interface DetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UITextFieldDelegate,UITextViewDelegate,MusicDetailCellDelegate>{
+@interface DetailViewController : UIViewController
+<
+UITableViewDataSource,
+UITableViewDelegate,
+UIScrollViewDelegate,
+UIActionSheetDelegate,
+UITextFieldDelegate,
+UITextViewDelegate,
+MusicDetailCellDelegate
+>
+{
     UITableView *table_;
     UITableView *halfTableView_;
     
@@ -101,6 +111,24 @@
     UIButton *rightPage_;
     UIButton *leftPage_;
     
+    UIButton *showSlideViewButton_;
+    UIView *slideView_;
+    
+    UILabel *fullComboCount_;
+    UILabel *exHardCount_;
+    UILabel *hardCount_;
+    UILabel *clearCount_;
+    UILabel *easyClearCount_;
+    UILabel *assistClearCount_;
+    UILabel *failedcount_;
+    UILabel *noPlayCount_;
+    UILabel *allCount_;
+    
+    UILabel *playStyleLabel_;
+    UILabel *nhaLabel_;
+    UILabel *difficultyLabel_;
+    UILabel *versionLabel_;
+    UILabel *clearLampLabel_;
 }
 
 @property (nonatomic ,retain) UITableView *table;
