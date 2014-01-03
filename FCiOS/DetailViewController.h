@@ -64,7 +64,7 @@ MusicDetailCellDelegate
     NSArray *toolbarItems;
     NSArray *toolbarItemsInEditing;
     
-    UIToolbar *toolBar;
+    UIToolbar *toolBar_;
     
     NSMutableArray *checkList_;
     
@@ -111,6 +111,8 @@ MusicDetailCellDelegate
     UIButton *rightPage_;
     UIButton *leftPage_;
     
+    UIView *informationView_;
+    UIImageView *triangleImage_;
     UIButton *showSlideViewButton_;
     UIView *slideView_;
     

@@ -71,7 +71,7 @@ typedef enum {
     self = [super init];
     if (self) {
         // Custom initialization
-        self.table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 108) style:UITableViewStylePlain];
+        self.table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64) style:UITableViewStylePlain];
         self.table.delegate = self;
         self.table.dataSource = self;
         self.table.rowHeight = 40;
@@ -82,8 +82,13 @@ typedef enum {
         
         // スライドビュー
         {
+            
+            triangleImage_ = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"triangle.png"]];
+            triangleImage_.frame = CGRectMake(257, [UIScreen mainScreen].bounds.size.height - 136, 90, 90);
+            [self.view addSubview:triangleImage_];
+            
             showSlideViewButton_ = [UIButton buttonWithType:UIButtonTypeInfoDark];
-            showSlideViewButton_.frame = CGRectMake(250, 200, 50, 50);
+            showSlideViewButton_.frame = CGRectMake(278, [UIScreen mainScreen].bounds.size.height - 106, 50, 50);
             [showSlideViewButton_ addTarget:self action:NSSelectorFromString(@"showSlideView:") forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:showSlideViewButton_];
             
@@ -380,22 +385,22 @@ typedef enum {
 
         
         //ツールバー
-        toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 108, [UIScreen mainScreen].bounds.size.width, 44)];
-        toolBar.barStyle = UIBarStyleBlack;
-        [self.view addSubview:toolBar];
+        toolBar_ = [[UIToolbar alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 64, [UIScreen mainScreen].bounds.size.width, 44)];
+        toolBar_.barStyle = UIBarStyleBlack;
+        [self.view addSubview:toolBar_];
         
         
         //ツールバーアイテム
         //通常
-        viewMode = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, self.view.bounds.size.width - 20, 40)];
-        viewMode.adjustsFontSizeToFitWidth = YES;
-        viewMode.text = @"";
-        viewMode.font = DEFAULT_FONT;
-        viewMode.textColor = [UIColor whiteColor];
-        viewMode.backgroundColor = [UIColor clearColor];
-        UIBarButtonItem *labelBtn = [[UIBarButtonItem alloc] initWithCustomView:viewMode];
-        toolbarItems = [[NSArray alloc] initWithObjects:labelBtn, nil];
-        toolBar.items = toolbarItems;
+//        viewMode = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, self.view.bounds.size.width - 20, 40)];
+//        viewMode.adjustsFontSizeToFitWidth = YES;
+//        viewMode.text = @"";
+//        viewMode.font = DEFAULT_FONT;
+//        viewMode.textColor = [UIColor whiteColor];
+//        viewMode.backgroundColor = [UIColor clearColor];
+//        UIBarButtonItem *labelBtn = [[UIBarButtonItem alloc] initWithCustomView:viewMode];
+//        toolbarItems = [[NSArray alloc] initWithObjects:labelBtn, nil];
+//        toolBar.items = toolbarItems;
         
         //編集中
         editMode = [[UILabel alloc] initWithFrame:CGRectMake(2, 10, 145, 40)];
@@ -743,7 +748,16 @@ typedef enum {
 - (void)cancel{
     editing = NO;
     self.navigationItem.rightBarButtonItem = self.button;
-    toolBar.items = toolbarItems;
+//    toolBar.items = toolbarItems;
+    // ツールバー下げる
+    [UIView animateWithDuration:0.3f animations:^(void) {
+        toolBar_.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 64, [UIScreen mainScreen].bounds.size.width, 44);
+        self.table.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
+        
+        showSlideViewButton_.alpha = 1.0f;
+        triangleImage_.alpha = 1.0f;
+    }];
+    
     [self clearCheckList];
     [self.table reloadData];
     self.editStateButton.hidden = NO;
@@ -952,6 +966,7 @@ typedef enum {
     [UIView animateWithDuration:0.2f animations:^(void) {
         [slideView_ setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
         slideView_.alpha = 0.9f;
+        triangleImage_.alpha = 0.0f;
         showSlideViewButton_.alpha = 0.0f;
     }];
     
@@ -962,6 +977,7 @@ typedef enum {
     [UIView animateWithDuration:0.2f animations:^(void) {
         [slideView_ setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
         slideView_.alpha = 0.0f;
+        triangleImage_.alpha = 1.0f;
         showSlideViewButton_.alpha = 1.0f;
     }completion:^(BOOL finished){
         [slideView_ removeFromSuperview];
@@ -1616,7 +1632,8 @@ typedef enum {
     
     NSLog(@"scrollViewWillBeginDragging");
     [UIView animateWithDuration:0.2f animations:^(void) {
-        showSlideViewButton_.alpha = 0.0;
+        showSlideViewButton_.alpha = 0.0f;
+        triangleImage_.alpha = 0.0f;
     }];
     
 }
@@ -1626,7 +1643,8 @@ typedef enum {
     
     NSLog(@"scrollViewDidEndDragging");
     [UIView animateWithDuration:0.2f animations:^(void) {
-        showSlideViewButton_.alpha = 1.0;
+        showSlideViewButton_.alpha = 1.0f;
+        triangleImage_.alpha = 1.0f;
     }];
     
 }
@@ -1733,7 +1751,16 @@ typedef enum {
                 editing = YES;
                 someEditType = 7 - buttonIndex;
                 editMode.text = [editTypes objectAtIndex:buttonIndex];
-                toolBar.items = toolbarItemsInEditing;
+                toolBar_.items = toolbarItemsInEditing;
+                // ツールバーあげる
+                [UIView animateWithDuration:0.3f animations:^(void) {
+                    toolBar_.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 108, [UIScreen mainScreen].bounds.size.width, 44);
+                    self.table.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 108);
+                    
+                    
+                    showSlideViewButton_.alpha = 0.0f;
+                    triangleImage_.alpha = 0.0f;
+                }];
                 self.editStateButton.hidden = YES;
             }
         }
