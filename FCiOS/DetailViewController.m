@@ -1008,12 +1008,23 @@ typedef enum {
     }
     
     // スライドビュー検索条件情報
-    TableSources *tableSources = [[TableSources alloc] init];
     playStyleLabel_.text = playStyle;
-    nhaLabel_.text = [tableSources.playRankList objectAtIndex:self.playRankSortType];
-    difficultyLabel_.text = [tableSources.levelSortList objectAtIndex:self.levelSortType];
-    versionLabel_.text = [tableSources.versionSortList objectAtIndex:self.versionSortType];
-    clearLampLabel_.text = [tableSources.clearSortList objectAtIndex:self.clearSortType];
+    if (self.tagId == -1) {
+        // タグ指定なし
+        TableSources *tableSources = [[TableSources alloc] init];
+        nhaLabel_.text = [tableSources.playRankList objectAtIndex:self.playRankSortType];
+        difficultyLabel_.text = [tableSources.levelSortList objectAtIndex:self.levelSortType];
+        versionLabel_.text = [tableSources.versionSortList objectAtIndex:self.versionSortType];
+        clearLampLabel_.text = [tableSources.clearSortList objectAtIndex:self.clearSortType];
+    }
+    else{
+        // タグ指定あり
+        nhaLabel_.text = @"-";
+        difficultyLabel_.text = @"-";
+        versionLabel_.text = @"-";
+        clearLampLabel_.text = @"-";
+    }
+    
 
     [self.table reloadData];
 }

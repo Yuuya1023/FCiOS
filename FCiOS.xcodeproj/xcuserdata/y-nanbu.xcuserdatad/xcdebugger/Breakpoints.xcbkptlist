@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410480172.342459"
+         timestampString = "410480742.846451"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1696"
-         endingLineNumber = "1696"
+         startingLineNumber = "1707"
+         endingLineNumber = "1707"
          landmarkName = "-actionSheet:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410480172.342459"
+         timestampString = "410480742.846451"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1442"
-         endingLineNumber = "1442"
+         startingLineNumber = "1453"
+         endingLineNumber = "1453"
          landmarkName = "-memoEditModeWithMusicId:title:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410480172.342459"
+         timestampString = "410480742.846451"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1044"
-         endingLineNumber = "1044"
+         startingLineNumber = "1055"
+         endingLineNumber = "1055"
          landmarkName = "-dbSelector"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410480172.342459"
+         timestampString = "410480742.846451"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1962"
-         endingLineNumber = "1962"
+         startingLineNumber = "1973"
+         endingLineNumber = "1973"
          landmarkName = "-didReceiveMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410480172.342459"
+         timestampString = "410480742.846451"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1363"
-         endingLineNumber = "1363"
+         startingLineNumber = "1374"
+         endingLineNumber = "1374"
          landmarkName = "-memoEditModeWithMusicId:title:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FCiOS/DetailViewController.m"
-         timestampString = "410480172.342459"
+         timestampString = "410480742.846451"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1010"
-         endingLineNumber = "1010"
+         startingLineNumber = "1013"
+         endingLineNumber = "1013"
          landmarkName = "-setTableData"
          landmarkType = "5">
       </FileBreakpoint>
