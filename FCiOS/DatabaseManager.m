@@ -660,6 +660,7 @@ static dispatch_queue_t serialQueue;
         FMResultSet *rs = [self.music_DB executeQuery:sql];
         while ([rs next]) {
             [dic setValue:[DatabaseManager decodeString:[rs stringForColumn:@"memo"]] forKey:@"memo"];
+            [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"version"]] forKey:@"version"];
             [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_Another_Level"]] forKey:@"SP_Another_Level"];
             [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_Hyper_Level"]] forKey:@"SP_Hyper_Level"];
             [dic setValue:[NSString stringWithFormat:@"%d",[rs intForColumn:@"SP_Normal_Level"]] forKey:@"SP_Normal_Level"];

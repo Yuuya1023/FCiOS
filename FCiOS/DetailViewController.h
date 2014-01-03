@@ -66,6 +66,8 @@
     
     UIScrollView *pageView;
     
+    UILabel *version;
+    UILabel *versionLabel;
     UILabel *normal;
     UILabel *hyper;
     UILabel *another;

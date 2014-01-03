@@ -9,7 +9,7 @@
 #import "DetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-
+#import "TableSources.h"
 
 
 
@@ -178,6 +178,23 @@ typedef enum {
             grayViewForMemo = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
             grayViewForMemo.backgroundColor = [UIColor blackColor];
             grayViewForMemo.alpha = 0.0;
+            
+            // バージョン
+            version = [[UILabel alloc] init];
+            version.frame = CGRectMake(10, 55, 40, 20);
+            version.alpha = 0.0;
+            version.backgroundColor = [UIColor clearColor];
+            version.font = DEFAULT_FONT_SMALL;
+            version.textColor = [UIColor whiteColor];
+            version.text = @"Version :";
+            
+            versionLabel = [[UILabel alloc] init];
+            versionLabel.frame = CGRectMake(50, 55, 200, 20);
+            versionLabel.alpha = 0.0;
+            versionLabel.backgroundColor = [UIColor clearColor];
+            versionLabel.font = DEFAULT_FONT_SMALL;
+            versionLabel.textColor = [UIColor whiteColor];
+            versionLabel.textAlignment = NSTextAlignmentLeft;
             
             //曲名
             memoTitle = [[UILabel alloc] init];
@@ -1002,11 +1019,13 @@ typedef enum {
     
     [self.navigationController.view addSubview:grayViewForMemo];
     [self.navigationController.view addSubview:pageView];
+    [self.navigationController.view addSubview:version];
+    [self.navigationController.view addSubview:versionLabel];
     [self.navigationController.view addSubview:memoTitle];
     [self.navigationController.view addSubview:memoUpdateButton];
     [pageView addSubview:memoTextView];
 
-//
+
 //    [pageView addSubview:normalLevel];
 //    [pageView addSubview:hyperLevel];
 //    [pageView addSubview:anotherLevel];
@@ -1019,8 +1038,16 @@ typedef enum {
     memoUpdateButton.tag = [musicId intValue];
     
     NSDictionary *res = [[DatabaseManager sharedInstance] getMemoAndTagWithMusicId:musicId];
+//    NSLog(@"%@",res);
+    // バージョン
+    NSString *versionIndex = [res objectForKey:@"version"];
+    TableSources *sources = [[TableSources alloc] init];
+    versionLabel.text = [sources.versionList objectAtIndex:[versionIndex intValue] - 1];
+    
+    // メモ
     tmpText = [res objectForKey:@"memo"];
     
+    // タグ、レベル情報
     NSDictionary *list;
     int normalLv = 0;
     int hyperLv = 0;
@@ -1080,11 +1107,13 @@ typedef enum {
     }
     
     
-    
+    // アニメーション
     [UIView animateWithDuration:0.3f animations:^(void) {
         memoTextView.text = tmpText;
         
         grayViewForMemo.alpha = 0.9;
+        version.alpha = 1.0;
+        versionLabel.alpha = 1.0;
         memoTitle.alpha = 1.0;
         memoTextView.alpha = 0.8;
         
@@ -1137,6 +1166,8 @@ typedef enum {
     
     [UIView animateWithDuration:0.3f animations:^(void) {
         grayViewForMemo.alpha = 0.0;
+        version.alpha = 0.0;
+        versionLabel.alpha = 0.0;
         memoTitle.alpha = 0.0;
         memoTextView.alpha = 0.0;
         
@@ -1174,6 +1205,8 @@ typedef enum {
 //        [anotherUpdate removeFromSuperview];
         
         [grayViewForMemo removeFromSuperview];
+        [version removeFromSuperview];
+        [versionLabel removeFromSuperview];
         [memoTitle removeFromSuperview];
         [memoUpdateButton removeFromSuperview];
         [memoTextView removeFromSuperview];
