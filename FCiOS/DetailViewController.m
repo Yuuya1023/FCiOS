@@ -862,6 +862,13 @@ typedef enum {
             case 3:
                 [sql appendFormat:@") AS tblResults ORDER BY tblResults.status DESC,tblResults.level ASC,LOWER(tblResults.name) ASC"];
                 break;
+            case 4:
+                [sql appendFormat:@") AS tblResults ORDER BY LOWER(tblResults.name) ASC"];
+                break;
+            case 5:
+                [sql appendFormat:@") AS tblResults ORDER BY LOWER(tblResults.name) DESC"];
+                break;
+                
             default:
                 break;
         }

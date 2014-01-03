@@ -26,7 +26,7 @@
         self.clearList = tableSources.clearSortList;
         self.levelList = tableSources.levelSortList;
         self.versionList = tableSources.versionSortList;
-        self.sortingList = tableSources.sortingSortList;
+        self.sortingList = tableSources.sortSetting;
         
         self.playRankList = [[NSArray alloc] initWithObjects:@"NORMAL",@"HYPER",@"ANOTHER",@"A+H",@"ALL", nil];
         

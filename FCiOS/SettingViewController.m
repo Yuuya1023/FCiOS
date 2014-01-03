@@ -320,6 +320,7 @@
     }];
 }
 
+#pragma mark - Table View
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return @"";
@@ -348,38 +349,6 @@
     return cell;
 }
 
-- (void)setAlpha:(BOOL)isSelecting tag:(int)tag{
-    if (isSelecting) {
-        self.tablelView.alpha = 1.0;
-//        cancelButton.alpha = 1.0;
-        
-        infomation.alpha = 0.2;
-        appStore.alpha = 0.2;
-        settings.alpha = 0.5;
-        
-        if (tag != 0) {
-            defaultSort.alpha = 0.2;
-        }
-        if (tag != 1 && tag != 2) {
-            custom.alpha = 0.2;
-        }
-        if (tag != 2) {
-            tagSetting.alpha = 0.2;
-        }
-    }
-    else{
-        self.tablelView.alpha = 0.0;
-//        cancelButton.alpha = 0.0;
-        
-        infomation.alpha = 1.0;
-        appStore.alpha = 1.0;
-        settings.alpha = 1.0;
-        
-        defaultSort.alpha = 1.0;
-        custom.alpha = 1.0;
-        tagSetting.alpha = 1.0;
-    }
-}
 
 -(void)tableView: (UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [UIView animateWithDuration:0.5f animations:^(void) {
@@ -408,7 +377,44 @@
     }];    
 }
 
+#pragma mark -
 
+
+- (void)setAlpha:(BOOL)isSelecting tag:(int)tag{
+    if (isSelecting) {
+        self.tablelView.alpha = 1.0;
+        //        cancelButton.alpha = 1.0;
+        
+        infomation.alpha = 0.2;
+        appStore.alpha = 0.2;
+        settings.alpha = 0.5;
+        
+        if (tag != 0) {
+            defaultSort.alpha = 0.2;
+        }
+        if (tag != 1 && tag != 2) {
+            custom.alpha = 0.2;
+        }
+        if (tag != 2) {
+            tagSetting.alpha = 0.2;
+        }
+    }
+    else{
+        self.tablelView.alpha = 0.0;
+        //        cancelButton.alpha = 0.0;
+        
+        infomation.alpha = 1.0;
+        appStore.alpha = 1.0;
+        settings.alpha = 1.0;
+        
+        defaultSort.alpha = 1.0;
+        custom.alpha = 1.0;
+        tagSetting.alpha = 1.0;
+    }
+}
+
+
+#pragma mark -
 
 - (void)didReceiveMemoryWarning
 {

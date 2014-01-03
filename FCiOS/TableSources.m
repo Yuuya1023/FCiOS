@@ -16,7 +16,8 @@
 @synthesize clearSortList = clearSortList_;
 @synthesize levelSortList = levelSortList_;
 @synthesize versionSortList = versionSortList_;
-@synthesize sortingSortList = sortingSortList_;
+//@synthesize sortingSortList = sortingSortList_;
+@synthesize sortSetting = sortSetting_;
 
 
 - (id)init
@@ -128,18 +129,20 @@
                                 @"21th SPADA",
                                 nil];
         
-        self.sortingSortList = [[NSArray alloc] initWithObjects:
-                                @"Difficulity (ASC)",
-                                @"Difficulity (DESC)",
-                                @"CLEAR LAMP (ASC)",
-                                @"CLEAR LAMP (DESC)",
-                                nil];
+//        self.sortingSortList = [[NSArray alloc] initWithObjects:
+//                                @"Difficulity (ASC)",
+//                                @"Difficulity (DESC)",
+//                                @"CLEAR LAMP (ASC)",
+//                                @"CLEAR LAMP (DESC)",
+//                                nil];
         
         self.sortSetting = [[NSArray alloc] initWithObjects:
                             @"Difficulity (ASC)",
                             @"Difficulity (DESC)",
                             @"CLEAR LAMP (ASC)",
                             @"CLEAR LAMP (DESC)",
+                            @"Music Name (ASC)",
+                            @"Music Name (DESC)",
                             nil];
     }
     return self;
