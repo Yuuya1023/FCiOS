@@ -97,6 +97,7 @@ static dispatch_queue_t serialQueue;
                 NSString *masterSql = [key_sql objectForKey:@"music"];
                 
                 if (!music_id || !masterSql) {
+                    NSLog(@"ERROR: !music_id || !masterSql");
                     return NO;
                 }
                 
@@ -112,6 +113,7 @@ static dispatch_queue_t serialQueue;
                 while ([rs_confirm next]) {
                     if ([rs_confirm intForColumn:@"count(music_id)"] == 0) {
                         [self.music_DB rollback];
+                        NSLog(@"ERROR: count(music_id) == 0");
                         return NO;
                     }
                 }
@@ -121,6 +123,7 @@ static dispatch_queue_t serialQueue;
                 while ([rs_confirm2 next]) {
                     if ([rs_confirm2 intForColumn:@"count(music_id)"] == 0) {
                         [self.music_DB rollback];
+                        NSLog(@"ERROR: count(music_id) == 0");
                         return NO;
                     }
                 }
