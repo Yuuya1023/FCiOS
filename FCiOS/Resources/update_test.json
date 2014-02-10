@@ -538,5 +538,67 @@
         "music": "UPDATE musicMaster SET deleteFlg = 1 WHERE music_id = ?"
         }
         ]
+ },
+ {
+ "version":"2.03",
+ "description": "新規イベントの楽曲を追加致しました。（全14曲）",
+ "sql":[
+        {
+        "music_id": "21044",
+        "music": "insert into musicMaster values(?,'Sigmund','noname',21,7,10,12,7,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21045",
+        "music": "insert into musicMaster values(?,'NEMESIS -gratitude remix- IIDX Edition','noname',21,6,9,11,6,10,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21046",
+        "music": "insert into musicMaster values(?,'Votum stellarum -Hommarju Remix-','noname',21,6,9,11,6,9,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21047",
+        "music": "insert into musicMaster values(?,'Dark Fall','noname',21,5,8,11,5,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21048",
+        "music": "insert into musicMaster values(?,'BLUE DRAGON(雷龍Remix IIDX)','noname',21,7,10,12,7,10,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21049",
+        "music": "insert into musicMaster values(?,'Hypersonik','noname',21,5,8,10,5,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21050",
+        "music": "insert into musicMaster values(?,'refractive index','noname',21,3,7,11,4,7,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21051",
+        "music": "insert into musicMaster values(?,'Last Dance','noname',21,6,10,12,6,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21052",
+        "music": "insert into musicMaster values(?,'デッドボヲルdeホームラン','noname',21,3,9,11,4,9,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21053",
+        "music": "insert into musicMaster values(?,'Squeeze','noname',21,5,8,11,5,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21054",
+        "music": "insert into musicMaster values(?,'野球の遊び方 そしてその歴史 ～決定版～','noname',21,3,7,10,3,7,10,0,0,1,2)"
+        },
+        {
+        "music_id": "21055",
+        "music": "insert into musicMaster values(?,'轟け！恋のビーンボール！！','noname',21,6,10,12,6,10,12,0,0,1,2)"
+        },
+        {
+        "music_id": "21056",
+        "music": "insert into musicMaster values(?,'Engraved Mark','noname',21,4,8,11,4,8,11,0,0,1,2)"
+        },
+        {
+        "music_id": "21057",
+        "music": "insert into musicMaster values(?,'IX','noname',21,6,11,12,6,11,12,0,0,1,2)"
+        }
+        ]
  }
 ]
